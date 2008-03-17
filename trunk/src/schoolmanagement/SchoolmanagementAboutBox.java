@@ -98,7 +98,7 @@ public class SchoolmanagementAboutBox extends javax.swing.JDialog {
                             .addComponent(appVendorLabel)
                             .addComponent(appHomepageLabel)))
                     .addComponent(appTitleLabel, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(appDescLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
+                    .addComponent(appDescLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE)
                     .addComponent(closeButton))
                 .addContainerGap())
         );
@@ -122,7 +122,7 @@ public class SchoolmanagementAboutBox extends javax.swing.JDialog {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(homepageLabel)
                     .addComponent(appHomepageLabel))
-                .addGap(19, 19, Short.MAX_VALUE)
+                .addGap(33, 33, Short.MAX_VALUE)
                 .addComponent(closeButton)
                 .addContainerGap())
         );
