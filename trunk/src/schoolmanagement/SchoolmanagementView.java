@@ -25,7 +25,8 @@ public class SchoolmanagementView extends FrameView {
         super(app);
 
         initComponents();
-
+        statusMessageLabel = new javax.swing.JLabel();
+        statusAnimationLabel = new javax.swing.JLabel();
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
         int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
@@ -1223,6 +1224,14 @@ public class SchoolmanagementView extends FrameView {
     private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
 
+    
+
+    //private javax.swing.JMenuBar menuBar;
+    //private javax.swing.JProgressBar progressBar;
+    private javax.swing.JLabel statusAnimationLabel;
+    private javax.swing.JLabel statusMessageLabel;
+    //private javax.swing.JPanel statusPanel;
+    
     private final Timer messageTimer;
     private final Timer busyIconTimer;
     private final Icon idleIcon;
