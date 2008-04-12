@@ -11,11 +11,14 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-
+import javax.swing.JLabel;
+import schoolmanagement.DataAccess.DataAccess;
+import schoolmanagement.entity.SmPersons;
 /**
  * The application's main frame.
  */
@@ -27,6 +30,15 @@ public class SchoolmanagementView extends FrameView {
         initComponents();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
+        aboutBox = new JDialog();
+        statusAnimationLabel = new JLabel();
+        statusMessageLabel = new JLabel();
+        
+        DataAccess personDA = new DataAccess();
+        List personList = personDA.getData();
+        SmPersons smPersonEntity = (SmPersons) personList.get(0);
+        jTextField2.setText(smPersonEntity.getPerName());
+        
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
         int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
