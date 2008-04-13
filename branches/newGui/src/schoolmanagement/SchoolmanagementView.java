@@ -147,6 +147,7 @@ public class SchoolmanagementView extends FrameView {
         jComboBoxOcenyKlasa = new javax.swing.JComboBox();
         jLabel22 = new javax.swing.JLabel();
         jComboBoxOcenyNauczyciel = new javax.swing.JComboBox();
+        jButtonOcenyZapisz = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jRadioButtonDaneNazwisko = new javax.swing.JRadioButton();
@@ -292,13 +293,28 @@ public class SchoolmanagementView extends FrameView {
 
         jButtonSkrzynkaUsun.setText(resourceMap.getString("jButtonSkrzynkaUsun.text")); // NOI18N
         jButtonSkrzynkaUsun.setName("jButtonSkrzynkaUsun"); // NOI18N
+        jButtonSkrzynkaUsun.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSkrzynkaUsunActionPerformed(evt);
+            }
+        });
 
         jButtonSkrzynkaOdswiez.setText(resourceMap.getString("jButtonSkrzynkaOdswiez.text")); // NOI18N
         jButtonSkrzynkaOdswiez.setName("jButtonSkrzynkaOdswiez"); // NOI18N
+        jButtonSkrzynkaOdswiez.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonSkrzynkaOdswiezActionPerformed(evt);
+            }
+        });
 
         jCheckBoxPokazOdebrane.setSelected(true);
         jCheckBoxPokazOdebrane.setText(resourceMap.getString("jCheckBoxPokazOdebrane.text")); // NOI18N
         jCheckBoxPokazOdebrane.setName("jCheckBoxPokazOdebrane"); // NOI18N
+        jCheckBoxPokazOdebrane.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jCheckBoxPokazOdebranePropertyChange(evt);
+            }
+        });
 
         jCheckBoxPokazWyslane.setText(resourceMap.getString("jCheckBoxPokazWyslane.text")); // NOI18N
         jCheckBoxPokazWyslane.setName("jCheckBoxPokazWyslane"); // NOI18N
@@ -398,6 +414,11 @@ public class SchoolmanagementView extends FrameView {
         buttonGroup1.add(jRadioButtonNadawczaIndywidualna);
         jRadioButtonNadawczaIndywidualna.setText(resourceMap.getString("jRadioButtonNadawczaIndywidualna.text")); // NOI18N
         jRadioButtonNadawczaIndywidualna.setName("jRadioButtonNadawczaIndywidualna"); // NOI18N
+        jRadioButtonNadawczaIndywidualna.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jRadioButtonNadawczaIndywidualnaPropertyChange(evt);
+            }
+        });
 
         buttonGroup1.add(jRadioButtonNadawczaZbiorowa);
         jRadioButtonNadawczaZbiorowa.setText(resourceMap.getString("jRadioButtonNadawczaZbiorowa.text")); // NOI18N
@@ -735,13 +756,23 @@ public class SchoolmanagementView extends FrameView {
                 .addGap(66, 66, 66))
         );
 
+        jButtonOcenyZapisz.setText(resourceMap.getString("jButtonOcenyZapisz.text")); // NOI18N
+        jButtonOcenyZapisz.setName("jButtonOcenyZapisz"); // NOI18N
+        jButtonOcenyZapisz.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonOcenyZapiszActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButtonOcenyZapisz, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane7, javax.swing.GroupLayout.PREFERRED_SIZE, 497, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -751,7 +782,10 @@ public class SchoolmanagementView extends FrameView {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButtonOcenyZapisz, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -1158,6 +1192,27 @@ public class SchoolmanagementView extends FrameView {
         setComponent(mainPanel);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButtonSkrzynkaOdswiezActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSkrzynkaOdswiezActionPerformed
+
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSkrzynkaOdswiezActionPerformed
+
+    private void jButtonSkrzynkaUsunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonSkrzynkaUsunActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonSkrzynkaUsunActionPerformed
+
+    private void jCheckBoxPokazOdebranePropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jCheckBoxPokazOdebranePropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBoxPokazOdebranePropertyChange
+
+    private void jRadioButtonNadawczaIndywidualnaPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jRadioButtonNadawczaIndywidualnaPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButtonNadawczaIndywidualnaPropertyChange
+
+    private void jButtonOcenyZapiszActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonOcenyZapiszActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButtonOcenyZapiszActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
@@ -1166,6 +1221,7 @@ public class SchoolmanagementView extends FrameView {
     private javax.swing.JButton jButtonDaneZatwierdz;
     private javax.swing.JButton jButtonDaneZmienHaslo;
     private javax.swing.JButton jButtonNadawczaWyslij;
+    private javax.swing.JButton jButtonOcenyZapisz;
     private javax.swing.JButton jButtonPlanZatwierdz;
     private javax.swing.JButton jButtonSkrzynkaOdswiez;
     private javax.swing.JButton jButtonSkrzynkaUsun;
@@ -1274,6 +1330,8 @@ public class SchoolmanagementView extends FrameView {
     private final Icon idleIcon;
     private final Icon[] busyIcons = new Icon[15];
     private int busyIconIndex = 0;
+    
+    
 
     private JDialog aboutBox;
 }

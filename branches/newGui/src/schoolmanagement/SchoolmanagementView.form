@@ -289,12 +289,18 @@
                     <Property name="text" type="java.lang.String" resourceKey="jButtonSkrzynkaUsun.text"/>
                     <Property name="name" type="java.lang.String" value="jButtonSkrzynkaUsun" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSkrzynkaUsunActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jButtonSkrzynkaOdswiez">
                   <Properties>
                     <Property name="text" type="java.lang.String" resourceKey="jButtonSkrzynkaOdswiez.text"/>
                     <Property name="name" type="java.lang.String" value="jButtonSkrzynkaOdswiez" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonSkrzynkaOdswiezActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="jCheckBoxPokazOdebrane">
                   <Properties>
@@ -302,6 +308,9 @@
                     <Property name="text" type="java.lang.String" resourceKey="jCheckBoxPokazOdebrane.text"/>
                     <Property name="name" type="java.lang.String" value="jCheckBoxPokazOdebrane" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jCheckBoxPokazOdebranePropertyChange"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JCheckBox" name="jCheckBoxPokazWyslane">
                   <Properties>
@@ -417,6 +426,9 @@
                     <Property name="text" type="java.lang.String" resourceKey="jRadioButtonNadawczaIndywidualna.text"/>
                     <Property name="name" type="java.lang.String" value="jRadioButtonNadawczaIndywidualna" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="propertyChange" listener="java.beans.PropertyChangeListener" parameters="java.beans.PropertyChangeEvent" handler="jRadioButtonNadawczaIndywidualnaPropertyChange"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JRadioButton" name="jRadioButtonNadawczaZbiorowa">
                   <Properties>
@@ -784,7 +796,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel3" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jPanel3" max="32767" attributes="0"/>
+                              <Component id="jButtonOcenyZapisz" min="-2" pref="139" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jScrollPane7" min="-2" pref="497" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
@@ -796,7 +811,11 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jButtonOcenyZapisz" min="-2" pref="36" max="-2" attributes="0"/>
+                              </Group>
                               <Component id="jScrollPane7" alignment="0" pref="522" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -954,6 +973,15 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JButton" name="jButtonOcenyZapisz">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jButtonOcenyZapisz.text"/>
+                    <Property name="name" type="java.lang.String" value="jButtonOcenyZapisz" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonOcenyZapiszActionPerformed"/>
+                  </Events>
+                </Component>
               </SubComponents>
             </Container>
             <Container class="javax.swing.JPanel" name="jPanel6">
