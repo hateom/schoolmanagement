@@ -11,14 +11,11 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import schoolmanagement.DataAccess.DataAccess;
-import schoolmanagement.entity.SmPersons;
+
 /**
  * The application's main frame.
  */
@@ -30,15 +27,6 @@ public class SchoolmanagementView extends FrameView {
         initComponents();
         statusMessageLabel = new javax.swing.JLabel();
         statusAnimationLabel = new javax.swing.JLabel();
-        aboutBox = new JDialog();
-        statusAnimationLabel = new JLabel();
-        statusMessageLabel = new JLabel();
-        
-        DataAccess personDA = new DataAccess();
-        List personList = personDA.getData();
-        SmPersons smPersonEntity = (SmPersons) personList.get(0);
-        jTextField2.setText(smPersonEntity.getPerName());
-        
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
         int messageTimeout = resourceMap.getInteger("StatusBar.messageTimeout");
@@ -109,63 +97,67 @@ public class SchoolmanagementView extends FrameView {
         jPanel1 = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextAreaSkrzynka = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
+        jLabelSkrzynkaOd = new javax.swing.JLabel();
+        jLabelSkrzynkaData = new javax.swing.JLabel();
+        jLabelSkrzynkaTemat = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
+        jTableSkrzynka = new javax.swing.JTable();
+        jButtonSkrzynkaUsun = new javax.swing.JButton();
+        jButtonSkrzynkaOdswiez = new javax.swing.JButton();
+        jCheckBoxPokazOdebrane = new javax.swing.JCheckBox();
+        jCheckBoxPokazWyslane = new javax.swing.JCheckBox();
+        jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTextArea2 = new javax.swing.JTextArea();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jTextAreaNadawcza = new javax.swing.JTextArea();
+        jRadioButtonNadawczaIndywidualna = new javax.swing.JRadioButton();
+        jRadioButtonNadawczaZbiorowa = new javax.swing.JRadioButton();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList();
+        jListNadawczaGrupy = new javax.swing.JList();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList();
+        jListNadawczaNazwiska = new javax.swing.JList();
         jSeparator2 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        jButtonNadawczaWyslij = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jPanel11 = new javax.swing.JPanel();
-        jComboBox8 = new javax.swing.JComboBox();
+        jComboBoxPlanKlasa = new javax.swing.JComboBox();
         jLabel24 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jTablePlan = new javax.swing.JTable();
         jPanel12 = new javax.swing.JPanel();
-        jComboBox9 = new javax.swing.JComboBox();
+        jComboBoxPlanPrzedmiot = new javax.swing.JComboBox();
         jLabel27 = new javax.swing.JLabel();
         jLabel28 = new javax.swing.JLabel();
-        jComboBox10 = new javax.swing.JComboBox();
-        jButton7 = new javax.swing.JButton();
+        jComboBoxPlanNauczyciel = new javax.swing.JComboBox();
+        jButtonPlanZatwierdz = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTableOceny = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
-        jComboBox4 = new javax.swing.JComboBox();
-        jComboBox5 = new javax.swing.JComboBox();
+        jComboBoxOcenyPrzedmiot = new javax.swing.JComboBox();
+        jComboBoxOcenyKlasa = new javax.swing.JComboBox();
         jLabel22 = new javax.swing.JLabel();
-        jComboBox6 = new javax.swing.JComboBox();
+        jComboBoxOcenyNauczyciel = new javax.swing.JComboBox();
         jPanel6 = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jTextField1 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
-        jButton6 = new javax.swing.JButton();
+        jRadioButtonDaneNazwisko = new javax.swing.JRadioButton();
+        jRadioButtonDaneGrupy = new javax.swing.JRadioButton();
+        jRadioButtonDaneKlasy = new javax.swing.JRadioButton();
+        jTextFieldDaneSzukaj = new javax.swing.JTextField();
+        jComboBoxDaneGrupa = new javax.swing.JComboBox();
+        jComboBoxDaneKlasa = new javax.swing.JComboBox();
+        jButtonDaneWyszukuj = new javax.swing.JButton();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jList3 = new javax.swing.JList();
+        jListDaneWyniki = new javax.swing.JList();
         jLabel11 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -173,30 +165,30 @@ public class SchoolmanagementView extends FrameView {
         jLabel14 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jComboBox3 = new javax.swing.JComboBox();
-        jButton5 = new javax.swing.JButton();
+        jTextFieldDaneNazwisko = new javax.swing.JTextField();
+        jTextFieldDaneImie = new javax.swing.JTextField();
+        jTextFieldDaneAdres = new javax.swing.JTextField();
+        jTextFieldDaneTelefon = new javax.swing.JTextField();
+        jComboBoxDaneNalezyDo = new javax.swing.JComboBox();
+        jButtonDaneNowaOsoba = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        jTextFieldDaneNip = new javax.swing.JTextField();
+        jTextFieldPesel = new javax.swing.JTextField();
         jLabel25 = new javax.swing.JLabel();
         jLabel26 = new javax.swing.JLabel();
-        jComboBox7 = new javax.swing.JComboBox();
+        jComboBoxDaneWychowawcaKlasy = new javax.swing.JComboBox();
+        jButtonDaneZatwierdz = new javax.swing.JButton();
         jPanel10 = new javax.swing.JPanel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField3 = new javax.swing.JPasswordField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jPasswordFieldAktualne = new javax.swing.JPasswordField();
+        jPasswordFieldNowe1 = new javax.swing.JPasswordField();
+        jPasswordFieldNowe2 = new javax.swing.JPasswordField();
+        jButtonDaneZmienHaslo = new javax.swing.JButton();
+        jLabelNaglowek = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
+        jLabelZalogowanyJako = new javax.swing.JLabel();
         jToggleButton1 = new javax.swing.JToggleButton();
         buttonGroup1 = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -213,14 +205,14 @@ public class SchoolmanagementView extends FrameView {
 
         jScrollPane3.setName("jScrollPane3"); // NOI18N
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setLineWrap(true);
-        jTextArea1.setRows(5);
+        jTextAreaSkrzynka.setColumns(20);
+        jTextAreaSkrzynka.setLineWrap(true);
+        jTextAreaSkrzynka.setRows(5);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(SchoolmanagementView.class);
-        jTextArea1.setText(resourceMap.getString("jTextArea1.text")); // NOI18N
-        jTextArea1.setWrapStyleWord(true);
-        jTextArea1.setName("jTextArea1"); // NOI18N
-        jScrollPane3.setViewportView(jTextArea1);
+        jTextAreaSkrzynka.setText(resourceMap.getString("jTextAreaSkrzynka.text")); // NOI18N
+        jTextAreaSkrzynka.setWrapStyleWord(true);
+        jTextAreaSkrzynka.setName("jTextAreaSkrzynka"); // NOI18N
+        jScrollPane3.setViewportView(jTextAreaSkrzynka);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
@@ -234,18 +226,18 @@ public class SchoolmanagementView extends FrameView {
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
 
-        jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
-        jLabel5.setName("jLabel5"); // NOI18N
+        jLabelSkrzynkaOd.setText(resourceMap.getString("jLabelSkrzynkaOd.text")); // NOI18N
+        jLabelSkrzynkaOd.setName("jLabelSkrzynkaOd"); // NOI18N
 
-        jLabel6.setText(resourceMap.getString("jLabel6.text")); // NOI18N
-        jLabel6.setName("jLabel6"); // NOI18N
+        jLabelSkrzynkaData.setText(resourceMap.getString("jLabelSkrzynkaData.text")); // NOI18N
+        jLabelSkrzynkaData.setName("jLabelSkrzynkaData"); // NOI18N
 
-        jLabel7.setText(resourceMap.getString("jLabel7.text")); // NOI18N
-        jLabel7.setName("jLabel7"); // NOI18N
+        jLabelSkrzynkaTemat.setText(resourceMap.getString("jLabelSkrzynkaTemat.text")); // NOI18N
+        jLabelSkrzynkaTemat.setName("jLabelSkrzynkaTemat"); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableSkrzynka.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -293,13 +285,26 @@ public class SchoolmanagementView extends FrameView {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setName("jTable1"); // NOI18N
-        jScrollPane1.setViewportView(jTable1);
-        jTable1.getColumnModel().getColumn(3).setResizable(false);
-        jTable1.getColumnModel().getColumn(3).setPreferredWidth(30);
+        jTableSkrzynka.setName("jTableSkrzynka"); // NOI18N
+        jScrollPane1.setViewportView(jTableSkrzynka);
+        jTableSkrzynka.getColumnModel().getColumn(3).setResizable(false);
+        jTableSkrzynka.getColumnModel().getColumn(3).setPreferredWidth(8);
 
-        jButton2.setText(resourceMap.getString("jButton2.text")); // NOI18N
-        jButton2.setName("jButton2"); // NOI18N
+        jButtonSkrzynkaUsun.setText(resourceMap.getString("jButtonSkrzynkaUsun.text")); // NOI18N
+        jButtonSkrzynkaUsun.setName("jButtonSkrzynkaUsun"); // NOI18N
+
+        jButtonSkrzynkaOdswiez.setText(resourceMap.getString("jButtonSkrzynkaOdswiez.text")); // NOI18N
+        jButtonSkrzynkaOdswiez.setName("jButtonSkrzynkaOdswiez"); // NOI18N
+
+        jCheckBoxPokazOdebrane.setSelected(true);
+        jCheckBoxPokazOdebrane.setText(resourceMap.getString("jCheckBoxPokazOdebrane.text")); // NOI18N
+        jCheckBoxPokazOdebrane.setName("jCheckBoxPokazOdebrane"); // NOI18N
+
+        jCheckBoxPokazWyslane.setText(resourceMap.getString("jCheckBoxPokazWyslane.text")); // NOI18N
+        jCheckBoxPokazWyslane.setName("jCheckBoxPokazWyslane"); // NOI18N
+
+        jLabel5.setText(resourceMap.getString("jLabel5.text")); // NOI18N
+        jLabel5.setName("jLabel5"); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -308,13 +313,24 @@ public class SchoolmanagementView extends FrameView {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonSkrzynkaUsun, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
+                            .addComponent(jButtonSkrzynkaOdswiez, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 343, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 109, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBoxPokazOdebrane)
+                        .addGap(18, 18, 18)
+                        .addComponent(jCheckBoxPokazWyslane)
+                        .addGap(18, 18, 18)))
+                .addGap(6, 6, 6)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 476, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -322,38 +338,46 @@ public class SchoolmanagementView extends FrameView {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabelSkrzynkaOd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelSkrzynkaTemat, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabelSkrzynkaData, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
 
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabel5, jLabel6, jLabel7});
+        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jLabelSkrzynkaData, jLabelSkrzynkaOd, jLabelSkrzynkaTemat});
 
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(5, 5, 5)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabelSkrzynkaOd))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3)
-                            .addComponent(jLabel6))
+                            .addComponent(jLabelSkrzynkaData))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
-                            .addComponent(jLabel7))
-                        .addGap(11, 11, 11)
+                            .addComponent(jLabelSkrzynkaTemat))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 457, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBoxPokazWyslane)
+                            .addComponent(jCheckBoxPokazOdebrane)
+                            .addComponent(jLabel5))
+                        .addGap(8, 8, 8)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jButton2)))
+                        .addComponent(jButtonSkrzynkaOdswiez)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addComponent(jButtonSkrzynkaUsun)))
                 .addContainerGap())
         );
 
@@ -363,21 +387,21 @@ public class SchoolmanagementView extends FrameView {
 
         jScrollPane4.setName("jScrollPane4"); // NOI18N
 
-        jTextArea2.setColumns(20);
-        jTextArea2.setLineWrap(true);
-        jTextArea2.setRows(5);
-        jTextArea2.setText(resourceMap.getString("jTextArea2.text")); // NOI18N
-        jTextArea2.setWrapStyleWord(true);
-        jTextArea2.setName("jTextArea2"); // NOI18N
-        jScrollPane4.setViewportView(jTextArea2);
+        jTextAreaNadawcza.setColumns(20);
+        jTextAreaNadawcza.setLineWrap(true);
+        jTextAreaNadawcza.setRows(5);
+        jTextAreaNadawcza.setText(resourceMap.getString("jTextAreaNadawcza.text")); // NOI18N
+        jTextAreaNadawcza.setWrapStyleWord(true);
+        jTextAreaNadawcza.setName("jTextAreaNadawcza"); // NOI18N
+        jScrollPane4.setViewportView(jTextAreaNadawcza);
 
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText(resourceMap.getString("jRadioButton1.text")); // NOI18N
-        jRadioButton1.setName("jRadioButton1"); // NOI18N
+        buttonGroup1.add(jRadioButtonNadawczaIndywidualna);
+        jRadioButtonNadawczaIndywidualna.setText(resourceMap.getString("jRadioButtonNadawczaIndywidualna.text")); // NOI18N
+        jRadioButtonNadawczaIndywidualna.setName("jRadioButtonNadawczaIndywidualna"); // NOI18N
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText(resourceMap.getString("jRadioButton2.text")); // NOI18N
-        jRadioButton2.setName("jRadioButton2"); // NOI18N
+        buttonGroup1.add(jRadioButtonNadawczaZbiorowa);
+        jRadioButtonNadawczaZbiorowa.setText(resourceMap.getString("jRadioButtonNadawczaZbiorowa.text")); // NOI18N
+        jRadioButtonNadawczaZbiorowa.setName("jRadioButtonNadawczaZbiorowa"); // NOI18N
 
         jLabel8.setText(resourceMap.getString("jLabel8.text")); // NOI18N
         jLabel8.setName("jLabel8"); // NOI18N
@@ -390,29 +414,29 @@ public class SchoolmanagementView extends FrameView {
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
-        jList1.setModel(new javax.swing.AbstractListModel() {
+        jListNadawczaGrupy.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Dyrekcja", "Nauczyciele", "Pracownicy", "Uczniowie" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jList1.setName("jList1"); // NOI18N
-        jScrollPane2.setViewportView(jList1);
+        jListNadawczaGrupy.setName("jListNadawczaGrupy"); // NOI18N
+        jScrollPane2.setViewportView(jListNadawczaGrupy);
 
         jScrollPane5.setName("jScrollPane5"); // NOI18N
 
-        jList2.setModel(new javax.swing.AbstractListModel() {
+        jListNadawczaNazwiska.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jList2.setName("jList2"); // NOI18N
-        jScrollPane5.setViewportView(jList2);
+        jListNadawczaNazwiska.setName("jListNadawczaNazwiska"); // NOI18N
+        jScrollPane5.setViewportView(jListNadawczaNazwiska);
 
         jSeparator2.setOrientation(javax.swing.SwingConstants.VERTICAL);
         jSeparator2.setName("jSeparator2"); // NOI18N
 
-        jButton1.setText(resourceMap.getString("jButton1.text")); // NOI18N
-        jButton1.setName("jButton1"); // NOI18N
+        jButtonNadawczaWyslij.setText(resourceMap.getString("jButtonNadawczaWyslij.text")); // NOI18N
+        jButtonNadawczaWyslij.setName("jButtonNadawczaWyslij"); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -421,22 +445,20 @@ public class SchoolmanagementView extends FrameView {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE)
+                    .addComponent(jButtonNadawczaWyslij, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jRadioButton1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jRadioButton2))
+                        .addComponent(jRadioButtonNadawczaIndywidualna)
+                        .addGap(26, 26, 26)
+                        .addComponent(jRadioButtonNadawczaZbiorowa))
                     .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 2, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 602, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -445,14 +467,15 @@ public class SchoolmanagementView extends FrameView {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButtonNadawczaWyslij, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jRadioButton1)
-                            .addComponent(jRadioButton2))
+                            .addComponent(jRadioButtonNadawczaIndywidualna)
+                            .addComponent(jRadioButtonNadawczaZbiorowa))
                         .addGap(18, 18, 18)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -460,8 +483,7 @@ public class SchoolmanagementView extends FrameView {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -472,8 +494,8 @@ public class SchoolmanagementView extends FrameView {
         jPanel11.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel11.border.title"))); // NOI18N
         jPanel11.setName("jPanel11"); // NOI18N
 
-        jComboBox8.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Klasa 2A" }));
-        jComboBox8.setName("jComboBox8"); // NOI18N
+        jComboBoxPlanKlasa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Klasa 2A" }));
+        jComboBoxPlanKlasa.setName("jComboBoxPlanKlasa"); // NOI18N
 
         jLabel24.setText(resourceMap.getString("jLabel24.text")); // NOI18N
         jLabel24.setName("jLabel24"); // NOI18N
@@ -486,7 +508,7 @@ public class SchoolmanagementView extends FrameView {
                 .addGap(45, 45, 45)
                 .addComponent(jLabel24)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox8, 0, 182, Short.MAX_VALUE)
+                .addComponent(jComboBoxPlanKlasa, 0, 182, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel11Layout.setVerticalGroup(
@@ -494,14 +516,14 @@ public class SchoolmanagementView extends FrameView {
             .addGroup(jPanel11Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxPlanKlasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel24))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jScrollPane8.setName("jScrollPane8"); // NOI18N
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jTablePlan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null},
@@ -526,17 +548,17 @@ public class SchoolmanagementView extends FrameView {
                 return types [columnIndex];
             }
         });
-        jTable3.setName("jTable3"); // NOI18N
-        jTable3.setRowHeight(22);
-        jTable3.setRowSelectionAllowed(false);
-        jTable3.getTableHeader().setReorderingAllowed(false);
-        jScrollPane8.setViewportView(jTable3);
+        jTablePlan.setName("jTablePlan"); // NOI18N
+        jTablePlan.setRowHeight(22);
+        jTablePlan.setRowSelectionAllowed(false);
+        jTablePlan.getTableHeader().setReorderingAllowed(false);
+        jScrollPane8.setViewportView(jTablePlan);
 
         jPanel12.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel12.border.title"))); // NOI18N
         jPanel12.setName("jPanel12"); // NOI18N
 
-        jComboBox9.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Matematyka" }));
-        jComboBox9.setName("jComboBox9"); // NOI18N
+        jComboBoxPlanPrzedmiot.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Matematyka" }));
+        jComboBoxPlanPrzedmiot.setName("jComboBoxPlanPrzedmiot"); // NOI18N
 
         jLabel27.setText(resourceMap.getString("jLabel27.text")); // NOI18N
         jLabel27.setName("jLabel27"); // NOI18N
@@ -544,11 +566,11 @@ public class SchoolmanagementView extends FrameView {
         jLabel28.setText(resourceMap.getString("jLabel28.text")); // NOI18N
         jLabel28.setName("jLabel28"); // NOI18N
 
-        jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kowalski Janusz" }));
-        jComboBox10.setName("jComboBox10"); // NOI18N
+        jComboBoxPlanNauczyciel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kowalski Janusz" }));
+        jComboBoxPlanNauczyciel.setName("jComboBoxPlanNauczyciel"); // NOI18N
 
-        jButton7.setText(resourceMap.getString("jButton7.text")); // NOI18N
-        jButton7.setName("jButton7"); // NOI18N
+        jButtonPlanZatwierdz.setText(resourceMap.getString("jButtonPlanZatwierdz.text")); // NOI18N
+        jButtonPlanZatwierdz.setName("jButtonPlanZatwierdz"); // NOI18N
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -561,9 +583,9 @@ public class SchoolmanagementView extends FrameView {
                     .addComponent(jLabel27))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(jComboBox9, 0, 188, Short.MAX_VALUE)
-                    .addComponent(jComboBox10, 0, 188, Short.MAX_VALUE))
+                    .addComponent(jButtonPlanZatwierdz, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
+                    .addComponent(jComboBoxPlanPrzedmiot, 0, 188, Short.MAX_VALUE)
+                    .addComponent(jComboBoxPlanNauczyciel, 0, 188, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel12Layout.setVerticalGroup(
@@ -572,13 +594,13 @@ public class SchoolmanagementView extends FrameView {
                 .addContainerGap()
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel27)
-                    .addComponent(jComboBox9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxPlanPrzedmiot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBoxPlanNauczyciel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel28))
                 .addGap(18, 18, 18)
-                .addComponent(jButton7)
+                .addComponent(jButtonPlanZatwierdz)
                 .addContainerGap(28, Short.MAX_VALUE))
         );
 
@@ -612,7 +634,7 @@ public class SchoolmanagementView extends FrameView {
 
         jScrollPane7.setName("jScrollPane7"); // NOI18N
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTableOceny.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -652,9 +674,9 @@ public class SchoolmanagementView extends FrameView {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setName("jTable2"); // NOI18N
-        jTable2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane7.setViewportView(jTable2);
+        jTableOceny.setName("jTableOceny"); // NOI18N
+        jTableOceny.getTableHeader().setReorderingAllowed(false);
+        jScrollPane7.setViewportView(jTableOceny);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel3.border.title"))); // NOI18N
         jPanel3.setName("jPanel3"); // NOI18N
@@ -665,17 +687,17 @@ public class SchoolmanagementView extends FrameView {
         jLabel21.setText(resourceMap.getString("jLabel21.text")); // NOI18N
         jLabel21.setName("jLabel21"); // NOI18N
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "J. Polski", "Matematyka" }));
-        jComboBox4.setName("jComboBox4"); // NOI18N
+        jComboBoxOcenyPrzedmiot.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "J. Polski", "Matematyka" }));
+        jComboBoxOcenyPrzedmiot.setName("jComboBoxOcenyPrzedmiot"); // NOI18N
 
-        jComboBox5.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Klasa 2A" }));
-        jComboBox5.setName("jComboBox5"); // NOI18N
+        jComboBoxOcenyKlasa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Klasa 2A" }));
+        jComboBoxOcenyKlasa.setName("jComboBoxOcenyKlasa"); // NOI18N
 
         jLabel22.setText(resourceMap.getString("jLabel22.text")); // NOI18N
         jLabel22.setName("jLabel22"); // NOI18N
 
-        jComboBox6.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kowalski Janusz" }));
-        jComboBox6.setName("jComboBox6"); // NOI18N
+        jComboBoxOcenyNauczyciel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kowalski Janusz" }));
+        jComboBoxOcenyNauczyciel.setName("jComboBoxOcenyNauczyciel"); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -689,9 +711,9 @@ public class SchoolmanagementView extends FrameView {
                     .addComponent(jLabel21))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.Alignment.TRAILING, 0, 182, Short.MAX_VALUE)
-                    .addComponent(jComboBox6, 0, 182, Short.MAX_VALUE)
-                    .addComponent(jComboBox5, 0, 182, Short.MAX_VALUE))
+                    .addComponent(jComboBoxOcenyPrzedmiot, javax.swing.GroupLayout.Alignment.TRAILING, 0, 182, Short.MAX_VALUE)
+                    .addComponent(jComboBoxOcenyNauczyciel, 0, 182, Short.MAX_VALUE)
+                    .addComponent(jComboBoxOcenyKlasa, 0, 182, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -700,14 +722,14 @@ public class SchoolmanagementView extends FrameView {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel22)
-                    .addComponent(jComboBox6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxOcenyNauczyciel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBoxOcenyPrzedmiot, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(57, 57, 57)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jComboBox5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBoxOcenyKlasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel21)))
                     .addComponent(jLabel20))
                 .addGap(66, 66, 66))
@@ -741,29 +763,29 @@ public class SchoolmanagementView extends FrameView {
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPanel8.border.title"))); // NOI18N
         jPanel8.setName("jPanel8"); // NOI18N
 
-        buttonGroup2.add(jRadioButton3);
-        jRadioButton3.setText(resourceMap.getString("jRadioButton3.text")); // NOI18N
-        jRadioButton3.setName("jRadioButton3"); // NOI18N
+        buttonGroup2.add(jRadioButtonDaneNazwisko);
+        jRadioButtonDaneNazwisko.setText(resourceMap.getString("jRadioButtonDaneNazwisko.text")); // NOI18N
+        jRadioButtonDaneNazwisko.setName("jRadioButtonDaneNazwisko"); // NOI18N
 
-        buttonGroup2.add(jRadioButton4);
-        jRadioButton4.setText(resourceMap.getString("jRadioButton4.text")); // NOI18N
-        jRadioButton4.setName("jRadioButton4"); // NOI18N
+        buttonGroup2.add(jRadioButtonDaneGrupy);
+        jRadioButtonDaneGrupy.setText(resourceMap.getString("jRadioButtonDaneGrupy.text")); // NOI18N
+        jRadioButtonDaneGrupy.setName("jRadioButtonDaneGrupy"); // NOI18N
 
-        buttonGroup2.add(jRadioButton5);
-        jRadioButton5.setText(resourceMap.getString("jRadioButton5.text")); // NOI18N
-        jRadioButton5.setName("jRadioButton5"); // NOI18N
+        buttonGroup2.add(jRadioButtonDaneKlasy);
+        jRadioButtonDaneKlasy.setText(resourceMap.getString("jRadioButtonDaneKlasy.text")); // NOI18N
+        jRadioButtonDaneKlasy.setName("jRadioButtonDaneKlasy"); // NOI18N
 
-        jTextField1.setText(resourceMap.getString("jTextField1.text")); // NOI18N
-        jTextField1.setName("jTextField1"); // NOI18N
+        jTextFieldDaneSzukaj.setText(resourceMap.getString("jTextFieldDaneSzukaj.text")); // NOI18N
+        jTextFieldDaneSzukaj.setName("jTextFieldDaneSzukaj"); // NOI18N
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dyrekcja", "Nauczyciele", "Pracownicy", "Uczniowie" }));
-        jComboBox1.setName("jComboBox1"); // NOI18N
+        jComboBoxDaneGrupa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dyrekcja", "Nauczyciele", "Pracownicy", "Uczniowie" }));
+        jComboBoxDaneGrupa.setName("jComboBoxDaneGrupa"); // NOI18N
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Klasa 2A", "Klasa 2B", "Klasa 3A", "Klasa 3B" }));
-        jComboBox2.setName("jComboBox2"); // NOI18N
+        jComboBoxDaneKlasa.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Klasa 2A", "Klasa 2B", "Klasa 3A", "Klasa 3B" }));
+        jComboBoxDaneKlasa.setName("jComboBoxDaneKlasa"); // NOI18N
 
-        jButton6.setText(resourceMap.getString("jButton6.text")); // NOI18N
-        jButton6.setName("jButton6"); // NOI18N
+        jButtonDaneWyszukuj.setText(resourceMap.getString("jButtonDaneWyszukuj.text")); // NOI18N
+        jButtonDaneWyszukuj.setName("jButtonDaneWyszukuj"); // NOI18N
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -775,18 +797,18 @@ public class SchoolmanagementView extends FrameView {
                         .addContainerGap()
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel8Layout.createSequentialGroup()
-                                .addComponent(jRadioButton5)
+                                .addComponent(jRadioButtonDaneKlasy)
                                 .addGap(18, 18, 18)
-                                .addComponent(jComboBox2, 0, 202, Short.MAX_VALUE))
+                                .addComponent(jComboBoxDaneKlasa, 0, 169, Short.MAX_VALUE))
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jRadioButton3)
-                                    .addComponent(jRadioButton4))
+                                    .addComponent(jRadioButtonDaneNazwisko)
+                                    .addComponent(jRadioButtonDaneGrupy))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jComboBox1, 0, 200, Short.MAX_VALUE)
-                                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))))
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE))
+                                    .addComponent(jComboBoxDaneGrupa, 0, 167, Short.MAX_VALUE)
+                                    .addComponent(jTextFieldDaneSzukaj, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)))))
+                    .addComponent(jButtonDaneWyszukuj, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel8Layout.setVerticalGroup(
@@ -794,31 +816,31 @@ public class SchoolmanagementView extends FrameView {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRadioButtonDaneNazwisko)
+                    .addComponent(jTextFieldDaneSzukaj, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRadioButtonDaneGrupy)
+                    .addComponent(jComboBoxDaneGrupa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jRadioButtonDaneKlasy)
+                    .addComponent(jComboBoxDaneKlasa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jButton6)
+                .addComponent(jButtonDaneWyszukuj)
                 .addContainerGap())
         );
 
         jScrollPane6.setName("jScrollPane6"); // NOI18N
 
-        jList3.setModel(new javax.swing.AbstractListModel() {
+        jListDaneWyniki.setModel(new javax.swing.AbstractListModel() {
             String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
             public int getSize() { return strings.length; }
             public Object getElementAt(int i) { return strings[i]; }
         });
-        jList3.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jList3.setName("jList3"); // NOI18N
-        jScrollPane6.setViewportView(jList3);
+        jListDaneWyniki.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        jListDaneWyniki.setName("jListDaneWyniki"); // NOI18N
+        jScrollPane6.setViewportView(jListDaneWyniki);
 
         jLabel11.setText(resourceMap.getString("jLabel11.text")); // NOI18N
         jLabel11.setName("jLabel11"); // NOI18N
@@ -846,32 +868,32 @@ public class SchoolmanagementView extends FrameView {
         jLabel16.setText(resourceMap.getString("jLabel16.text")); // NOI18N
         jLabel16.setName("jLabel16"); // NOI18N
 
-        jTextField2.setText(resourceMap.getString("jTextField2.text")); // NOI18N
-        jTextField2.setName("jTextField2"); // NOI18N
+        jTextFieldDaneNazwisko.setText(resourceMap.getString("jTextFieldDaneNazwisko.text")); // NOI18N
+        jTextFieldDaneNazwisko.setName("jTextFieldDaneNazwisko"); // NOI18N
 
-        jTextField3.setText(resourceMap.getString("jTextField3.text")); // NOI18N
-        jTextField3.setName("jTextField3"); // NOI18N
+        jTextFieldDaneImie.setText(resourceMap.getString("jTextFieldDaneImie.text")); // NOI18N
+        jTextFieldDaneImie.setName("jTextFieldDaneImie"); // NOI18N
 
-        jTextField4.setText(resourceMap.getString("jTextField4.text")); // NOI18N
-        jTextField4.setName("jTextField4"); // NOI18N
+        jTextFieldDaneAdres.setText(resourceMap.getString("jTextFieldDaneAdres.text")); // NOI18N
+        jTextFieldDaneAdres.setName("jTextFieldDaneAdres"); // NOI18N
 
-        jTextField5.setText(resourceMap.getString("jTextField5.text")); // NOI18N
-        jTextField5.setName("jTextField5"); // NOI18N
+        jTextFieldDaneTelefon.setText(resourceMap.getString("jTextFieldDaneTelefon.text")); // NOI18N
+        jTextFieldDaneTelefon.setName("jTextFieldDaneTelefon"); // NOI18N
 
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox3.setName("jComboBox3"); // NOI18N
+        jComboBoxDaneNalezyDo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDaneNalezyDo.setName("jComboBoxDaneNalezyDo"); // NOI18N
 
-        jButton5.setText(resourceMap.getString("jButton5.text")); // NOI18N
-        jButton5.setName("jButton5"); // NOI18N
+        jButtonDaneNowaOsoba.setText(resourceMap.getString("jButtonDaneNowaOsoba.text")); // NOI18N
+        jButtonDaneNowaOsoba.setName("jButtonDaneNowaOsoba"); // NOI18N
 
         jLabel23.setText(resourceMap.getString("jLabel23.text")); // NOI18N
         jLabel23.setName("jLabel23"); // NOI18N
 
-        jTextField6.setText(resourceMap.getString("jTextField6.text")); // NOI18N
-        jTextField6.setName("jTextField6"); // NOI18N
+        jTextFieldDaneNip.setText(resourceMap.getString("jTextFieldDaneNip.text")); // NOI18N
+        jTextFieldDaneNip.setName("jTextFieldDaneNip"); // NOI18N
 
-        jTextField7.setText(resourceMap.getString("jTextField7.text")); // NOI18N
-        jTextField7.setName("jTextField7"); // NOI18N
+        jTextFieldPesel.setText(resourceMap.getString("jTextFieldPesel.text")); // NOI18N
+        jTextFieldPesel.setName("jTextFieldPesel"); // NOI18N
 
         jLabel25.setText(resourceMap.getString("jLabel25.text")); // NOI18N
         jLabel25.setName("jLabel25"); // NOI18N
@@ -880,8 +902,11 @@ public class SchoolmanagementView extends FrameView {
         jLabel26.setText(resourceMap.getString("jLabel26.text")); // NOI18N
         jLabel26.setName("jLabel26"); // NOI18N
 
-        jComboBox7.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox7.setName("jComboBox7"); // NOI18N
+        jComboBoxDaneWychowawcaKlasy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBoxDaneWychowawcaKlasy.setName("jComboBoxDaneWychowawcaKlasy"); // NOI18N
+
+        jButtonDaneZatwierdz.setText(resourceMap.getString("jButtonDaneZatwierdz.text")); // NOI18N
+        jButtonDaneZatwierdz.setName("jButtonDaneZatwierdz"); // NOI18N
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -896,74 +921,79 @@ public class SchoolmanagementView extends FrameView {
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
+                            .addComponent(jTextFieldDaneImie, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                            .addComponent(jTextFieldDaneNazwisko, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel25)
                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField7)
-                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
+                            .addComponent(jTextFieldPesel)
+                            .addComponent(jTextFieldDaneAdres, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jComboBoxDaneNalezyDo, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel23)
                             .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField6)
-                            .addComponent(jTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
+                            .addComponent(jTextFieldDaneNip)
+                            .addComponent(jTextFieldDaneTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5)
-                            .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(112, 112, 112))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addComponent(jButtonDaneNowaOsoba)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButtonDaneZatwierdz, 0, 0, Short.MAX_VALUE))
+                            .addComponent(jComboBoxDaneWychowawcaKlasy, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(145, 145, 145))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextFieldDaneNazwisko, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel12))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextFieldDaneImie, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldDaneAdres, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel25)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldPesel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldDaneTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextFieldDaneNip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel16)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxDaneNalezyDo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel26)
-                    .addComponent(jComboBox7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBoxDaneWychowawcaKlasy, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton5)
+                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonDaneNowaOsoba)
+                    .addComponent(jButtonDaneZatwierdz))
                 .addGap(18, 18, 18))
         );
 
@@ -982,67 +1012,58 @@ public class SchoolmanagementView extends FrameView {
         jLabel19.setText(resourceMap.getString("jLabel19.text")); // NOI18N
         jLabel19.setName("jLabel19"); // NOI18N
 
-        jPasswordField1.setText(resourceMap.getString("jPasswordField1.text")); // NOI18N
-        jPasswordField1.setName("jPasswordField1"); // NOI18N
+        jPasswordFieldAktualne.setText(resourceMap.getString("jPasswordFieldAktualne.text")); // NOI18N
+        jPasswordFieldAktualne.setName("jPasswordFieldAktualne"); // NOI18N
 
-        jPasswordField2.setText(resourceMap.getString("jPasswordField2.text")); // NOI18N
-        jPasswordField2.setName("jPasswordField2"); // NOI18N
+        jPasswordFieldNowe1.setText(resourceMap.getString("jPasswordFieldNowe1.text")); // NOI18N
+        jPasswordFieldNowe1.setName("jPasswordFieldNowe1"); // NOI18N
 
-        jPasswordField3.setText(resourceMap.getString("jPasswordField3.text")); // NOI18N
-        jPasswordField3.setName("jPasswordField3"); // NOI18N
+        jPasswordFieldNowe2.setText(resourceMap.getString("jPasswordFieldNowe2.text")); // NOI18N
+        jPasswordFieldNowe2.setName("jPasswordFieldNowe2"); // NOI18N
 
-        jButton3.setText(resourceMap.getString("jButton3.text")); // NOI18N
-        jButton3.setName("jButton3"); // NOI18N
-
-        jButton4.setText(resourceMap.getString("jButton4.text")); // NOI18N
-        jButton4.setName("jButton4"); // NOI18N
+        jButtonDaneZmienHaslo.setText(resourceMap.getString("jButtonDaneZmienHaslo.text")); // NOI18N
+        jButtonDaneZmienHaslo.setName("jButtonDaneZmienHaslo"); // NOI18N
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel10Layout.createSequentialGroup()
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel10Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                                .addComponent(jLabel18))
-                            .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPasswordField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                            .addComponent(jPasswordField3, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButtonDaneZmienHaslo, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
-                        .addComponent(jLabel17, javax.swing.GroupLayout.DEFAULT_SIZE, 119, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton3)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE))))
-                .addGap(119, 119, 119))
+                            .addComponent(jPasswordFieldNowe2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                            .addComponent(jPasswordFieldNowe1, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE)
+                            .addComponent(jPasswordFieldAktualne, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+                        .addGap(130, 130, 130))))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel17))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
-                .addGap(40, 40, 40)
+                    .addComponent(jLabel17)
+                    .addComponent(jPasswordFieldAktualne, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jPasswordField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPasswordFieldNowe1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel18))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel19)
-                    .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addContainerGap(23, Short.MAX_VALUE))
+                    .addComponent(jPasswordFieldNowe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19))
+                .addGap(26, 26, 26)
+                .addComponent(jButtonDaneZmienHaslo)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
@@ -1052,9 +1073,9 @@ public class SchoolmanagementView extends FrameView {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
                     .addComponent(jPanel8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1081,21 +1102,21 @@ public class SchoolmanagementView extends FrameView {
 
         jTabbedPane1.addTab(resourceMap.getString("jPanel6.TabConstraints.tabTitle"), jPanel6); // NOI18N
 
-        jLabel1.setFont(resourceMap.getFont("jLabel1.font")); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
-        jLabel1.setName("jLabel1"); // NOI18N
+        jLabelNaglowek.setFont(resourceMap.getFont("jLabelNaglowek.font")); // NOI18N
+        jLabelNaglowek.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelNaglowek.setText(resourceMap.getString("jLabelNaglowek.text")); // NOI18N
+        jLabelNaglowek.setName("jLabelNaglowek"); // NOI18N
 
         jLabel29.setFont(resourceMap.getFont("jLabel29.font")); // NOI18N
         jLabel29.setText(resourceMap.getString("jLabel29.text")); // NOI18N
         jLabel29.setName("jLabel29"); // NOI18N
 
-        jLabel30.setFont(resourceMap.getFont("jLabel30.font")); // NOI18N
-        jLabel30.setText(resourceMap.getString("jLabel30.text")); // NOI18N
-        jLabel30.setName("jLabel30"); // NOI18N
+        jLabelZalogowanyJako.setFont(resourceMap.getFont("jLabelZalogowanyJako.font")); // NOI18N
+        jLabelZalogowanyJako.setText(resourceMap.getString("jLabelZalogowanyJako.text")); // NOI18N
+        jLabelZalogowanyJako.setName("jLabelZalogowanyJako"); // NOI18N
 
-        jToggleButton1.setText(resourceMap.getString("jToggleButton1.text")); // NOI18N
-        jToggleButton1.setName("jToggleButton1"); // NOI18N
+        jToggleButton1.setText(resourceMap.getString("jButtonWyloguj.text")); // NOI18N
+        jToggleButton1.setName("jButtonWyloguj"); // NOI18N
 
         javax.swing.GroupLayout mainPanelLayout = new javax.swing.GroupLayout(mainPanel);
         mainPanel.setLayout(mainPanelLayout);
@@ -1105,14 +1126,14 @@ public class SchoolmanagementView extends FrameView {
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE))
+                        .addComponent(jLabelNaglowek, javax.swing.GroupLayout.DEFAULT_SIZE, 828, Short.MAX_VALUE))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel29)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel30)
+                                .addComponent(jLabelZalogowanyJako)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jToggleButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 812, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1123,11 +1144,11 @@ public class SchoolmanagementView extends FrameView {
             mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(mainPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addComponent(jLabelNaglowek)
                 .addGap(25, 25, 25)
                 .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel29)
-                    .addComponent(jLabel30)
+                    .addComponent(jLabelZalogowanyJako)
                     .addComponent(jToggleButton1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1140,24 +1161,26 @@ public class SchoolmanagementView extends FrameView {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox10;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
-    private javax.swing.JComboBox jComboBox5;
-    private javax.swing.JComboBox jComboBox6;
-    private javax.swing.JComboBox jComboBox7;
-    private javax.swing.JComboBox jComboBox8;
-    private javax.swing.JComboBox jComboBox9;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton jButtonDaneNowaOsoba;
+    private javax.swing.JButton jButtonDaneWyszukuj;
+    private javax.swing.JButton jButtonDaneZatwierdz;
+    private javax.swing.JButton jButtonDaneZmienHaslo;
+    private javax.swing.JButton jButtonNadawczaWyslij;
+    private javax.swing.JButton jButtonPlanZatwierdz;
+    private javax.swing.JButton jButtonSkrzynkaOdswiez;
+    private javax.swing.JButton jButtonSkrzynkaUsun;
+    private javax.swing.JCheckBox jCheckBoxPokazOdebrane;
+    private javax.swing.JCheckBox jCheckBoxPokazWyslane;
+    private javax.swing.JComboBox jComboBoxDaneGrupa;
+    private javax.swing.JComboBox jComboBoxDaneKlasa;
+    private javax.swing.JComboBox jComboBoxDaneNalezyDo;
+    private javax.swing.JComboBox jComboBoxDaneWychowawcaKlasy;
+    private javax.swing.JComboBox jComboBoxOcenyKlasa;
+    private javax.swing.JComboBox jComboBoxOcenyNauczyciel;
+    private javax.swing.JComboBox jComboBoxOcenyPrzedmiot;
+    private javax.swing.JComboBox jComboBoxPlanKlasa;
+    private javax.swing.JComboBox jComboBoxPlanNauczyciel;
+    private javax.swing.JComboBox jComboBoxPlanPrzedmiot;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -1180,16 +1203,18 @@ public class SchoolmanagementView extends FrameView {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
-    private javax.swing.JList jList2;
-    private javax.swing.JList jList3;
+    private javax.swing.JLabel jLabelNaglowek;
+    private javax.swing.JLabel jLabelSkrzynkaData;
+    private javax.swing.JLabel jLabelSkrzynkaOd;
+    private javax.swing.JLabel jLabelSkrzynkaTemat;
+    private javax.swing.JLabel jLabelZalogowanyJako;
+    private javax.swing.JList jListDaneWyniki;
+    private javax.swing.JList jListNadawczaGrupy;
+    private javax.swing.JList jListNadawczaNazwiska;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
@@ -1201,14 +1226,14 @@ public class SchoolmanagementView extends FrameView {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
-    private javax.swing.JPasswordField jPasswordField3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
+    private javax.swing.JPasswordField jPasswordFieldAktualne;
+    private javax.swing.JPasswordField jPasswordFieldNowe1;
+    private javax.swing.JPasswordField jPasswordFieldNowe2;
+    private javax.swing.JRadioButton jRadioButtonDaneGrupy;
+    private javax.swing.JRadioButton jRadioButtonDaneKlasy;
+    private javax.swing.JRadioButton jRadioButtonDaneNazwisko;
+    private javax.swing.JRadioButton jRadioButtonNadawczaIndywidualna;
+    private javax.swing.JRadioButton jRadioButtonNadawczaZbiorowa;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
@@ -1220,18 +1245,18 @@ public class SchoolmanagementView extends FrameView {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JTable jTableOceny;
+    private javax.swing.JTable jTablePlan;
+    private javax.swing.JTable jTableSkrzynka;
+    private javax.swing.JTextArea jTextAreaNadawcza;
+    private javax.swing.JTextArea jTextAreaSkrzynka;
+    private javax.swing.JTextField jTextFieldDaneAdres;
+    private javax.swing.JTextField jTextFieldDaneImie;
+    private javax.swing.JTextField jTextFieldDaneNazwisko;
+    private javax.swing.JTextField jTextFieldDaneNip;
+    private javax.swing.JTextField jTextFieldDaneSzukaj;
+    private javax.swing.JTextField jTextFieldDaneTelefon;
+    private javax.swing.JTextField jTextFieldPesel;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JPanel mainPanel;
     // End of variables declaration//GEN-END:variables
