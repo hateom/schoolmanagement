@@ -1,0 +1,6 @@
+Zrobiłem brancha,  bo coś nie chciał funkcjonować projekt po zmianach. Więc jeśli możesz Andrzeju to podziałaj na nowej wersji.
+
+
+PS hasło jest takie jak login - wtedy przechodzi.
+
+Nie udało mi się zrobić tak, żeby najpierw pojawiało się okno logowania a potem główne. Jak się przestawi kolejność to się coś zwiesza. Mam nadzieję, że to będzie ok dla was.
