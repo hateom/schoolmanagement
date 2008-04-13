@@ -1,0 +1,44 @@
+#summary Funkcje do zaimplementowania.
+
+= Introduction =
+
+Trzeba się będzie podzielić i zaimplementować funkcje. Śmiało edytujcie tę stronę. Pewnie jest niekompletna/z błędami.
+
+Będę pisał skrótami.
+
+= Details =
+
+Inne:
+  * Init - pobierz skrzynkę dla defaultowych ustawien, pobierz liste przedmiotow, nauczycieli, klas, grup. Umiesc je w odpowiednich miejscach, gdzie sie da. Pobierz przy tym wartosci poprawne dla danego uzytkownika. Np. Dla nauczyciela w dziale oceny wpisz tylko jego nazwisko, dla ucznia tylko jego plan itp (a moze nie?). Update jLabelZalogowanyJako
+  * Wyloguj: przywroc okno logowania, usun stare wartosci gdzie konieczne
+
+Skrzynka
+  * WypiszWiadomosci(jCheckBoxPokazOdebrane, jCheckBoxPokazWyslane)
+  * jButtonSkrzynkaOdswiezActionPerformed()
+  * jButtonSkrzynkaUsunActionPerformed(jTableSkrzynka)
+  * jCheckBoxPokazOdebranePropertyChange
+  * jCheckBoxPokazWyslanePropertyChange
+  * wybor wiadomosci z tabeli -> szczegoly
+
+Wyslij wiadomosc:
+  * jRadioButtonNadawczaIndywidualnaPropertyChange 
+  * jRadioButtonNadawczaZbiorowaPropertyChange
+                      - zmiana mozliwosci multiple choice jListNadawczaGrupy, jListNadawczaNazwiska
+  * Wyslij wiadomosc(jTextAreaNadawcza, jListNadawczaGrupy, jListNadawczaNazwiska)
+
+
+Plan zajec:
+  * Wybor klasy
+  * Zatwierdz zmiany
+
+Oceny:
+  * jComboBoxOcenyKlasaActionPerformed ? -> wpisz do tabeli wartosci
+  * jButtonOcenyZapiszActionPerformed
+
+Dane:
+
+  * Wyszukuj(RadioButton): wpisz do wynikow
+  * Wyniki+przycisniecie -> szczegoly
+  * Nowa osoba: usuniecie danych ze szczegolow, utworzenie nowego obiektu osoby
+  * Zatwierdz: do bazy (umowmy sie ze bez specjalnej weryfikacji heh)
+  * Zmiana hasla (aktualne, nowe1, nowe2)
