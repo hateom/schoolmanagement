@@ -17,7 +17,9 @@ public class SchoolmanagementApp extends SingleFrameApplication {
      */
     @Override protected void startup() {
         //show(new SchoolmanagementView(this));
-        show(new LoginJFrame());
+        LoginJFrame instance = new LoginJFrame();
+        LoginJFrame.setInstance( instance );
+        show( instance );
     }
 
     /**

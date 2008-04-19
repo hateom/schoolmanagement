@@ -6,6 +6,10 @@
 
 package schoolmanagement;
 
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import javax.swing.WindowConstants;
 import org.jdesktop.application.Action;
 import org.jgroups.demos.wb.MessageDialog;
 import schoolmanagement.controller.*;
@@ -16,9 +20,20 @@ import schoolmanagement.controller.*;
  */
 public class LoginJFrame extends javax.swing.JFrame {
     
+    static private LoginJFrame instance;
+    
     /** Creates new form LoginJFrame */
     public LoginJFrame() {
         initComponents();
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    }
+    
+    static public void setInstance( LoginJFrame inst ) {
+        instance = inst;
+    }
+    
+    static public LoginJFrame getInstance() {
+        return instance;
     }
     
     /** This method is called from within the constructor to
@@ -35,6 +50,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("LoginForm"); // NOI18N
@@ -95,15 +111,23 @@ public class LoginJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(resourceMap.getFont("jLabel3.font")); // NOI18N
+        jLabel3.setForeground(resourceMap.getColor("jLabel3.foreground")); // NOI18N
+        jLabel3.setText(resourceMap.getString("jLabel3.text")); // NOI18N
+        jLabel3.setName("jLabel3"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -112,7 +136,9 @@ public class LoginJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
+                    .addComponent(jLabel3))
                 .addContainerGap())
         );
 
@@ -127,7 +153,23 @@ public class LoginJFrame extends javax.swing.JFrame {
             strPwd += pwd[j];
         }
         
-        User.Login( jTextField1.getText(), strPwd );
+        if( User.Login( jTextField1.getText(), strPwd ) ) {
+            SchoolmanagementView mv = new SchoolmanagementView(SchoolmanagementApp.getApplication());
+            final LoginJFrame ljf = this;
+            mv.getFrame().setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            mv.getFrame().addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosing(WindowEvent e) {
+                    User.Logout();
+                    LoginJFrame.getInstance().setVisible(true);
+                }
+            });
+            this.jPasswordField1.setText("");
+            this.setVisible(false);
+            SchoolmanagementApp.getApplication().show(mv);
+        } else {
+            jLabel3.setText("Invalid username or password!");
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
     
     /**
@@ -146,6 +188,7 @@ public class LoginJFrame extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
