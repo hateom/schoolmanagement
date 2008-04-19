@@ -39,11 +39,14 @@ public class DataAccess {
     public SmUser loginUser(String a_strLogin, String a_strPassword)
     {
         Query sq = m_oEm.createQuery("SELECT u FROM SmUser u INNER JOIN FETCH u.rolId WHERE u.usrLogin = ?1 AND u.usrPasswd = ?2").setParameter(1, a_strLogin).setParameter(2, a_strPassword);
-        Object o = sq.getSingleResult();
-        if(o != null)
+        try{
+            Object o = sq.getSingleResult();
+            SmUser smUser = (SmUser)o;
+            return smUser;
+        }
+        catch(Exception ex)
         {
-            SmUser oUser = (SmUser)sq.getSingleResult();
-            return oUser;
+            
         }
         return null;
     }
