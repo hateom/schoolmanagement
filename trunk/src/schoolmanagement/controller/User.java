@@ -5,6 +5,9 @@
 
 package schoolmanagement.controller;
 
+import schoolmanagement.DataAccess.*;
+import schoolmanagement.entity.SmUser;
+
 /**
  *
  * @author deely
@@ -18,11 +21,18 @@ public class User
     
     static public boolean Login( String user, String password )
     {
+        DataAccess da = new DataAccess();
         //String passmd5 = Crypto.MD5Sum(password);
+        SmUser usr = da.loginUser(user, password);
+        if( usr == null ) return false;
+        
         user_name = user;
-        user_id = 0; //
+        user_id = usr.getUsrId(); //
         is_logged = true;
-        user_role = new Role( "", RoleType.GetRoleType( 0 ) );
+        user_role = new Role( usr.getUsrRolId().getRolName(), RoleType.GetRoleType( usr.getUsrRolId().getRolId() ) );
+        
+        da.dispose();
+        
         return true;
     }
     

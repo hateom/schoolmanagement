@@ -210,6 +210,11 @@ public class SchoolmanagementView extends FrameView {
 
         jTabbedPane1.setTabLayoutPolicy(javax.swing.JTabbedPane.SCROLL_TAB_LAYOUT);
         jTabbedPane1.setName("jTabbedPane1"); // NOI18N
+        jTabbedPane1.addContainerListener(new java.awt.event.ContainerAdapter() {
+            public void componentRemoved(java.awt.event.ContainerEvent evt) {
+                jTabbedPane1ComponentRemoved(evt);
+            }
+        });
 
         jPanel1.setName("jPanel1"); // NOI18N
 
@@ -1089,6 +1094,10 @@ public class SchoolmanagementView extends FrameView {
     private void mainPanelComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_mainPanelComponentRemoved
         // TODO add your handling code here:
     }//GEN-LAST:event_mainPanelComponentRemoved
+
+    private void jTabbedPane1ComponentRemoved(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jTabbedPane1ComponentRemoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTabbedPane1ComponentRemoved
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
