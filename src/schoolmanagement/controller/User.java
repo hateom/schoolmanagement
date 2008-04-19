@@ -16,9 +16,9 @@ public class User
     static private boolean  is_logged;
     static private Role     user_role;
     
-    static boolean Login( String user, String password )
+    static public boolean Login( String user, String password )
     {
-        String passmd5 = Crypto.MD5Sum(password);
+        //String passmd5 = Crypto.MD5Sum(password);
         user_name = user;
         user_id = 0; //
         is_logged = true;
@@ -26,27 +26,27 @@ public class User
         return true;
     }
     
-    static void Logout()
+    static public void Logout()
     {
         is_logged = false;
         user_id = -1;
         user_name = "";
     }
     
-    static boolean isLogged()
+    static public boolean isLogged()
     {
         return is_logged;
     }
     
-    static Role GetRole() {
+    static public Role GetRole() {
         return user_role;
     }
     
-    static String GetUserName() {
+    static public String GetUserName() {
         return user_name;
     }
     
-    static int GetUserId() {
+    static public int GetUserId() {
         return user_id;
     }
 }
