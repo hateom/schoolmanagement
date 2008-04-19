@@ -154,19 +154,23 @@ public class LoginJFrame extends javax.swing.JFrame {
         }
         
         if( User.Login( jTextField1.getText(), strPwd ) ) {
-            SchoolmanagementView mv = new SchoolmanagementView(SchoolmanagementApp.getApplication());
-            final LoginJFrame ljf = this;
-            mv.getFrame().setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            mv.getFrame().addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosing(WindowEvent e) {
-                    User.Logout();
-                    LoginJFrame.getInstance().setVisible(true);
-                }
-            });
+            SchoolmanagementView mv;
+            if( ( mv = SchoolmanagementView.getInstance() ) != null ) {
+                mv.getFrame().setVisible(true);
+            } else {
+                mv = new SchoolmanagementView(SchoolmanagementApp.getApplication());
+                mv.getFrame().setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+                mv.getFrame().addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosing(WindowEvent e) {
+                        User.Logout();
+                        LoginJFrame.getInstance().setVisible(true);
+                    }
+                });
+                SchoolmanagementApp.getApplication().show(mv);
+            }
             this.jPasswordField1.setText("");
             this.setVisible(false);
-            SchoolmanagementApp.getApplication().show(mv);
         } else {
             jLabel3.setText("Invalid username or password!");
         }
