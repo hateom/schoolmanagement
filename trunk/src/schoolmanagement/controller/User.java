@@ -18,10 +18,11 @@ public class User
     
     static boolean Login( String user, String password )
     {
-        // 
+        String passmd5 = Crypto.MD5Sum(password);
         user_name = user;
         user_id = 0; //
         is_logged = true;
+        user_role = new Role( "", RoleType.GetRoleType( 0 ) );
         return true;
     }
     
