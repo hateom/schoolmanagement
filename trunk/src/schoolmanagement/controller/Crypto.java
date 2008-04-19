@@ -22,6 +22,10 @@ public class Crypto {
            return "";
        }
          
-       return new String( hash );
+       String strOut = new String();
+       for( int i=0; i<hash.length; ++i ) {
+            strOut += Integer.toHexString( hash[i] );
+       }
+       return strOut;
     }
 }
