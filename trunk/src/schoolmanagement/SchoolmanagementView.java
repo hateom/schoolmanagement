@@ -312,6 +312,7 @@ public class SchoolmanagementView extends FrameView {
         jTable1.getColumnModel().getColumn(3).setResizable(false);
         jTable1.getColumnModel().getColumn(3).setPreferredWidth(30);
 
+        jButton2.setText("Usuń zaznaczone wiadomości"); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -364,7 +365,7 @@ public class SchoolmanagementView extends FrameView {
                         .addGap(11, 11, 11)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 499, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 502, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton2)))
                 .addContainerGap())
@@ -384,9 +385,11 @@ public class SchoolmanagementView extends FrameView {
         jScrollPane4.setViewportView(jTextArea2);
 
         buttonGroup1.add(jRadioButton1);
+        jRadioButton1.setText("Indywidualna"); // NOI18N
         jRadioButton1.setName("jRadioButton1"); // NOI18N
 
         buttonGroup1.add(jRadioButton2);
+        jRadioButton2.setText("Zbiorowa"); // NOI18N
         jRadioButton2.setName("jRadioButton2"); // NOI18N
 
         jLabel8.setName("jLabel8"); // NOI18N
@@ -466,7 +469,7 @@ public class SchoolmanagementView extends FrameView {
                         .addGap(18, 18, 18)
                         .addComponent(jLabel10)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 301, Short.MAX_VALUE))
+                        .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 522, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -550,6 +553,7 @@ public class SchoolmanagementView extends FrameView {
         jComboBox10.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kowalski Janusz" }));
         jComboBox10.setName("jComboBox10"); // NOI18N
 
+        jButton7.setText("Zatwierdź zmiany"); // NOI18N
         jButton7.setName("jButton7"); // NOI18N
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
@@ -757,6 +761,7 @@ public class SchoolmanagementView extends FrameView {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Klasa 2A", "Klasa 2B", "Klasa 3A", "Klasa 3B" }));
         jComboBox2.setName("jComboBox2"); // NOI18N
 
+        jButton6.setText("Wyszukuj"); // NOI18N
         jButton6.setName("jButton6"); // NOI18N
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
@@ -845,6 +850,7 @@ public class SchoolmanagementView extends FrameView {
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox3.setName("jComboBox3"); // NOI18N
 
+        jButton5.setText("Dodaj nową osobę"); // NOI18N
         jButton5.setName("jButton5"); // NOI18N
 
         jLabel23.setName("jLabel23"); // NOI18N
@@ -963,8 +969,10 @@ public class SchoolmanagementView extends FrameView {
 
         jPasswordField3.setName("jPasswordField3"); // NOI18N
 
+        jButton3.setText("Pokaż moje dane"); // NOI18N
         jButton3.setName("jButton3"); // NOI18N
 
+        jButton4.setText("Zmień hasło"); // NOI18N
         jButton4.setName("jButton4"); // NOI18N
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
@@ -1012,7 +1020,7 @@ public class SchoolmanagementView extends FrameView {
                     .addComponent(jPasswordField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton4)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
