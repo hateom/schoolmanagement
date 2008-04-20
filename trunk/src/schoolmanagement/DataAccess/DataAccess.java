@@ -20,6 +20,9 @@ public class DataAccess {
     EntityManagerFactory m_oEmf;
     EntityManager m_oEm;
     
+    /**
+     * konstruktor tworzacy EntityManangera
+     */
     public DataAccess()
     {
      m_oEmf = javax.persistence.Persistence.createEntityManagerFactory("schoolmanagementPU");   
@@ -36,6 +39,9 @@ public class DataAccess {
         }
     }
     
+    /**
+     * Logowanie uzytkownika
+     */
     public SmUser loginUser(String a_strLogin, String a_strPassword)
     {
         Query sq = m_oEm.createQuery("SELECT u FROM SmUser u INNER JOIN FETCH u.usrRolId WHERE u.usrLogin = ?1 AND u.usrPasswd = ?2").setParameter(1, a_strLogin).setParameter(2, a_strPassword);
@@ -55,20 +61,11 @@ public class DataAccess {
     
     public List getData() {
         return m_oEm.createQuery("SELECT p FROM SmPersons p").getResultList();
-}
-
-    public void persist(Object object) {
-        EntityManagerFactory emf = javax.persistence.Persistence.createEntityManagerFactory("schoolmanagementPU");
-        EntityManager em = emf.createEntityManager();
-        em.getTransaction().begin();
-        try {
-            em.persist(object);
-            em.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            em.getTransaction().rollback();
-        }
     }
+    
+    /**
+     * Zamkniecie sesji
+     */
     public void dispose()
     {
         m_oEm.close();
