@@ -57,7 +57,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder title="Login to the system">
+            <TitledBorder title="Zaloguj sie do systemu">
               <Property name="titleX" resourceKey="jPanelLogin.border.title"/>
             </TitledBorder>
           </Border>
@@ -69,7 +69,7 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jlbUsername" min="-2" max="-2" attributes="0"/>
                       <Component id="jlbPassword" min="-2" max="-2" attributes="0"/>
@@ -133,7 +133,7 @@
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
           <action class="schoolmanagement.LoginJFrame" id="OnLogin" methodName="OnLogin"/>
         </Property>
-        <Property name="text" type="java.lang.String" resourceKey="jBtnLogin.text"/>
+        <Property name="text" type="java.lang.String" value="Zaloguj" noResource="true"/>
         <Property name="name" type="java.lang.String" value="jBtnLogin" noResource="true"/>
       </Properties>
       <Events>
