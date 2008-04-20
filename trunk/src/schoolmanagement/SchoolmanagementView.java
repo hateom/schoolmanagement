@@ -11,15 +11,13 @@ import org.jdesktop.application.FrameView;
 import org.jdesktop.application.TaskMonitor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.List;
 import javax.swing.Timer;
 import javax.swing.Icon;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import schoolmanagement.DataAccess.DataAccess;
-import schoolmanagement.entity.SmPersons;
 import schoolmanagement.controller.*;
+import schoolmanagement.entity.SmPerson;
 /**
  * The application's main frame.
  */
@@ -34,6 +32,18 @@ public class SchoolmanagementView extends FrameView {
         instance = inst;
     }
     
+    public void ReloadFields() {
+        SmPerson smp = User.GetUserPerson();
+        jtbSurnameNameDetails.setText(smp.getPerSurname());
+        jtbNameDetails.setText(smp.getPerName());
+        jtbAddressDetail.setText(smp.getPerAdress());
+        jtbPeselForDetail.setText(Integer.toString( smp.getPerPesel() ) );
+        jtbPhoneDetail.setText(Integer.toString( smp.getPerPhone()) );
+        jtbNipForDetail.setText(Integer.toString( smp.getPerNip()) );
+        
+        jLblLoggedAs.setText(smp.getPerName() + " " + smp.getPerSurname() );
+    }
+    
     public SchoolmanagementView(SingleFrameApplication app) {
         super(app);
 
@@ -45,11 +55,6 @@ public class SchoolmanagementView extends FrameView {
         aboutBox = new JDialog();
         statusAnimationLabel = new JLabel();
         statusMessageLabel = new JLabel();
-        
-        DataAccess personDA = new DataAccess();
-        List personList = personDA.getData();
-        SmPersons smPersonEntity = (SmPersons) personList.get(0);
-        jtbSurnameNameDetails.setText(smPersonEntity.getPerName());
         
         // status bar initialization - message timeout, idle icon and busy animation, etc
         ResourceMap resourceMap = getResourceMap();
@@ -96,6 +101,8 @@ public class SchoolmanagementView extends FrameView {
                 }
             }
         });
+        
+        ReloadFields();
     }
 
     @Action
@@ -188,7 +195,7 @@ public class SchoolmanagementView extends FrameView {
         jtbSurnameNameDetails = new javax.swing.JTextField();
         jtbNameDetails = new javax.swing.JTextField();
         jtbAddressDetail = new javax.swing.JTextField();
-        jbtPhoneDetail = new javax.swing.JTextField();
+        jtbPhoneDetail = new javax.swing.JTextField();
         jcbPickGroupForDetails = new javax.swing.JComboBox();
         jbtnAddNewPerson = new javax.swing.JButton();
         jLabel23 = new javax.swing.JLabel();
@@ -208,7 +215,7 @@ public class SchoolmanagementView extends FrameView {
         jbtnChangePassword = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
+        jLblLoggedAs = new javax.swing.JLabel();
         jbtnLogout = new javax.swing.JButton();
         jbtgrpMessageRecpGroupType = new javax.swing.ButtonGroup();
         buttonGroup2 = new javax.swing.ButtonGroup();
@@ -870,7 +877,7 @@ public class SchoolmanagementView extends FrameView {
 
         jtbAddressDetail.setName("jtbAddressDetail"); // NOI18N
 
-        jbtPhoneDetail.setName("jbtPhoneDetail"); // NOI18N
+        jtbPhoneDetail.setName("jtbPhoneDetail"); // NOI18N
 
         jcbPickGroupForDetails.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbPickGroupForDetails.setName("jcbPickGroupForDetails"); // NOI18N
@@ -903,22 +910,6 @@ public class SchoolmanagementView extends FrameView {
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jtbNameDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                            .addComponent(jtbSurnameNameDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)))
-                    .addGroup(jPanel9Layout.createSequentialGroup()
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel25)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jtbPeselForDetail)
-                            .addComponent(jtbAddressDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jcbPickGroupForDetails, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -929,13 +920,28 @@ public class SchoolmanagementView extends FrameView {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtbNipForDetail)
-                            .addComponent(jbtPhoneDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
+                            .addComponent(jtbPhoneDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
                         .addComponent(jLabel26, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jbtnAddNewPerson)
-                            .addComponent(jcbPickTutorForDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jcbPickTutorForDetail, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createSequentialGroup()
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel9Layout.createSequentialGroup()
+                                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel25)
+                                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, 153, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 157, Short.MAX_VALUE)
+                            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtbNameDetails, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jtbPeselForDetail)
+                                .addComponent(jtbAddressDetail, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))
+                            .addComponent(jtbSurnameNameDetails, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE))))
                 .addGap(172, 172, 172))
         );
         jPanel9Layout.setVerticalGroup(
@@ -943,13 +949,13 @@ public class SchoolmanagementView extends FrameView {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jtbSurnameNameDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel12))
+                        .addComponent(jLabel12)
+                        .addComponent(jtbSurnameNameDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel9Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jtbNameDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel13))))
+                            .addComponent(jLabel13)
+                            .addComponent(jtbNameDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
@@ -961,7 +967,7 @@ public class SchoolmanagementView extends FrameView {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jbtPhoneDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtbPhoneDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel23)
@@ -1095,11 +1101,14 @@ public class SchoolmanagementView extends FrameView {
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
+        jLabel29.setFont(resourceMap.getFont("jLabel29.font")); // NOI18N
         jLabel29.setText("Jesteś zalogowany jako"); // NOI18N
         jLabel29.setName("jLabel29"); // NOI18N
 
-        jLabel30.setText("Paweł Pawłowski"); // NOI18N
-        jLabel30.setName("jLabel30"); // NOI18N
+        jLblLoggedAs.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLblLoggedAs.setForeground(new java.awt.Color(0, 153, 255));
+        jLblLoggedAs.setText("Paweł Pawłowski"); // NOI18N
+        jLblLoggedAs.setName("jLblLoggedAs"); // NOI18N
 
         jbtnLogout.setText("Wyloguj sie"); // NOI18N
         jbtnLogout.setName("jbtnLogout"); // NOI18N
@@ -1124,7 +1133,7 @@ public class SchoolmanagementView extends FrameView {
                             .addGroup(mainPanelLayout.createSequentialGroup()
                                 .addComponent(jLabel29)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel30)
+                                .addComponent(jLblLoggedAs)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jbtnLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jtabMain, javax.swing.GroupLayout.PREFERRED_SIZE, 812, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -1141,13 +1150,13 @@ public class SchoolmanagementView extends FrameView {
                         .addGap(25, 25, 25)
                         .addGroup(mainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel29)
-                            .addComponent(jLabel30)))
+                            .addComponent(jLblLoggedAs)))
                     .addGroup(mainPanelLayout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbtnLogout)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtabMain, javax.swing.GroupLayout.PREFERRED_SIZE, 572, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         setComponent(mainPanel);
@@ -1192,13 +1201,13 @@ public class SchoolmanagementView extends FrameView {
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLblLoggedAs;
     private javax.swing.JList jList3;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1212,7 +1221,6 @@ public class SchoolmanagementView extends FrameView {
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextField jbtPhoneDetail;
     private javax.swing.ButtonGroup jbtgrpMessageRecpGroupType;
     private javax.swing.JButton jbtnAddNewPerson;
     private javax.swing.JButton jbtnApplyLessonEditChanges;
@@ -1259,6 +1267,7 @@ public class SchoolmanagementView extends FrameView {
     private javax.swing.JTextField jtbNameForSearch;
     private javax.swing.JTextField jtbNipForDetail;
     private javax.swing.JTextField jtbPeselForDetail;
+    private javax.swing.JTextField jtbPhoneDetail;
     private javax.swing.JTextField jtbSurnameNameDetails;
     private javax.swing.JTable jtblMessageList;
     private javax.swing.JTable jtblPupilNotes;

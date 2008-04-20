@@ -25,7 +25,7 @@
                               <Group type="102" alignment="0" attributes="1">
                                   <Component id="jLabel29" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jLabel30" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLblLoggedAs" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jbtnLogout" min="-2" pref="129" max="-2" attributes="0"/>
                               </Group>
@@ -48,7 +48,7 @@
                           <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel29" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jLabel30" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLblLoggedAs" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
@@ -58,7 +58,7 @@
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jtabMain" min="-2" pref="572" max="-2" attributes="0"/>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace pref="24" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -1154,28 +1154,6 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabel13" pref="156" max="32767" attributes="1"/>
-                                          <Component id="jLabel12" min="-2" pref="114" max="-2" attributes="1"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jtbNameDetails" alignment="1" pref="184" max="32767" attributes="1"/>
-                                          <Component id="jtbSurnameNameDetails" alignment="1" pref="184" max="32767" attributes="1"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" attributes="0">
-                                          <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel14" alignment="1" pref="153" max="32767" attributes="1"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                          <Component id="jtbPeselForDetail" max="32767" attributes="1"/>
-                                          <Component id="jtbAddressDetail" alignment="0" pref="187" max="32767" attributes="1"/>
-                                      </Group>
-                                  </Group>
-                                  <Group type="102" alignment="1" attributes="0">
                                       <Component id="jLabel16" pref="153" max="32767" attributes="1"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="jcbPickGroupForDetails" min="-2" pref="187" max="-2" attributes="1"/>
@@ -1188,7 +1166,7 @@
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                           <Component id="jtbNipForDetail" max="32767" attributes="1"/>
-                                          <Component id="jbtPhoneDetail" alignment="0" pref="187" max="32767" attributes="1"/>
+                                          <Component id="jtbPhoneDetail" alignment="0" pref="187" max="32767" attributes="1"/>
                                       </Group>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
@@ -1197,6 +1175,27 @@
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="jbtnAddNewPerson" alignment="0" min="-2" max="-2" attributes="0"/>
                                           <Component id="jcbPickTutorForDetail" alignment="0" min="-2" pref="187" max="-2" attributes="0"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <Group type="103" groupAlignment="1" attributes="0">
+                                                  <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="jLabel14" alignment="1" pref="153" max="32767" attributes="1"/>
+                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jLabel13" alignment="1" pref="157" max="32767" attributes="1"/>
+                                          <Component id="jLabel12" alignment="1" min="-2" pref="114" max="-2" attributes="1"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jtbNameDetails" alignment="1" pref="187" max="32767" attributes="1"/>
+                                          <Group type="103" alignment="1" groupAlignment="0" max="-2" attributes="0">
+                                              <Component id="jtbPeselForDetail" max="32767" attributes="1"/>
+                                              <Component id="jtbAddressDetail" alignment="0" pref="187" max="32767" attributes="1"/>
+                                          </Group>
+                                          <Component id="jtbSurnameNameDetails" alignment="1" pref="187" max="32767" attributes="1"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1209,14 +1208,14 @@
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                                      <Component id="jtbSurnameNameDetails" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jLabel12" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jtbSurnameNameDetails" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jtbNameDetails" alignment="3" min="-2" max="-2" attributes="0"/>
                                           <Component id="jLabel13" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jtbNameDetails" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                               </Group>
@@ -1233,7 +1232,7 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel15" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jbtPhoneDetail" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jtbPhoneDetail" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
@@ -1308,9 +1307,9 @@
                         <Property name="name" type="java.lang.String" value="jtbAddressDetail" noResource="true"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jbtPhoneDetail">
+                    <Component class="javax.swing.JTextField" name="jtbPhoneDetail">
                       <Properties>
-                        <Property name="name" type="java.lang.String" value="jbtPhoneDetail" noResource="true"/>
+                        <Property name="name" type="java.lang.String" value="jtbPhoneDetail" noResource="true"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JComboBox" name="jcbPickGroupForDetails">
@@ -1512,14 +1511,21 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel29">
           <Properties>
+            <Property name="font" type="java.awt.Font" resourceKey="jLabel29.font"/>
             <Property name="text" type="java.lang.String" value="Jeste&#x15b; zalogowany jako" noResource="true"/>
             <Property name="name" type="java.lang.String" value="jLabel29" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel30">
+        <Component class="javax.swing.JLabel" name="jLblLoggedAs">
           <Properties>
+            <Property name="font" type="java.awt.Font" noResource="true" editor="org.netbeans.beaninfo.editors.FontEditor">
+              <Font name="Tahoma" size="11" style="1"/>
+            </Property>
+            <Property name="foreground" type="java.awt.Color" noResource="true" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="99" red="0" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" value="Pawe&#x142; Paw&#x142;owski" noResource="true"/>
-            <Property name="name" type="java.lang.String" value="jLabel30" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="jLblLoggedAs" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JButton" name="jbtnLogout">
