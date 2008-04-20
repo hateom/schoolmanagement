@@ -21,10 +21,21 @@ import schoolmanagement.dialogs.*;
  */
 public class MainJFrame extends javax.swing.JFrame {
 
+    static private MainJFrame instance;
+    static public MainJFrame getInstance() {
+        return instance;
+    }
+    
+    static void setInstance( MainJFrame inst ) {
+        instance = inst;
+    }
+    
     /** Creates new form MainJFrame */
     public MainJFrame() {
         initComponents();
         PrepareTree();
+        
+        jLblLoggedAs.setText(User.GetUserPerson().getPerName() + " " + User.GetUserPerson().getPerSurname());
     }
 
     public void PrepareTree() {
@@ -33,7 +44,8 @@ public class MainJFrame extends javax.swing.JFrame {
             new Object[] { 
                 "Szkola",
                 "Osoby",
-                "Oceny"
+                "Oceny",
+                "Plan Zajec"
             },
             new Object[] {
                 "Poczta",
@@ -831,6 +843,8 @@ public class MainJFrame extends javax.swing.JFrame {
             c = jPnlInbox;
         } else if( layer.compareTo("Wyslane") == 0 ) {
             c = jPnlOutbox;
+        } else if( layer.compareTo("Plan Zajec") == 0 ) {
+            c = jPnlSchedule;
         }
         
         for( Component k: jLayers.getComponents() ) {

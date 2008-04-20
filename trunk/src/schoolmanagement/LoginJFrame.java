@@ -160,13 +160,13 @@ public class LoginJFrame extends javax.swing.JFrame {
         }
 
         if (User.Login(jtbLogin.getText(), strPwd)) {
-            SchoolmanagementView mv;
-            if ((mv = SchoolmanagementView.getInstance()) != null) {
-                mv.getFrame().setVisible(true);
+            MainJFrame mv;
+            if ((mv = MainJFrame.getInstance()) != null) {
+                mv.setVisible(true);
             } else {
-                mv = new SchoolmanagementView(SchoolmanagementApp.getApplication());
-                mv.getFrame().setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
-                mv.getFrame().addWindowListener(new WindowAdapter() {
+                mv = new MainJFrame();//SchoolmanagementApp.getApplication());
+                mv.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+                mv.addWindowListener(new WindowAdapter() {
 
                     @Override
                     public void windowClosing(WindowEvent e) {
