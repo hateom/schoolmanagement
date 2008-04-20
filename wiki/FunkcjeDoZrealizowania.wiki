@@ -1,4 +1,4 @@
-#summary Funkcje do zaimplementowania.
+﻿#summary Funkcje do zaimplementowania.
 
 = Introduction =
 
@@ -42,3 +42,23 @@ Dane:
   * Nowa osoba: usuniecie danych ze szczegolow, utworzenie nowego obiektu osoby
   * Zatwierdz: do bazy (umowmy sie ze bez specjalnej weryfikacji heh)
   * Zmiana hasla (aktualne, nowe1, nowe2)
+  
+= Zmiany =
+
+  * Dodalismy okienko logowania - na razie w bazie jest jeden uzytkownik "jasiu" z haslem "asdfgh"
+  * zmienilismy "troche" wyglad okna glownego
+  * dodalismy interfejs User w package controller do pobierania informacji o zalogowanym zytkowniku oraz o danych personalnych
+  * Kilka okien dialogowych
+  * Kilka zalozen przemyslelismy i zmienilismy w oknie pare rzeczy
+  
+= Podzial zadan =
+
+  * Jasiek rzezbi polaczenia z baza
+  * Tomek robi interfejs bazo-GUI'owy, ktory bedzie udostepnial wszystkie mtody do uzupelniania okien i pol edycyjnych
+  * Maciek wywoluje funkcje w interfejsach w package controller i manipuluje danymi
+  
+= Do robienia na teraz =
+
+  * Wypelnic pola przy pokazywaniu glownego okna wartosciami domyslnymi dla danego uzytkownika (profil, etc)
+  * Pojsc do Sedziwego :-)
+  
