@@ -3,7 +3,6 @@
  *
  * Created on 19 kwiecień 2008, 17:36
  */
-
 package schoolmanagement;
 
 import java.awt.event.WindowAdapter;
@@ -16,32 +15,33 @@ import schoolmanagement.controller.*;
  * @author  deely
  */
 public class LoginJFrame extends javax.swing.JFrame {
-    
+
     static private LoginJFrame instance;
-    
+
     /** Creates new form LoginJFrame */
     public LoginJFrame() {
         initComponents();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        
+
         DBAccess.Connect();
-        
+
         addWindowListener(new WindowAdapter() {
+
             @Override
             public void windowClosing(WindowEvent e) {
                 DBAccess.Dispose();
             }
         });
     }
-    
-    static public void setInstance( LoginJFrame inst ) {
+
+    static public void setInstance(LoginJFrame inst) {
         instance = inst;
     }
-    
+
     static public LoginJFrame getInstance() {
         return instance;
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -150,24 +150,24 @@ public class LoginJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
     private void jbtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtLoginActionPerformed
         this.jlbErrorMsg.setText(""); // clear error label
-        char [] pwd = jpassField.getPassword();
+        char[] pwd = jpassField.getPassword();
         String strPwd = new String();
-        
-        for( int j=0; j<pwd.length; ++j ) {
+
+        for (int j = 0; j < pwd.length; ++j) {
             strPwd += pwd[j];
         }
-        
-        if( User.Login( jtbLogin.getText(), strPwd ) ) {
+
+        if (User.Login(jtbLogin.getText(), strPwd)) {
             SchoolmanagementView mv;
-            if( ( mv = SchoolmanagementView.getInstance() ) != null ) {
+            if ((mv = SchoolmanagementView.getInstance()) != null) {
                 mv.getFrame().setVisible(true);
             } else {
                 mv = new SchoolmanagementView(SchoolmanagementApp.getApplication());
                 mv.getFrame().setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
                 mv.getFrame().addWindowListener(new WindowAdapter() {
+
                     @Override
                     public void windowClosing(WindowEvent e) {
                         User.Logout();
@@ -182,19 +182,18 @@ public class LoginJFrame extends javax.swing.JFrame {
             jlbErrorMsg.setText("Invalid username or password!");
         }
 }//GEN-LAST:event_jbtLoginActionPerformed
-    
+
     /**
      * @param args the command line arguments
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new LoginJFrame().setVisible(true);
             }
         });
     }
-
-   
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jbtLogin;
     private javax.swing.JLabel jlbErrorMsg;
@@ -204,5 +203,4 @@ public class LoginJFrame extends javax.swing.JFrame {
     private javax.swing.JPasswordField jpassField;
     private javax.swing.JTextField jtbLogin;
     // End of variables declaration//GEN-END:variables
-    
 }
