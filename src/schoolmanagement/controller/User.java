@@ -65,7 +65,7 @@ public class User {
         return user_person;
     }
 
-    static public boolean ChangePassword(String newPass) {
+    static public boolean ChangePassword(String current, String newPass) {
         return false;
     }
 }

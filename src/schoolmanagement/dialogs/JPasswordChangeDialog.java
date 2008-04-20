@@ -7,6 +7,7 @@
 package schoolmanagement.dialogs;
 
 import org.jdesktop.application.Action;
+import schoolmanagement.controller.*;
 
 /**
  *
@@ -17,16 +18,10 @@ public class JPasswordChangeDialog extends javax.swing.JDialog {
     /** Creates new form JPasswordChangeDialog */
     public JPasswordChangeDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        m_strCurrentPasswd = "";
         initComponents();
     }
     
-    public JPasswordChangeDialog(java.awt.Frame parent, boolean modal, String a_strCurrentPasswd) {
-        super(parent, modal);
-        m_strCurrentPasswd = a_strCurrentPasswd;
-        initComponents();
-    }
-    
+   
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -46,6 +41,7 @@ public class JPasswordChangeDialog extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setName("Form"); // NOI18N
+        setResizable(false);
 
         jLabel1.setText("Aktualne haslo"); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
@@ -72,6 +68,7 @@ public class JPasswordChangeDialog extends javax.swing.JDialog {
         m_jbtnApply.setName("m_jbtnApply"); // NOI18N
 
         jButton2.setAction(actionMap.get("CancelBtn_Click")); // NOI18N
+        jButton2.setText("Anuluj"); // NOI18N
         jButton2.setName("jButton2"); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -146,12 +143,6 @@ public class JPasswordChangeDialog extends javax.swing.JDialog {
         return m_bResult;
     }
     
-    private String m_strCurrentPasswd;
-    public void setCurrentPasswd(String a_strPassword)
-    {
-        m_strCurrentPasswd = a_strPassword;
-    }
-    
     public String getNewPassword()
     {
         return String.valueOf(m_jpassfieldNewPassword.getPassword());
@@ -164,8 +155,13 @@ public class JPasswordChangeDialog extends javax.swing.JDialog {
         if(strNewPass.equals(strNewPassRetype))
         {
             m_bResult = true;
-            this.setVisible(false);
+            if( User.ChangePassword( String.valueOf(m_jpassfieldCurrentPassword.getPassword()), strNewPassRetype ) ) {
+                this.setVisible(false);
+            } else {
+                // ERROR
+            }
         }
+        
     }
 
     @Action
