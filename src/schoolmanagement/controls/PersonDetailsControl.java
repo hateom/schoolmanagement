@@ -165,10 +165,9 @@ public class PersonDetailsControl extends javax.swing.JPanel {
 
         jtbNipForDetail.setName("jtbNipForDetail"); // NOI18N
 
-        jcbPickGroupForDetails.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbPickGroupForDetails.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dyrekcja", "Nauczyciele", "Uczniowie" }));
         jcbPickGroupForDetails.setName("jcbPickGroupForDetails"); // NOI18N
 
-        jcbPickTutorForDetail.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbPickTutorForDetail.setName("jcbPickTutorForDetail"); // NOI18N
 
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);

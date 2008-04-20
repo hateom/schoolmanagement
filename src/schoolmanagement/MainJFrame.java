@@ -5,8 +5,12 @@
  */
 package schoolmanagement;
 
+import java.awt.Component;
+import java.util.Enumeration;
 import javax.swing.JOptionPane;
+import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 
 /**
@@ -27,9 +31,13 @@ public class MainJFrame extends javax.swing.JFrame {
             new Object[] { 
                 "Szkola",
                 "Osoby",
-                "Oceny",
-                "Poczta"
+                "Oceny"
             },
+            new Object[] {
+                "Poczta",
+                "Odebrane",
+                "Wyslane"
+                },
             "Profil",
             "Opcje"
         };
@@ -46,8 +54,30 @@ public class MainJFrame extends javax.swing.JFrame {
                 jTreeValueChanged(evt);
             }
         });
+        
+        ShowLayer( "Profil" );
+        expandAll( jTree, new TreePath(jTree.getModel().getRoot()), true );
     }
 
+    private void expandAll(JTree tree, TreePath parent, boolean expand) {
+        // Traverse children
+        TreeNode node = (TreeNode)parent.getLastPathComponent();
+        if (node.getChildCount() >= 0) {
+            for (Enumeration e=node.children(); e.hasMoreElements(); ) {
+                TreeNode n = (TreeNode)e.nextElement();
+                TreePath path = parent.pathByAddingChild(n);
+                expandAll(tree, path, expand);
+            }
+        }
+    
+        // Expansion or collapse must be done bottom-up
+        if (expand) {
+            tree.expandPath(parent);
+        } else {
+            tree.collapsePath(parent);
+        }
+    }
+    
     private DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
         DefaultMutableTreeNode node =
                 new DefaultMutableTreeNode(hierarchy[0]);
@@ -73,6 +103,7 @@ public class MainJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jStatus = new javax.swing.JPanel();
         jLblLogText = new javax.swing.JLabel();
         jLblLoggedAs = new javax.swing.JLabel();
@@ -80,10 +111,51 @@ public class MainJFrame extends javax.swing.JFrame {
         jTree = new javax.swing.JTree();
         jLayers = new javax.swing.JLayeredPane();
         jPnlProfile = new javax.swing.JPanel();
-        jPnlPeople = new javax.swing.JPanel();
+        jSeparator1 = new javax.swing.JSeparator();
+        jBtnSave = new javax.swing.JButton();
+        jBtnPassCHange = new javax.swing.JButton();
+        personDetailsControl1 = new schoolmanagement.controls.PersonDetailsControl();
         jPnlNotes = new javax.swing.JPanel();
+        jpanelProporties = new javax.swing.JPanel();
+        jLabel20 = new javax.swing.JLabel();
+        jLabel21 = new javax.swing.JLabel();
+        jcbPickSubjectForNotes = new javax.swing.JComboBox();
+        jcbPickClassForNotes = new javax.swing.JComboBox();
+        jLabel22 = new javax.swing.JLabel();
+        jcbPickTeacherForNotes = new javax.swing.JComboBox();
+        jScrollPane7 = new javax.swing.JScrollPane();
+        jtblPupilNotes = new javax.swing.JTable();
         jPnlMail = new javax.swing.JPanel();
+        jBtnNewMail = new javax.swing.JButton();
+        jSeparator2 = new javax.swing.JSeparator();
         jPnlOptions = new javax.swing.JPanel();
+        jPnlSchedule = new javax.swing.JPanel();
+        jpanelClassSelect = new javax.swing.JPanel();
+        jcbSelectClass = new javax.swing.JComboBox();
+        jLabel24 = new javax.swing.JLabel();
+        jScrollPane8 = new javax.swing.JScrollPane();
+        jtblScheldue = new javax.swing.JTable();
+        jPnlInbox = new javax.swing.JPanel();
+        jSeparator5 = new javax.swing.JSeparator();
+        jBtnNewMail3 = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTable3 = new javax.swing.JTable();
+        jPnlOutbox = new javax.swing.JPanel();
+        jSeparator4 = new javax.swing.JSeparator();
+        jBtnNewMail2 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jPnlPeople = new javax.swing.JPanel();
+        jScrollPane5 = new javax.swing.JScrollPane();
+        jTable4 = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jRbSurname = new javax.swing.JRadioButton();
+        jRbRole = new javax.swing.JRadioButton();
+        jRbClass = new javax.swing.JRadioButton();
+        jTbName = new javax.swing.JTextField();
+        jTbRole = new javax.swing.JComboBox();
+        jTbClass = new javax.swing.JComboBox();
+        jBtnSearch = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -92,6 +164,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
+        setResizable(false);
 
         jStatus.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jStatus.setName("jStatus"); // NOI18N
@@ -99,7 +172,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLblLogText.setText("Zalogowany jako:"); // NOI18N
         jLblLogText.setName("jLblLogText"); // NOI18N
 
-        jLblLoggedAs.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLblLoggedAs.setFont(new java.awt.Font("Tahoma", 1, 11));
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(MainJFrame.class);
         jLblLoggedAs.setText(resourceMap.getString("jLblLoggedAs.text")); // NOI18N
         jLblLoggedAs.setName("jLblLoggedAs"); // NOI18N
@@ -140,72 +213,216 @@ public class MainJFrame extends javax.swing.JFrame {
         jPnlProfile.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPnlProfile.border.title"))); // NOI18N
         jPnlProfile.setName("jPnlProfile"); // NOI18N
 
+        jSeparator1.setName("jSeparator1"); // NOI18N
+
+        jBtnSave.setText("Zapisz"); // NOI18N
+        jBtnSave.setName("jBtnSave"); // NOI18N
+
+        jBtnPassCHange.setText("Zmien haslo..."); // NOI18N
+        jBtnPassCHange.setName("jBtnPassCHange"); // NOI18N
+
+        personDetailsControl1.setName("personDetailsControl1"); // NOI18N
+
         javax.swing.GroupLayout jPnlProfileLayout = new javax.swing.GroupLayout(jPnlProfile);
         jPnlProfile.setLayout(jPnlProfileLayout);
         jPnlProfileLayout.setHorizontalGroup(
             jPnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+            .addGroup(jPnlProfileLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPnlProfileLayout.createSequentialGroup()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlProfileLayout.createSequentialGroup()
+                        .addComponent(jBtnPassCHange, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
+                        .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(134, 134, 134))
+                    .addGroup(jPnlProfileLayout.createSequentialGroup()
+                        .addComponent(personDetailsControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(124, Short.MAX_VALUE))))
         );
         jPnlProfileLayout.setVerticalGroup(
             jPnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGroup(jPnlProfileLayout.createSequentialGroup()
+                .addComponent(personDetailsControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(6, 6, 6)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnSave)
+                    .addComponent(jBtnPassCHange))
+                .addContainerGap(176, Short.MAX_VALUE))
         );
 
         jPnlProfile.setBounds(0, 0, 440, 480);
         jLayers.add(jPnlProfile, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jPnlPeople.setBorder(javax.swing.BorderFactory.createTitledBorder("Osoby")); // NOI18N
-        jPnlPeople.setName("jPnlPeople"); // NOI18N
-
-        javax.swing.GroupLayout jPnlPeopleLayout = new javax.swing.GroupLayout(jPnlPeople);
-        jPnlPeople.setLayout(jPnlPeopleLayout);
-        jPnlPeopleLayout.setHorizontalGroup(
-            jPnlPeopleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
-        );
-        jPnlPeopleLayout.setVerticalGroup(
-            jPnlPeopleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
-        );
-
-        jPnlPeople.setBounds(0, 0, 440, 480);
-        jLayers.add(jPnlPeople, javax.swing.JLayeredPane.DEFAULT_LAYER);
-
-        jPnlNotes.setBorder(javax.swing.BorderFactory.createTitledBorder("Oceny")); // NOI18N
+        jPnlNotes.setBorder(javax.swing.BorderFactory.createTitledBorder("Oceny"));
         jPnlNotes.setName("jPnlNotes"); // NOI18N
+
+        jpanelProporties.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jpanelProporties.setName("jpanelProporties"); // NOI18N
+
+        jLabel20.setText("Przedmiot:"); // NOI18N
+        jLabel20.setName("jLabel20"); // NOI18N
+
+        jLabel21.setText("Klasa:"); // NOI18N
+        jLabel21.setName("jLabel21"); // NOI18N
+
+        jcbPickSubjectForNotes.setName("jcbPickSubjectForNotes"); // NOI18N
+
+        jcbPickClassForNotes.setName("jcbPickClassForNotes"); // NOI18N
+
+        jLabel22.setText("Nauczyciel:"); // NOI18N
+        jLabel22.setName("jLabel22"); // NOI18N
+
+        jcbPickTeacherForNotes.setName("jcbPickTeacherForNotes"); // NOI18N
+
+        javax.swing.GroupLayout jpanelProportiesLayout = new javax.swing.GroupLayout(jpanelProporties);
+        jpanelProporties.setLayout(jpanelProportiesLayout);
+        jpanelProportiesLayout.setHorizontalGroup(
+            jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelProportiesLayout.createSequentialGroup()
+                .addGroup(jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpanelProportiesLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jpanelProportiesLayout.createSequentialGroup()
+                                .addComponent(jLabel22)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jcbPickTeacherForNotes, 0, 0, Short.MAX_VALUE))
+                            .addGroup(jpanelProportiesLayout.createSequentialGroup()
+                                .addGap(3, 3, 3)
+                                .addComponent(jLabel20)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jcbPickSubjectForNotes, 0, 0, Short.MAX_VALUE))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpanelProportiesLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jLabel21)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbPickClassForNotes, 0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jpanelProportiesLayout.setVerticalGroup(
+            jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelProportiesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel22)
+                    .addComponent(jcbPickTeacherForNotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbPickSubjectForNotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel20))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbPickClassForNotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel21))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane7.setName("jScrollPane7"); // NOI18N
+
+        jtblPupilNotes.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Nazwisko ucznia", "Oceny"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jtblPupilNotes.setName("jtblPupilNotes"); // NOI18N
+        jtblPupilNotes.getTableHeader().setReorderingAllowed(false);
+        jScrollPane7.setViewportView(jtblPupilNotes);
 
         javax.swing.GroupLayout jPnlNotesLayout = new javax.swing.GroupLayout(jPnlNotes);
         jPnlNotes.setLayout(jPnlNotesLayout);
         jPnlNotesLayout.setHorizontalGroup(
             jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlNotesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                    .addComponent(jpanelProporties, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPnlNotesLayout.setVerticalGroup(
             jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGroup(jPnlNotesLayout.createSequentialGroup()
+                .addComponent(jpanelProporties, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 335, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         jPnlNotes.setBounds(0, 0, 440, 480);
         jLayers.add(jPnlNotes, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jPnlMail.setBorder(javax.swing.BorderFactory.createTitledBorder("Poczta")); // NOI18N
+        jPnlMail.setBorder(javax.swing.BorderFactory.createTitledBorder("Poczta"));
         jPnlMail.setName("jPnlMail"); // NOI18N
+
+        jBtnNewMail.setText("Nowa wiadomosc"); // NOI18N
+        jBtnNewMail.setName("jBtnNewMail"); // NOI18N
+
+        jSeparator2.setName("jSeparator2"); // NOI18N
 
         javax.swing.GroupLayout jPnlMailLayout = new javax.swing.GroupLayout(jPnlMail);
         jPnlMail.setLayout(jPnlMailLayout);
         jPnlMailLayout.setHorizontalGroup(
             jPnlMailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+            .addGroup(jPnlMailLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPnlMailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                    .addComponent(jBtnNewMail))
+                .addContainerGap())
         );
         jPnlMailLayout.setVerticalGroup(
             jPnlMailLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGroup(jPnlMailLayout.createSequentialGroup()
+                .addComponent(jBtnNewMail)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(411, Short.MAX_VALUE))
         );
 
         jPnlMail.setBounds(0, 0, 440, 480);
         jLayers.add(jPnlMail, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jPnlOptions.setBorder(javax.swing.BorderFactory.createTitledBorder("Opcje")); // NOI18N
+        jPnlOptions.setBorder(javax.swing.BorderFactory.createTitledBorder("Opcje"));
         jPnlOptions.setName("jPnlOptions"); // NOI18N
 
         javax.swing.GroupLayout jPnlOptionsLayout = new javax.swing.GroupLayout(jPnlOptions);
@@ -221,6 +438,327 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPnlOptions.setBounds(0, 0, 440, 480);
         jLayers.add(jPnlOptions, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jPnlSchedule.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPnlSchedule.border.title"))); // NOI18N
+        jPnlSchedule.setName("jPnlSchedule"); // NOI18N
+
+        jpanelClassSelect.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jpanelClassSelect.setName("jpanelClassSelect"); // NOI18N
+
+        jcbSelectClass.setName("jcbSelectClass"); // NOI18N
+
+        jLabel24.setText("Klasa:"); // NOI18N
+        jLabel24.setName("jLabel24"); // NOI18N
+
+        javax.swing.GroupLayout jpanelClassSelectLayout = new javax.swing.GroupLayout(jpanelClassSelect);
+        jpanelClassSelect.setLayout(jpanelClassSelectLayout);
+        jpanelClassSelectLayout.setHorizontalGroup(
+            jpanelClassSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelClassSelectLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel24)
+                .addGap(18, 18, 18)
+                .addComponent(jcbSelectClass, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(194, Short.MAX_VALUE))
+        );
+        jpanelClassSelectLayout.setVerticalGroup(
+            jpanelClassSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpanelClassSelectLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpanelClassSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel24)
+                    .addComponent(jcbSelectClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jScrollPane8.setName("jScrollPane8"); // NOI18N
+
+        jtblScheldue.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+            },
+            new String [] {
+                "Godzina", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jtblScheldue.setName("jtblScheldue"); // NOI18N
+        jtblScheldue.setRowHeight(22);
+        jtblScheldue.setRowSelectionAllowed(false);
+        jtblScheldue.getTableHeader().setReorderingAllowed(false);
+        jScrollPane8.setViewportView(jtblScheldue);
+
+        javax.swing.GroupLayout jPnlScheduleLayout = new javax.swing.GroupLayout(jPnlSchedule);
+        jPnlSchedule.setLayout(jPnlScheduleLayout);
+        jPnlScheduleLayout.setHorizontalGroup(
+            jPnlScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlScheduleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPnlScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                    .addComponent(jpanelClassSelect, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPnlScheduleLayout.setVerticalGroup(
+            jPnlScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnlScheduleLayout.createSequentialGroup()
+                .addComponent(jpanelClassSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPnlSchedule.setBounds(0, 0, 440, 480);
+        jLayers.add(jPnlSchedule, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jPnlInbox.setBorder(javax.swing.BorderFactory.createTitledBorder("Odebrane")); // NOI18N
+        jPnlInbox.setName("jPnlInbox"); // NOI18N
+
+        jSeparator5.setName("jSeparator5"); // NOI18N
+
+        jBtnNewMail3.setText("Nowa wiadomosc"); // NOI18N
+        jBtnNewMail3.setName("jBtnNewMail3"); // NOI18N
+
+        jScrollPane4.setName("jScrollPane4"); // NOI18N
+
+        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Od", "Temat", "Data"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable3.setName("jTable3"); // NOI18N
+        jScrollPane4.setViewportView(jTable3);
+
+        javax.swing.GroupLayout jPnlInboxLayout = new javax.swing.GroupLayout(jPnlInbox);
+        jPnlInbox.setLayout(jPnlInboxLayout);
+        jPnlInboxLayout.setHorizontalGroup(
+            jPnlInboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 424, Short.MAX_VALUE)
+            .addGroup(jPnlInboxLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPnlInboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator5, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                    .addComponent(jBtnNewMail3)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPnlInboxLayout.setVerticalGroup(
+            jPnlInboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+            .addGroup(jPnlInboxLayout.createSequentialGroup()
+                .addComponent(jBtnNewMail3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPnlInbox.setBounds(0, 0, 440, 480);
+        jLayers.add(jPnlInbox, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jPnlOutbox.setBorder(javax.swing.BorderFactory.createTitledBorder("Wyslane")); // NOI18N
+        jPnlOutbox.setName("jPnlOutbox"); // NOI18N
+
+        jSeparator4.setName("jSeparator4"); // NOI18N
+
+        jBtnNewMail2.setText("Nowa wiadomosc"); // NOI18N
+        jBtnNewMail2.setName("jBtnNewMail2"); // NOI18N
+
+        jScrollPane3.setName("jScrollPane3"); // NOI18N
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Od", "Temat", "Data"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable2.setName("jTable2"); // NOI18N
+        jScrollPane3.setViewportView(jTable2);
+
+        javax.swing.GroupLayout jPnlOutboxLayout = new javax.swing.GroupLayout(jPnlOutbox);
+        jPnlOutbox.setLayout(jPnlOutboxLayout);
+        jPnlOutboxLayout.setHorizontalGroup(
+            jPnlOutboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnlOutboxLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPnlOutboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                    .addComponent(jBtnNewMail2)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPnlOutboxLayout.setVerticalGroup(
+            jPnlOutboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnlOutboxLayout.createSequentialGroup()
+                .addComponent(jBtnNewMail2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPnlOutbox.setBounds(0, 0, 440, 480);
+        jLayers.add(jPnlOutbox, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jPnlPeople.setBorder(javax.swing.BorderFactory.createTitledBorder("Osoby")); // NOI18N
+        jPnlPeople.setName("jPnlPeople"); // NOI18N
+
+        jScrollPane5.setName("jScrollPane5"); // NOI18N
+
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nazwisko", "Imie", "Grupa"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTable4.setName("jTable4"); // NOI18N
+        jScrollPane5.setViewportView(jTable4);
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setName("jPanel2"); // NOI18N
+
+        buttonGroup1.add(jRbSurname);
+        jRbSurname.setSelected(true);
+        jRbSurname.setText("Nazwisko"); // NOI18N
+        jRbSurname.setActionCommand(resourceMap.getString("jRbSurname.actionCommand")); // NOI18N
+        jRbSurname.setName("jRbSurname"); // NOI18N
+
+        buttonGroup1.add(jRbRole);
+        jRbRole.setText("Grupa:"); // NOI18N
+        jRbRole.setName("jRbRole"); // NOI18N
+
+        buttonGroup1.add(jRbClass);
+        jRbClass.setText("Klasa:"); // NOI18N
+        jRbClass.setName("jRbClass"); // NOI18N
+
+        jTbName.setName("jTbName"); // NOI18N
+
+        jTbRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dyrekcja", "Nauczyciele", "Uczniowie" }));
+        jTbRole.setName("jTbRole"); // NOI18N
+
+        jTbClass.setName("jTbClass"); // NOI18N
+
+        jBtnSearch.setText("Szukaj"); // NOI18N
+        jBtnSearch.setName("jBtnSearch"); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRbClass)
+                    .addComponent(jRbSurname)
+                    .addComponent(jRbRole))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTbName, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                    .addComponent(jTbRole, 0, 169, Short.MAX_VALUE)
+                    .addComponent(jTbClass, 0, 169, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(jBtnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRbSurname)
+                    .addComponent(jTbName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnSearch))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRbRole)
+                    .addComponent(jTbRole, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRbClass)
+                    .addComponent(jTbClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPnlPeopleLayout = new javax.swing.GroupLayout(jPnlPeople);
+        jPnlPeople.setLayout(jPnlPeopleLayout);
+        jPnlPeopleLayout.setHorizontalGroup(
+            jPnlPeopleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlPeopleLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPnlPeopleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPnlPeopleLayout.setVerticalGroup(
+            jPnlPeopleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnlPeopleLayout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 332, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPnlPeople.setBounds(0, 0, 440, 480);
+        jLayers.add(jPnlPeople, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jMenuBar1.setName("jMenuBar1"); // NOI18N
 
@@ -270,20 +808,36 @@ public class MainJFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ShowLayer( String layer ) {
+        Component c = null;
+         if( layer.compareTo("Opcje") == 0 ) {
+            c = jPnlOptions;
+        } else if( layer.compareTo("Profil") == 0 ) {
+            c = jPnlProfile;
+        } else if( layer.compareTo("Oceny") == 0 ) {
+            c = jPnlNotes;
+        } else if( layer.compareTo("Osoby") == 0 ) {
+            c = jPnlPeople;
+        } else if( layer.compareTo("Poczta") == 0 ) {
+            c = jPnlMail;
+        } else if( layer.compareTo("Odebrane") == 0 ) {
+            c = jPnlInbox;
+        } else if( layer.compareTo("Wyslane") == 0 ) {
+            c = jPnlOutbox;
+        }
+        
+        for( Component k: jLayers.getComponents() ) {
+            k.setVisible(false);
+        }
+        jLayers.moveToFront(c);
+        c.setVisible(true);
+    }
+    
     private void jTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeValueChanged
+        
         TreePath tp = jTree.getSelectionPath();
         String obj = tp.getLastPathComponent().toString();
-        if( obj.compareTo("Opcje") == 0 ) {
-            jLayers.moveToFront(jPnlOptions);
-        } else if( obj.compareTo("Profil") == 0 ) {
-            jLayers.moveToFront(jPnlProfile);
-        } else if( obj.compareTo("Oceny") == 0 ) {
-            jLayers.moveToFront(jPnlNotes);
-        } else if( obj.compareTo("Osoby") == 0 ) {
-            jLayers.moveToFront(jPnlPeople);
-        } else if( obj.compareTo("Poczta") == 0 ) {
-            jLayers.moveToFront(jPnlMail);
-        }
+        ShowLayer( obj );
     }//GEN-LAST:event_jTreeValueChanged
     /**
      * @param args the command line arguments
@@ -297,6 +851,17 @@ public class MainJFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jBtnNewMail;
+    private javax.swing.JButton jBtnNewMail2;
+    private javax.swing.JButton jBtnNewMail3;
+    private javax.swing.JButton jBtnPassCHange;
+    private javax.swing.JButton jBtnSave;
+    private javax.swing.JButton jBtnSearch;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLayeredPane jLayers;
     private javax.swing.JLabel jLblLogText;
     private javax.swing.JLabel jLblLoggedAs;
@@ -305,13 +870,44 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPnlInbox;
     private javax.swing.JPanel jPnlMail;
     private javax.swing.JPanel jPnlNotes;
     private javax.swing.JPanel jPnlOptions;
+    private javax.swing.JPanel jPnlOutbox;
     private javax.swing.JPanel jPnlPeople;
     private javax.swing.JPanel jPnlProfile;
+    private javax.swing.JPanel jPnlSchedule;
+    private javax.swing.JRadioButton jRbClass;
+    private javax.swing.JRadioButton jRbRole;
+    private javax.swing.JRadioButton jRbSurname;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane7;
+    private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator4;
+    private javax.swing.JSeparator jSeparator5;
     private javax.swing.JPanel jStatus;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTable3;
+    private javax.swing.JTable jTable4;
+    private javax.swing.JComboBox jTbClass;
+    private javax.swing.JTextField jTbName;
+    private javax.swing.JComboBox jTbRole;
     private javax.swing.JTree jTree;
+    private javax.swing.JComboBox jcbPickClassForNotes;
+    private javax.swing.JComboBox jcbPickSubjectForNotes;
+    private javax.swing.JComboBox jcbPickTeacherForNotes;
+    private javax.swing.JComboBox jcbSelectClass;
+    private javax.swing.JPanel jpanelClassSelect;
+    private javax.swing.JPanel jpanelProporties;
+    private javax.swing.JTable jtblPupilNotes;
+    private javax.swing.JTable jtblScheldue;
+    private schoolmanagement.controls.PersonDetailsControl personDetailsControl1;
     // End of variables declaration//GEN-END:variables
 }
