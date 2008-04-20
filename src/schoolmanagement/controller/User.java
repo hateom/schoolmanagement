@@ -23,9 +23,9 @@ public class User
     
     static public boolean Login( String user, String password )
     {
-        DataAccess da = new DataAccess();
         //String passmd5 = Crypto.MD5Sum(password);
-        SmUser usr = da.loginUser(user, password);
+        if( !DBAccess.IsConnected() ) return false;
+        SmUser usr = DBAccess.GetInstance().loginUser(user, password);
         if( usr == null ) return false;
         
         user_name = user;
@@ -33,8 +33,6 @@ public class User
         is_logged = true;
         user_role = new Role( usr.getUsrRolId().getRolName(), RoleType.GetRoleType( usr.getUsrRolId().getRolId() ) );
         user_person = usr.getUsrPerId();
-        
-        da.dispose();
         
         return true;
     }
