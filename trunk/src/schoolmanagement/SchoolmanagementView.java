@@ -34,6 +34,7 @@ public class SchoolmanagementView extends FrameView {
     
     public void ReloadFields() {
         SmPerson smp = User.GetUserPerson();
+        personDetailsControl1.setAddress(smp.getPerAdress());
         /*
         jtbSurnameNameDetails.setText(smp.getPerSurname());
         jtbNameDetails.setText(smp.getPerName());
@@ -196,6 +197,7 @@ public class SchoolmanagementView extends FrameView {
         jpassfieldRetypePasswd = new javax.swing.JPasswordField();
         jbtnShowMyDetails = new javax.swing.JButton();
         jbtnChangePassword = new javax.swing.JButton();
+        personDetailsControl1 = new schoolmanagement.controls.PersonDetailsControl();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel29 = new javax.swing.JLabel();
@@ -610,7 +612,7 @@ public class SchoolmanagementView extends FrameView {
                 .addContainerGap()
                 .addComponent(jpanelClassSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 244, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 228, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jpanelLessonEdit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(22, 22, 22))
@@ -908,6 +910,8 @@ public class SchoolmanagementView extends FrameView {
                 .addContainerGap(15, Short.MAX_VALUE))
         );
 
+        personDetailsControl1.setName("personDetailsControl1"); // NOI18N
+
         javax.swing.GroupLayout jpanelPersonalDataLayout = new javax.swing.GroupLayout(jpanelPersonalData);
         jpanelPersonalData.setLayout(jpanelPersonalDataLayout);
         jpanelPersonalDataLayout.setHorizontalGroup(
@@ -918,8 +922,13 @@ public class SchoolmanagementView extends FrameView {
                     .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
                     .addComponent(jpanelSearchCriteria, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpanelPasswdChange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jpanelPersonalDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpanelPersonalDataLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpanelPasswdChange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jpanelPersonalDataLayout.createSequentialGroup()
+                        .addGap(49, 49, 49)
+                        .addComponent(personDetailsControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jpanelPersonalDataLayout.setVerticalGroup(
@@ -928,7 +937,8 @@ public class SchoolmanagementView extends FrameView {
                 .addContainerGap()
                 .addGroup(jpanelPersonalDataLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpanelPersonalDataLayout.createSequentialGroup()
-                        .addGap(286, 286, 286)
+                        .addComponent(personDetailsControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(57, 57, 57)
                         .addComponent(jpanelPasswdChange, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jpanelPersonalDataLayout.createSequentialGroup()
                         .addComponent(jpanelSearchCriteria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -941,7 +951,7 @@ public class SchoolmanagementView extends FrameView {
 
         jtabMain.addTab("Dane personalne", jpanelPersonalData);
 
-        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Trebuchet MS", 1, 24));
         jLabel1.setForeground(new java.awt.Color(102, 51, 0));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
@@ -954,7 +964,7 @@ public class SchoolmanagementView extends FrameView {
         jLabel29.setText("Jesteś zalogowany jako"); // NOI18N
         jLabel29.setName("jLabel29"); // NOI18N
 
-        jLblLoggedAs.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLblLoggedAs.setFont(new java.awt.Font("Tahoma", 1, 11));
         jLblLoggedAs.setForeground(new java.awt.Color(0, 153, 255));
         jLblLoggedAs.setText("Paweł Pawłowski"); // NOI18N
         jLblLoggedAs.setName("jLblLoggedAs"); // NOI18N
@@ -1120,6 +1130,7 @@ public class SchoolmanagementView extends FrameView {
     private javax.swing.JTable jtblPupilNotes;
     private javax.swing.JTable jtblScheldue;
     private javax.swing.JPanel mainPanel;
+    private schoolmanagement.controls.PersonDetailsControl personDetailsControl1;
     // End of variables declaration//GEN-END:variables
 
     
