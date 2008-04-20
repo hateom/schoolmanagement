@@ -28,4 +28,8 @@ public class DBAccess {
         da.dispose();
         da = null;
     }
+    
+    static public DataAccess GetInstance() {
+        return da;
+    }
 }
