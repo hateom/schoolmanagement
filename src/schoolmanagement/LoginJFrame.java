@@ -23,12 +23,13 @@ public class LoginJFrame extends javax.swing.JFrame {
     public LoginJFrame() {
         initComponents();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        
         DBAccess.Connect();
         
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
-                DBAccess.Dsipose();
+                DBAccess.Dispose();
             }
         });
     }

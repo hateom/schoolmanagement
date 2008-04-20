@@ -144,7 +144,7 @@
                                   <Component id="jScrollPane3" pref="499" max="32767" attributes="1"/>
                               </Group>
                               <Group type="102" alignment="1" attributes="0">
-                                  <Component id="jScrollPane1" pref="502" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane1" pref="488" max="32767" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jButton2" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -269,6 +269,7 @@
                 </Container>
                 <Component class="javax.swing.JButton" name="jButton2">
                   <Properties>
+                    <Property name="text" type="java.lang.String" value="Usu&#x144; zaznaczone wiadomo&#x15b;ci" noResource="true"/>
                     <Property name="name" type="java.lang.String" value="jButton2" noResource="true"/>
                   </Properties>
                 </Component>
@@ -337,7 +338,7 @@
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
-                                  <Component id="jScrollPane5" pref="301" max="32767" attributes="0"/>
+                                  <Component id="jScrollPane5" pref="299" max="32767" attributes="0"/>
                               </Group>
                               <Component id="jScrollPane4" alignment="0" pref="522" max="32767" attributes="1"/>
                           </Group>
@@ -373,6 +374,7 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="buttonGroup1"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" value="Indywidualna" noResource="true"/>
                     <Property name="name" type="java.lang.String" value="jRadioButton1" noResource="true"/>
                   </Properties>
                 </Component>
@@ -381,6 +383,7 @@
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
                       <ComponentRef name="buttonGroup1"/>
                     </Property>
+                    <Property name="text" type="java.lang.String" value="Zbiorowa" noResource="true"/>
                     <Property name="name" type="java.lang.String" value="jRadioButton2" noResource="true"/>
                   </Properties>
                 </Component>
@@ -705,6 +708,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton7">
                       <Properties>
+                        <Property name="text" type="java.lang.String" value="Zatwierd&#x17a; zmiany" noResource="true"/>
                         <Property name="name" type="java.lang.String" value="jButton7" noResource="true"/>
                       </Properties>
                     </Component>
@@ -1076,6 +1080,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton6">
                       <Properties>
+                        <Property name="text" type="java.lang.String" value="Wyszukuj" noResource="true"/>
                         <Property name="name" type="java.lang.String" value="jButton6" noResource="true"/>
                       </Properties>
                     </Component>
@@ -1299,6 +1304,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton5">
                       <Properties>
+                        <Property name="text" type="java.lang.String" value="Dodaj now&#x105; osob&#x119;" noResource="true"/>
                         <Property name="name" type="java.lang.String" value="jButton5" noResource="true"/>
                       </Properties>
                     </Component>
@@ -1409,7 +1415,7 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jButton4" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="59" max="32767" attributes="0"/>
+                              <EmptySpace pref="31" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -1450,11 +1456,13 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton3">
                       <Properties>
+                        <Property name="text" type="java.lang.String" value="Poka&#x17c; moje dane" noResource="true"/>
                         <Property name="name" type="java.lang.String" value="jButton3" noResource="true"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton4">
                       <Properties>
+                        <Property name="text" type="java.lang.String" value="Zmie&#x144; has&#x142;o" noResource="true"/>
                         <Property name="name" type="java.lang.String" value="jButton4" noResource="true"/>
                       </Properties>
                     </Component>
