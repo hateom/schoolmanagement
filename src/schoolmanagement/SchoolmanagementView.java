@@ -17,6 +17,7 @@ import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import schoolmanagement.controller.*;
+import schoolmanagement.dialogs.JPasswordChangeDialog;
 import schoolmanagement.entity.SmPerson;
 /**
  * The application's main frame.
@@ -314,6 +315,11 @@ public class SchoolmanagementView extends FrameView {
 
         jbtnDeleteMessages.setText("Usuń zaznaczone wiadomości"); // NOI18N
         jbtnDeleteMessages.setName("jbtnDeleteMessages"); // NOI18N
+        jbtnDeleteMessages.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnDeleteMessagesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpanelMessageListLayout = new javax.swing.GroupLayout(jpanelMessageList);
         jpanelMessageList.setLayout(jpanelMessageListLayout);
@@ -1048,6 +1054,15 @@ public class SchoolmanagementView extends FrameView {
         User.Logout();
         LoginJFrame.getInstance().setVisible(true);
 }//GEN-LAST:event_jbtnLogoutActionPerformed
+
+    private void jbtnDeleteMessagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteMessagesActionPerformed
+        JPasswordChangeDialog jpn = new JPasswordChangeDialog(this.getFrame(), false, "aaa");
+        jpn.setVisible(true);
+        if(jpn.getResult())
+        {
+            
+        }
+    }//GEN-LAST:event_jbtnDeleteMessagesActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup2;
