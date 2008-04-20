@@ -83,7 +83,7 @@ public class LoginJFrame extends javax.swing.JFrame {
         jpMainPanelLayout.setHorizontalGroup(
             jpMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMainPanelLayout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addContainerGap()
                 .addGroup(jpMainPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jlbUsername)
                     .addComponent(jlbPassword))
@@ -109,7 +109,7 @@ public class LoginJFrame extends javax.swing.JFrame {
 
         javax.swing.ActionMap actionMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getActionMap(LoginJFrame.class, this);
         jbtLogin.setAction(actionMap.get("OnLogin")); // NOI18N
-        jbtLogin.setText(resourceMap.getString("jBtnLogin.text")); // NOI18N
+        jbtLogin.setText("Zaloguj"); // NOI18N
         jbtLogin.setName("jBtnLogin"); // NOI18N
         jbtLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
