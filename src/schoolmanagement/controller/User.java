@@ -5,7 +5,6 @@
 
 package schoolmanagement.controller;
 
-import schoolmanagement.DataAccess.DataAccess;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmUser;
 
@@ -45,7 +44,7 @@ public class User
         user_person = null;
     }
     
-    static public boolean isLogged()
+    static public boolean IsLogged()
     {
         return is_logged;
     }
@@ -62,7 +61,7 @@ public class User
         return user_id;
     }
     
-    static public SmPerson getUserPerson() {
+    static public SmPerson GetUserPerson() {
         return user_person;
     }
 }
