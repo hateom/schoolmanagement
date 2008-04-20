@@ -7,11 +7,13 @@ package schoolmanagement;
 
 import java.awt.Component;
 import java.util.Enumeration;
-import javax.swing.JOptionPane;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import schoolmanagement.dialogs.JPasswordChangeDialog;
+import schoolmanagement.controller.*;
+import schoolmanagement.dialogs.*;
 
 /**
  *
@@ -220,6 +222,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jBtnPassCHange.setText("Zmien haslo..."); // NOI18N
         jBtnPassCHange.setName("jBtnPassCHange"); // NOI18N
+        jBtnPassCHange.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnPassCHangeActionPerformed(evt);
+            }
+        });
 
         personDetailsControl1.setName("personDetailsControl1"); // NOI18N
 
@@ -839,6 +846,11 @@ public class MainJFrame extends javax.swing.JFrame {
         String obj = tp.getLastPathComponent().toString();
         ShowLayer( obj );
     }//GEN-LAST:event_jTreeValueChanged
+
+    private void jBtnPassCHangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPassCHangeActionPerformed
+        JPasswordChangeDialog jpDlg = new JPasswordChangeDialog( this, true );
+        jpDlg.setVisible(true);
+    }//GEN-LAST:event_jBtnPassCHangeActionPerformed
     /**
      * @param args the command line arguments
      */
