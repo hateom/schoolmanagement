@@ -26,11 +26,11 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                  <Component id="jpMainPanel" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="1" attributes="1">
-                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlbErrorMsg" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="112" max="-2" attributes="0"/>
+                      <Component id="jbtLogin" min="-2" pref="112" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
@@ -41,11 +41,11 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <Component id="jpMainPanel" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" pref="23" max="32767" attributes="0"/>
-                  <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jbtLogin" alignment="3" pref="23" max="32767" attributes="0"/>
+                  <Component id="jlbErrorMsg" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -53,7 +53,7 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="javax.swing.JPanel" name="jPanel1">
+    <Container class="javax.swing.JPanel" name="jpMainPanel">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
@@ -71,13 +71,13 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" attributes="0">
-                      <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlbUsername" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlbPassword" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                      <Component id="jPasswordField1" alignment="0" max="32767" attributes="1"/>
-                      <Component id="jTextField1" alignment="0" pref="155" max="32767" attributes="1"/>
+                      <Component id="jpassField" alignment="0" max="32767" attributes="1"/>
+                      <Component id="jtbLogin" alignment="0" pref="155" max="32767" attributes="1"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -88,13 +88,13 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtbLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlbUsername" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jPasswordField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jpassField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jlbPassword" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -102,33 +102,33 @@
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JTextField" name="jTextField1">
+        <Component class="javax.swing.JTextField" name="jtbLogin">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="jTextUser.text"/>
             <Property name="name" type="java.lang.String" value="jTextUser" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JPasswordField" name="jPasswordField1">
+        <Component class="javax.swing.JPasswordField" name="jpassField">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="jPassword.text"/>
             <Property name="name" type="java.lang.String" value="jPassword" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jlbUsername">
           <Properties>
             <Property name="text" type="java.lang.String" resourceKey="jLabelUser.text"/>
             <Property name="name" type="java.lang.String" value="jLabelUser" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel2">
+        <Component class="javax.swing.JLabel" name="jlbPassword">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jLabel2.text"/>
-            <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
+            <Property name="text" type="java.lang.String" resourceKey="jlbPassword.text"/>
+            <Property name="name" type="java.lang.String" value="jlbPassword" noResource="true"/>
           </Properties>
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="jbtLogin">
       <Properties>
         <Property name="action" type="javax.swing.Action" editor="org.netbeans.modules.swingapp.ActionEditor">
           <action class="schoolmanagement.LoginJFrame" id="OnLogin" methodName="OnLogin"/>
@@ -137,15 +137,15 @@
         <Property name="name" type="java.lang.String" value="jBtnLogin" noResource="true"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtLoginActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="jLabel3">
+    <Component class="javax.swing.JLabel" name="jlbErrorMsg">
       <Properties>
-        <Property name="font" type="java.awt.Font" resourceKey="jLabel3.font"/>
-        <Property name="foreground" type="java.awt.Color" resourceKey="jLabel3.foreground"/>
-        <Property name="text" type="java.lang.String" resourceKey="jLabel3.text"/>
-        <Property name="name" type="java.lang.String" value="jLabel3" noResource="true"/>
+        <Property name="font" type="java.awt.Font" resourceKey="jlbErrorMsg.font"/>
+        <Property name="foreground" type="java.awt.Color" resourceKey="jlbErrorMsg.foreground"/>
+        <Property name="text" type="java.lang.String" resourceKey="jlbErrorMsg.text"/>
+        <Property name="name" type="java.lang.String" value="jlbErrorMsg" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>
