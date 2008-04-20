@@ -8,10 +8,7 @@ package schoolmanagement;
 
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import javax.swing.WindowConstants;
-import org.jdesktop.application.Action;
-import org.jgroups.demos.wb.MessageDialog;
 import schoolmanagement.controller.*;
 
 /**
@@ -146,6 +143,7 @@ public class LoginJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        this.jLabel3.setText(""); // clear error label
         char [] pwd = jPasswordField1.getPassword();
         String strPwd = new String();
         
