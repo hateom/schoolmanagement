@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import schoolmanagement.entity.SmTeacher;
 import schoolmanagement.entity.SmUser;
 
 /**
@@ -58,6 +59,16 @@ public class DataAccess {
         return null;
     }
     
+    public List<SmTeacher> getTeacherList()
+    {
+        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t");
+        try{
+        return query.getResultList();
+        }
+        catch(Exception e)
+        {}
+        return null;
+    }
     
     public List getData() {
         return m_oEm.createQuery("SELECT p FROM SmPersons p").getResultList();
