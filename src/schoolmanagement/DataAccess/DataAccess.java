@@ -11,6 +11,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import schoolmanagement.controller.RoleType;
+import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmRole;
 import schoolmanagement.entity.SmTeacher;
@@ -112,7 +113,20 @@ public class DataAccess {
         return null;
     }
     
-    
+    /**
+     * 
+     * @return
+     */
+    public List<SmClass> GetAllClasses()
+    {
+        Query query = m_oEm.createQuery("SELECT c FROM SmClass c");
+        try{
+        return query.getResultList();
+        }
+        catch(Exception e)
+        {}
+        return null;
+    }
     public List<SmRole> GetRoles()
     {
         Query query = m_oEm.createQuery("SELECT r FROM SmRole r");
@@ -122,6 +136,16 @@ public class DataAccess {
         catch(Exception e)
         {}
         return null;
+    }
+    
+    public List<SmPerson> GetPersonsForClass(SmClass a_oClsId)
+    {
+        List lstPerson = new ArrayList<SmPerson>();
+       while(a_oClsId.getSmPerson2classCollection().iterator().hasNext())
+       {
+           lstPerson.add(a_oClsId.getSmPerson2classCollection().iterator().next().getP2cPerId());
+       }
+        return lstPerson;
     }
     
     /**

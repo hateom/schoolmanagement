@@ -121,7 +121,7 @@ public class SmClass implements Serializable {
 
     @Override
     public String toString() {
-        return "schoolmanagement.entity.SmClass[clsId=" + clsId + "]";
+        return clsNumber +" "+clsNumberAlph;
     }
 
 }
