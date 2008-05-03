@@ -10,7 +10,7 @@ package schoolmanagement.controller;
  */
 public enum RoleType {
 
-    ROLE_ADMIN, ROLE_PRINCIPAL, ROLE_TEACHER, ROLE_STUDENT, ROLE_UNDEFINED;
+    ROLE_UNDEFINED, ROLE_ADMIN, ROLE_PRINCIPAL, ROLE_TEACHER, ROLE_STUDENT;
 
     static RoleType GetRoleType(int db_role) {
         switch (db_role) {
