@@ -5,6 +5,7 @@
 
 package schoolmanagement.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import schoolmanagement.entity.SmRole;
 
@@ -19,6 +20,7 @@ public class ConstantData {
     {
         if( m_lstRoles == null)
         {
+            m_lstRoles = new ArrayList<Role>();
            List<SmRole> lst = DBAccess.GetInstance().GetRoles();
            for(SmRole role : lst)
            {
