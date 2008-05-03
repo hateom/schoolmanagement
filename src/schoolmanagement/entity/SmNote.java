@@ -31,7 +31,7 @@ public class SmNote implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer notId;
     @Column(name = "NOT_NOTE")
-    private Integer notNote;
+    private String notNote;
     @JoinColumn(name = "NOT_TCH_ID", referencedColumnName = "TCH_ID")
     @ManyToOne
     private SmTeacher notTchId;
@@ -54,11 +54,11 @@ public class SmNote implements Serializable {
         this.notId = notId;
     }
 
-    public Integer getNotNote() {
+    public String getNotNote() {
         return notNote;
     }
 
-    public void setNotNote(Integer notNote) {
+    public void setNotNote(String notNote) {
         this.notNote = notNote;
     }
 

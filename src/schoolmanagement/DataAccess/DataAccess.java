@@ -16,6 +16,7 @@ import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmPerson2class;
 import schoolmanagement.entity.SmRole;
+import schoolmanagement.entity.SmSchedule;
 import schoolmanagement.entity.SmTeacher;
 import schoolmanagement.entity.SmUser;
 
@@ -71,6 +72,28 @@ public class DataAccess {
         Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t");
         try{
         return query.getResultList();
+        }
+        catch(Exception e)
+        {}
+        return null;
+    }
+    
+    public List<SmClass> getClassesForTeacher( SmTeacher a_oTeacher )
+    {
+        List<SmClass> lstClass = new ArrayList<SmClass>();
+        Query query = m_oEm.createQuery("SELECT s FROM SmSchedule s WHERE s.schTchId = ?1").setParameter(1, a_oTeacher);
+        try{
+            List<SmSchedule> lst = query.getResultList();
+            Iterator iter = lst.iterator();
+            while(iter.hasNext())
+            {
+                SmClass cls = (SmClass)((SmSchedule)iter.next()).getSchClsId();
+                if(!lstClass.contains(cls))
+                {
+                    lstClass.add(cls);
+                }
+            }
+            return lstClass;
         }
         catch(Exception e)
         {}
