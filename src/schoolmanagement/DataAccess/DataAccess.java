@@ -6,6 +6,7 @@
 package schoolmanagement.DataAccess;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
@@ -13,6 +14,7 @@ import javax.persistence.EntityManagerFactory;
 import schoolmanagement.controller.RoleType;
 import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmPerson;
+import schoolmanagement.entity.SmPerson2class;
 import schoolmanagement.entity.SmRole;
 import schoolmanagement.entity.SmTeacher;
 import schoolmanagement.entity.SmUser;
@@ -98,7 +100,7 @@ public class DataAccess {
     
     public List<SmPerson> GetUserByRole(RoleType a_rtRole)
     {
-        Query query = m_oEm.createQuery("SELECT u FROM SmUser u WHERE u.usrRolId = ?1").setParameter(1, a_rtRole.ordinal());
+        Query query = m_oEm.createQuery("SELECT u FROM SmUser u INNER JOIN u.usrRolId Role WHERE Role.rolId = ?1").setParameter(1, a_rtRole.ordinal());
         List<SmPerson> perList = new ArrayList<SmPerson>();
         try{
             List<SmUser> lst = query.getResultList();
@@ -141,9 +143,11 @@ public class DataAccess {
     public List<SmPerson> GetPersonsForClass(SmClass a_oClsId)
     {
         List lstPerson = new ArrayList<SmPerson>();
-       while(a_oClsId.getSmPerson2classCollection().iterator().hasNext())
+        Iterator it = a_oClsId.getSmPerson2classCollection().iterator();
+       while(it.hasNext())
        {
-           lstPerson.add(a_oClsId.getSmPerson2classCollection().iterator().next().getP2cPerId());
+           SmPerson2class osmPerson2Class = (SmPerson2class)it.next();
+           lstPerson.add(osmPerson2Class.getP2cPerId());
        }
         return lstPerson;
     }
