@@ -208,7 +208,7 @@ public class SmPerson implements Serializable {
 
     @Override
     public String toString() {
-        return "schoolmanagement.entity.SmPerson[perId=" + perId + "]";
+        return perSurname + " " + perName;
     }
 
 }
