@@ -77,7 +77,13 @@ public class DataAccess {
      */
     public List<SmPerson> GetUserByName(String a_strUserName)
     {
-        Query query = m_oEm.createQuery("SELECT p FROM SmPerson p WHERE p.perSurname = ?1").setParameter(1, a_strUserName);
+        Query query = null;
+        if( a_strUserName.equals("") || a_strUserName== null)
+        {
+            query = m_oEm.createQuery("SELECT p FROM SmPerson p");
+        }
+        else
+            query = m_oEm.createQuery("SELECT p FROM SmPerson p WHERE p.perSurname = ?1").setParameter(1, a_strUserName);
         try{
         return query.getResultList();
         }
