@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import schoolmanagement.controller.RoleType;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmRole;
 import schoolmanagement.entity.SmTeacher;
@@ -84,7 +85,7 @@ public class DataAccess {
             query = m_oEm.createQuery("SELECT p FROM SmPerson p");
         }
         else
-            query = m_oEm.createQuery("SELECT p FROM SmPerson p WHERE p.perSurname = ?1").setParameter(1, a_strUserName);
+            query = m_oEm.createQuery("SELECT p FROM SmPerson INNER JOIN SmUser u.usrPerId user WHERE u.usrRolId = ?1").setParameter(1, a_strUserName);
         try{
         return query.getResultList();
         }
@@ -92,6 +93,18 @@ public class DataAccess {
         {}
         return null;
     }
+    
+    public List<SmPerson> GetUserByRole(RoleType a_rtRole)
+    {
+        Query query = m_oEm.createQuery("SELECT p FROM SmPerson p JOIN SmUserWHERE ");
+        try{
+        return query.getResultList();
+        }
+        catch(Exception e)
+        {}
+        return null;
+    }
+    
     
     public List<SmRole> GetRoles()
     {
