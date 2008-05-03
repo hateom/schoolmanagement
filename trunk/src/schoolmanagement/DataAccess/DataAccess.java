@@ -9,6 +9,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmTeacher;
 import schoolmanagement.entity.SmUser;
 
@@ -74,7 +75,7 @@ public class DataAccess {
      * Szuka czlowieczka po nazwisku
      * @return liste odnalezionych ludzikow
      */
-    public List<SmUser> GetUserByName(String a_strUserName)
+    public List<SmPerson> GetUserByName(String a_strUserName)
     {
         Query query = m_oEm.createQuery("SELECT p FROM SmPerson p WHERE p.perSurname = ?1").setParameter(1, a_strUserName);
         try{
@@ -84,6 +85,8 @@ public class DataAccess {
         {}
         return null;
     }
+    
+    
     
     /**
      * 
