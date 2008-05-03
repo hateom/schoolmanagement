@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import schoolmanagement.controller.RoleType;
 import schoolmanagement.entity.SmClass;
+import schoolmanagement.entity.SmNote;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmPerson2class;
 import schoolmanagement.entity.SmRole;
@@ -119,6 +120,20 @@ public class DataAccess {
         catch(Exception e)
         {}
         return null;
+    }
+    
+    public List<SmNote> getNotesForTeacher( SmTeacher a_oTeacher, SmClass a_oClass, SmPerson a_oPupilID)
+    {
+        Query query = null;
+        if( a_oPupilID == null)
+        {
+            query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notTchId = ?1 AND n.notP2cId.p2cClsId = ?2").setParameter(1, a_oTeacher).setParameter(2, a_oClass);
+            return query.getResultList();
+        }
+        else
+        {
+            
+        }
     }
     
     public List<SmPerson> GetUserByRole(RoleType a_rtRole)
