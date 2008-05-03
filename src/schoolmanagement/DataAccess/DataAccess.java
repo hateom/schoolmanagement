@@ -5,6 +5,7 @@
 
 package schoolmanagement.DataAccess;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
@@ -96,9 +97,15 @@ public class DataAccess {
     
     public List<SmPerson> GetUserByRole(RoleType a_rtRole)
     {
-        Query query = m_oEm.createQuery("SELECT p FROM SmPerson p JOIN SmUserWHERE ");
+        Query query = m_oEm.createQuery("SELECT u FROM SmUser u WHERE u.usrRolId = ?1").setParameter(1, a_rtRole.ordinal());
+        List<SmPerson> perList = new ArrayList<SmPerson>();
         try{
-        return query.getResultList();
+            List<SmUser> lst = query.getResultList();
+            for(SmUser user : lst)
+            {
+                perList.add(user.getUsrPerId());
+            }
+            return perList;
         }
         catch(Exception e)
         {}
