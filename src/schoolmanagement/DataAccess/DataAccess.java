@@ -122,7 +122,7 @@ public class DataAccess {
         return null;
     }
     
-    public List<SmNote> getNotesForTeacher( SmTeacher a_oTeacher, SmClass a_oClass, SmPerson a_oPupilID)
+    public List<SmNote> getNotes( SmTeacher a_oTeacher, SmClass a_oClass, SmPerson a_oPupilID)
     {
         Query query = null;
         if( a_oPupilID == null)
@@ -134,6 +134,7 @@ public class DataAccess {
         {
             
         }
+        return null;
     }
     
     public List<SmPerson> GetUserByRole(RoleType a_rtRole)

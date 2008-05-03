@@ -5,6 +5,9 @@
  */
 package schoolmanagement;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.WindowConstants;
@@ -71,6 +74,11 @@ public class LoginJFrame extends javax.swing.JFrame {
 
         jpassField.setText(resourceMap.getString("jPassword.text")); // NOI18N
         jpassField.setName("jPassword"); // NOI18N
+        jpassField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jpassFieldKeyPressed(evt);
+            }
+        });
 
         jlbUsername.setText(resourceMap.getString("jLabelUser.text")); // NOI18N
         jlbUsername.setName("jLabelUser"); // NOI18N
@@ -182,6 +190,15 @@ public class LoginJFrame extends javax.swing.JFrame {
             jlbErrorMsg.setText("Invalid username or password!");
         }
 }//GEN-LAST:event_jbtLoginActionPerformed
+
+    private void jpassFieldKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpassFieldKeyPressed
+        int key = evt.getKeyCode();
+        
+        if (key == KeyEvent.VK_ENTER) {
+            jbtLogin.getActionListeners()[0].actionPerformed(new java.awt.event.ActionEvent(jbtLogin, ActionEvent.ACTION_PERFORMED, ""));
+
+        }
+    }//GEN-LAST:event_jpassFieldKeyPressed
 
     /**
      * @param args the command line arguments

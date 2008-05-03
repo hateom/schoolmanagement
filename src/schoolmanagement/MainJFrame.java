@@ -18,6 +18,7 @@ import schoolmanagement.dialogs.JPasswordChangeDialog;
 import schoolmanagement.controller.*;
 import schoolmanagement.dialogs.*;
 import schoolmanagement.entity.SmClass;
+import schoolmanagement.entity.SmNote;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmSubject;
 import schoolmanagement.entity.SmTeacher;
@@ -321,6 +322,11 @@ public class MainJFrame extends javax.swing.JFrame {
         });
 
         jcbPickClassForNotes.setName("jcbPickClassForNotes"); // NOI18N
+        jcbPickClassForNotes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbPickClassForNotesActionPerformed(evt);
+            }
+        });
 
         jLabel22.setText("Nauczyciel:"); // NOI18N
         jLabel22.setName("jLabel22"); // NOI18N
@@ -946,9 +952,9 @@ public class MainJFrame extends javax.swing.JFrame {
     private void jPnlNotesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlNotesComponentShown
         jcbPickTeacherForNotes.removeAllItems();
         List<SmTeacher> lstSmTeacher = DBAccess.GetInstance().getTeacherList();
-        for( SmTeacher smclass : lstSmTeacher)
+        for( SmTeacher smTeacher : lstSmTeacher)
         {
-            jcbPickTeacherForNotes.addItem(smclass);
+            jcbPickTeacherForNotes.addItem(smTeacher);
         }
     }//GEN-LAST:event_jPnlNotesComponentShown
 
@@ -964,8 +970,29 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void jcbPickSubjectForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickSubjectForNotesActionPerformed
         SmTeacher teacher = (SmTeacher)jcbPickTeacherForNotes.getSelectedItem();
-        DBAccess.GetInstance().getClassesForTeacher(teacher);
+        jcbPickClassForNotes.removeAllItems();
+        List<SmClass> lstSmClass = DBAccess.GetInstance().getClassesForTeacher(teacher);
+        for( SmClass smclass : lstSmClass)
+        {
+            jcbPickClassForNotes.addItem(smclass);
+        }
     }//GEN-LAST:event_jcbPickSubjectForNotesActionPerformed
+
+    private void jcbPickClassForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickClassForNotesActionPerformed
+        SmClass smclass = (SmClass)jcbPickClassForNotes.getSelectedItem();
+        SmTeacher teacher = (SmTeacher)jcbPickTeacherForNotes.getSelectedItem();
+        List<SmNote> notes = DBAccess.GetInstance().getNotes(teacher, smclass, null);
+        
+        DefaultTableModel model = new DefaultTableModel();
+        jtblPupilNotes.setModel(model);
+        model.addColumn("Nazwisko");
+        model.addColumn("Oceny");
+        
+        for(SmNote note : notes){
+            model.addRow(new Object[]{note.getNotP2cId().getP2cPerId(), note.getNotNote()});
+        }
+        
+    }//GEN-LAST:event_jcbPickClassForNotesActionPerformed
     /**
      * @param args the command line arguments
      */
