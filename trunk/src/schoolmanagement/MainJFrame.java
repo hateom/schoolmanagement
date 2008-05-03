@@ -850,8 +850,11 @@ public class MainJFrame extends javax.swing.JFrame {
         for( Component k: jLayers.getComponents() ) {
             k.setVisible(false);
         }
-        jLayers.moveToFront(c);
-        c.setVisible(true);
+        if(c != null)
+        {
+            jLayers.moveToFront(c);
+            c.setVisible(true);
+        }
     }
     
     private void jTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeValueChanged

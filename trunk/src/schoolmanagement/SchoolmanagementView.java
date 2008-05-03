@@ -1056,7 +1056,7 @@ public class SchoolmanagementView extends FrameView {
 }//GEN-LAST:event_jbtnLogoutActionPerformed
 
     private void jbtnDeleteMessagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnDeleteMessagesActionPerformed
-        JPasswordChangeDialog jpn = new JPasswordChangeDialog(this.getFrame(), false, "aaa");
+        JPasswordChangeDialog jpn = new JPasswordChangeDialog(this.getFrame(), false);
         jpn.setVisible(true);
         if(jpn.getResult())
         {
