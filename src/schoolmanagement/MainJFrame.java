@@ -19,6 +19,8 @@ import schoolmanagement.controller.*;
 import schoolmanagement.dialogs.*;
 import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmPerson;
+import schoolmanagement.entity.SmSubject;
+import schoolmanagement.entity.SmTeacher;
 
 /**
  *
@@ -296,6 +298,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPnlNotes.setBorder(javax.swing.BorderFactory.createTitledBorder("Oceny"));
         jPnlNotes.setName("jPnlNotes"); // NOI18N
+        jPnlNotes.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPnlNotesComponentShown(evt);
+            }
+        });
 
         jpanelProporties.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jpanelProporties.setName("jpanelProporties"); // NOI18N
@@ -307,6 +314,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel21.setName("jLabel21"); // NOI18N
 
         jcbPickSubjectForNotes.setName("jcbPickSubjectForNotes"); // NOI18N
+        jcbPickSubjectForNotes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbPickSubjectForNotesActionPerformed(evt);
+            }
+        });
 
         jcbPickClassForNotes.setName("jcbPickClassForNotes"); // NOI18N
 
@@ -314,6 +326,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel22.setName("jLabel22"); // NOI18N
 
         jcbPickTeacherForNotes.setName("jcbPickTeacherForNotes"); // NOI18N
+        jcbPickTeacherForNotes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbPickTeacherForNotesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpanelProportiesLayout = new javax.swing.GroupLayout(jpanelProporties);
         jpanelProporties.setLayout(jpanelProportiesLayout);
@@ -925,6 +942,30 @@ public class MainJFrame extends javax.swing.JFrame {
             //jTable4.setValueAt(person.getSmUserCollection().iterator().next().getUsrRolId().getRolName(), row, 2);
         }
     }//GEN-LAST:event_jBtnSearchActionPerformed
+
+    private void jPnlNotesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlNotesComponentShown
+        jcbPickTeacherForNotes.removeAllItems();
+        List<SmTeacher> lstSmTeacher = DBAccess.GetInstance().getTeacherList();
+        for( SmTeacher smclass : lstSmTeacher)
+        {
+            jcbPickTeacherForNotes.addItem(smclass);
+        }
+    }//GEN-LAST:event_jPnlNotesComponentShown
+
+    private void jcbPickTeacherForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickTeacherForNotesActionPerformed
+        SmTeacher teacher = (SmTeacher)jcbPickTeacherForNotes.getSelectedItem();
+        jcbPickSubjectForNotes.removeAllItems();
+//        for( SmSubject sm : teacher.getTchSubId())
+//        {
+//            jcbPickTeacherForNotes.addItem(smclass);
+//        }
+        jcbPickSubjectForNotes.addItem(teacher.getTchSubId());
+    }//GEN-LAST:event_jcbPickTeacherForNotesActionPerformed
+
+    private void jcbPickSubjectForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickSubjectForNotesActionPerformed
+        SmTeacher teacher = (SmTeacher)jcbPickTeacherForNotes.getSelectedItem();
+        DBAccess.GetInstance().getClassesForTeacher(teacher);
+    }//GEN-LAST:event_jcbPickSubjectForNotesActionPerformed
     /**
      * @param args the command line arguments
      */

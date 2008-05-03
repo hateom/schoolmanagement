@@ -112,7 +112,7 @@ public class SmTeacher implements Serializable {
 
     @Override
     public String toString() {
-        return "schoolmanagement.entity.SmTeacher[tchId=" + tchId + "]";
+        return tchPerId.getPerName() + " " + tchPerId.getPerSurname();
     }
 
 }

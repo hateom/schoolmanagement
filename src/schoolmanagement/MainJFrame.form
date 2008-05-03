@@ -262,6 +262,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="jPnlNotes" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="jPnlNotesComponentShown"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
               <JLayeredPaneConstraints x="0" y="0" width="440" height="480" layer="0" position="-1"/>
@@ -378,6 +381,9 @@
                     </Property>
                     <Property name="name" type="java.lang.String" value="jcbPickSubjectForNotes" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbPickSubjectForNotesActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jcbPickClassForNotes">
                   <Properties>
@@ -400,6 +406,9 @@
                     </Property>
                     <Property name="name" type="java.lang.String" value="jcbPickTeacherForNotes" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbPickTeacherForNotesActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
