@@ -10,6 +10,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import schoolmanagement.entity.SmPerson;
+import schoolmanagement.entity.SmRole;
 import schoolmanagement.entity.SmTeacher;
 import schoolmanagement.entity.SmUser;
 
@@ -92,7 +93,16 @@ public class DataAccess {
         return null;
     }
     
-    
+    public List<SmRole> GetRoles()
+    {
+        Query query = m_oEm.createQuery("SELECT r FROM SmRole r");
+        try{
+        return query.getResultList();
+        }
+        catch(Exception e)
+        {}
+        return null;
+    }
     
     /**
      * 

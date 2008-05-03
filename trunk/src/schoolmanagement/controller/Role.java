@@ -26,4 +26,10 @@ public class Role
     public String GetRoleName() {
         return role_name;
     }
+    
+    @Override
+    public String toString()
+    {
+        return role_name;
+    }
 }
