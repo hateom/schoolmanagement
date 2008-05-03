@@ -70,6 +70,25 @@ public class DataAccess {
         return null;
     }
     
+    /**
+     * Szuka czlowieczka po nazwisku
+     * @return liste odnalezionych ludzikow
+     */
+    public List<SmUser> GetUserByName(String a_strUserName)
+    {
+        Query query = m_oEm.createQuery("SELECT p FROM SmPerson p WHERE p.perSurname = ?1").setParameter(1, a_strUserName);
+        try{
+        return query.getResultList();
+        }
+        catch(Exception e)
+        {}
+        return null;
+    }
+    
+    /**
+     * 
+     * @return
+     */
     public List getData() {
         return m_oEm.createQuery("SELECT p FROM SmPersons p").getResultList();
     }
