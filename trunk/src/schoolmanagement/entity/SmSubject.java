@@ -93,7 +93,7 @@ public class SmSubject implements Serializable {
 
     @Override
     public String toString() {
-        return "schoolmanagement.entity.SmSubject[subId=" + subId + "]";
+        return subName;
     }
 
 }
