@@ -113,7 +113,7 @@ public class DataAccess {
             query = m_oEm.createQuery("SELECT p FROM SmPerson p");
         }
         else
-            query = m_oEm.createQuery("SELECT p FROM SmPerson INNER JOIN SmUser u.usrPerId user WHERE u.usrRolId = ?1").setParameter(1, a_strUserName);
+            query = m_oEm.createQuery("SELECT p FROM SmPerson p WHERE p.perSurname LIKE ?1 OR p.perName LIKE ?1").setParameter(1, a_strUserName);
         try{
         return query.getResultList();
         }

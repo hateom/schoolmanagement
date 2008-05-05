@@ -72,8 +72,10 @@ public class DBAccess {
     }
 
     static public void Dispose() {
-        da.dispose();
-        da = null;
+        if( da != null ) {
+            da.dispose();
+            da = null;
+        }
     }
 
     static public DataAccess GetInstance() {
