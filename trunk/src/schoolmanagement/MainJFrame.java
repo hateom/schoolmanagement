@@ -56,6 +56,8 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         jLblLoggedAs.setText(User.GetUserPerson().getPerName() + " " + User.GetUserPerson().getPerSurname());
         jLblLoggedAs.setText(User.GetUserPerson().getPerName() + " " + User.GetUserPerson().getPerSurname());
+        
+        activeNotes = null;
     }
 
     public void PrepareTree() {
@@ -430,6 +432,11 @@ public class MainJFrame extends javax.swing.JFrame {
         });
         jtblPupilNotes.setName("jtblPupilNotes"); // NOI18N
         jtblPupilNotes.getTableHeader().setReorderingAllowed(false);
+        jtblPupilNotes.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jtblPupilNotesPropertyChange(evt);
+            }
+        });
         jScrollPane7.setViewportView(jtblPupilNotes);
 
         javax.swing.GroupLayout jPnlNotesLayout = new javax.swing.GroupLayout(jPnlNotes);
@@ -985,8 +992,14 @@ public class MainJFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jcbPickSubjectForNotesActionPerformed
 
+    private List<SmNote> activeNotes;
+    
     private void jcbPickClassForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickClassForNotesActionPerformed
-        if( jcbPickClassForNotes.getSelectedItem() == null ) return;
+        if( jcbPickClassForNotes.getSelectedItem() == null ) {
+            activeNotes = null;
+            return;
+        }
+        
         SmClass smclass = (SmClass)jcbPickClassForNotes.getSelectedItem();
         SmTeacher teacher = (SmTeacher)jcbPickTeacherForNotes.getSelectedItem();
         List<SmNote> notes = DBAccess.GetInstance().getNotes(teacher, smclass, null);
@@ -999,6 +1012,7 @@ public class MainJFrame extends javax.swing.JFrame {
         for(SmNote note : notes){
             model.addRow(new Object[]{note.getNotP2cId().getP2cPerId(), note.getNotNote()});
         }
+        activeNotes = notes;
         
     }//GEN-LAST:event_jcbPickClassForNotesActionPerformed
 
@@ -1011,6 +1025,10 @@ public class MainJFrame extends javax.swing.JFrame {
         personDetailsControl1.setPhoneNumber( User.GetUserPerson().getPerPhone().toString() );
         personDetailsControl1.setGroups( new Object[] { User.GetUserPerson().getSmUserCollection().iterator().next().getUsrRolId().getRolName() } );
     }//GEN-LAST:event_jPnlProfileComponentShown
+
+    private void jtblPupilNotesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtblPupilNotesPropertyChange
+        // dziwne wartosci w evt ;/
+    }//GEN-LAST:event_jtblPupilNotesPropertyChange
     /**
      * @param args the command line arguments
      */
