@@ -138,7 +138,7 @@ public class DataAccess {
     {
         SmUser usr = new SmUser();
         usr.setUsrRolId(a_oRole);
-        usr.setUsrLogin(a_strLogin)
+        usr.setUsrLogin(a_strLogin);
         usr.setUsrPerId(a_oPerID);
         usr.setUsrPasswd(a_strPasswd);
         if(save(usr))
