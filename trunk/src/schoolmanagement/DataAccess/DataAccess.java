@@ -132,9 +132,13 @@ public class DataAccess {
         return null;
     }
     
-    public SmUser addUser(SmPerson a_oPerID)
+    public SmUser addUser(SmPerson a_oPerID, SmRole a_oRole, String a_strPasswd)
     {
         SmUser usr = new SmUser();
+        usr.setUsrRolId(a_oRole);
+        usr.setUsrPerId(a_oPerID);
+        usr.setUsrPasswd(a_strPasswd);
+        save(usr);
         return usr;
     }
     
@@ -146,7 +150,7 @@ public class DataAccess {
         return null;
     }
     
-    List<SmSubject> getSubjectsForPerson( SmPerson a_oPerson )
+    public List<SmSubject> getSubjectsForPerson( SmPerson a_oPerson )
     {
         Collection<SmTeacher> col = a_oPerson.getSmTeacherCollection();
         if( col != null ){
