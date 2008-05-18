@@ -859,7 +859,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane5" pref="315" max="32767" attributes="0"/>
+                      <Component id="jScrollPane5" pref="314" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -939,7 +939,10 @@
                               <Component id="jTbClass" alignment="0" pref="154" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
-                          <Component id="jBtnSearch" min="-2" pref="106" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="jBtnAddPerson" max="32767" attributes="1"/>
+                              <Component id="jBtnSearch" alignment="1" pref="106" max="32767" attributes="1"/>
+                          </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -962,6 +965,7 @@
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jRbClass" alignment="3" min="-2" max="-2" attributes="0"/>
                               <Component id="jTbClass" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="jBtnAddPerson" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
@@ -1030,6 +1034,15 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnSearchActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="jBtnAddPerson">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" resourceKey="jBtnAddPerson.text"/>
+                    <Property name="name" type="java.lang.String" value="jBtnAddPerson" noResource="true"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnAddPersonActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>
