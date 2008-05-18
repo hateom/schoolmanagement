@@ -23,6 +23,7 @@ import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmNote;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmRing;
+import schoolmanagement.entity.SmSubject;
 import schoolmanagement.entity.SmTeacher;
 
 /**
@@ -66,6 +67,7 @@ public class MainJFrame extends javax.swing.JFrame {
             new Object[] { 
                 "Szkoła",
                 "Osoby",
+                "Nauczyciele",
                 "Oceny",
                 "Plan Zajęc",
                 "Dzwonki"
@@ -194,6 +196,15 @@ public class MainJFrame extends javax.swing.JFrame {
         jPnlRings = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTblRings = new javax.swing.JTable();
+        jPnlTeachers = new javax.swing.JPanel();
+        jScrollPane6 = new javax.swing.JScrollPane();
+        jTblTeachers = new javax.swing.JTable();
+        jPanel3 = new javax.swing.JPanel();
+        jRbSurname1 = new javax.swing.JRadioButton();
+        jRbSubject = new javax.swing.JRadioButton();
+        jTbName1 = new javax.swing.JTextField();
+        jTbSubs = new javax.swing.JComboBox();
+        jBtnSearch2 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -875,6 +886,119 @@ public class MainJFrame extends javax.swing.JFrame {
         jPnlRings.setBounds(0, 0, 440, 480);
         jLayers.add(jPnlRings, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jPnlTeachers.setBorder(javax.swing.BorderFactory.createTitledBorder("Nauczyciele")); // NOI18N
+        jPnlTeachers.setName("jPnlTeachers"); // NOI18N
+        jPnlTeachers.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPnlTeachersComponentShown(evt);
+            }
+        });
+
+        jScrollPane6.setName("jScrollPane6"); // NOI18N
+
+        jTblTeachers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Nazwisko", "Imie", "Przedmiot"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTblTeachers.setName("jTblTeachers"); // NOI18N
+        jScrollPane6.setViewportView(jTblTeachers);
+
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel3.setName("jPanel3"); // NOI18N
+
+        buttonGroup1.add(jRbSurname1);
+        jRbSurname1.setSelected(true);
+        jRbSurname1.setText("Nazwisko:"); // NOI18N
+        jRbSurname1.setActionCommand(resourceMap.getString("jRbSurname1.actionCommand")); // NOI18N
+        jRbSurname1.setName("jRbSurname1"); // NOI18N
+
+        buttonGroup1.add(jRbSubject);
+        jRbSubject.setText("Przedmiot:"); // NOI18N
+        jRbSubject.setName("jRbSubject"); // NOI18N
+
+        jTbName1.setName("jTbName1"); // NOI18N
+
+        jTbSubs.setName("jTbSubs"); // NOI18N
+
+        jBtnSearch2.setText("Szukaj"); // NOI18N
+        jBtnSearch2.setName("jBtnSearch2"); // NOI18N
+        jBtnSearch2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnSearch2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jRbSurname1)
+                    .addComponent(jRbSubject))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTbSubs, 0, 146, Short.MAX_VALUE)
+                    .addComponent(jTbName1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                .addGap(38, 38, 38)
+                .addComponent(jBtnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRbSurname1)
+                    .addComponent(jBtnSearch2)
+                    .addComponent(jTbName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jRbSubject)
+                    .addComponent(jTbSubs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPnlTeachersLayout = new javax.swing.GroupLayout(jPnlTeachers);
+        jPnlTeachers.setLayout(jPnlTeachersLayout);
+        jPnlTeachersLayout.setHorizontalGroup(
+            jPnlTeachersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 428, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlTeachersLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPnlTeachersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPnlTeachersLayout.setVerticalGroup(
+            jPnlTeachersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnlTeachersLayout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPnlTeachers.setBounds(0, 0, 440, 480);
+        jLayers.add(jPnlTeachers, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         jMenuBar1.setName("jMenuBar1"); // NOI18N
 
         jMenu1.setText(resourceMap.getString("jMenu1.text")); // NOI18N
@@ -943,6 +1067,8 @@ public class MainJFrame extends javax.swing.JFrame {
             c = jPnlRings;
         } else if( layer.compareTo("Plan Zajęc") == 0 ) {
             c = jPnlSchedule;
+        } else if( layer.compareTo("Nauczyciele") == 0 ) {
+            c = jPnlTeachers;
         }
         
         for( Component k: jLayers.getComponents() ) {
@@ -1012,6 +1138,7 @@ public class MainJFrame extends javax.swing.JFrame {
             jcbPickTeacherForNotes.addItem(smTeacher);
         }*/
         
+        jcbPickClassForNotes.removeAllItems();
         List<SmClass> classes = DBAccess.GetInstance().GetAllClasses();
         for( SmClass cls : classes )
         {
@@ -1034,7 +1161,17 @@ public class MainJFrame extends javax.swing.JFrame {
     private void jcbPickClassForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickClassForNotesActionPerformed
         if( (SmClass)jcbPickClassForNotes.getSelectedItem() == null)
             return;     
+        
         SmClass smclass = (SmClass)jcbPickClassForNotes.getSelectedItem();
+        List<SmSubject> subjs = DBAccess.GetInstance().getSubjectsForClass(smclass);
+        
+        jcbPickSubjectForNotes.removeAllItems();
+        for( SmSubject sbj : subjs )
+        {
+            jcbPickSubjectForNotes.addItem( sbj );
+        }
+        
+        /*
         
         List<SmNote> notes = null;//DBAccess.GetInstance().getNotes(teacher, smclass, null);
         
@@ -1045,6 +1182,7 @@ public class MainJFrame extends javax.swing.JFrame {
         for(SmNote note : notes){
             model.addRow(new Object[]{note.getNotP2cId().getP2cPerId(), note.getNotNote()});
         }
+         */
     }//GEN-LAST:event_jcbPickClassForNotesActionPerformed
 
     private void jPnlProfileComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlProfileComponentShown
@@ -1143,6 +1281,55 @@ private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
     } );*/
 }//GEN-LAST:event_jPnlRingsComponentShown
 
+private void jBtnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearch2ActionPerformed
+    DefaultTableModel model = new DefaultTableModel();
+    jTblTeachers.setModel(model);
+    model.addColumn("Nazwisko");
+    model.addColumn("Imię");
+    model.addColumn("Przedmiot");
+    
+    if(jRbSurname1.isSelected()){
+        List<SmPerson> list = new ArrayList<SmPerson>();
+        list = DBAccess.GetInstance().GetUserByName(jTbName.getText().trim());
+        
+        for( SmPerson pers : list )
+        {
+            if( pers.getSmUserCollection().iterator().next().getUsrRolId().getRolName().compareTo( "Nauczyciel" ) != 0 ) continue;
+
+            List<SmSubject> subs = DBAccess.GetInstance().getSubjectsForPerson( pers );
+
+            for( SmSubject sb : subs )
+            {
+                model.addRow(new Object[] { pers.getPerSurname(), pers.getPerName(), sb.getSubName() } );
+            }
+        }
+    }
+    else if(jRbSubject.isSelected()){
+        List<SmTeacher> list = DBAccess.GetInstance().getTeacherForSubject( (SmSubject)jTbSubs.getSelectedObjects()[0] );
+        
+        for( SmTeacher tr : list )
+        {
+            model.addRow(new Object[] { 
+                tr.getTchPerId().getPerSurname(),
+                tr.getTchPerId().getPerName(),
+                tr.getTchSubId().getSubName()
+            });
+        }
+    }
+    
+    
+}//GEN-LAST:event_jBtnSearch2ActionPerformed
+
+private void jPnlTeachersComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlTeachersComponentShown
+    List<SmSubject> sList = DBAccess.GetInstance().getSubjectsList();
+    
+    jTbSubs.removeAllItems();
+    for( SmSubject ss : sList )
+    {
+        jTbSubs.addItem( ss );
+    }    // TODO add your handling code here:
+}//GEN-LAST:event_jPnlTeachersComponentShown
+
 String dateToTimeString( Date date )
 {
     return String.format("%tH:%tM",date,date);
@@ -1167,6 +1354,7 @@ String dateToTimeString( Date date )
     private javax.swing.JButton jBtnPassCHange;
     private javax.swing.JButton jBtnSave;
     private javax.swing.JButton jBtnSearch;
+    private javax.swing.JButton jBtnSearch2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel24;
@@ -1179,6 +1367,7 @@ String dateToTimeString( Date date )
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPnlInbox;
     private javax.swing.JPanel jPnlMail;
     private javax.swing.JPanel jPnlNotes;
@@ -1188,14 +1377,18 @@ String dateToTimeString( Date date )
     private javax.swing.JPanel jPnlProfile;
     private javax.swing.JPanel jPnlRings;
     private javax.swing.JPanel jPnlSchedule;
+    private javax.swing.JPanel jPnlTeachers;
     private javax.swing.JRadioButton jRbClass;
     private javax.swing.JRadioButton jRbRole;
+    private javax.swing.JRadioButton jRbSubject;
     private javax.swing.JRadioButton jRbSurname;
+    private javax.swing.JRadioButton jRbSurname1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
     private javax.swing.JSeparator jSeparator1;
@@ -1208,8 +1401,11 @@ String dateToTimeString( Date date )
     private javax.swing.JTable jTable4;
     private javax.swing.JComboBox jTbClass;
     private javax.swing.JTextField jTbName;
+    private javax.swing.JTextField jTbName1;
     private javax.swing.JComboBox jTbRole;
+    private javax.swing.JComboBox jTbSubs;
     private javax.swing.JTable jTblRings;
+    private javax.swing.JTable jTblTeachers;
     private javax.swing.JTree jTree;
     private javax.swing.JComboBox jcbPickClassForNotes;
     private javax.swing.JComboBox jcbPickSubjectForNotes;
