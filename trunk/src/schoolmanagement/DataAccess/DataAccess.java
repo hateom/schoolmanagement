@@ -105,10 +105,10 @@ public class DataAccess {
         Query query = null;
         if( a_strUserName.equals("") || a_strUserName== null)
         {
-            query = m_oEm.createQuery("SELECT p FROM SmPerson p");
+            query = m_oEm.createQuery("SELECT p FROM SmPerson p").setHint("refresh", new Boolean(true));
         }
         else
-            query = m_oEm.createQuery("SELECT p FROM SmPerson p WHERE p.perSurname LIKE ?1 OR p.perName LIKE ?1").setParameter(1, a_strUserName);
+            query = m_oEm.createQuery("SELECT p FROM SmPerson p WHERE p.perSurname LIKE ?1 OR p.perName LIKE ?1").setParameter(1, a_strUserName).setHint("refresh", new Boolean(true));
         try{
         return query.getResultList();
         }
@@ -119,7 +119,7 @@ public class DataAccess {
     
     public List<SmPerson> GetUserByRole(RoleType a_rtRole)
     {
-        Query query = m_oEm.createQuery("SELECT u FROM SmUser u INNER JOIN u.usrRolId Role WHERE Role.rolId = ?1").setParameter(1, a_rtRole.ordinal());
+        Query query = m_oEm.createQuery("SELECT u FROM SmUser u INNER JOIN u.usrRolId Role WHERE Role.rolId = ?1").setParameter(1, a_rtRole.ordinal()).setHint("refresh", new Boolean(true));
         List<SmPerson> perList = new ArrayList<SmPerson>();
         try{
             List<SmUser> lst = query.getResultList();
@@ -142,7 +142,10 @@ public class DataAccess {
         usr.setUsrPerId(a_oPerID);
         usr.setUsrPasswd(a_strPasswd);
         if(save(usr))
+        {
+            a_oPerID.getSmUserCollection().add(usr);
             return usr;
+        }
         return null;
     }
     
