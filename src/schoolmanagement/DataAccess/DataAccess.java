@@ -145,7 +145,7 @@ public class DataAccess {
 //---------------END OF USER METHODS------------
     
 //----------PERSON METHODS---------------
-    public SmPerson createNewPerson(  )
+    public SmPerson addPerson(  )
     {
         return null;
     }
@@ -308,6 +308,17 @@ public class DataAccess {
     public List<SmClass> GetAllClasses()
     {
         Query query = m_oEm.createQuery("SELECT c FROM SmClass c");
+        try{
+        return query.getResultList();
+        }
+        catch(Exception e)
+        {}
+        return null;
+    }
+    
+    public List<SmSubject> getSubjectsList()
+    {
+        Query query = m_oEm.createQuery("SELECT s FROM SmSubject s");
         try{
         return query.getResultList();
         }
