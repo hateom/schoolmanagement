@@ -148,7 +148,7 @@ public class DataAccess {
 //---------------END OF USER METHODS------------
     
 //----------PERSON METHODS---------------
-    public SmPerson addPerson( String a_strName, String a_strSurname, int a_nPesel, Integer a_nNip, Integer a_nPhone, String a_strAddress, String a_strEmail)
+    public SmPerson addPerson( String a_strName, String a_strSurname, int a_nPesel, Integer a_nNip, Integer a_nPhone, String a_strAddress, String a_strEmail, boolean a_bSaveToDB)
     {
         SmPerson person = new SmPerson();
         person.setPerAdress(a_strAddress);
@@ -158,9 +158,12 @@ public class DataAccess {
         person.setPerPhone(a_nPhone);
         person.setPerNip(a_nNip);
         person.setPerPesel(a_nPesel);
-        if(save(person))
-            return person;
-        return null;
+        if(a_bSaveToDB){
+            if(save(person))
+                return person;
+            return null;
+        }
+        return person;
     }
     
     public List<SmSubject> getSubjectsForPerson( SmPerson a_oPerson )
