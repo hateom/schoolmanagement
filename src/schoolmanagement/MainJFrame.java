@@ -6,21 +6,23 @@
 package schoolmanagement;
 
 import java.awt.Component;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import javax.swing.JTree;
+import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import schoolmanagement.dialogs.JPasswordChangeDialog;
 import schoolmanagement.controller.*;
 import schoolmanagement.dialogs.*;
 import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmNote;
 import schoolmanagement.entity.SmPerson;
-import schoolmanagement.entity.SmSubject;
+import schoolmanagement.entity.SmRing;
 import schoolmanagement.entity.SmTeacher;
 
 /**
@@ -194,6 +196,8 @@ public class MainJFrame extends javax.swing.JFrame {
         jTbClass = new javax.swing.JComboBox();
         jBtnSearch = new javax.swing.JButton();
         jPnlRings = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTblRings = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -838,16 +842,62 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPnlRings.setBorder(javax.swing.BorderFactory.createTitledBorder("Dzwonki")); // NOI18N
         jPnlRings.setName("jPnlRings"); // NOI18N
+        jPnlRings.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPnlRingsComponentShown(evt);
+            }
+        });
+
+        jScrollPane2.setName("jScrollPane2"); // NOI18N
+
+        jTblRings.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, "", "", ""},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Numer", "Początek lekcji", "Koniec lekcji", "Przerwa"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jTblRings.setName("jTblRings"); // NOI18N
+        jScrollPane2.setViewportView(jTblRings);
 
         javax.swing.GroupLayout jPnlRingsLayout = new javax.swing.GroupLayout(jPnlRings);
         jPnlRings.setLayout(jPnlRingsLayout);
         jPnlRingsLayout.setHorizontalGroup(
             jPnlRingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 428, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlRingsLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 415, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPnlRingsLayout.setVerticalGroup(
             jPnlRingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 454, Short.MAX_VALUE)
+            .addGroup(jPnlRingsLayout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jPnlRings.setBounds(0, 0, 440, 480);
@@ -1046,6 +1096,94 @@ public class MainJFrame extends javax.swing.JFrame {
     private void jtblPupilNotesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtblPupilNotesPropertyChange
         // dziwne wartosci w evt ;/
     }//GEN-LAST:event_jtblPupilNotesPropertyChange
+
+private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlRingsComponentShown
+    /*
+    DefaultTableModel model = new DefaultTableModel();
+        jtblPupilNotes.setModel(model);
+        model.addColumn("Nazwisko");
+        model.addColumn("Oceny");
+                for(SmNote note : notes){
+            model.addRow(new Object[]{note.getNotP2cId().getP2cPerId(), note.getNotNote()});
+        }
+     **/
+    
+    DefaultTableModel model = new DefaultTableModel();
+    jTblRings.setModel(model);
+    model.addTableModelListener(new TableModelListener() {
+        public void tableChanged(TableModelEvent e) {
+            int row = e.getFirstRow();
+            int column = e.getColumn();
+            TableModel model = (TableModel)e.getSource();
+            String columnName = model.getColumnName(column);
+            if(row == -1 || column == -1 || model.getValueAt(row, column) == null)
+                return;
+            String data = model.getValueAt(row, column).toString();
+            SmRing ring = (SmRing)model.getValueAt(row, 0);
+            
+            SimpleDateFormat ssdf = new SimpleDateFormat("HH:mm");
+            long time = 0;
+            Date outDate = (Date)ring.getRngTime().clone();
+            try {
+                time = ssdf.parse(data).getTime();
+                outDate.setTime(time);
+                DBAccess.GetInstance().changeRingTime(ring, outDate );
+            } catch( ParseException ex )
+            {
+            }
+        }
+    });
+    model.addColumn("Nr");
+    model.addColumn( "Początek lekcji" );
+    model.addColumn( "Koniec lekcji" );
+    model.addColumn( "Przerwa" );
+
+    
+    List<SmRing> rings = DBAccess.GetInstance().getRings();
+    int i;
+    Date lStart = new Date();
+    Date lEnd = new Date();
+    Date lNext = new Date();
+    long lesson = 0;
+    long ringDuration = 0;
+    
+    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+    try {
+        lesson = sdf.parse("00:45:00").getTime();
+
+        for( i=0; i<rings.size()-1; ++i )
+        {
+            lStart = rings.get(i).getRngTime();
+            lEnd.setTime( lStart.getTime() + lesson );
+            lNext = rings.get(i+1).getRngTime();
+            ringDuration = lNext.getTime() - lEnd.getTime();
+            
+            Date dupa = (Date)lStart.clone();
+            dupa.setTime(ringDuration);
+            model.addRow( new Object[] { 
+                rings.get(i), //
+                dateToTimeString( lStart ),
+                dateToTimeString( lEnd ),
+                dateToTimeString( dupa )
+            } );
+        }
+    
+    } catch (ParseException ex) {
+    }
+    
+    /*i = rings.size()-1;
+    model.addRow( new Object[] { 
+        rings.get(i+1).getRngTime(),
+        rings.get(i+1).getRngTime(),
+        ""
+    } );*/
+}//GEN-LAST:event_jPnlRingsComponentShown
+
+String dateToTimeString( Date date )
+{
+    return String.format("%tH:%tM",date,date);
+}
+
     /**
      * @param args the command line arguments
      */
@@ -1091,6 +1229,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton jRbRole;
     private javax.swing.JRadioButton jRbSurname;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
@@ -1107,6 +1246,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox jTbClass;
     private javax.swing.JTextField jTbName;
     private javax.swing.JComboBox jTbRole;
+    private javax.swing.JTable jTblRings;
     private javax.swing.JTree jTree;
     private javax.swing.JComboBox jcbPickClassForNotes;
     private javax.swing.JComboBox jcbPickSubjectForNotes;
