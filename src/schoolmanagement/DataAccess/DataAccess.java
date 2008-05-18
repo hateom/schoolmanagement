@@ -21,6 +21,7 @@ import schoolmanagement.entity.SmPerson2class;
 import schoolmanagement.entity.SmRing;
 import schoolmanagement.entity.SmRole;
 import schoolmanagement.entity.SmSchedule;
+import schoolmanagement.entity.SmSubject;
 import schoolmanagement.entity.SmTeacher;
 import schoolmanagement.entity.SmUser;
 
@@ -249,6 +250,25 @@ public class DataAccess {
         {}
         return null;
     }
+    
+    public List<SmSubject> getSubjectsForClass( SmClass a_oClass )
+    {
+        Query query = m_oEm.createQuery("SELECT s FROM SmSchedule s WHERE s.schClsId = :class").setParameter("class", a_oClass);
+        List<SmSubject> subjectList = new ArrayList<SmSubject>();
+        try{ 
+            List<SmSchedule> lst = query.getResultList();
+            for(SmSchedule sh : lst)
+            {
+                if(!subjectList.contains(sh.getSchTchId().getTchSubId()))
+                    subjectList.add(sh.getSchTchId().getTchSubId());
+            }
+            return subjectList;
+        }
+        catch(Exception e)
+        {}
+        return null;
+    }
+    
     public List<SmRole> GetRoles()
     {
         Query query = m_oEm.createQuery("SELECT r FROM SmRole r");
