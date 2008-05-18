@@ -17,6 +17,7 @@ import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmNote;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmPerson2class;
+import schoolmanagement.entity.SmRing;
 import schoolmanagement.entity.SmRole;
 import schoolmanagement.entity.SmSchedule;
 import schoolmanagement.entity.SmTeacher;
@@ -227,6 +228,11 @@ public class DataAccess {
            lstPerson.add(osmPerson2Class.getP2cPerId());
        }
         return lstPerson;
+    }
+    
+    public List<SmRing> getRings()
+    {
+        return m_oEm.createQuery("SELECT r FROM SmRing r").getResultList();
     }
     
     /**
