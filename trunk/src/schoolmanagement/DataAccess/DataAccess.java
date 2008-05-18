@@ -146,7 +146,7 @@ public class DataAccess {
         return null;
     }
     
-    List<SmSubject> getSubjectForPerson( SmPerson a_oPerson )
+    List<SmSubject> getSubjectsForPerson( SmPerson a_oPerson )
     {
         Collection<SmTeacher> col = a_oPerson.getSmTeacherCollection();
         if( col != null ){
