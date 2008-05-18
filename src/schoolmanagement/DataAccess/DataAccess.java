@@ -204,19 +204,12 @@ public class DataAccess {
     public List<SmNote> getNotes( SmSubject a_oSubject, SmClass a_oClass )
     {
         Query query = null;
-        Iterator it = a_oSubject.getSmTeacherCollection().iterator();
-        if(it.next() != null)
-        {
-            SmTeacher teacher = a_oSubject.getSmTeacherCollection().iterator().next();
-            if(teacher != null)
-            {
-                    query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notTchId = ?1 AND n.notP2cId.p2cClsId = ?2").setParameter(1, teacher).setParameter(2, a_oClass).setHint("refresh", new Boolean(true));
-                    return query.getResultList();
-            }
-            else
-            {
-            }
+        query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notTchId.tchSubId = ?1 AND n.notP2cId.p2cClsId = ?2").setParameter(1, a_oSubject).setParameter(2, a_oClass).setHint("refresh", new Boolean(true));
+        try{
+        return query.getResultList();
         }
+        catch(Exception e)
+        {}
         return null;
     }
     
