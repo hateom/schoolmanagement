@@ -53,7 +53,7 @@ public class DataAccess {
             m_oEm.getTransaction().rollback();
         }
     }
-    
+ // USER METHODS -----------------------------------------------   
     /**
      * Logowanie uzytkownika
      */
@@ -94,11 +94,77 @@ public class DataAccess {
         return false;
     }
     
+        /**
+     * Szuka czlowieczka po nazwisku
+     * @return liste odnalezionych ludzikow
+     */
+    public List<SmPerson> GetUserByName(String a_strUserName)
+    {
+        Query query = null;
+        if( a_strUserName.equals("") || a_strUserName== null)
+        {
+            query = m_oEm.createQuery("SELECT p FROM SmPerson p");
+        }
+        else
+            query = m_oEm.createQuery("SELECT p FROM SmPerson p WHERE p.perSurname LIKE ?1 OR p.perName LIKE ?1").setParameter(1, a_strUserName);
+        try{
+        return query.getResultList();
+        }
+        catch(Exception e)
+        {}
+        return null;
+    }
+    
+    public List<SmPerson> GetUserByRole(RoleType a_rtRole)
+    {
+        Query query = m_oEm.createQuery("SELECT u FROM SmUser u INNER JOIN u.usrRolId Role WHERE Role.rolId = ?1").setParameter(1, a_rtRole.ordinal());
+        List<SmPerson> perList = new ArrayList<SmPerson>();
+        try{
+            List<SmUser> lst = query.getResultList();
+            for(SmUser user : lst)
+            {
+                perList.add(user.getUsrPerId());
+            }
+            return perList;
+        }
+        catch(Exception e)
+        {}
+        return null;
+    }
+    
+    public SmUser addUser(SmPerson a_oPerID)
+    {
+        SmUser usr = new SmUser();
+        return usr;
+    }
+    
+//---------------END OF USER METHODS------------
+    
+//----------PERSON METHODS---------------
     public SmPerson createNewPerson(  )
     {
         return null;
     }
     
+    List<SmSubject> getSubjectForPerson( SmPerson a_oPerson )
+    {
+        Collection<SmTeacher> col = a_oPerson.getSmTeacherCollection();
+        if( col != null ){
+            List<SmSubject> subList = new ArrayList<SmSubject>();
+            Iterator it = col.iterator();
+            if(it != null)
+            {
+                while( it.hasNext() )
+                {
+                    subList.add( ((SmTeacher)it.next()).getTchSubId() );
+                }
+                return subList;
+            }
+        }
+        return null;
+    }
+    
+ //-------------------END OF PERSON METHODS-------------   
     public boolean changeRingTime(SmRing a_oRing, Date a_oNewRingTime)
     {
         try
@@ -196,27 +262,7 @@ public class DataAccess {
         return null;
     }
     
-    /**
-     * Szuka czlowieczka po nazwisku
-     * @return liste odnalezionych ludzikow
-     */
-    public List<SmPerson> GetUserByName(String a_strUserName)
-    {
-        Query query = null;
-        if( a_strUserName.equals("") || a_strUserName== null)
-        {
-            query = m_oEm.createQuery("SELECT p FROM SmPerson p");
-        }
-        else
-            query = m_oEm.createQuery("SELECT p FROM SmPerson p WHERE p.perSurname LIKE ?1 OR p.perName LIKE ?1").setParameter(1, a_strUserName);
-        try{
-        return query.getResultList();
-        }
-        catch(Exception e)
-        {}
-        return null;
-    }
-    
+  
     public List<SmNote> getNotes( SmSubject a_oSubject, SmClass a_oClass )
     {
         Query query = null;
@@ -249,22 +295,7 @@ public class DataAccess {
         return null;
     }
     
-    public List<SmPerson> GetUserByRole(RoleType a_rtRole)
-    {
-        Query query = m_oEm.createQuery("SELECT u FROM SmUser u INNER JOIN u.usrRolId Role WHERE Role.rolId = ?1").setParameter(1, a_rtRole.ordinal());
-        List<SmPerson> perList = new ArrayList<SmPerson>();
-        try{
-            List<SmUser> lst = query.getResultList();
-            for(SmUser user : lst)
-            {
-                perList.add(user.getUsrPerId());
-            }
-            return perList;
-        }
-        catch(Exception e)
-        {}
-        return null;
-    }
+ 
     
     /**
      * 
