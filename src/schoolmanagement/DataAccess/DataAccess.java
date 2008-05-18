@@ -43,15 +43,17 @@ public class DataAccess {
      m_oEmf = javax.persistence.Persistence.createEntityManagerFactory("schoolmanagementPU");   
      m_oEm = m_oEmf.createEntityManager();
     }
-    public void save(Object object) {
+    public boolean save(Object object) {
         m_oEm.getTransaction().begin();
         try {
             m_oEm.persist(object);
             m_oEm.getTransaction().commit();
+            return true;
         } catch (Exception e) {
             e.printStackTrace();
             m_oEm.getTransaction().rollback();
         }
+        return false;
     }
  // USER METHODS -----------------------------------------------   
     /**
@@ -152,6 +154,11 @@ public class DataAccess {
         person.setPerEmail(a_strEmail);
         person.setPerName(a_strName);
         person.setPerSurname(a_strSurname);
+        person.setPerPhone(a_nPhone);
+        person.setPerNip(a_nNip);
+        person.setPerPesel(a_nPesel);
+        if(save(person))
+            return person;
         return null;
     }
     
@@ -239,6 +246,7 @@ public class DataAccess {
             {
                 teacherList.add( (SmTeacher)it.next() );
             }
+            return teacherList;
         }
         return null;
     }
