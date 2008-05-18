@@ -134,10 +134,11 @@ public class DataAccess {
         return null;
     }
     
-    public SmUser addUser(SmPerson a_oPerID, SmRole a_oRole, String a_strPasswd)
+    public SmUser addUser(SmPerson a_oPerID, SmRole a_oRole, String a_strLogin, String a_strPasswd)
     {
         SmUser usr = new SmUser();
         usr.setUsrRolId(a_oRole);
+        usr.setUsrLogin(a_strLogin)
         usr.setUsrPerId(a_oPerID);
         usr.setUsrPasswd(a_strPasswd);
         if(save(usr))
@@ -164,6 +165,17 @@ public class DataAccess {
             return null;
         }
         return person;
+    }
+    
+    public SmRole getRoleByName(String a_StrRole)
+    {
+        Query query = m_oEm.createQuery("SELECT r FROM SmRole r WHERE r.rolName = :rolName").setParameter("rolName", a_StrRole);
+        try{
+        return (SmRole)query.getSingleResult();
+        }
+        catch(Exception e)
+        {}
+        return null;
     }
     
     public List<SmSubject> getSubjectsForPerson( SmPerson a_oPerson )
