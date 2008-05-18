@@ -193,6 +193,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jTbRole = new javax.swing.JComboBox();
         jTbClass = new javax.swing.JComboBox();
         jBtnSearch = new javax.swing.JButton();
+        jBtnAddPerson = new javax.swing.JButton();
         jPnlRings = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTblRings = new javax.swing.JTable();
@@ -762,6 +763,14 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        jBtnAddPerson.setText(resourceMap.getString("jBtnAddPerson.text")); // NOI18N
+        jBtnAddPerson.setName("jBtnAddPerson"); // NOI18N
+        jBtnAddPerson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAddPersonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -778,7 +787,9 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(jTbRole, 0, 154, Short.MAX_VALUE)
                     .addComponent(jTbClass, 0, 154, Short.MAX_VALUE))
                 .addGap(38, 38, 38)
-                .addComponent(jBtnSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jBtnAddPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jBtnSearch, javax.swing.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -796,7 +807,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jRbClass)
-                    .addComponent(jTbClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTbClass, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jBtnAddPerson))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -816,7 +828,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlPeopleLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1330,6 +1342,11 @@ private void jPnlTeachersComponentShown(java.awt.event.ComponentEvent evt) {//GE
     }    // TODO add your handling code here:
 }//GEN-LAST:event_jPnlTeachersComponentShown
 
+private void jBtnAddPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddPersonActionPerformed
+    JNewPersonDialog jNewPesonDlg = new JNewPersonDialog();
+    jNewPesonDlg.setVisible(true);
+}//GEN-LAST:event_jBtnAddPersonActionPerformed
+
 String dateToTimeString( Date date )
 {
     return String.format("%tH:%tM",date,date);
@@ -1348,6 +1365,7 @@ String dateToTimeString( Date date )
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JButton jBtnAddPerson;
     private javax.swing.JButton jBtnNewMail;
     private javax.swing.JButton jBtnNewMail2;
     private javax.swing.JButton jBtnNewMail3;

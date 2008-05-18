@@ -18,10 +18,6 @@ public class PersonDetailsControl extends javax.swing.JPanel {
     }
     
     ///getters and setters
-    public String getTutor()
-    {
-        return jcbPickTutorForDetail.getSelectedItem().toString();
-    }
     
     public String getGroup()
     {
@@ -88,15 +84,6 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         jtbPeselForDetail.setText(a_strValue);
     }
     
-    public void setTutors(Object[] a_arrObjects)
-    {
-        jcbPickTutorForDetail.removeAllItems();
-        for(int i=0; i<a_arrObjects.length; ++i)
-        {
-           jcbPickTutorForDetail.addItem(a_arrObjects[i]); 
-        }
-    }
-    
     public void setGroups (Object[] a_arrObjects)
     {
         jcbPickGroupForDetails.removeAllItems();
@@ -104,16 +91,6 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         {
            jcbPickGroupForDetails.addItem(a_arrObjects[i]); 
         }
-    }
-    
-    public void addTutor(Object a_oTutor)
-    {
-        jcbPickTutorForDetail.addItem(a_oTutor);
-    }
-    
-    public void removeTutor(Object a_oTutor)
-    {
-        jcbPickTutorForDetail.removeItem(a_oTutor);
     }
     
     public void addGroup(Object a_oGroup)
@@ -124,6 +101,28 @@ public class PersonDetailsControl extends javax.swing.JPanel {
     public void removeGroup(Object a_oGroup)
     {
         jcbPickGroupForDetails.removeItem(a_oGroup);
+    }
+    
+    public void setLoginVisible( boolean v )
+    {
+        jtbLogin.setVisible(v);
+        jLabel2.setVisible(v);
+    }
+     
+    public void setRoleVisible( boolean v )
+    {
+        jcbPickGroupForDetails.setVisible(v);
+        jLabel16.setVisible(v);
+    }
+    
+    public void setLogin( String login )
+    {
+        jtbLogin.setText( login );
+    }
+    
+    public String getLogin()
+    {
+        return jtbLogin.getText();
     }
     
     /** This method is called from within the constructor to
@@ -141,8 +140,6 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         jtbPhoneDetail = new javax.swing.JTextField();
         jtbNipForDetail = new javax.swing.JTextField();
         jcbPickGroupForDetails = new javax.swing.JComboBox();
-        jcbPickTutorForDetail = new javax.swing.JComboBox();
-        jLabel26 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
@@ -150,6 +147,10 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         jLabel14 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
+        jtbEmail = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        jtbLogin = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setName("Form"); // NOI18N
 
@@ -165,14 +166,8 @@ public class PersonDetailsControl extends javax.swing.JPanel {
 
         jtbNipForDetail.setName("jtbNipForDetail"); // NOI18N
 
-        jcbPickGroupForDetails.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dyrekcja", "Nauczyciele", "Uczniowie" }));
+        jcbPickGroupForDetails.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dyrektor", "Nauczyciel", "Uczeń", "Admin" }));
         jcbPickGroupForDetails.setName("jcbPickGroupForDetails"); // NOI18N
-
-        jcbPickTutorForDetail.setName("jcbPickTutorForDetail"); // NOI18N
-
-        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel26.setText("Wychowawca:"); // NOI18N
-        jLabel26.setName("jLabel26"); // NOI18N
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel16.setText("Grupa:"); // NOI18N
@@ -200,40 +195,65 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         jLabel12.setText("Nazwisko:"); // NOI18N
         jLabel12.setName("jLabel12"); // NOI18N
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(PersonDetailsControl.class);
+        jtbEmail.setText(resourceMap.getString("jtbEmail.text")); // NOI18N
+        jtbEmail.setName("jtbEmail"); // NOI18N
+
+        jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
+        jLabel1.setName("jLabel1"); // NOI18N
+
+        jtbLogin.setText(resourceMap.getString("jtbLogin.text")); // NOI18N
+        jtbLogin.setName("jtbLogin"); // NOI18N
+
+        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel2.setName("jLabel2"); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(52, 52, 52)
-                        .addComponent(jLabel25)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel23)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
-                            .addComponent(jLabel26, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtbPhoneDetail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(jtbNameDetails, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(jtbSurnameNameDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(jtbPeselForDetail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(jtbAddressDetail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(jtbNipForDetail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(jcbPickGroupForDetails, 0, 188, Short.MAX_VALUE)
-                    .addComponent(jcbPickTutorForDetail, 0, 188, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(52, 52, 52)
+                                        .addComponent(jLabel25))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                                            .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addContainerGap()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                            .addComponent(jLabel23)
+                                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(52, 52, 52)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(jLabel2))))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtbLogin, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE))
+                            .addComponent(jtbEmail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                            .addComponent(jtbPhoneDetail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                            .addComponent(jtbNameDetails, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                            .addComponent(jtbSurnameNameDetails, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                            .addComponent(jtbPeselForDetail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                            .addComponent(jtbAddressDetail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                            .addComponent(jtbNipForDetail, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbPickGroupForDetails, 0, 188, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -267,29 +287,35 @@ public class PersonDetailsControl extends javax.swing.JPanel {
                     .addComponent(jLabel23))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbPickGroupForDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16))
+                    .addComponent(jLabel1)
+                    .addComponent(jtbEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbPickTutorForDetail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel26))
+                    .addComponent(jtbLogin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbPickGroupForDetails, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel16))
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
     
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JComboBox jcbPickGroupForDetails;
-    private javax.swing.JComboBox jcbPickTutorForDetail;
     private javax.swing.JTextField jtbAddressDetail;
+    private javax.swing.JTextField jtbEmail;
+    private javax.swing.JTextField jtbLogin;
     private javax.swing.JTextField jtbNameDetails;
     private javax.swing.JTextField jtbNipForDetail;
     private javax.swing.JTextField jtbPeselForDetail;

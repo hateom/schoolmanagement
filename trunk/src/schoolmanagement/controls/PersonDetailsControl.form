@@ -18,44 +18,64 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Group type="103" groupAlignment="1" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
-                      <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel13" alignment="1" pref="81" max="32767" attributes="1"/>
-                          <Component id="jLabel14" alignment="1" min="-2" pref="76" max="-2" attributes="1"/>
-                          <Component id="jLabel12" alignment="1" pref="81" max="32767" attributes="1"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel23" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel16" alignment="1" min="-2" pref="69" max="-2" attributes="1"/>
-                          <Component id="jLabel15" alignment="1" pref="81" max="32767" attributes="1"/>
-                          <Component id="jLabel26" alignment="1" min="-2" pref="75" max="-2" attributes="1"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-              </Group>
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jtbPhoneDetail" alignment="1" pref="188" max="32767" attributes="1"/>
-                  <Component id="jtbNameDetails" alignment="1" pref="188" max="32767" attributes="1"/>
-                  <Component id="jtbSurnameNameDetails" alignment="0" pref="188" max="32767" attributes="1"/>
-                  <Component id="jtbPeselForDetail" alignment="1" pref="188" max="32767" attributes="1"/>
-                  <Component id="jtbAddressDetail" alignment="1" pref="188" max="32767" attributes="1"/>
-                  <Component id="jtbNipForDetail" alignment="1" pref="188" max="32767" attributes="1"/>
-                  <Component id="jcbPickGroupForDetails" pref="188" max="32767" attributes="1"/>
-                  <Component id="jcbPickTutorForDetail" alignment="0" pref="188" max="32767" attributes="1"/>
+                  <Group type="102" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                                      <Component id="jLabel25" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jLabel13" alignment="1" pref="80" max="32767" attributes="1"/>
+                                          <Component id="jLabel14" alignment="1" min="-2" pref="76" max="-2" attributes="1"/>
+                                          <Component id="jLabel12" alignment="1" pref="80" max="32767" attributes="1"/>
+                                      </Group>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <EmptySpace min="-2" max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="1" attributes="0">
+                                          <Component id="jLabel23" alignment="1" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel15" alignment="1" pref="80" max="32767" attributes="1"/>
+                                      </Group>
+                                  </Group>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace min="-2" pref="52" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" alignment="1" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jtbLogin" pref="189" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jtbEmail" alignment="1" pref="189" max="32767" attributes="0"/>
+                          <Component id="jtbPhoneDetail" alignment="1" pref="189" max="32767" attributes="1"/>
+                          <Component id="jtbNameDetails" alignment="1" pref="189" max="32767" attributes="1"/>
+                          <Component id="jtbSurnameNameDetails" alignment="0" pref="189" max="32767" attributes="1"/>
+                          <Component id="jtbPeselForDetail" alignment="1" pref="189" max="32767" attributes="1"/>
+                          <Component id="jtbAddressDetail" alignment="1" pref="189" max="32767" attributes="1"/>
+                          <Component id="jtbNipForDetail" alignment="1" pref="189" max="32767" attributes="1"/>
+                      </Group>
+                  </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="jLabel16" min="-2" pref="69" max="-2" attributes="1"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jcbPickGroupForDetails" pref="188" max="32767" attributes="1"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -96,15 +116,20 @@
                   <Component id="jtbNipForDetail" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel23" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jtbEmail" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="jtbLogin" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="jcbPickGroupForDetails" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="jLabel16" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jcbPickTutorForDetail" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jLabel26" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -145,28 +170,14 @@
     <Component class="javax.swing.JComboBox" name="jcbPickGroupForDetails">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="3">
-            <StringItem index="0" value="Dyrekcja"/>
-            <StringItem index="1" value="Nauczyciele"/>
-            <StringItem index="2" value="Uczniowie"/>
+          <StringArray count="4">
+            <StringItem index="0" value="Dyrektor"/>
+            <StringItem index="1" value="Nauczyciel"/>
+            <StringItem index="2" value="Ucze&#x144;"/>
+            <StringItem index="3" value="Admin"/>
           </StringArray>
         </Property>
         <Property name="name" type="java.lang.String" value="jcbPickGroupForDetails" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JComboBox" name="jcbPickTutorForDetail">
-      <Properties>
-        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="0"/>
-        </Property>
-        <Property name="name" type="java.lang.String" value="jcbPickTutorForDetail" noResource="true"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel26">
-      <Properties>
-        <Property name="horizontalAlignment" type="int" value="4"/>
-        <Property name="text" type="java.lang.String" value="Wychowawca:" noResource="true"/>
-        <Property name="name" type="java.lang.String" value="jLabel26" noResource="true"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel16">
@@ -214,6 +225,30 @@
         <Property name="horizontalAlignment" type="int" value="4"/>
         <Property name="text" type="java.lang.String" value="Nazwisko:" noResource="true"/>
         <Property name="name" type="java.lang.String" value="jLabel12" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtbEmail">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jtbEmail.text"/>
+        <Property name="name" type="java.lang.String" value="jtbEmail" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabel1.text"/>
+        <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JTextField" name="jtbLogin">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jtbLogin.text"/>
+        <Property name="name" type="java.lang.String" value="jtbLogin" noResource="true"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="jLabel2">
+      <Properties>
+        <Property name="text" type="java.lang.String" resourceKey="jLabel2.text"/>
+        <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
       </Properties>
     </Component>
   </SubComponents>
