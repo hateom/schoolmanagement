@@ -224,7 +224,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jLblLogText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLblLoggedAs)
-                .addContainerGap(512, Short.MAX_VALUE))
+                .addContainerGap(481, Short.MAX_VALUE))
         );
         jStatusLayout.setVerticalGroup(
             jStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,14 +342,14 @@ public class MainJFrame extends javax.swing.JFrame {
         jpanelProportiesLayout.setHorizontalGroup(
             jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpanelProportiesLayout.createSequentialGroup()
-                .addContainerGap(49, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel2)
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jcbPickClassForNotes, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jcbPickSubjectForNotes, 0, 335, Short.MAX_VALUE))
+                    .addComponent(jcbPickClassForNotes, 0, 303, Short.MAX_VALUE)
+                    .addComponent(jcbPickSubjectForNotes, 0, 303, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpanelProportiesLayout.setVerticalGroup(
@@ -357,8 +357,8 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jpanelProportiesLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jcbPickClassForNotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(jcbPickClassForNotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jcbPickSubjectForNotes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -421,12 +421,12 @@ public class MainJFrame extends javax.swing.JFrame {
         jPnlNotes.setLayout(jPnlNotesLayout);
         jPnlNotesLayout.setHorizontalGroup(
             jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlNotesLayout.createSequentialGroup()
+            .addGroup(jPnlNotesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 467, Short.MAX_VALUE)
+                .addGroup(jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                     .addComponent(jpanelProporties, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPnlNotesLayout.setVerticalGroup(
             jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -906,7 +906,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                .addComponent(jLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1011,6 +1011,12 @@ public class MainJFrame extends javax.swing.JFrame {
         {
             jcbPickTeacherForNotes.addItem(smTeacher);
         }*/
+        
+        List<SmClass> classes = DBAccess.GetInstance().GetAllClasses();
+        for( SmClass cls : classes )
+        {
+            jcbPickClassForNotes.addItem(cls);        
+        }
     }//GEN-LAST:event_jPnlNotesComponentShown
 
     private void jcbPickSubjectForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickSubjectForNotesActionPerformed
@@ -1026,21 +1032,19 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jcbPickSubjectForNotesActionPerformed
 
     private void jcbPickClassForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickClassForNotesActionPerformed
-        /*if( (SmClass)jcbPickClassForNotes.getSelectedItem() == null || jcbPickTeacherForNotes.getSelectedItem() == null )
+        if( (SmClass)jcbPickClassForNotes.getSelectedItem() == null)
             return;     
         SmClass smclass = (SmClass)jcbPickClassForNotes.getSelectedItem();
-        TeacherCollection teacher = (TeacherCollection)jcbPickTeacherForNotes.getSelectedItem();
         
-        List<SmNote> notes = DBAccess.GetInstance().getNotes(teacher, smclass, null);
+        List<SmNote> notes = null;//DBAccess.GetInstance().getNotes(teacher, smclass, null);
         
         DefaultTableModel model = new DefaultTableModel();
         jtblPupilNotes.setModel(model);
         model.addColumn("Nazwisko");
         model.addColumn("Oceny");
-                for(SmNote note : notes){
+        for(SmNote note : notes){
             model.addRow(new Object[]{note.getNotP2cId().getP2cPerId(), note.getNotNote()});
         }
-        */
     }//GEN-LAST:event_jcbPickClassForNotesActionPerformed
 
     private void jPnlProfileComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlProfileComponentShown
