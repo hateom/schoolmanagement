@@ -6,6 +6,8 @@
 
 package schoolmanagement.dialogs;
 
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import org.jdesktop.application.Action;
 import schoolmanagement.controller.*;
 
@@ -158,8 +160,12 @@ public class JPasswordChangeDialog extends javax.swing.JDialog {
             if( User.ChangePassword( String.valueOf(m_jpassfieldCurrentPassword.getPassword()), strNewPassRetype ) ) {
                 this.setVisible(false);
             } else {
-                // ERROR
+                JOptionPane.showMessageDialog(null, "Błąd zmiany hasła","Błąd",JOptionPane.ERROR_MESSAGE);
             }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Hasła nie zgadzają się","Błąd",JOptionPane.ERROR_MESSAGE);
         }
         
     }

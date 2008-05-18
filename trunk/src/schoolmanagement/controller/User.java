@@ -66,6 +66,6 @@ public class User {
     }
 
     static public boolean ChangePassword(String current, String newPass) {
-        return false;
+        return DBAccess.GetInstance().changeUserPassword(newPass, current, user_id);
     }
 }

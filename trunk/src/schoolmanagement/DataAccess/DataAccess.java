@@ -6,6 +6,7 @@
 package schoolmanagement.DataAccess;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import javax.persistence.Query;
@@ -68,6 +69,42 @@ public class DataAccess {
             
         }
         return null;
+    }
+    
+    public boolean changeUserPassword(String a_strNewPasswd, String a_strOldPasswd, int a_nUsrId)
+    {
+        Query q = m_oEm.createNamedQuery("SmUser.findByUsrId").setParameter("usrId",a_nUsrId);
+        SmUser user = (SmUser)q.getSingleResult();
+        if( !user.getUsrPasswd().equals(a_strOldPasswd) )
+        {
+            return false;
+        }
+        try
+        {
+        user.setUsrPasswd(a_strNewPasswd);
+        save(user);
+        return true;
+        }
+        catch(Exception e)
+        {
+        }
+        
+        return false;
+    }
+    
+    public boolean changeRingTime(SmRing a_oRing, Date a_oNewRingTime)
+    {
+        try
+        {
+            a_oRing.setRngTime(a_oNewRingTime);
+            save(a_oRing);
+            return true;
+        }
+        catch(Exception e)
+        {
+            
+        }
+        return false;
     }
     
     public List<TeacherCollection> getTeacherList()

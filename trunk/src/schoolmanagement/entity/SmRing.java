@@ -97,7 +97,7 @@ public class SmRing implements Serializable {
 
     @Override
     public String toString() {
-        return "schoolmanagement.entity.SmRing[rngId=" + rngId + "]";
+        return String.format("%tH:%tM", rngTime, rngTime);
     }
 
 }
