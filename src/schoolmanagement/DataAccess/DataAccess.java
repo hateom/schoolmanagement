@@ -12,6 +12,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import schoolmanagement.controller.RoleType;
+import schoolmanagement.controller.TeacherCollection;
 import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmNote;
 import schoolmanagement.entity.SmPerson;
@@ -68,21 +69,55 @@ public class DataAccess {
         return null;
     }
     
-    public List<SmTeacher> getTeacherList()
+    public List<TeacherCollection> getTeacherList()
     {
         Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t");
+        List<TeacherCollection> teachColList = new ArrayList<TeacherCollection>();
         try{
-        return query.getResultList();
+            List<SmTeacher> lst = query.getResultList();
+            for( SmTeacher teacher : lst )
+            {
+                boolean found = false;
+                int idx = 0;
+                for( TeacherCollection tch : teachColList )
+                {
+                    if(tch.containsTeacher(teacher))
+                    {
+                        found = true;
+                        break;
+                    }
+                    idx++;
+                }
+                if(!found)
+                {
+                    TeacherCollection col = new TeacherCollection();
+                    col.getTeacherList().add(teacher);
+                    teachColList.add(col);
+                }
+                else
+                {
+                  teachColList.get(idx).getTeacherList().add(teacher);
+                }
+            }
+            return teachColList;
         }
         catch(Exception e)
-        {}
+        {
+            e.printStackTrace();
+        }
         return null;
     }
     
-    public List<SmClass> getClassesForTeacher( SmTeacher a_oTeacher )
+    public List<SmClass> getClassesForTeacher( TeacherCollection a_oTeacherCol )
     {
         List<SmClass> lstClass = new ArrayList<SmClass>();
-        Query query = m_oEm.createQuery("SELECT s FROM SmSchedule s WHERE s.schTchId = ?1").setParameter(1, a_oTeacher);
+        String lstID = "";
+        for(SmTeacher teach : a_oTeacherCol.getTeacherList())
+        {
+            lstID += (teach.getTchId().toString()) + ",";
+        }
+        lstID = lstID.substring(0, lstID.length()-1);
+        Query query = m_oEm.createQuery("SELECT s FROM SmSchedule s WHERE s.schTchId.tchId IN ("+ lstID +")");
         try{
             List<SmSchedule> lst = query.getResultList();
             Iterator iter = lst.iterator();
@@ -122,17 +157,20 @@ public class DataAccess {
         return null;
     }
     
-    public List<SmNote> getNotes( SmTeacher a_oTeacher, SmClass a_oClass, SmPerson a_oPupilID)
+    public List<SmNote> getNotes( TeacherCollection a_oTeacher, SmClass a_oClass, SmPerson a_oPupilID)
     {
         Query query = null;
-        if( a_oPupilID == null)
-        {
-            query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notTchId = ?1 AND n.notP2cId.p2cClsId = ?2").setParameter(1, a_oTeacher).setParameter(2, a_oClass);
-            return query.getResultList();
-        }
-        else
-        {
-            
+        SmPerson teacherPerson = a_oTeacher.getPerson();
+        if(teacherPerson != null){
+            if( a_oPupilID == null )
+            {
+                query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notTchId.tchPerId = ?1 AND n.notP2cId.p2cClsId = ?2").setParameter(1, teacherPerson).setParameter(2, a_oClass).setHint("refresh", new Boolean(true));
+                return query.getResultList();
+            }
+            else
+            {
+
+            }
         }
         return null;
     }
