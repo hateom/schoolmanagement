@@ -97,7 +97,7 @@ public class SmRing implements Serializable {
 
     @Override
     public String toString() {
-        return Integer.toString( rngId + 1 );
+        return Integer.toString( rngId );
     }
 
 }
