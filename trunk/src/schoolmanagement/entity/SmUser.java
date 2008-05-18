@@ -7,6 +7,7 @@ package schoolmanagement.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -39,7 +40,7 @@ public class SmUser implements Serializable {
     @Column(name = "USR_ISLOGGED", nullable = false)
     private boolean usrIslogged;
     @JoinColumn(name = "USR_PER_ID", referencedColumnName = "PER_ID")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private SmPerson usrPerId;
     @JoinColumn(name = "USR_ROL_ID", referencedColumnName = "ROL_ID")
     @ManyToOne
