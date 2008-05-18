@@ -963,27 +963,27 @@ public class MainJFrame extends javax.swing.JFrame {
 
     private void jPnlNotesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlNotesComponentShown
         jcbPickTeacherForNotes.removeAllItems();
-        List<SmTeacher> lstSmTeacher = DBAccess.GetInstance().getTeacherList();
-        for( SmTeacher smTeacher : lstSmTeacher)
+        List<TeacherCollection> lstSmTeacher = DBAccess.GetInstance().getTeacherList();
+        for( TeacherCollection smTeacher : lstSmTeacher)
         {
             jcbPickTeacherForNotes.addItem(smTeacher);
         }
     }//GEN-LAST:event_jPnlNotesComponentShown
 
     private void jcbPickTeacherForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickTeacherForNotesActionPerformed
-        if( jcbPickTeacherForNotes.getSelectedItem() == null ) return;
-        SmTeacher teacher = (SmTeacher)jcbPickTeacherForNotes.getSelectedItem();
+        if(jcbPickTeacherForNotes.getSelectedItem() == null)
+            return;
+        TeacherCollection teacher = (TeacherCollection)jcbPickTeacherForNotes.getSelectedItem();
         jcbPickSubjectForNotes.removeAllItems();
-//        for( SmSubject sm : teacher.getTchSubId())
-//        {
-//            jcbPickTeacherForNotes.addItem(smclass);
-//        }
-        jcbPickSubjectForNotes.addItem(teacher.getTchSubId());
+                List<SmTeacher> teacherList = teacher.getTeacherList();
+        for(SmTeacher teacherEntity : teacherList)
+            jcbPickSubjectForNotes.addItem(teacherEntity.getTchSubId());
     }//GEN-LAST:event_jcbPickTeacherForNotesActionPerformed
 
     private void jcbPickSubjectForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickSubjectForNotesActionPerformed
-        if( jcbPickTeacherForNotes.getSelectedItem() == null ) return;
-        SmTeacher teacher = (SmTeacher)jcbPickTeacherForNotes.getSelectedItem();
+        if( jcbPickTeacherForNotes.getSelectedItem() == null)
+            return;
+        TeacherCollection teacher = (TeacherCollection)jcbPickTeacherForNotes.getSelectedItem();
         jcbPickClassForNotes.removeAllItems();
         List<SmClass> lstSmClass = DBAccess.GetInstance().getClassesForTeacher(teacher);
         for( SmClass smclass : lstSmClass)
@@ -995,25 +995,21 @@ public class MainJFrame extends javax.swing.JFrame {
     private List<SmNote> activeNotes;
     
     private void jcbPickClassForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickClassForNotesActionPerformed
-        if( jcbPickClassForNotes.getSelectedItem() == null ) {
-            activeNotes = null;
-            return;
-        }
-        
+        if( (SmClass)jcbPickClassForNotes.getSelectedItem() == null || jcbPickTeacherForNotes.getSelectedItem() == null )
+            return;     
         SmClass smclass = (SmClass)jcbPickClassForNotes.getSelectedItem();
-        SmTeacher teacher = (SmTeacher)jcbPickTeacherForNotes.getSelectedItem();
+        TeacherCollection teacher = (TeacherCollection)jcbPickTeacherForNotes.getSelectedItem();
+        
         List<SmNote> notes = DBAccess.GetInstance().getNotes(teacher, smclass, null);
         
         DefaultTableModel model = new DefaultTableModel();
         jtblPupilNotes.setModel(model);
         model.addColumn("Nazwisko");
         model.addColumn("Oceny");
-        
-        for(SmNote note : notes){
+                for(SmNote note : notes){
             model.addRow(new Object[]{note.getNotP2cId().getP2cPerId(), note.getNotNote()});
         }
         activeNotes = notes;
-        
     }//GEN-LAST:event_jcbPickClassForNotesActionPerformed
 
     private void jPnlProfileComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlProfileComponentShown
