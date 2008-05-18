@@ -6,6 +6,7 @@
 package schoolmanagement.DataAccess;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -152,6 +153,21 @@ public class DataAccess {
         return null;
     }
     
+    public List<SmTeacher> getTeacherForSubject(SmSubject a_oSubject)
+    {
+        Collection<SmTeacher> teachCol = a_oSubject.getSmTeacherCollection();
+        List<SmTeacher> teacherList = new ArrayList<SmTeacher>();
+        if( teachCol != null )
+        {
+            Iterator it = teachCol.iterator();
+            while( it.hasNext() )
+            {
+                teacherList.add( (SmTeacher)it.next() );
+            }
+        }
+        return null;
+    }
+    
     public List<SmClass> getClassesForTeacher( TeacherCollection a_oTeacherCol )
     {
         List<SmClass> lstClass = new ArrayList<SmClass>();
@@ -212,6 +228,8 @@ public class DataAccess {
         {}
         return null;
     }
+    
+    
     
     public List<SmNote> getNotes( TeacherCollection a_oTeacher, SmClass a_oClass, SmPerson a_oPupilID)
     {
