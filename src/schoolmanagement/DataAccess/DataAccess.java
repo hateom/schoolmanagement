@@ -145,8 +145,13 @@ public class DataAccess {
 //---------------END OF USER METHODS------------
     
 //----------PERSON METHODS---------------
-    public SmPerson addPerson(  )
+    public SmPerson addPerson( String a_strName, String a_strSurname, int a_nPesel, Integer a_nNip, Integer a_nPhone, String a_strAddress, String a_strEmail)
     {
+        SmPerson person = new SmPerson();
+        person.setPerAdress(a_strAddress);
+        person.setPerEmail(a_strEmail);
+        person.setPerName(a_strName);
+        person.setPerSurname(a_strSurname);
         return null;
     }
     
