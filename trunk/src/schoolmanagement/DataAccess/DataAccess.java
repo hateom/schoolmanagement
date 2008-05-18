@@ -140,8 +140,9 @@ public class DataAccess {
         usr.setUsrRolId(a_oRole);
         usr.setUsrPerId(a_oPerID);
         usr.setUsrPasswd(a_strPasswd);
-        save(usr);
-        return usr;
+        if(save(usr))
+            return usr;
+        return null;
     }
     
 //---------------END OF USER METHODS------------
