@@ -92,6 +92,11 @@ public class DataAccess {
         return false;
     }
     
+    public SmPerson createNewPerson(  )
+    {
+        return null;
+    }
+    
     public boolean changeRingTime(SmRing a_oRing, Date a_oNewRingTime)
     {
         try
