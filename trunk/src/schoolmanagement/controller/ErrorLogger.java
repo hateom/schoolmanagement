@@ -18,21 +18,25 @@ public class ErrorLogger {
     {
         return errorList.size();
     }
-    static String getError(int no)
+    static public String getError(int no)
     {
         if( no < 0 || no >= getCount()) return "";
         return errorList.get(no);
     }
-    static void error( String strError )
+    static public void error( String strError )
     {
         errorList.add(strError);
     }
-    boolean errorReported()
+    static public boolean errorReported()
     {
         return getCount() > 0;
     }
-    void removeAll()
+    static public void removeAll()
     {
         errorList.removeAll(errorList);
+    }
+    static public String getLast()
+    {
+        return errorList.get(getCount()-1);
     }
 }
