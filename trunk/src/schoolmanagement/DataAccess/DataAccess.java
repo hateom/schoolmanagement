@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import schoolmanagement.controller.ClassTeacherEnt;
 import schoolmanagement.controller.ErrorLogger;
 import schoolmanagement.controller.RoleType;
 import schoolmanagement.controller.TeacherCollection;
@@ -349,6 +350,19 @@ public class DataAccess {
         return null;
     }
     
+    public List<SmSchedule> getScheduleForTeacher( SmPerson a_oPerson )
+    {
+        Query query = m_oEm.createQuery("SELECT DISTINCT s.schClsId, s.schTchId FROM SmSchedule s WHERE s.schTchId.tchPerId = ?1").setParameter(1, a_oPerson);
+        try{
+            return query.getResultList();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return null;
+    }
+    
     public List<SmClass> getClassesForTeacher( TeacherCollection a_oTeacherCol )
     {
         List<SmClass> lstClass = new ArrayList<SmClass>();
@@ -402,6 +416,8 @@ public class DataAccess {
         {}
         return false;
     }
+    
+    
  //------------------------------- END OF TEACHER STUFF
     public List<SmNote> getNotes( SmSubject a_oSubject, SmClass a_oClass )
     {

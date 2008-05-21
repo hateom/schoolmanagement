@@ -6,14 +6,16 @@
 
 package schoolmanagement.dialogs;
 
+import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.ListModel;
+import javax.swing.table.DefaultTableModel;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmSubject;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.controller.ErrorLogger;
-import sun.security.jca.GetInstance;
+import schoolmanagement.entity.SmSchedule;
+import schoolmanagement.entity.SmTeacher;
 
 /**
  *
@@ -62,7 +64,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
 
         jTabbedPane1.setName("jTabbedPane1"); // NOI18N
 
-        jpnSubjects.setBorder(javax.swing.BorderFactory.createTitledBorder("Wybierz liste uczonych przedmiotow")); // NOI18N
+        jpnSubjects.setBorder(javax.swing.BorderFactory.createTitledBorder("Wybierz liste uczonych przedmiotow"));
         jpnSubjects.setName("jpnSubjects"); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
@@ -114,7 +116,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
             .addGroup(jpnSubjectsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpnSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 452, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
                     .addGroup(jpnSubjectsLayout.createSequentialGroup()
                         .addGroup(jpnSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -127,7 +129,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnSubjectsLayout.createSequentialGroup()
                         .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 158, Short.MAX_VALUE)
                         .addComponent(jbtnRemoveSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -142,8 +144,8 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpnSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 204, Short.MAX_VALUE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(jpnSubjectsLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
@@ -163,8 +165,18 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
 
         jpnClasses.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jpnClasses.border.title"))); // NOI18N
         jpnClasses.setName("jpnClasses"); // NOI18N
+        jpnClasses.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                classPanelComponentShow(evt);
+            }
+        });
 
         jScrollPane3.setName("jScrollPane3"); // NOI18N
+        jScrollPane3.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                classesTableComponentShow(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -190,14 +202,14 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
         jpnClassesLayout.setHorizontalGroup(
             jpnClassesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnClassesLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(16, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jpnClassesLayout.setVerticalGroup(
             jpnClassesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnClassesLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -282,6 +294,39 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_jbtnSaveActionPerformed
+
+    private void classesTableComponentShow(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_classesTableComponentShow
+        // TODO add your handling code here:
+    }//GEN-LAST:event_classesTableComponentShow
+
+    private void classPanelComponentShow(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_classPanelComponentShow
+        // TODO add your handling code here:
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+            },
+            new String [] {
+                "Klasa", "Przedmiot"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        DefaultTableModel model = (DefaultTableModel)jTable1.getModel();      
+        List<SmSchedule> shedule = DBAccess.GetInstance().getScheduleForTeacher(m_person);
+        
+        Iterator it = shedule.iterator();
+        while(it.hasNext()){
+            Object[] o = (Object[]) it.next();
+            SmTeacher t = (SmTeacher)o[1];
+            model.addRow(new Object[] { o[0], t.getTchSubId() }); 
+        }
+    }//GEN-LAST:event_classPanelComponentShow
     
     /**
      * @param args the command line arguments
