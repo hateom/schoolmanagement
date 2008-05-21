@@ -195,6 +195,9 @@
                 <Property name="text" type="java.lang.String" resourceKey="jbtnMove.text"/>
                 <Property name="name" type="java.lang.String" value="jbtnMove" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnMoveActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator1">
               <Properties>
@@ -206,6 +209,9 @@
                 <Property name="text" type="java.lang.String" resourceKey="jbtnRemoveSelected.text"/>
                 <Property name="name" type="java.lang.String" value="jbtnRemoveSelected" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnRemoveSelectedActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
