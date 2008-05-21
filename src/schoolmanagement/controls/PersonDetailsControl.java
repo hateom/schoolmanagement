@@ -47,9 +47,9 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         person.setPerAdress(getAddress());
         person.setPerName(getFirstName());
         person.setPerSurname(getSurname());
-        person.setPerNip(Integer.getInteger(getNip()));
-        person.setPerPesel(Integer.getInteger(getPesel()));
-        person.setPerPhone(Integer.getInteger(getPhoneNumber()));
+        person.setPerNip(Integer.parseInt(getNip()));
+        person.setPerPesel(Integer.parseInt(getPesel()));
+        person.setPerPhone(Integer.parseInt(getPhoneNumber()));
         person.setPerEmail(getEmail());
         DBAccess.GetInstance().getUserByPerson(person).setUsrRolId(getGroupRole());
     }
