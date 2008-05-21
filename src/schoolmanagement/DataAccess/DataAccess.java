@@ -59,7 +59,16 @@ public class DataAccess {
     
     public boolean delete(Object object)
     {
-        
+        m_oEm.getTransaction().begin();
+        try {
+            m_oEm.remove(object);
+            m_oEm.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            m_oEm.getTransaction().rollback();
+        }
+        return false;
     }
     
  // USER METHODS -----------------------------------------------   
@@ -299,11 +308,11 @@ public class DataAccess {
     
     public boolean removeTeachersSubject(SmPerson a_oPerson, SmSubject a_oSubject)
     {
-        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.getPerId = :person AND t.getSubId = :subject").setParameter("person", a_oPerson).setParameter("subject", a_oSubject);
+        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.getPerId = :person AND t.getSubId = :subject").setParameter("person", a_oPerson).setParameter("subject", a_oSubject).setHint("refresh", new Boolean(true));
         try
         {
             SmTeacher teacher = (SmTeacher)query.getResultList();
-            m_oEm.remove(query);
+            delete(teacher);
             return true;
         }
         catch(Exception e)
