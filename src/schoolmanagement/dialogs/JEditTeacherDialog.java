@@ -47,6 +47,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
         jbtnMove = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
         jbtnRemoveSelected = new javax.swing.JButton();
+        jbtnSave = new javax.swing.JButton();
         jpnClasses = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -108,6 +109,14 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
             }
         });
 
+        jbtnSave.setText("Zapisz zmiany"); // NOI18N
+        jbtnSave.setName("jbtnSave"); // NOI18N
+        jbtnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnSaveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jpnSubjectsLayout = new javax.swing.GroupLayout(jpnSubjects);
         jpnSubjects.setLayout(jpnSubjectsLayout);
         jpnSubjectsLayout.setHorizontalGroup(
@@ -126,7 +135,10 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
                         .addGroup(jpnSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jbtnRemoveSelected, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnSubjectsLayout.createSequentialGroup()
+                        .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 154, Short.MAX_VALUE)
+                        .addComponent(jbtnRemoveSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jpnSubjectsLayout.setVerticalGroup(
@@ -150,7 +162,9 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbtnRemoveSelected)
+                .addGroup(jpnSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnRemoveSelected)
+                    .addComponent(jbtnSave))
                 .addContainerGap())
         );
 
@@ -267,6 +281,15 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
         }
         updateLists();
     }//GEN-LAST:event_jbtnRemoveSelectedActionPerformed
+
+    private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
+        for( int k=0; k<jlTought.getModel().getSize(); ++k ) {
+            SmSubject sb = (SmSubject)jlAll.getModel().getElementAt(k);
+            if( !DBAccess.GetInstance().teacherHasSubject(m_person, sb)) {
+                DBAccess.GetInstance().addTeachersSubject(m_person, sb);
+            }
+        }
+    }//GEN-LAST:event_jbtnSaveActionPerformed
     
     /**
      * @param args the command line arguments
@@ -290,6 +313,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JButton jbtnMove;
     private javax.swing.JButton jbtnRemoveSelected;
+    private javax.swing.JButton jbtnSave;
     private javax.swing.JList jlAll;
     private javax.swing.JList jlTought;
     private javax.swing.JPanel jpnClasses;
