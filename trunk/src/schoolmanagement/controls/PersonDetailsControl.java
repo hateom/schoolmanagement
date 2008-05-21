@@ -6,6 +6,7 @@
 
 package schoolmanagement.controls;
 
+import schoolmanagement.controller.DBAccess;
 import schoolmanagement.entity.SmPerson;
 
 /**
@@ -30,7 +31,7 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         setPesel(Integer.toString(person.getPerPesel()));
         setPhoneNumber(Integer.toString(person.getPerPhone()));
         setEmail(person.getPerEmail());
-        setLogin( DBAccess.GetInstance().getUserLogin( person ) );
+        setLogin( DBAccess.GetInstance().getUserByPerson(person).getUsrLogin());
     }
     
     public void readFields( SmPerson person )
@@ -42,6 +43,11 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         person.setPerPesel(Integer.getInteger(getPesel()));
         person.setPerPhone(Integer.getInteger(getPhoneNumber()));
         person.setPerEmail(getEmail());
+    }
+    
+    public void setLoginRO( boolean ro )
+    {
+        jtbLogin.enableInputMethods(ro);
     }
     
     public String getGroup()
