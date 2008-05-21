@@ -6,8 +6,10 @@
 
 package schoolmanagement.controls;
 
+import java.util.List;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.entity.SmPerson;
+import schoolmanagement.entity.SmRole;
 
 /**
  *
@@ -18,6 +20,11 @@ public class PersonDetailsControl extends javax.swing.JPanel {
     /** Creates new form PersonDetailsControl */
     public PersonDetailsControl() {
         initComponents();
+        List<SmRole> list = DBAccess.GetInstance().GetRoles();
+        jcbPickGroupForDetails.removeAllItems();
+        for( SmRole role : list ) {
+            jcbPickGroupForDetails.addItem(role);
+        }
     }
     
     ///getters and setters
@@ -32,6 +39,7 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         setPhoneNumber(Integer.toString(person.getPerPhone()));
         setEmail(person.getPerEmail());
         setLogin( DBAccess.GetInstance().getUserByPerson(person).getUsrLogin());
+        setGroup( DBAccess.GetInstance().getUserByPerson(person).getUsrRolId().getRolName() );
     }
     
     public void readFields( SmPerson person )
@@ -50,9 +58,14 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         jtbLogin.enableInputMethods(ro);
     }
     
+    public void setGroup( String gr )
+    {
+        jcbPickGroupForDetails.setSelectedItem( gr );
+    }
+    
     public String getGroup()
     {
-        return jcbPickGroupForDetails.getSelectedItem().toString();
+        return ((SmRole)(jcbPickGroupForDetails.getSelectedItem())).getRolName();
     }
     
     public String getSurname()
