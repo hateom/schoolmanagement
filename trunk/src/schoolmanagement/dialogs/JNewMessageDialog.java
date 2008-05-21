@@ -7,7 +7,7 @@
 package schoolmanagement.dialogs;
 
 import java.util.List;
-import schoolmanagement.controller.User
+import schoolmanagement.controller.User;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmUser;
