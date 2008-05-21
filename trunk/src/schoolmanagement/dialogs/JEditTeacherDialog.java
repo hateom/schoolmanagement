@@ -77,8 +77,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
         jLabel1.setText("Przedmioty:"); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JEditTeacherDialog.class);
-        jLabel2.setText(resourceMap.getString("jLabel2.text")); // NOI18N
+        jLabel2.setText("Uczone przedmioty:"); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
@@ -91,7 +90,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
         jlTought.setName("jlTought"); // NOI18N
         jScrollPane2.setViewportView(jlTought);
 
-        jbtnMove.setText(resourceMap.getString("jbtnMove.text")); // NOI18N
+        jbtnMove.setText(">>"); // NOI18N
         jbtnMove.setName("jbtnMove"); // NOI18N
         jbtnMove.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,7 +100,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
 
         jSeparator1.setName("jSeparator1"); // NOI18N
 
-        jbtnRemoveSelected.setText(resourceMap.getString("jbtnRemoveSelected.text")); // NOI18N
+        jbtnRemoveSelected.setText("Usun zaznaczone"); // NOI18N
         jbtnRemoveSelected.setName("jbtnRemoveSelected"); // NOI18N
         jbtnRemoveSelected.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -155,6 +154,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JEditTeacherDialog.class);
         jTabbedPane1.addTab(resourceMap.getString("jpnSubjects.TabConstraints.tabTitle"), jpnSubjects); // NOI18N
 
         jpnClasses.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jpnClasses.border.title"))); // NOI18N
