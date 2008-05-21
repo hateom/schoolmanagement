@@ -350,7 +350,7 @@ public class DataAccess {
         return null;
     }
     
-    public List<SmSchedule> getScheduleForTeacher( SmPerson a_oPerson )
+    public List<Object[]> getScheduleForTeacher( SmPerson a_oPerson )
     {
         Query query = m_oEm.createQuery("SELECT DISTINCT s.schClsId, s.schTchId FROM SmSchedule s WHERE s.schTchId.tchPerId = ?1").setParameter(1, a_oPerson);
         try{
