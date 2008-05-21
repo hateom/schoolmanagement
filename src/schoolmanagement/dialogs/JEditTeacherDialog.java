@@ -9,6 +9,7 @@ package schoolmanagement.dialogs;
 import java.util.Iterator;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmSubject;
@@ -195,6 +196,11 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
             }
         });
         jTable1.setName("jTable1"); // NOI18N
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                classTableMouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable1);
 
         javax.swing.GroupLayout jpnClassesLayout = new javax.swing.GroupLayout(jpnClasses);
@@ -318,7 +324,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
             }
         });
         DefaultTableModel model = (DefaultTableModel)jTable1.getModel();      
-        List<SmSchedule> shedule = DBAccess.GetInstance().getScheduleForTeacher(m_person);
+        List<Object[]> shedule = DBAccess.GetInstance().getScheduleForTeacher(m_person);
         
         Iterator it = shedule.iterator();
         while(it.hasNext()){
@@ -327,6 +333,19 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
             model.addRow(new Object[] { o[0], t.getTchSubId() }); 
         }
     }//GEN-LAST:event_classPanelComponentShow
+
+    private void classTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_classTableMouseClicked
+        // TODO add your handling code here:
+        if (evt.getClickCount() == 2) {
+      JTable target = (JTable)evt.getSource();
+      int row = target.getSelectedRow();
+      Object o = target.getValueAt(row, 0);
+      if(o == null)
+          return;
+      //SmPerson person = (SmPerson)target.getValueAt(row, 0);
+      //JEditPersonDialog dlg = new JEditPersonDialog( person, target, row );
+      //dlg.setVisible(true);
+    }//GEN-LAST:event_classTableMouseClicked
     
     /**
      * @param args the command line arguments
