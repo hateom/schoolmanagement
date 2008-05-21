@@ -13,7 +13,6 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
-import schoolmanagement.controller.ClassTeacherEnt;
 import schoolmanagement.controller.ErrorLogger;
 import schoolmanagement.controller.RoleType;
 import schoolmanagement.controller.TeacherCollection;
@@ -540,5 +539,7 @@ public class DataAccess {
     {
         m_oEm.close();
     }
-
+//----------------------------------- MESSAGES UTILZ
+    
+//------------------------------------
 }
