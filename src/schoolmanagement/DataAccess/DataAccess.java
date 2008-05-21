@@ -75,6 +75,26 @@ public class DataAccess {
         return null;
     }
     
+    public void modifyUser(SmUser a_oUser)
+    {
+        save(a_oUser);
+    }
+    
+    public boolean modifyUserAndPerson(SmUser a_oUser, SmPerson a_oPerson)
+    {
+        m_oEm.getTransaction().begin();
+        try {
+            m_oEm.persist(a_oUser);
+            m_oEm.persist(a_oPerson);
+            m_oEm.getTransaction().commit();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            m_oEm.getTransaction().rollback();
+        }
+        return false;
+    }
+    
     public boolean changeUserPassword(String a_strNewPasswd, String a_strOldPasswd, int a_nUsrId)
     {
         Query q = m_oEm.createNamedQuery("SmUser.findByUsrId").setParameter("usrId",a_nUsrId);
@@ -149,11 +169,11 @@ public class DataAccess {
         return null;
     }
     
-    public String getPersonLogin(SmPerson a_oPerson)
+    public SmUser getUserByPerson(SmPerson a_oPerson)
     {
-        Query query = m_oEm.createQuery("SELECT u.usrLogin FROM SmUser u WHERE u.usrPerId = ?1").setParameter(1, a_oPerson).setHint("refresh", new Boolean(true));
+        Query query = m_oEm.createQuery("SELECT u FROM SmUser u WHERE u.usrPerId = ?1").setParameter(1, a_oPerson).setHint("refresh", new Boolean(true));
         try{
-            return (String)query.getSingleResult();
+            return (SmUser)query.getSingleResult();
         }
         catch(Exception e)
         {}
