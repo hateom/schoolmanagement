@@ -562,16 +562,16 @@ public class DataAccess {
         return null;
     }
     
-    public List<SmMessage> getRecievedMessages(SmUser a_oCurrentUser, SmUser a_oSenderOrRecp)
+    public List<SmMessage> getRecievedMessages(SmUser a_oCurrentUser, SmUser a_oSenderOrRecp, boolean a_bIsReaded)
     {
         Query query = null;        
         if( a_oSenderOrRecp != null )
         {
-            query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?1 AND m.msgSenderUsrId = ?2").setParameter(1, a_oCurrentUser).setParameter(2, a_oSenderOrRecp).setHint("refresh", new Boolean(true));
+            query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?1 AND m.msgSenderUsrId = ?2 AND m.msgReaded = ?3 ").setParameter(1, a_oCurrentUser).setParameter(2, a_oSenderOrRecp).setParameter(3, a_bIsReaded).setHint("refresh", new Boolean(true));
         }
         else
         {
-            query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?1").setParameter(1, a_oCurrentUser).setHint("refresh", new Boolean(true));
+            query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?1 AND m.msgReaded = ?2").setParameter(1, a_oCurrentUser).setParameter(2, a_bIsReaded).setHint("refresh", new Boolean(true));
         }
         try{
         return query.getResultList();
