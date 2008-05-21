@@ -27,7 +27,7 @@ public class jNewMessageDialog extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jtbFrom = new javax.swing.JTextField();
+        jtbReceiver = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jtbSubject = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
@@ -45,7 +45,7 @@ public class jNewMessageDialog extends javax.swing.JFrame {
         jLabel1.setText("Do:"); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
-        jtbFrom.setName("jtbFrom"); // NOI18N
+        jtbReceiver.setName("jtbReceiver"); // NOI18N
 
         jLabel2.setText("Temat:"); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
@@ -85,7 +85,7 @@ public class jNewMessageDialog extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jtbFrom, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jtbReceiver, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jtbSubject))
@@ -106,7 +106,7 @@ public class jNewMessageDialog extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jtbFrom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jtbReceiver, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jbtSearch))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,7 +164,7 @@ public class jNewMessageDialog extends javax.swing.JFrame {
     private javax.swing.JButton jbtCancel;
     private javax.swing.JButton jbtSearch;
     private javax.swing.JButton jbtSend;
-    private javax.swing.JTextField jtbFrom;
+    private javax.swing.JTextField jtbReceiver;
     private javax.swing.JTextField jtbSubject;
     // End of variables declaration//GEN-END:variables
     

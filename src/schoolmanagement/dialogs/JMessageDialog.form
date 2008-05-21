@@ -49,12 +49,15 @@
         </Property>
         <Property name="name" type="java.lang.String" value="jPanel1" noResource="true"/>
       </Properties>
+      <Events>
+        <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="jPanel1ComponentShown"/>
+      </Events>
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="1" attributes="0">
-                  <Group type="103" groupAlignment="1" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jScrollPane1" alignment="0" pref="614" max="32767" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -67,10 +70,16 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="jtbDate" max="32767" attributes="1"/>
                               <Component id="jtbSubject" max="32767" attributes="1"/>
-                              <Component id="jtbFrom" alignment="0" pref="203" max="32767" attributes="1"/>
+                              <Component id="jtbSender" alignment="0" pref="203" max="32767" attributes="1"/>
                           </Group>
                       </Group>
                       <Component id="jSeparator1" alignment="0" pref="614" max="32767" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jbtnForward" min="-2" pref="103" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jbtnReply" min="-2" pref="117" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -82,7 +91,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jtbFrom" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtbSender" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
@@ -97,8 +106,13 @@
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="224" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" min="-2" pref="196" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jbtnReply" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jbtnForward" alignment="3" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -110,10 +124,12 @@
             <Property name="name" type="java.lang.String" value="jLabel1" noResource="true"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="jtbFrom">
+        <Component class="javax.swing.JTextField" name="jtbSender">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jtbFrom.text"/>
-            <Property name="name" type="java.lang.String" value="jtbFrom" noResource="true"/>
+            <Property name="background" type="java.awt.Color" resourceKey="jtbSender.background"/>
+            <Property name="text" type="java.lang.String" resourceKey="jtbSender.text"/>
+            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="name" type="java.lang.String" value="jtbSender" noResource="true"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
@@ -124,7 +140,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtbSubject">
           <Properties>
+            <Property name="background" type="java.awt.Color" resourceKey="jtbSubject.background"/>
             <Property name="text" type="java.lang.String" resourceKey="jtbSubject.text"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="jtbSubject" noResource="true"/>
           </Properties>
         </Component>
@@ -136,7 +154,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtbDate">
           <Properties>
+            <Property name="background" type="java.awt.Color" resourceKey="jtbDate.background"/>
             <Property name="text" type="java.lang.String" resourceKey="jtbDate.text"/>
+            <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="jtbDate" noResource="true"/>
           </Properties>
         </Component>
@@ -155,15 +175,27 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTextArea" name="jTextArea1">
+            <Component class="javax.swing.JTextArea" name="jtBody">
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
-                <Property name="name" type="java.lang.String" value="jTextArea1" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="jtBody" noResource="true"/>
               </Properties>
             </Component>
           </SubComponents>
         </Container>
+        <Component class="javax.swing.JButton" name="jbtnReply">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Odpowiedz" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="jbtnReply" noResource="true"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="jbtnForward">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Przeslij dalej" noResource="true"/>
+            <Property name="name" type="java.lang.String" value="jbtnForward" noResource="true"/>
+          </Properties>
+        </Component>
       </SubComponents>
     </Container>
   </SubComponents>
