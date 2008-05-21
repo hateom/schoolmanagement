@@ -49,6 +49,8 @@ public class SmMessage implements Serializable {
     private Integer msgChildId;
     @Column(name = "MSG_RESP_REQ")
     private Boolean msgRespReq;
+    @Column(name = "MSG_SEVERITY")
+    private int msgSeverity;
     @Column(name = "MSG_READED")
     private Boolean msgReaded;
     @JoinColumn(name = "MSG_RECP_USR_ID", referencedColumnName = "USR_ID")
@@ -173,6 +175,14 @@ public class SmMessage implements Serializable {
     @Override
     public String toString() {
         return "schoolmanagement.entity.SmMessage[msgId=" + msgId + "]";
+    }
+
+    public int getMsgSeverity() {
+        return msgSeverity;
+    }
+
+    public void setMsgSeverity(int msgSeverity) {
+        this.msgSeverity = msgSeverity;
     }
 
 }
