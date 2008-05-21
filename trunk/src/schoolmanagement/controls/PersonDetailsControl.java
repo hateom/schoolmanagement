@@ -20,6 +20,10 @@ public class PersonDetailsControl extends javax.swing.JPanel {
     /** Creates new form PersonDetailsControl */
     public PersonDetailsControl() {
         initComponents();
+    }
+    
+    public void readDBFields()
+    {
         List<SmRole> list = DBAccess.GetInstance().GetRoles();
         jcbPickGroupForDetails.removeAllItems();
         for( SmRole role : list ) {
@@ -54,7 +58,7 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         DBAccess.GetInstance().getUserByPerson(person).setUsrRolId(getGroupRole());
     }
     
-    public void setLoginRO( boolean ro )
+    public void LoginRO( boolean ro )
     {
         jtbLogin.enableInputMethods(ro);
     }
