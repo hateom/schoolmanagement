@@ -290,6 +290,11 @@ public class DataAccess {
         return null;
     }
     
+    public boolean removeTeachersSubject(SmPerson a_oPerson, SmSubject a_oSubject)
+    {
+        return false;
+    }
+    
     public List<SmTeacher> getTeacherForSubject(SmSubject a_oSubject)
     {
         Collection<SmTeacher> teachCol = a_oSubject.getSmTeacherCollection();
