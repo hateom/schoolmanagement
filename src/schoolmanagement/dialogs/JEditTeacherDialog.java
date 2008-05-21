@@ -12,6 +12,7 @@ import javax.swing.ListModel;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmSubject;
 import schoolmanagement.controller.DBAccess;
+import schoolmanagement.controller.ErrorLogger;
 import sun.security.jca.GetInstance;
 
 /**
@@ -277,7 +278,9 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
         int [] list = jlTought.getSelectedIndices();
         for( int k: list ) {
             SmSubject sb = (SmSubject)((DefaultListModel)jlTought.getModel()).getElementAt(k);
-            DBAccess.GetInstance().removeTeachersSubject( m_person, sb );
+            boolean removeTeachersSubject = DBAccess.GetInstance().removeTeachersSubject(m_person, sb);
+            if(!removeTeachersSubject) 
+                ErrorLogger.error("Could not add teachers subject!");
         }
         updateLists();
     }//GEN-LAST:event_jbtnRemoveSelectedActionPerformed
