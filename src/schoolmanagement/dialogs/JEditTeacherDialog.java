@@ -345,6 +345,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
       //SmPerson person = (SmPerson)target.getValueAt(row, 0);
       //JEditPersonDialog dlg = new JEditPersonDialog( person, target, row );
       //dlg.setVisible(true);
+        }
     }//GEN-LAST:event_classTableMouseClicked
     
     /**
