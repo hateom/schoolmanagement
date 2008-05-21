@@ -37,7 +37,6 @@ public class jNewMessageDialog extends javax.swing.JFrame {
         jbtSend = new javax.swing.JButton();
         jbtCancel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Wiadomosc")); // NOI18N
