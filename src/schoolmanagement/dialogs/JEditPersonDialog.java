@@ -41,7 +41,6 @@ public class JEditPersonDialog extends javax.swing.JFrame {
         jbtnCancel = new javax.swing.JButton();
         jbtnSaveEdit = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
         setResizable(false);
 
