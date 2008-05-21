@@ -618,5 +618,10 @@ public class DataAccess {
         a_oMessage.setMsgReaded(a_bIsReaded);
         return save(a_oMessage);
     }
+    
+    public boolean deleteMessage(SmMessage a_oMessage)
+    {
+        return delete(a_oMessage);
+    }
 //------------------------------------
 }
