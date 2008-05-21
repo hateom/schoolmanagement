@@ -290,8 +290,8 @@ public class JSelectPersonDialog extends javax.swing.JDialog {
             if(o == null)
                 return;
             SmPerson person = (SmPerson)target.getValueAt(row, 0);
-            JEditPersonDialog dlg = new JEditPersonDialog( person, target, row );
-            dlg.setVisible(true);
+            m_result.add(person);
+            setVisible(false);
         }
     }//GEN-LAST:event_jTable4mouseClicked
 
@@ -301,6 +301,26 @@ public class JSelectPersonDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtCancelActionPerformed
 
     private void jbtSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSelectActionPerformed
+        List<SmPerson> list = null;
+        if(jRbSurname.isSelected()){
+            if( jTable4.getSelectedRowCount() == 0 ) return;
+            int[] rows = jTable4.getSelectedRows();
+            for( int row : rows )
+            {
+                Object o = jTable4.getValueAt(row, 0);
+                if(o == null) continue;
+                SmPerson person = (SmPerson)jTable4.getValueAt(row, 0);
+                m_result.add(person);
+            }
+            setVisible(false);
+            return;
+        } else if(jRbRole.isSelected()){
+            list = DBAccess.GetInstance().GetUserByRole( ((Role)jTbRole.getSelectedItem()).GetRoleType());
+        } else if(jRbClass.isSelected()){
+            list = DBAccess.GetInstance().GetPersonsForClass((SmClass)jTbClass.getSelectedItem());
+        }
+        
+        m_result = list;
         setVisible(false);
     }//GEN-LAST:event_jbtSelectActionPerformed
 
