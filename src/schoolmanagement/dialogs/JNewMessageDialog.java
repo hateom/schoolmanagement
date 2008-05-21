@@ -184,8 +184,8 @@ public class JNewMessageDialog extends javax.swing.JFrame {
             {
                 if( recv.compareTo("") != 0 ) {
                     recv += ", ";
-                    recv += p.toString();
                 }
+                recv += p.toString();
             }
         }
     }//GEN-LAST:event_jbtSearchActionPerformed
@@ -206,7 +206,7 @@ public class JNewMessageDialog extends javax.swing.JFrame {
             rec = DBAccess.GetInstance().getUserByPerson(p);
             if( rec == null ) continue;
             
-            DBAccess.GetInstance().sendMessage(rec, me, jTextArea1.getText(), jtbSubject.getText(), false, 1 );
+            DBAccess.GetInstance().sendMessage(rec, me, jTextArea1.getText(), jtbSubject.getText(), false, 2 );
         }
         
         setVisible(false);
