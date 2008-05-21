@@ -93,7 +93,7 @@ public class SmRole implements Serializable {
 
     @Override
     public String toString() {
-        return "schoolmanagement.entity.SmRole[rolId=" + rolId + "]";
+        return rolName;
     }
 
 }
