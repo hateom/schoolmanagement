@@ -149,6 +149,17 @@ public class DataAccess {
         return null;
     }
     
+    public String getPersonLogin(SmPerson a_oPerson)
+    {
+        Query query = m_oEm.createQuery("SELECT u.usrLogin FROM SmUser u WHERE u.usrPerId = ?1").setParameter(1, a_oPerson).setHint("refresh", new Boolean(true));
+        try{
+            return (String)query.getSingleResult();
+        }
+        catch(Exception e)
+        {}
+        return null;
+    }
+    
 //---------------END OF USER METHODS------------
     
 //----------PERSON METHODS---------------
@@ -168,6 +179,11 @@ public class DataAccess {
             return null;
         }
         return person;
+    }
+    
+    public void savePerson(SmPerson a_oPerson)
+    {
+        save(a_oPerson);
     }
     
     public SmRole getRoleByName(String a_StrRole)
