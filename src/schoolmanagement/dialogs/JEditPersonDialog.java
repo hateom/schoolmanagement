@@ -6,6 +6,7 @@
 
 package schoolmanagement.dialogs;
 
+import javax.swing.JTable;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.controls.PersonDetailsControl;
 import schoolmanagement.entity.SmPerson;
@@ -18,15 +19,20 @@ import schoolmanagement.entity.SmUser;
 public class JEditPersonDialog extends javax.swing.JFrame {
     
     private SmPerson m_person;
+    private JTable m_table;
+    private int m_row;
     /** Creates new form JEditPersonDialog */
-    public JEditPersonDialog( SmPerson person ) {
+    public JEditPersonDialog( SmPerson person, JTable target, int row ) {
         initComponents();
         
         if( person != null ) persDetails.fillFields(person);
 
         persDetails.setLoginRO( true );
         m_person = person;
+        m_table = target;
+        m_row = row;
     }
+
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -120,6 +126,8 @@ public class JEditPersonDialog extends javax.swing.JFrame {
         persDetails.readFields(m_person);
         DBAccess.GetInstance().modifyUserAndPerson( user, m_person );
         m_person = null;
+        m_table.getModel().setValueAt( m_person, m_row, 0 );
+        m_table.getModel().setValueAt( DBAccess.GetInstance().getUserByPerson(m_person).getUsrRolId().getRolName(), m_row, 1 );
         setVisible(false);
     }//GEN-LAST:event_jbtnSaveEditActionPerformed
     
@@ -129,7 +137,7 @@ public class JEditPersonDialog extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JEditPersonDialog( null ).setVisible(true);
+                new JEditPersonDialog( null, null, 0 ).setVisible(true);
             }
         });
     }
