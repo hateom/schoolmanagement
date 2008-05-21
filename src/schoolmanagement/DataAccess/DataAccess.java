@@ -29,7 +29,8 @@ import schoolmanagement.entity.SmTeacher;
 import schoolmanagement.entity.SmUser;
 
 /**
- *
+ * Data Base manipulation subsystem
+ * provides access to underlying database using Java Persistence API
  * @author jasiu
  */
 public class DataAccess {
