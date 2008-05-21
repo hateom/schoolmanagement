@@ -11,6 +11,7 @@ import java.util.List;
 import schoolmanagement.controller.Role;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import schoolmanagement.controller.ConstantData;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmPerson;
@@ -60,6 +61,11 @@ public class JSelectPersonDialog extends javax.swing.JDialog {
         setLocationByPlatform(true);
         setName("Form"); // NOI18N
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setName("jPanel2"); // NOI18N
@@ -297,6 +303,21 @@ public class JSelectPersonDialog extends javax.swing.JDialog {
     private void jbtSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSelectActionPerformed
         setVisible(false);
     }//GEN-LAST:event_jbtSelectActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        jTbRole.removeAllItems();
+        jTbClass.removeAllItems();
+        List<Role> lstRole = ConstantData.GetRoles();
+        for( Role role : lstRole)
+        {
+            jTbRole.addItem(role);
+        }
+        List<SmClass> lstClass = DBAccess.GetInstance().GetAllClasses();
+        for( SmClass smclass : lstClass)
+        {
+            jTbClass.addItem(smclass);
+        }
+    }//GEN-LAST:event_formComponentShown
     
     /**
      * @param args the command line arguments
