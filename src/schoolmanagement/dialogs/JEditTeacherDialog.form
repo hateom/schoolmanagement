@@ -160,7 +160,7 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="jLabel2.text"/>
+                <Property name="text" type="java.lang.String" value="Uczone przedmioty:" noResource="true"/>
                 <Property name="name" type="java.lang.String" value="jLabel2" noResource="true"/>
               </Properties>
             </Component>
@@ -192,7 +192,7 @@
             </Container>
             <Component class="javax.swing.JButton" name="jbtnMove">
               <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="jbtnMove.text"/>
+                <Property name="text" type="java.lang.String" value="&gt;&gt;" noResource="true"/>
                 <Property name="name" type="java.lang.String" value="jbtnMove" noResource="true"/>
               </Properties>
               <Events>
@@ -206,7 +206,7 @@
             </Component>
             <Component class="javax.swing.JButton" name="jbtnRemoveSelected">
               <Properties>
-                <Property name="text" type="java.lang.String" resourceKey="jbtnRemoveSelected.text"/>
+                <Property name="text" type="java.lang.String" value="Usun zaznaczone" noResource="true"/>
                 <Property name="name" type="java.lang.String" value="jbtnRemoveSelected" noResource="true"/>
               </Properties>
               <Events>
