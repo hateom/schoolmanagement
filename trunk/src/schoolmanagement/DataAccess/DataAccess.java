@@ -383,7 +383,7 @@ public class DataAccess {
         teacher.setTchSubId(a_oSubject);
         if(save(teacher))
         {
-            a_oSubject.getSmTeacherCollection().add(teacher);
+            //a_oSubject.getSmTeacherCollection().add(teacher);
             a_oPerson.getSmTeacherCollection().add(teacher);
             return teacher;
         }
