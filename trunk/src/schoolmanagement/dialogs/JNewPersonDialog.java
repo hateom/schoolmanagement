@@ -19,6 +19,8 @@ public class JNewPersonDialog extends javax.swing.JFrame {
     /** Creates new form JNewPersonDialog */
     public JNewPersonDialog() {
         initComponents();
+        
+        personDetailsControl1.readDBFields();
     }
     
     /** This method is called from within the constructor to
