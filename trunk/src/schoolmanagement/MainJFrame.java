@@ -1458,6 +1458,8 @@ private void jPnlInboxComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
     
     DefaultTableModel dm = (DefaultTableModel)jlReceived.getModel();
     
+    while(dm.getRowCount() > 0) dm.removeRow(0);
+    
     for( SmMessage msg : list )
     {
         dm.addRow(new Object[] { msg.getMsgTopic(), msg, msg.getMsgSendDate().toString() } );
@@ -1469,6 +1471,8 @@ private void jPnlOutboxComponentShown(java.awt.event.ComponentEvent evt) {//GEN-
     List<SmMessage> list = DBAccess.GetInstance().getSentMessages( me, null );
     
     DefaultTableModel dm = (DefaultTableModel)jlSent.getModel();
+    
+    while(dm.getRowCount() > 0) dm.removeRow(0);
     
     for( SmMessage msg : list )
     {
