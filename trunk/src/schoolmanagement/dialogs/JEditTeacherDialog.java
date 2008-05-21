@@ -67,11 +67,6 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jlAll.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jlAll.setName("jlAll"); // NOI18N
         jScrollPane1.setViewportView(jlAll);
 
@@ -83,11 +78,6 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
-        jlTought.setModel(new javax.swing.AbstractListModel() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public Object getElementAt(int i) { return strings[i]; }
-        });
         jlTought.setName("jlTought"); // NOI18N
         jScrollPane2.setViewportView(jlTought);
 
