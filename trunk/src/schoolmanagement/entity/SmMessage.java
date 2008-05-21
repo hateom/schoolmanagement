@@ -174,7 +174,7 @@ public class SmMessage implements Serializable {
 
     @Override
     public String toString() {
-        return "schoolmanagement.entity.SmMessage[msgId=" + msgId + "]";
+        return msgTopic;
     }
 
     public int getMsgSeverity() {
