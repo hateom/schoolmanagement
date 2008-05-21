@@ -276,7 +276,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
         for( int k=0; k<jlTought.getModel().getSize(); ++k ) {
-            SmSubject sb = (SmSubject)jlAll.getModel().getElementAt(k);
+            SmSubject sb = (SmSubject)jlTought.getModel().getElementAt(k);
             if( !DBAccess.GetInstance().teacherHasSubject(m_person, sb)) {
                 DBAccess.GetInstance().addTeachersSubject(m_person, sb);
             }
