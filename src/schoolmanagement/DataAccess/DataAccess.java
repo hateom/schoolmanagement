@@ -292,6 +292,13 @@ public class DataAccess {
     
     public boolean removeTeachersSubject(SmPerson a_oPerson, SmSubject a_oSubject)
     {
+        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.getPerId = :person AND t.getSubId = :subject").setParameter("person", a_oPerson).setParameter("subject", a_oSubject);
+        try
+        {
+            return true;
+        }
+        catch(Exception e)
+        {}
         return false;
     }
     
