@@ -117,6 +117,7 @@ public class JEditPersonDialog extends javax.swing.JFrame {
 
     private void jbtnSaveEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveEditActionPerformed
         SmUser user = DBAccess.GetInstance().getUserByPerson(m_person);
+        persDetails.readFields(m_person);
         DBAccess.GetInstance().modifyUserAndPerson( user, m_person );
         m_person = null;
         setVisible(false);
