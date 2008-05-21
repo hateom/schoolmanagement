@@ -72,7 +72,7 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jSeparator1" alignment="0" pref="452" max="32767" attributes="0"/>
+                          <Component id="jSeparator1" alignment="0" pref="456" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -88,7 +88,7 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jbtnSave" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace pref="154" max="32767" attributes="0"/>
+                              <EmptySpace pref="158" max="32767" attributes="0"/>
                               <Component id="jbtnRemoveSelected" min="-2" pref="148" max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -108,8 +108,8 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane1" pref="204" max="32767" attributes="1"/>
-                                  <Component id="jScrollPane2" alignment="0" pref="204" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane1" pref="198" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane2" alignment="0" pref="198" max="32767" attributes="1"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -229,6 +229,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="jpnClasses" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="classPanelComponentShow"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
               <JTabbedPaneConstraints tabName="Klasy">
@@ -241,7 +244,7 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace pref="16" max="32767" attributes="0"/>
                       <Component id="jScrollPane3" min="-2" pref="452" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -250,7 +253,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane3" pref="280" max="32767" attributes="0"/>
+                      <Component id="jScrollPane3" pref="281" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -261,6 +264,9 @@
               <Properties>
                 <Property name="name" type="java.lang.String" value="jScrollPane3" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="classesTableComponentShow"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
               </AuxValues>
