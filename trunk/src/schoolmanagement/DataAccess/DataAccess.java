@@ -17,6 +17,7 @@ import schoolmanagement.controller.ErrorLogger;
 import schoolmanagement.controller.RoleType;
 import schoolmanagement.controller.TeacherCollection;
 import schoolmanagement.entity.SmClass;
+import schoolmanagement.entity.SmMessage;
 import schoolmanagement.entity.SmNote;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmPerson2class;
@@ -540,6 +541,19 @@ public class DataAccess {
         m_oEm.close();
     }
 //----------------------------------- MESSAGES UTILZ
+    public List<SmMessage> getMessages(SmUser a_oRecpUser, SmUser a_oSenderUser, boolean a_bIsReaded)
+    {
+        return null;
+    }
     
+    public boolean sendMessage()
+    {
+        return false;
+    }
+    
+    public boolean markAsRead(boolean a_bIsReaded)
+    {
+        return false;
+    }
 //------------------------------------
 }
