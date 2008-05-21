@@ -187,6 +187,8 @@ public class JNewMessageDialog extends javax.swing.JFrame {
                 }
                 recv += p.toString();
             }
+            
+            jtbReceiver.setText(recv);
         }
     }//GEN-LAST:event_jbtSearchActionPerformed
 
