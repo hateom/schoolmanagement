@@ -27,7 +27,7 @@ public class JEditPersonDialog extends javax.swing.JFrame {
         
         if( person != null ) persDetails.fillFields(person);
 
-        persDetails.setLoginRO( true );
+        persDetails.LoginRO( true );
         m_person = person;
         m_table = target;
         m_row = row;
