@@ -598,6 +598,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPnlInbox.setBorder(javax.swing.BorderFactory.createTitledBorder("Odebrane"));
         jPnlInbox.setName("jPnlInbox"); // NOI18N
+        jPnlInbox.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPnlInboxComponentShown(evt);
+            }
+        });
 
         jSeparator5.setName("jSeparator5"); // NOI18N
 
@@ -1440,6 +1445,10 @@ private void jBtnNewMail2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
     JNewMessageDialog nmd = new JNewMessageDialog();
     nmd.setVisible(true);
 }//GEN-LAST:event_jBtnNewMail2ActionPerformed
+
+private void jPnlInboxComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlInboxComponentShown
+    
+}//GEN-LAST:event_jPnlInboxComponentShown
 
 String dateToTimeString( Date date )
 {
