@@ -31,6 +31,8 @@ public class JEditPersonDialog extends javax.swing.JFrame {
         m_person = person;
         m_table = target;
         m_row = row;
+        
+        persDetails.readDBFields();
     }
 
     
