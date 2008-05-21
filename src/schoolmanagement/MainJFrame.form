@@ -4,6 +4,8 @@
   <NonVisualComponents>
     <Component class="javax.swing.ButtonGroup" name="buttonGroup1">
     </Component>
+    <Component class="javax.swing.ButtonGroup" name="buttonGroup2">
+    </Component>
     <Menu class="javax.swing.JMenuBar" name="jMenuBar1">
       <Properties>
         <Property name="name" type="java.lang.String" value="jMenuBar1" noResource="true"/>
@@ -1309,7 +1311,7 @@
                 <Component class="javax.swing.JRadioButton" name="jRbSurname1">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroup1"/>
+                      <ComponentRef name="buttonGroup2"/>
                     </Property>
                     <Property name="selected" type="boolean" value="true"/>
                     <Property name="text" type="java.lang.String" value="Nazwisko:" noResource="true"/>
@@ -1320,7 +1322,7 @@
                 <Component class="javax.swing.JRadioButton" name="jRbSubject">
                   <Properties>
                     <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                      <ComponentRef name="buttonGroup1"/>
+                      <ComponentRef name="buttonGroup2"/>
                     </Property>
                     <Property name="text" type="java.lang.String" value="Przedmiot:" noResource="true"/>
                     <Property name="name" type="java.lang.String" value="jRbSubject" noResource="true"/>

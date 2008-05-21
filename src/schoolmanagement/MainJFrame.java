@@ -144,6 +144,7 @@ public class MainJFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
+        buttonGroup2 = new javax.swing.ButtonGroup();
         jStatus = new javax.swing.JPanel();
         jLblLogText = new javax.swing.JLabel();
         jLblLoggedAs = new javax.swing.JLabel();
@@ -939,13 +940,13 @@ public class MainJFrame extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel3.setName("jPanel3"); // NOI18N
 
-        buttonGroup1.add(jRbSurname1);
+        buttonGroup2.add(jRbSurname1);
         jRbSurname1.setSelected(true);
         jRbSurname1.setText("Nazwisko:"); // NOI18N
         jRbSurname1.setActionCommand(resourceMap.getString("jRbSurname1.actionCommand")); // NOI18N
         jRbSurname1.setName("jRbSurname1"); // NOI18N
 
-        buttonGroup1.add(jRbSubject);
+        buttonGroup2.add(jRbSubject);
         jRbSubject.setText("Przedmiot:"); // NOI18N
         jRbSubject.setName("jRbSubject"); // NOI18N
 
@@ -1394,6 +1395,7 @@ String dateToTimeString( Date date )
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jBtnAddPerson;
     private javax.swing.JButton jBtnNewMail;
     private javax.swing.JButton jBtnNewMail2;
