@@ -39,7 +39,7 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         setPhoneNumber(Integer.toString(person.getPerPhone()));
         setEmail(person.getPerEmail());
         setLogin( DBAccess.GetInstance().getUserByPerson(person).getUsrLogin());
-        setGroup( DBAccess.GetInstance().getUserByPerson(person).getUsrRolId().getRolName() );
+        setGroupRole( DBAccess.GetInstance().getUserByPerson(person).getUsrRolId() );
     }
     
     public void readFields( SmPerson person )
@@ -51,6 +51,7 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         person.setPerPesel(Integer.getInteger(getPesel()));
         person.setPerPhone(Integer.getInteger(getPhoneNumber()));
         person.setPerEmail(getEmail());
+        DBAccess.GetInstance().getUserByPerson(person).setUsrRolId(getGroupRole());
     }
     
     public void setLoginRO( boolean ro )
@@ -63,9 +64,19 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         jcbPickGroupForDetails.setSelectedItem( gr );
     }
     
+    public void setGroupRole( SmRole gr )
+    {
+        jcbPickGroupForDetails.setSelectedItem( gr );
+    }
+    
     public String getGroup()
     {
         return ((SmRole)(jcbPickGroupForDetails.getSelectedItem())).getRolName();
+    }
+    
+    public SmRole getGroupRole()
+    {
+        return ((SmRole)(jcbPickGroupForDetails.getSelectedItem()));
     }
     
     public String getSurname()
