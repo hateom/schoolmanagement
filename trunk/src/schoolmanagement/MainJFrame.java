@@ -27,6 +27,7 @@ import schoolmanagement.entity.SmSubject;
 import schoolmanagement.entity.SmTeacher;
 import schoolmanagement.entity.SmUser;
 import schoolmanagement.dialogs.JNewMessageDialog;
+import schoolmanagement.entity.SmMessage;
 
 /**
  *
@@ -178,12 +179,12 @@ public class MainJFrame extends javax.swing.JFrame {
         jSeparator5 = new javax.swing.JSeparator();
         jBtnNewMail3 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        jlReceived = new javax.swing.JTable();
         jPnlOutbox = new javax.swing.JPanel();
         jSeparator4 = new javax.swing.JSeparator();
         jBtnNewMail2 = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jlSent = new javax.swing.JTable();
         jPnlPeople = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
         jTable4 = new javax.swing.JTable();
@@ -616,7 +617,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jScrollPane4.setName("jScrollPane4"); // NOI18N
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        jlReceived.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -635,8 +636,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable3.setName("jTable3"); // NOI18N
-        jScrollPane4.setViewportView(jTable3);
+        jlReceived.setName("jlReceived"); // NOI18N
+        jScrollPane4.setViewportView(jlReceived);
 
         javax.swing.GroupLayout jPnlInboxLayout = new javax.swing.GroupLayout(jPnlInbox);
         jPnlInbox.setLayout(jPnlInboxLayout);
@@ -666,6 +667,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPnlOutbox.setBorder(javax.swing.BorderFactory.createTitledBorder("Wyslane"));
         jPnlOutbox.setName("jPnlOutbox"); // NOI18N
+        jPnlOutbox.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPnlOutboxComponentShown(evt);
+            }
+        });
 
         jSeparator4.setName("jSeparator4"); // NOI18N
 
@@ -679,7 +685,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jScrollPane3.setName("jScrollPane3"); // NOI18N
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jlSent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -698,8 +704,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable2.setName("jTable2"); // NOI18N
-        jScrollPane3.setViewportView(jTable2);
+        jlSent.setName("jlSent"); // NOI18N
+        jScrollPane3.setViewportView(jlSent);
 
         javax.swing.GroupLayout jPnlOutboxLayout = new javax.swing.GroupLayout(jPnlOutbox);
         jPnlOutbox.setLayout(jPnlOutboxLayout);
@@ -1447,8 +1453,28 @@ private void jBtnNewMail2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_jBtnNewMail2ActionPerformed
 
 private void jPnlInboxComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlInboxComponentShown
+    SmUser me = DBAccess.GetInstance().getUserByPerson(User.GetUserPerson());
+    List<SmMessage> list = DBAccess.GetInstance().getRecievedMessages( me, null, true );
     
+    DefaultTableModel dm = (DefaultTableModel)jlReceived.getModel();
+    
+    for( SmMessage msg : list )
+    {
+        dm.addRow(new Object[] { msg.getMsgTopic(), msg, msg.getMsgSendDate().toString() } );
+    }
 }//GEN-LAST:event_jPnlInboxComponentShown
+
+private void jPnlOutboxComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlOutboxComponentShown
+    SmUser me = DBAccess.GetInstance().getUserByPerson(User.GetUserPerson());
+    List<SmMessage> list = DBAccess.GetInstance().getSentMessages( me, null );
+    
+    DefaultTableModel dm = (DefaultTableModel)jlSent.getModel();
+    
+    for( SmMessage msg : list )
+    {
+        dm.addRow(new Object[] { msg.getMsgTopic(), msg, msg.getMsgSendDate().toString() } );
+    }
+}//GEN-LAST:event_jPnlOutboxComponentShown
 
 String dateToTimeString( Date date )
 {
@@ -1518,8 +1544,6 @@ String dateToTimeString( Date date )
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JPanel jStatus;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
     private javax.swing.JTable jTable4;
     private javax.swing.JComboBox jTbClass;
     private javax.swing.JTextField jTbName;
@@ -1532,6 +1556,8 @@ String dateToTimeString( Date date )
     private javax.swing.JComboBox jcbPickClassForNotes;
     private javax.swing.JComboBox jcbPickSubjectForNotes;
     private javax.swing.JComboBox jcbSelectClass;
+    private javax.swing.JTable jlReceived;
+    private javax.swing.JTable jlSent;
     private javax.swing.JPanel jpanelClassSelect;
     private javax.swing.JPanel jpanelProporties;
     private javax.swing.JTable jtblPupilNotes;
