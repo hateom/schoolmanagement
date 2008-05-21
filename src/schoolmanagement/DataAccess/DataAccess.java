@@ -308,8 +308,8 @@ public class DataAccess {
     
     public boolean removeTeachersSubject(SmPerson a_oPerson, SmSubject a_oSubject)
     {
-        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.getPerId = :person AND t.getSubId = :subject").setParameter("person", a_oPerson).setParameter("subject", a_oSubject).setHint("refresh", new Boolean(true));
-        SmTeacher teacher = (SmTeacher)query.getResultList();
+        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchPerId = ?1 AND t.tchSubId = ?2").setParameter(1, a_oPerson).setParameter(2, a_oSubject).setHint("refresh", new Boolean(true));
+        SmTeacher teacher = (SmTeacher)query.getSingleResult();
         try
         {
             m_oEm.getTransaction().begin();
