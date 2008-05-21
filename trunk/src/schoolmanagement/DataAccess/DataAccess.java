@@ -309,14 +309,21 @@ public class DataAccess {
     public boolean removeTeachersSubject(SmPerson a_oPerson, SmSubject a_oSubject)
     {
         Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.getPerId = :person AND t.getSubId = :subject").setParameter("person", a_oPerson).setParameter("subject", a_oSubject).setHint("refresh", new Boolean(true));
+        SmTeacher teacher = (SmTeacher)query.getResultList();
         try
         {
-            SmTeacher teacher = (SmTeacher)query.getResultList();
-            delete(teacher);
+            m_oEm.getTransaction().begin();
+            a_oPerson.getSmTeacherCollection().remove(teacher);
+            a_oSubject.getSmTeacherCollection().remove(teacher);
+            m_oEm.remove(teacher);
+            m_oEm.getTransaction().commit();
             return true;
         }
         catch(Exception e)
         {
+            m_oEm.getTransaction().rollback();
+            a_oPerson.getSmTeacherCollection().add(teacher);
+            a_oSubject.getSmTeacherCollection().add(teacher);
             ErrorLogger.error(e.getLocalizedMessage());
         }
         return false;
