@@ -125,9 +125,11 @@ public class JEditPersonDialog extends javax.swing.JFrame {
         SmUser user = DBAccess.GetInstance().getUserByPerson(m_person);
         persDetails.readFields(m_person);
         DBAccess.GetInstance().modifyUserAndPerson( user, m_person );
-        m_person = null;
+        
         m_table.getModel().setValueAt( m_person, m_row, 0 );
         m_table.getModel().setValueAt( DBAccess.GetInstance().getUserByPerson(m_person).getUsrRolId().getRolName(), m_row, 1 );
+        m_person = null;
+        
         setVisible(false);
     }//GEN-LAST:event_jbtnSaveEditActionPerformed
     
