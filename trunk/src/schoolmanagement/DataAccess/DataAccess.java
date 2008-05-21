@@ -250,7 +250,7 @@ public class DataAccess {
         }
         return false;
     }
-    
+//------------    TEACHER STUFF -------------
     public List<TeacherCollection> getTeacherList()
     {
         Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t");
@@ -333,8 +333,33 @@ public class DataAccess {
         {}
         return null;
     }
+    public SmTeacher addTeachersSubject( SmPerson a_oPerson, SmSubject a_oSubject)
+    {
+        SmTeacher teacher = new SmTeacher();
+        teacher.setTchPerId(a_oPerson);
+        teacher.setTchSubId(a_oSubject);
+        if(save(teacher))
+        {
+            a_oSubject.getSmTeacherCollection().add(teacher);
+            a_oPerson.getSmTeacherCollection().add(teacher);
+            return teacher;
+        }
+        return null;
+    }
     
-  
+    public boolean teacherHasSubject( SmPerson a_oPerson, SmSubject a_oSubject)
+    {
+        Query query = m_oEm.createQuery("SELECT COUNT(t) FROM SmTeacher t WHERE t.tchPerId = ?1 AND t.tchSubId = ?2").setParameter(1, a_oPerson).setParameter(2, a_oSubject).setHint("refresh", new Boolean(true));
+        try{
+        Integer count = (Integer)query.getSingleResult();
+        if(count != null || count >0)
+            return true;
+        }
+        catch(Exception e)
+        {}
+        return false;
+    }
+ //------------------------------- END OF TEACHER STUFF
     public List<SmNote> getNotes( SmSubject a_oSubject, SmClass a_oClass )
     {
         Query query = null;
