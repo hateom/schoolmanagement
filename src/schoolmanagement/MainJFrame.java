@@ -9,6 +9,7 @@ import java.awt.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
@@ -300,7 +301,7 @@ public class MainJFrame extends javax.swing.JFrame {
                         .addGap(134, 134, 134))
                     .addGroup(jPnlProfileLayout.createSequentialGroup()
                         .addComponent(personDetailsControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(113, Short.MAX_VALUE))))
+                        .addContainerGap(117, Short.MAX_VALUE))))
         );
         jPnlProfileLayout.setVerticalGroup(
             jPnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -312,7 +313,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnSave)
                     .addComponent(jBtnPassCHange))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addContainerGap(124, Short.MAX_VALUE))
         );
 
         jPnlProfile.setBounds(0, 0, 440, 480);
@@ -711,17 +712,17 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Nazwisko", "Imie", "Grupa"
+                "Nazwisko i Imię", "Grupa"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -729,6 +730,11 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
         jTable4.setName("jTable4"); // NOI18N
+        jTable4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                MainJFrame.this.mouseClicked(evt);
+            }
+        });
         jScrollPane5.setViewportView(jTable4);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -898,7 +904,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPnlRings.setBounds(0, 0, 440, 480);
         jLayers.add(jPnlRings, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jPnlTeachers.setBorder(javax.swing.BorderFactory.createTitledBorder("Nauczyciele")); // NOI18N
+        jPnlTeachers.setBorder(javax.swing.BorderFactory.createTitledBorder("Nauczyciele"));
         jPnlTeachers.setName("jPnlTeachers"); // NOI18N
         jPnlTeachers.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -991,7 +997,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jPnlTeachers.setLayout(jPnlTeachersLayout);
         jPnlTeachersLayout.setHorizontalGroup(
             jPnlTeachersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 428, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlTeachersLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPnlTeachersLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1108,13 +1113,24 @@ public class MainJFrame extends javax.swing.JFrame {
     private void jBtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearchActionPerformed
                 // TODO add your handling code here:
         
+        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+            },
+            new String [] {
+                "Nazwisko i Imię", "Grupa"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         
-        DefaultTableModel model = new DefaultTableModel();
-        jTable4.setModel(model);
-        model.addColumn("Nazwisko");
-        model.addColumn("Imię");
-        model.addColumn("Grupa");
-        
+        DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         
         List<SmPerson> list = new ArrayList<SmPerson>();
         if(jRbSurname.isSelected()){
@@ -1132,8 +1148,7 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         
         for(SmPerson person : list){
-            model.addRow(new Object[]{person.getPerSurname(),
-                                      person.getPerName(),
+            model.addRow(new Object[]{person,
                                       person.getSmUserCollection().iterator().next().getUsrRolId().getRolName()});
             //int row = list.indexOf(person);
             //jTable4.setValueAt(person.getPerSurname(), row, 0);
@@ -1346,6 +1361,19 @@ private void jBtnAddPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
     JNewPersonDialog jNewPesonDlg = new JNewPersonDialog();
     jNewPesonDlg.setVisible(true);
 }//GEN-LAST:event_jBtnAddPersonActionPerformed
+
+private void mouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseClicked
+    // TODO add your handling code here:
+   if (evt.getClickCount() == 2) {
+      JTable target = (JTable)evt.getSource();
+      int row = target.getSelectedRow();
+      Object o = target.getValueAt(row, 0);
+      if(o == null)
+          return;
+      SmPerson person = (SmPerson)target.getValueAt(row, 0);
+      //DIZL WND
+   }
+}//GEN-LAST:event_mouseClicked
 
 String dateToTimeString( Date date )
 {
