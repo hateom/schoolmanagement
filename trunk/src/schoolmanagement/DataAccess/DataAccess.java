@@ -269,7 +269,7 @@ public class DataAccess {
 //------------    TEACHER STUFF -------------
     public List<TeacherCollection> getTeacherList()
     {
-        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t");
+        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t").setHint("refresh", new Boolean(true));
         List<TeacherCollection> teachColList = new ArrayList<TeacherCollection>();
         try{
             List<SmTeacher> lst = query.getResultList();
@@ -309,9 +309,10 @@ public class DataAccess {
     public boolean removeTeachersSubject(SmPerson a_oPerson, SmSubject a_oSubject)
     {
         Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchPerId = ?1 AND t.tchSubId = ?2").setParameter(1, a_oPerson).setParameter(2, a_oSubject).setHint("refresh", new Boolean(true));
-        SmTeacher teacher = (SmTeacher)query.getSingleResult();
+        SmTeacher teacher = null;
         try
         {
+            teacher = (SmTeacher)query.getSingleResult();
             m_oEm.getTransaction().begin();
             a_oPerson.getSmTeacherCollection().remove(teacher);
             a_oSubject.getSmTeacherCollection().remove(teacher);
@@ -322,8 +323,11 @@ public class DataAccess {
         catch(Exception e)
         {
             m_oEm.getTransaction().rollback();
-            a_oPerson.getSmTeacherCollection().add(teacher);
-            a_oSubject.getSmTeacherCollection().add(teacher);
+            if( teacher != null )
+            {
+                a_oPerson.getSmTeacherCollection().add(teacher);
+                a_oSubject.getSmTeacherCollection().add(teacher);
+            }
             ErrorLogger.error(e.getLocalizedMessage());
         }
         return false;
@@ -439,7 +443,7 @@ public class DataAccess {
      */
     public List<SmClass> GetAllClasses()
     {
-        Query query = m_oEm.createQuery("SELECT c FROM SmClass c");
+        Query query = m_oEm.createQuery("SELECT c FROM SmClass c").setHint("refresh", new Boolean(true));
         try{
         return query.getResultList();
         }
@@ -450,7 +454,7 @@ public class DataAccess {
     
     public List<SmSubject> getSubjectsList()
     {
-        Query query = m_oEm.createQuery("SELECT s FROM SmSubject s");
+        Query query = m_oEm.createQuery("SELECT s FROM SmSubject s").setHint("refresh", new Boolean(true));
         try{
         return query.getResultList();
         }
