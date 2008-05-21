@@ -6,6 +6,8 @@
 
 package schoolmanagement.controls;
 
+import schoolmanagement.entity.SmPerson;
+
 /**
  *
  * @author  deely
@@ -18,6 +20,29 @@ public class PersonDetailsControl extends javax.swing.JPanel {
     }
     
     ///getters and setters
+    
+    public void fillFields( SmPerson person )
+    {
+        setAddress( person.getPerAdress() );
+        setFirstName( person.getPerName() );
+        setSurname( person.getPerSurname() );
+        setNip(Integer.toString(person.getPerNip()));
+        setPesel(Integer.toString(person.getPerPesel()));
+        setPhoneNumber(Integer.toString(person.getPerPhone()));
+        setEmail(person.getPerEmail());
+        setLogin( DBAccess.GetInstance().getUserLogin( person ) );
+    }
+    
+    public void readFields( SmPerson person )
+    {
+        person.setPerAdress(getAddress());
+        person.setPerName(getFirstName());
+        person.setPerSurname(getSurname());
+        person.setPerNip(Integer.getInteger(getNip()));
+        person.setPerPesel(Integer.getInteger(getPesel()));
+        person.setPerPhone(Integer.getInteger(getPhoneNumber()));
+        person.setPerEmail(getEmail());
+    }
     
     public String getGroup()
     {
@@ -123,6 +148,16 @@ public class PersonDetailsControl extends javax.swing.JPanel {
     public String getLogin()
     {
         return jtbLogin.getText();
+    }
+    
+    public void setEmail( String email )
+    {
+        jtbEmail.setText(email);
+    }
+    
+    public String getEmail()
+    {
+        return jtbEmail.getText();
     }
     
     /** This method is called from within the constructor to

@@ -35,8 +35,9 @@ public class JNewPersonDialog extends javax.swing.JFrame {
         jBtnCancel = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
+        setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dodaj nową osobę")); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dodaj nową osobę"));
         jPanel1.setName("jPanel1"); // NOI18N
 
         personDetailsControl1.setName("personDetailsControl1"); // NOI18N
