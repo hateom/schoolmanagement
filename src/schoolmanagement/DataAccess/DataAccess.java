@@ -541,19 +541,67 @@ public class DataAccess {
         m_oEm.close();
     }
 //----------------------------------- MESSAGES UTILZ
-    public List<SmMessage> getMessages(SmUser a_oRecpUser, SmUser a_oSenderUser, boolean a_bIsReaded)
+    public List<SmMessage> getSentMessages(SmUser a_oCurrentUser, SmUser a_oSenderOrRecp)
     {
+        Query query = null;        
+        if( a_oSenderOrRecp != null )
+        {
+            query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?2 AND m.msgSenderUsrId = ?1").setParameter(1, a_oCurrentUser).setParameter(2, a_oSenderOrRecp).setHint("refresh", new Boolean(true));
+        }
+        else
+        {
+            query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgSenderUsrId = ?1").setParameter(1, a_oCurrentUser).setHint("refresh", new Boolean(true));
+        }
+        try{
+        return query.getResultList();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
         return null;
     }
     
-    public boolean sendMessage()
+    public List<SmMessage> getRecievedMessages(SmUser a_oCurrentUser, SmUser a_oSenderOrRecp)
     {
-        return false;
+        Query query = null;        
+        if( a_oSenderOrRecp != null )
+        {
+            query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?1 AND m.msgSenderUsrId = ?2").setParameter(1, a_oCurrentUser).setParameter(2, a_oSenderOrRecp).setHint("refresh", new Boolean(true));
+        }
+        else
+        {
+            query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?1").setParameter(1, a_oCurrentUser).setHint("refresh", new Boolean(true));
+        }
+        try{
+        return query.getResultList();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return null;
     }
     
-    public boolean markAsRead(boolean a_bIsReaded)
+    public boolean sendMessage(SmUser a_oRecpUser, SmUser a_oSenderUser, String a_strBody, String a_strTopic, boolean a_bIsRespReq, int a_nSeverity )
     {
-        return false;
+        SmMessage message = new SmMessage();
+        message.setMsgBody(a_strBody);
+        message.setMsgReaded(false);
+        message.setMsgRecpUsrId(a_oRecpUser);
+        message.setMsgSenderUsrId(a_oSenderUser);
+        Date d = new Date();
+        d.setTime(System.currentTimeMillis());
+        message.setMsgSendDate(d);
+        message.setMsgSeverity(a_nSeverity);
+        message.setMsgTopic(a_strTopic);
+        return save(message);
+    }
+    
+    public boolean markAsRead(SmMessage a_oMessage, boolean a_bIsReaded)
+    {
+        a_oMessage.setMsgReaded(a_bIsReaded);
+        return save(a_oMessage);
     }
 //------------------------------------
 }
