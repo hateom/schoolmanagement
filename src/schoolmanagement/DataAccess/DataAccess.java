@@ -56,6 +56,12 @@ public class DataAccess {
         }
         return false;
     }
+    
+    public boolean delete(Object object)
+    {
+        
+    }
+    
  // USER METHODS -----------------------------------------------   
     /**
      * Logowanie uzytkownika
@@ -296,6 +302,8 @@ public class DataAccess {
         Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.getPerId = :person AND t.getSubId = :subject").setParameter("person", a_oPerson).setParameter("subject", a_oSubject);
         try
         {
+            SmTeacher teacher = (SmTeacher)query.getResultList();
+            m_oEm.remove(query);
             return true;
         }
         catch(Exception e)
@@ -367,7 +375,7 @@ public class DataAccess {
         Query query = m_oEm.createQuery("SELECT COUNT(t) FROM SmTeacher t WHERE t.tchPerId = ?1 AND t.tchSubId = ?2").setParameter(1, a_oPerson).setParameter(2, a_oSubject).setHint("refresh", new Boolean(true));
         try{
         Long count = (Long)query.getSingleResult();
-        if(count != null || count >0)
+        if(count != null && count >0)
             return true;
         }
         catch(Exception e)
