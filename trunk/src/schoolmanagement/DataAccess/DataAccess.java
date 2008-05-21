@@ -13,6 +13,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import schoolmanagement.controller.ErrorLogger;
 import schoolmanagement.controller.RoleType;
 import schoolmanagement.controller.TeacherCollection;
 import schoolmanagement.entity.SmClass;
@@ -298,7 +299,9 @@ public class DataAccess {
             return true;
         }
         catch(Exception e)
-        {}
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
         return false;
     }
     
@@ -363,7 +366,7 @@ public class DataAccess {
     {
         Query query = m_oEm.createQuery("SELECT COUNT(t) FROM SmTeacher t WHERE t.tchPerId = ?1 AND t.tchSubId = ?2").setParameter(1, a_oPerson).setParameter(2, a_oSubject).setHint("refresh", new Boolean(true));
         try{
-        Integer count = (Integer)query.getSingleResult();
+        Long count = (Long)query.getSingleResult();
         if(count != null || count >0)
             return true;
         }
