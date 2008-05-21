@@ -7,6 +7,8 @@
 package schoolmanagement.dialogs;
 
 import java.util.List;
+import javax.swing.DefaultListModel;
+import javax.swing.ListModel;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmSubject;
 import schoolmanagement.controller.DBAccess;
@@ -19,6 +21,7 @@ import sun.security.jca.GetInstance;
 public class JEditTeacherDialog extends javax.swing.JFrame {
     
     private SmPerson m_person;
+
     /** Creates new form JEditTeacherDialog */
     public JEditTeacherDialog( SmPerson person ) {
         m_person = person;
@@ -90,11 +93,21 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
 
         jbtnMove.setText(resourceMap.getString("jbtnMove.text")); // NOI18N
         jbtnMove.setName("jbtnMove"); // NOI18N
+        jbtnMove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnMoveActionPerformed(evt);
+            }
+        });
 
         jSeparator1.setName("jSeparator1"); // NOI18N
 
         jbtnRemoveSelected.setText(resourceMap.getString("jbtnRemoveSelected.text")); // NOI18N
         jbtnRemoveSelected.setName("jbtnRemoveSelected"); // NOI18N
+        jbtnRemoveSelected.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnRemoveSelectedActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jpnSubjectsLayout = new javax.swing.GroupLayout(jpnSubjects);
         jpnSubjects.setLayout(jpnSubjectsLayout);
@@ -207,14 +220,53 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-         List<SmSubject> subs = DBAccess.GetInstance().getSubjectsList();
-         jlAll.removeAll();
          
+         updateLists();
+    }//GEN-LAST:event_formComponentShown
+
+    public void updateLists()
+    {
+        List<SmSubject> subs = DBAccess.GetInstance().getSubjectsList();
+        
+        jlAll.removeAll();
+         
+         DefaultListModel lm = new DefaultListModel();
+         jlAll.setModel(lm);
+        
          for( SmSubject sb : subs )
          {
-             //jlAll.add
+             lm.addElement(sb);
          }
-    }//GEN-LAST:event_formComponentShown
+         
+         lm = new DefaultListModel();
+         jlTought.setModel(lm);
+         
+         List<SmSubject> tcht = DBAccess.GetInstance().getSubjectsForPerson(m_person);
+         
+         for( SmSubject sb : tcht )
+         {
+             lm.addElement(sb);
+         }
+    }
+    
+    private void jbtnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMoveActionPerformed
+        int [] list = jlAll.getSelectedIndices();
+        for( int k: list ) {
+            SmSubject sb = (SmSubject)jlAll.getModel().getElementAt(k);
+            if( !DBAccess.GetInstance().teacherHasSubject(m_person, sb)) {
+                ((DefaultListModel)jlTought.getModel()).addElement( sb );
+            }
+        }
+    }//GEN-LAST:event_jbtnMoveActionPerformed
+
+    private void jbtnRemoveSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoveSelectedActionPerformed
+        int [] list = jlTought.getSelectedIndices();
+        for( int k: list ) {
+            SmSubject sb = (SmSubject)((DefaultListModel)jlTought.getModel()).getElementAt(k);
+            DBAccess.GetInstance().removeTeachersSubject( m_person, sb );
+        }
+        updateLists();
+    }//GEN-LAST:event_jbtnRemoveSelectedActionPerformed
     
     /**
      * @param args the command line arguments
