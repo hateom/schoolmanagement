@@ -21,12 +21,12 @@ import javax.swing.tree.TreePath;
 import schoolmanagement.controller.*;
 import schoolmanagement.dialogs.*;
 import schoolmanagement.entity.SmClass;
-import schoolmanagement.entity.SmNote;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmRing;
 import schoolmanagement.entity.SmSubject;
 import schoolmanagement.entity.SmTeacher;
 import schoolmanagement.entity.SmUser;
+import schoolmanagement.dialogs.JNewMessageDialog;
 
 /**
  *
@@ -59,7 +59,6 @@ public class MainJFrame extends javax.swing.JFrame {
         {
             jTbClass.addItem(smclass);
         }
-        jLblLoggedAs.setText(User.GetUserPerson().getPerName() + " " + User.GetUserPerson().getPerSurname());
         jLblLoggedAs.setText(User.GetUserPerson().getPerName() + " " + User.GetUserPerson().getPerSurname());
     }
 
@@ -461,6 +460,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jBtnNewMail.setText("Nowa wiadomosc"); // NOI18N
         jBtnNewMail.setName("jBtnNewMail"); // NOI18N
+        jBtnNewMail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNewMailActionPerformed(evt);
+            }
+        });
 
         jSeparator2.setName("jSeparator2"); // NOI18N
 
@@ -599,6 +603,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jBtnNewMail3.setText("Nowa wiadomosc"); // NOI18N
         jBtnNewMail3.setName("jBtnNewMail3"); // NOI18N
+        jBtnNewMail3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNewMail3ActionPerformed(evt);
+            }
+        });
 
         jScrollPane4.setName("jScrollPane4"); // NOI18N
 
@@ -657,6 +666,11 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jBtnNewMail2.setText("Nowa wiadomosc"); // NOI18N
         jBtnNewMail2.setName("jBtnNewMail2"); // NOI18N
+        jBtnNewMail2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnNewMail2ActionPerformed(evt);
+            }
+        });
 
         jScrollPane3.setName("jScrollPane3"); // NOI18N
 
@@ -1411,6 +1425,21 @@ private void TblTeachersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST
       dlg.setVisible(true);
    }
 }//GEN-LAST:event_TblTeachersMouseClicked
+
+private void jBtnNewMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNewMailActionPerformed
+    JNewMessageDialog nmd = new JNewMessageDialog();
+    nmd.setVisible(true);
+}//GEN-LAST:event_jBtnNewMailActionPerformed
+
+private void jBtnNewMail3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNewMail3ActionPerformed
+    JNewMessageDialog nmd = new JNewMessageDialog();
+    nmd.setVisible(true);
+}//GEN-LAST:event_jBtnNewMail3ActionPerformed
+
+private void jBtnNewMail2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNewMail2ActionPerformed
+    JNewMessageDialog nmd = new JNewMessageDialog();
+    nmd.setVisible(true);
+}//GEN-LAST:event_jBtnNewMail2ActionPerformed
 
 String dateToTimeString( Date date )
 {

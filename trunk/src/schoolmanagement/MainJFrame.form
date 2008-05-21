@@ -457,6 +457,9 @@
                 <Property name="text" type="java.lang.String" value="Nowa wiadomosc" noResource="true"/>
                 <Property name="name" type="java.lang.String" value="jBtnNewMail" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnNewMailActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JSeparator" name="jSeparator2">
               <Properties>
@@ -674,6 +677,9 @@
                 <Property name="text" type="java.lang.String" value="Nowa wiadomosc" noResource="true"/>
                 <Property name="name" type="java.lang.String" value="jBtnNewMail3" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnNewMail3ActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane4">
               <Properties>
@@ -776,6 +782,9 @@
                 <Property name="text" type="java.lang.String" value="Nowa wiadomosc" noResource="true"/>
                 <Property name="name" type="java.lang.String" value="jBtnNewMail2" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnNewMail2ActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="jScrollPane3">
               <Properties>
