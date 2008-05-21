@@ -54,6 +54,7 @@ public class DataAccess {
         } catch (Exception e) {
             e.printStackTrace();
             m_oEm.getTransaction().rollback();
+            ErrorLogger.error(e.getLocalizedMessage());
         }
         return false;
     }
