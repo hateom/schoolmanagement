@@ -1371,7 +1371,8 @@ private void mouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mous
       if(o == null)
           return;
       SmPerson person = (SmPerson)target.getValueAt(row, 0);
-      //DIZL WND
+      JEditPersonDialog dlg = new JEditPersonDialog( person );
+      dlg.setVisible(true);
    }
 }//GEN-LAST:event_mouseClicked
 
