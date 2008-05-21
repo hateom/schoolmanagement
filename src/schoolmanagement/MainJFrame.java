@@ -301,7 +301,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPnlProfileLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(personDetailsControl1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(117, Short.MAX_VALUE))
         );
         jPnlProfileLayout.setVerticalGroup(
             jPnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -311,7 +311,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnPassCHange)
                     .addComponent(jBtnSave))
-                .addContainerGap(161, Short.MAX_VALUE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         jPnlProfile.setBounds(0, 0, 440, 480);
@@ -437,14 +437,14 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                     .addComponent(jpanelProporties, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPnlNotesLayout.setVerticalGroup(
             jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPnlNotesLayout.createSequentialGroup()
                 .addComponent(jpanelProporties, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -476,7 +476,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jBtnNewMail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(411, Short.MAX_VALUE))
+                .addContainerGap(410, Short.MAX_VALUE))
         );
 
         jPnlMail.setBounds(0, 0, 440, 480);
@@ -489,11 +489,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jPnlOptions.setLayout(jPnlOptionsLayout);
         jPnlOptionsLayout.setHorizontalGroup(
             jPnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+            .addGap(0, 428, Short.MAX_VALUE)
         );
         jPnlOptionsLayout.setVerticalGroup(
             jPnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
         );
 
         jPnlOptions.setBounds(0, 0, 440, 480);
@@ -519,7 +519,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel24)
                 .addGap(18, 18, 18)
                 .addComponent(jcbSelectClass, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addContainerGap(186, Short.MAX_VALUE))
         );
         jpanelClassSelectLayout.setVerticalGroup(
             jpanelClassSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -580,7 +580,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlScheduleLayout.createSequentialGroup()
                 .addComponent(jpanelClassSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -787,9 +787,9 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(jRbRole))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTbName, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
-                    .addComponent(jTbRole, 0, 169, Short.MAX_VALUE)
-                    .addComponent(jTbClass, 0, 169, Short.MAX_VALUE))
+                    .addComponent(jTbName, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
+                    .addComponent(jTbRole, 0, 154, Short.MAX_VALUE)
+                    .addComponent(jTbClass, 0, 154, Short.MAX_VALUE))
                 .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jBtnAddPerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -832,7 +832,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlPeopleLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 329, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -896,7 +896,7 @@ public class MainJFrame extends javax.swing.JFrame {
             jPnlRingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPnlRingsLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         jPnlRings.setBounds(0, 0, 440, 480);
@@ -914,17 +914,17 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jTblTeachers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
             },
             new String [] {
-                "Nazwisko", "Imie", "Przedmiot"
+                "Nazwisko i Imię", "Przedmiot"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -932,6 +932,11 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
         jTblTeachers.setName("jTblTeachers"); // NOI18N
+        jTblTeachers.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TblTeachersMouseClicked(evt);
+            }
+        });
         jScrollPane6.setViewportView(jTblTeachers);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -970,8 +975,8 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(jRbSubject))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTbSubs, 0, 161, Short.MAX_VALUE)
-                    .addComponent(jTbName1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
+                    .addComponent(jTbSubs, 0, 146, Short.MAX_VALUE)
+                    .addComponent(jTbName1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
                 .addGap(38, 38, 38)
                 .addComponent(jBtnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1007,7 +1012,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlTeachersLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1045,7 +1050,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+                .addComponent(jLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1302,12 +1307,25 @@ private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
 }//GEN-LAST:event_jPnlRingsComponentShown
 
 private void jBtnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearch2ActionPerformed
-    DefaultTableModel model = new DefaultTableModel();
-    jTblTeachers.setModel(model);
-    model.addColumn("Nazwisko");
-    model.addColumn("Imię");
-    model.addColumn("Przedmiot");
+  
+    jTblTeachers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+            },
+            new String [] {
+                "Nazwisko i Imię", "Przedmiot"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            @Override
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
     
+    DefaultTableModel model = (DefaultTableModel)jTblTeachers.getModel();
     if(jRbSurname1.isSelected()){
         List<SmPerson> list = new ArrayList<SmPerson>();
         list = DBAccess.GetInstance().GetUserByName(jTbName.getText().trim());
@@ -1320,7 +1338,7 @@ private void jBtnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 
             for( SmSubject sb : subs )
             {
-                model.addRow(new Object[] { pers.getPerSurname(), pers.getPerName(), sb.getSubName() } );
+                model.addRow(new Object[] { pers, sb } );
             }
         }
     }
@@ -1330,9 +1348,8 @@ private void jBtnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         for( SmTeacher tr : list )
         {
             model.addRow(new Object[] { 
-                tr.getTchPerId().getPerSurname(),
-                tr.getTchPerId().getPerName(),
-                tr.getTchSubId().getSubName()
+                tr.getTchPerId(),
+                tr.getTchSubId()
             });
         }
     }
@@ -1375,6 +1392,20 @@ private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     DBAccess.GetInstance().modifyUserAndPerson( user, User.GetUserPerson() );
     personDetailsControl1.fillFields( User.GetUserPerson() );
 }//GEN-LAST:event_jBtnSaveActionPerformed
+
+private void TblTeachersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblTeachersMouseClicked
+    // TODO add your handling code here:
+    if (evt.getClickCount() == 2) {
+      JTable target = (JTable)evt.getSource();
+      int row = target.getSelectedRow();
+      Object o = target.getValueAt(row, 0);
+      if(o == null)
+          return;
+      SmPerson person = (SmPerson)target.getValueAt(row, 0);
+      JEditTeacherDialog dlg = new JEditTeacherDialog( person );
+      dlg.setVisible(true);
+   }
+}//GEN-LAST:event_TblTeachersMouseClicked
 
 String dateToTimeString( Date date )
 {
