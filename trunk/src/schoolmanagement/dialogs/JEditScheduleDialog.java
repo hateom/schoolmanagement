@@ -82,11 +82,31 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
             }
         });
         jTblDays.setName("jTblDays"); // NOI18N
+        jTblDays.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblDaysMouseClicked(evt);
+            }
+        });
         jTblDays.addInputMethodListener(new java.awt.event.InputMethodListener() {
             public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
                 jTblDaysCaretPositionChanged(evt);
             }
             public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        jTblDays.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTblDaysPropertyChange(evt);
+            }
+        });
+        jTblDays.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                jTblDaysKeyReleased(evt);
+            }
+        });
+        jTblDays.addVetoableChangeListener(new java.beans.VetoableChangeListener() {
+            public void vetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {
+                jTblDaysVetoableChange(evt);
             }
         });
         jScrollPane1.setViewportView(jTblDays);
@@ -197,7 +217,7 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
         
         day = (SmDay) jTblDays.getModel().getValueAt(jTblDays.getSelectedRow(), 0 );
         ring = (SmRing) jTblSchedule.getModel().getValueAt( jTblSchedule.getSelectedRow(), 0 );
-        lesson = (SmSchedule) jTblSchedule.getModel().getValueAt( jTblSchedule.getSelectedRow(), 0 );
+        lesson = (SmSchedule) jTblSchedule.getModel().getValueAt( jTblSchedule.getSelectedRow(), 1 );
         
         JAddLessonDialog nl = new JAddLessonDialog(null, true, day, ring, lesson );
         nl.setVisible(true);
@@ -215,6 +235,15 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formComponentShown
 
     private void jTblDaysCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTblDaysCaretPositionChanged
+        
+    }//GEN-LAST:event_jTblDaysCaretPositionChanged
+
+    private void jTblDaysPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTblDaysPropertyChange
+        
+    }//GEN-LAST:event_jTblDaysPropertyChange
+
+    public void reloadSchedule()
+    {
         if( jTblDays.getSelectedRowCount() != 1 ) return;
         int row = jTblDays.getSelectedRow();
         SmDay day = (SmDay) jTblDays.getValueAt( row, 0 );
@@ -222,7 +251,19 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
         {
             reloadScheduleFor( day );
         }
-    }//GEN-LAST:event_jTblDaysCaretPositionChanged
+    }
+    
+    private void jTblDaysVetoableChange(java.beans.PropertyChangeEvent evt)throws java.beans.PropertyVetoException {//GEN-FIRST:event_jTblDaysVetoableChange
+
+    }//GEN-LAST:event_jTblDaysVetoableChange
+
+    private void jTblDaysMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblDaysMouseClicked
+        reloadSchedule();
+    }//GEN-LAST:event_jTblDaysMouseClicked
+
+    private void jTblDaysKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTblDaysKeyReleased
+        reloadSchedule();
+    }//GEN-LAST:event_jTblDaysKeyReleased
     
     /**
      * @param args the command line arguments

@@ -126,6 +126,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="jcbTeachers" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbTeachersActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="jcbRooms">
           <Properties>
