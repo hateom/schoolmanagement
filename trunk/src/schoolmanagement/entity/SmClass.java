@@ -35,7 +35,9 @@ public class SmClass implements Serializable {
     @Column(name = "CLS_NUMBER")
     private Integer clsNumber;
     @Column(name = "CLS_NUMBER_ALPH")
-    private Character clsNumberAlph;
+    private String clsNumberAlph;
+    @Column(name = "CLS_DESCRIPTION")
+    private String clsDescription;
     @OneToMany(mappedBy = "schClsId")
     private Collection<SmSchedule> smScheduleCollection;
     @JoinColumn(name = "CLS_PER_ID", referencedColumnName = "PER_ID")
@@ -67,11 +69,11 @@ public class SmClass implements Serializable {
         this.clsNumber = clsNumber;
     }
 
-    public Character getClsNumberAlph() {
+    public String getClsNumberAlph() {
         return clsNumberAlph;
     }
 
-    public void setClsNumberAlph(Character clsNumberAlph) {
+    public void setClsNumberAlph(String clsNumberAlph) {
         this.clsNumberAlph = clsNumberAlph;
     }
 
@@ -122,6 +124,14 @@ public class SmClass implements Serializable {
     @Override
     public String toString() {
         return clsNumber +" "+clsNumberAlph;
+    }
+
+    public String getClsDescription() {
+        return clsDescription;
+    }
+
+    public void setClsDescription(String clsDescription) {
+        this.clsDescription = clsDescription;
     }
 
 }

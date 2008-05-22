@@ -454,7 +454,10 @@ public class DataAccess {
         return null;
     }
     
- 
+//---------------------------- END OF NOTEZ STUFF
+    
+    
+//=------------------------------CLASS STUFF
     
     /**
      * 
@@ -469,6 +472,38 @@ public class DataAccess {
         catch(Exception e)
         {}
         return null;
+    }
+    
+    public boolean deleteClass( SmClass a_oClass )
+    {
+        return delete(a_oClass);
+    }
+    
+    public SmClass createNewClass(Integer a_nClsNumber, String a_strClsAlph, String a_strClsDesc, SmPerson a_oTutor)
+    {
+        SmClass cls = new SmClass();
+        cls.setClsNumber(a_nClsNumber);
+        cls.setClsPerId(a_oTutor);
+        cls.setClsDescription(a_strClsDesc);
+        cls.setClsNumberAlph(a_strClsAlph);
+        if(save(cls))
+            return cls;
+        return null;
+    }
+    
+    public boolean saveChanges( SmClass a_oClass )
+    {
+        return save(a_oClass);
+    }
+    
+    public boolean removePersonFromClass( SmClass a_oClass, SmPerson a_oPerson )
+    {
+        return false;
+    }
+    
+    public boolean addPersonToClass(SmClass a_oClass, SmPerson a_oPerson)
+    {
+        return false;
     }
     
     public List<SmSubject> getSubjectsList()
@@ -499,7 +534,7 @@ public class DataAccess {
         {}
         return null;
     }
-    
+//----------------------------------END OF CLASS STUFF
     public List<SmRole> GetRoles()
     {
         Query query = m_oEm.createQuery("SELECT r FROM SmRole r");
@@ -549,11 +584,11 @@ public class DataAccess {
         Query query = null;        
         if( a_oSenderOrRecp != null )
         {
-            query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?2 AND m.msgSenderUsrId = ?1").setParameter(1, a_oCurrentUser).setParameter(2, a_oSenderOrRecp).setHint("refresh", new Boolean(true));
+            query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?2 AND m.msgSenderUsrId = ?1 ORDER BY m.msgSendDate DESC").setParameter(1, a_oCurrentUser).setParameter(2, a_oSenderOrRecp).setHint("refresh", new Boolean(true));
         }
         else
         {
-            query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgSenderUsrId = ?1").setParameter(1, a_oCurrentUser).setHint("refresh", new Boolean(true));
+            query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgSenderUsrId = ?1 ORDER BY m.msgSendDate DESC").setParameter(1, a_oCurrentUser).setHint("refresh", new Boolean(true));
         }
         try{
         return query.getResultList();
@@ -572,11 +607,11 @@ public class DataAccess {
         {
             if( !a_bIsReaded )
             {
-                query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?1 AND m.msgSenderUsrId = ?2 AND m.msgReaded = ?3 ").setParameter(1, a_oCurrentUser).setParameter(2, a_oSenderOrRecp).setParameter(3, a_bIsReaded).setHint("refresh", new Boolean(true));
+                query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?1 AND m.msgSenderUsrId = ?2 AND m.msgReaded = ?3 ORDER BY m.msgSendDate DESC").setParameter(1, a_oCurrentUser).setParameter(2, a_oSenderOrRecp).setParameter(3, a_bIsReaded).setHint("refresh", new Boolean(true));
             }
             else
             {
-                query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?1 AND m.msgSenderUsrId = ?2").setParameter(1, a_oCurrentUser).setParameter(2, a_oSenderOrRecp).setHint("refresh", new Boolean(true));
+                query = m_oEm.createQuery("SELECT m FROM SmMessage m WHERE m.msgRecpUsrId = ?1 AND m.msgSenderUsrId = ?2 ORDER BY m.msgSendDate DESC").setParameter(1, a_oCurrentUser).setParameter(2, a_oSenderOrRecp).setHint("refresh", new Boolean(true));
             }
         }
         else
