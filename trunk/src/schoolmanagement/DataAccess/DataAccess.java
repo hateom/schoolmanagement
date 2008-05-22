@@ -396,16 +396,18 @@ public class DataAccess {
             if(str.length()>0)
             {
                 str = str.substring(0, str.length()-1);
-                 query = m_oEm.createQuery("SELECT t FROM SmTeacher t LEFT JOIN SmSchedule s WHERE t.tchSubId = ?1 AND t.tchId NOT IN("+str+")").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
+                 query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchSubId = ?1 AND t.tchId NOT IN("+str+")").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
             }
             else
             {
-                query = m_oEm.createQuery("SELECT t FROM SmTeacher t LEFT JOIN SmSchedule s WHERE t.tchSubId = ?1 AND t.tchId").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
+                query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchSubId = ?1 AND t.tchId").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
             }
             return query.getResultList();
         }
         catch(Exception e)
-        {}
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
         return null;
     }
  //------------------------------- END OF TEACHER STUFF
@@ -716,6 +718,36 @@ public class DataAccess {
         }
         return null;
     }
+    
+    public List<SmClassroom> getAvailableClassrooms(SmDay a_oDay , SmRing a_oRing)
+    {
+        try
+        {
+            List<SmClassroom> lst = m_oEm.createQuery("SELECT s.schClrId FROM SmSchedule s WHERE s.schDayId = ?1 AND s.schRngId = ?2").setParameter(1, a_oDay).setParameter(2, a_oRing).setHint("refresh", new Boolean(true)).getResultList();
+            String str ="";
+            Query query = null;
+            for(SmClassroom clr : lst)
+            {
+                str+= clr.getClrId()+",";
+            }
+            if(str.length()>0)
+            {
+                str = str.substring(0, str.length()-1);
+                 query = m_oEm.createQuery("SELECT c FROM SmClassroom c WHERE c.clrId NOT IN("+str+")").setHint("refresh", new Boolean(true));
+            }
+            else
+            {
+                query = m_oEm.createQuery("SELECT c FROM SmClassroom c").setHint("refresh", new Boolean(true));
+            }
+            return query.getResultList();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return null;
+    }
+    
     public SmClassroom addClassRom( int a_nClassroomNum, SmPerson a_oOwnerPer, String a_strDescription )
     {
         try
