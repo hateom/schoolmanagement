@@ -771,11 +771,26 @@ public class MainJFrame extends javax.swing.JFrame {
         jRbClass.setName("jRbClass"); // NOI18N
 
         jTbName.setName("jTbName"); // NOI18N
+        jTbName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTbNameFocusGained(evt);
+            }
+        });
 
         jTbRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dyrekcja", "Nauczyciele", "Uczniowie" }));
         jTbRole.setName("jTbRole"); // NOI18N
+        jTbRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTbRoleActionPerformed(evt);
+            }
+        });
 
         jTbClass.setName("jTbClass"); // NOI18N
+        jTbClass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTbClassActionPerformed(evt);
+            }
+        });
 
         jBtnSearch.setText("Szukaj"); // NOI18N
         jBtnSearch.setName("jBtnSearch"); // NOI18N
@@ -1458,6 +1473,18 @@ private void jPnlOutboxComponentShown(java.awt.event.ComponentEvent evt) {//GEN-
 private void jbtReceiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtReceiveActionPerformed
     refreshInbox();        // TODO add your handling code here:
 }//GEN-LAST:event_jbtReceiveActionPerformed
+
+private void jTbNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbNameFocusGained
+    jRbSurname.setSelected(true);
+}//GEN-LAST:event_jTbNameFocusGained
+
+private void jTbRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbRoleActionPerformed
+    jRbRole.setSelected(true);
+}//GEN-LAST:event_jTbRoleActionPerformed
+
+private void jTbClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbClassActionPerformed
+    jRbClass.setSelected(true);
+}//GEN-LAST:event_jTbClassActionPerformed
 
 String dateToTimeString( Date date )
 {

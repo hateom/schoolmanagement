@@ -1038,6 +1038,9 @@
                   <Properties>
                     <Property name="name" type="java.lang.String" value="jTbName" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="focusGained" listener="java.awt.event.FocusListener" parameters="java.awt.event.FocusEvent" handler="jTbNameFocusGained"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jTbRole">
                   <Properties>
@@ -1050,6 +1053,9 @@
                     </Property>
                     <Property name="name" type="java.lang.String" value="jTbRole" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTbRoleActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JComboBox" name="jTbClass">
                   <Properties>
@@ -1058,6 +1064,9 @@
                     </Property>
                     <Property name="name" type="java.lang.String" value="jTbClass" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTbClassActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JButton" name="jBtnSearch">
                   <Properties>
