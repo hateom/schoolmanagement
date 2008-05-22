@@ -9,6 +9,7 @@ package schoolmanagement.dialogs;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.controller.ErrorLogger;
@@ -22,12 +23,17 @@ import schoolmanagement.entity.SmRole;
  * @author  deely
  */
 public class JEditClassDialog extends javax.swing.JFrame {
-    SmClass m_class;
+    private SmClass m_class;
+    private JTable m_table;
+    private int m_row;
     /** Creates new form JEditClassDialog */
-    public JEditClassDialog( SmClass iclass ) {
+    public JEditClassDialog( SmClass iclass, JTable target, int row ) {
         initComponents();
         m_class = iclass;
         realodDB();
+        
+        m_table = target;
+        m_row = row;
         
         setClassName( m_class.getClsNumber(), m_class.getClsNumberAlph(), m_class.getClsDescription() );
         setTutor( m_class.getClsPerId() );
@@ -263,6 +269,9 @@ public class JEditClassDialog extends javax.swing.JFrame {
         m_class.setClsDescription(getClassDesc());
         m_class.setClsPerId( getTutor() );
       
+        ((DefaultTableModel)m_table.getModel()).setValueAt( m_class, m_row, 0);
+        ((DefaultTableModel)m_table.getModel()).setValueAt( m_class.getClsDescription(), m_row, 1);
+        
         DBAccess.GetInstance().saveChanges(m_class);
         setVisible(false);
     }//GEN-LAST:event_jbtnSaveActionPerformed
@@ -304,7 +313,7 @@ public class JEditClassDialog extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JEditClassDialog( null ).setVisible(true);
+                new JEditClassDialog( null, null, 0 ).setVisible(true);
             }
         });
     }
