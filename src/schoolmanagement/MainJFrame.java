@@ -28,6 +28,7 @@ import schoolmanagement.entity.SmSubject;
 import schoolmanagement.entity.SmTeacher;
 import schoolmanagement.entity.SmUser;
 import schoolmanagement.dialogs.JNewMessageDialog;
+import schoolmanagement.entity.SmClassroom;
 import schoolmanagement.entity.SmMessage;
 
 /**
@@ -74,6 +75,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 "Oceny",
                 "Plan Zajęc",
                 "Klasy",
+                "Sale",
                 "Dzwonki"
             },
             new Object[] {
@@ -218,6 +220,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jtblClasses = new javax.swing.JTable();
         jbtAddClass = new javax.swing.JButton();
         jBtnReload = new javax.swing.JButton();
+        jPnlRooms = new javax.swing.JPanel();
+        jbtAddRoom = new javax.swing.JButton();
+        jBtnReload1 = new javax.swing.JButton();
+        jScrollPane10 = new javax.swing.JScrollPane();
+        jtblRooms = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -248,7 +255,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jLblLogText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLblLoggedAs)
-                .addContainerGap(541, Short.MAX_VALUE))
+                .addContainerGap(556, Short.MAX_VALUE))
         );
         jStatusLayout.setVerticalGroup(
             jStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -307,12 +314,12 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlProfileLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(personDetailsControl1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE)
+                    .addComponent(personDetailsControl1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPnlProfileLayout.createSequentialGroup()
                         .addComponent(jBtnPassCHange, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
                         .addComponent(jBtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 297, Short.MAX_VALUE))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE))
                 .addGap(119, 119, 119))
         );
         jPnlProfileLayout.setVerticalGroup(
@@ -325,7 +332,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnSave)
                     .addComponent(jBtnPassCHange))
-                .addContainerGap(121, Short.MAX_VALUE))
+                .addContainerGap(147, Short.MAX_VALUE))
         );
 
         jPnlProfile.setBounds(0, 0, 440, 480);
@@ -373,8 +380,8 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpanelProportiesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jcbPickClassForNotes, 0, 303, Short.MAX_VALUE)
-                    .addComponent(jcbPickSubjectForNotes, 0, 303, Short.MAX_VALUE))
+                    .addComponent(jcbPickClassForNotes, 0, 0, Short.MAX_VALUE)
+                    .addComponent(jcbPickSubjectForNotes, 0, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpanelProportiesLayout.setVerticalGroup(
@@ -434,14 +441,14 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
                     .addComponent(jpanelProporties, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(335, Short.MAX_VALUE))
         );
         jPnlNotesLayout.setVerticalGroup(
             jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPnlNotesLayout.createSequentialGroup()
                 .addComponent(jpanelProporties, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -478,7 +485,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jBtnNewMail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(410, Short.MAX_VALUE))
+                .addContainerGap(411, Short.MAX_VALUE))
         );
 
         jPnlMail.setBounds(0, 0, 440, 480);
@@ -491,11 +498,11 @@ public class MainJFrame extends javax.swing.JFrame {
         jPnlOptions.setLayout(jPnlOptionsLayout);
         jPnlOptionsLayout.setHorizontalGroup(
             jPnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 428, Short.MAX_VALUE)
+            .addGap(0, 424, Short.MAX_VALUE)
         );
         jPnlOptionsLayout.setVerticalGroup(
             jPnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 452, Short.MAX_VALUE)
+            .addGap(0, 450, Short.MAX_VALUE)
         );
 
         jPnlOptions.setBounds(0, 0, 440, 480);
@@ -521,7 +528,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jLabel24)
                 .addGap(18, 18, 18)
                 .addComponent(jcbSelectClass, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(194, Short.MAX_VALUE))
         );
         jpanelClassSelectLayout.setVerticalGroup(
             jpanelClassSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -582,7 +589,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlScheduleLayout.createSequentialGroup()
                 .addComponent(jpanelClassSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -651,7 +658,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(jSeparator5, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                     .addGroup(jPnlInboxLayout.createSequentialGroup()
                         .addComponent(jBtnNewMail3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
                         .addComponent(jbtReceive, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
                 .addContainerGap())
@@ -846,9 +853,9 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(jRbRole))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTbName, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                    .addComponent(jTbRole, 0, 154, Short.MAX_VALUE)
-                    .addComponent(jTbClass, 0, 154, Short.MAX_VALUE))
+                    .addComponent(jTbName, javax.swing.GroupLayout.DEFAULT_SIZE, 169, Short.MAX_VALUE)
+                    .addComponent(jTbRole, 0, 169, Short.MAX_VALUE)
+                    .addComponent(jTbClass, 0, 169, Short.MAX_VALUE))
                 .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jBtnDeletePerson, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -893,7 +900,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlPeopleLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 313, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -942,7 +949,7 @@ public class MainJFrame extends javax.swing.JFrame {
             jPnlRingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPnlRingsLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
 
         jPnlRings.setBounds(0, 0, 440, 480);
@@ -1018,8 +1025,8 @@ public class MainJFrame extends javax.swing.JFrame {
                     .addComponent(jRbSubject))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTbSubs, 0, 146, Short.MAX_VALUE)
-                    .addComponent(jTbName1, javax.swing.GroupLayout.DEFAULT_SIZE, 146, Short.MAX_VALUE))
+                    .addComponent(jTbSubs, 0, 161, Short.MAX_VALUE)
+                    .addComponent(jTbName1, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
                 .addGap(38, 38, 38)
                 .addComponent(jBtnSearch2, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -1055,7 +1062,7 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlTeachersLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 346, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -1134,11 +1141,91 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPnlClassesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtAddClass)
                     .addComponent(jBtnReload))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPnlClasses.setBounds(0, 0, 440, 480);
         jLayers.add(jPnlClasses, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        jPnlRooms.setBorder(javax.swing.BorderFactory.createTitledBorder("Sale")); // NOI18N
+        jPnlRooms.setName("jPnlRooms"); // NOI18N
+        jPnlRooms.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPnlRoomsComponentShown(evt);
+            }
+        });
+
+        jbtAddRoom.setText("Dodaj sale"); // NOI18N
+        jbtAddRoom.setName("jbtAddRoom"); // NOI18N
+        jbtAddRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtAddRoomActionPerformed(evt);
+            }
+        });
+
+        jBtnReload1.setText("Przeladuj"); // NOI18N
+        jBtnReload1.setName("jBtnReload1"); // NOI18N
+        jBtnReload1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnReload1ActionPerformed(evt);
+            }
+        });
+
+        jScrollPane10.setName("jScrollPane10"); // NOI18N
+
+        jtblRooms.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Numer sali", "Sala"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jtblRooms.setName("jtblRooms"); // NOI18N
+        jtblRooms.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblRoomsmouseClicked(evt);
+            }
+        });
+        jScrollPane10.setViewportView(jtblRooms);
+
+        javax.swing.GroupLayout jPnlRoomsLayout = new javax.swing.GroupLayout(jPnlRooms);
+        jPnlRooms.setLayout(jPnlRoomsLayout);
+        jPnlRoomsLayout.setHorizontalGroup(
+            jPnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 424, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlRoomsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPnlRoomsLayout.createSequentialGroup()
+                        .addComponent(jBtnReload1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
+                        .addComponent(jbtAddRoom, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane10, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPnlRoomsLayout.setVerticalGroup(
+            jPnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 450, Short.MAX_VALUE)
+            .addGroup(jPnlRoomsLayout.createSequentialGroup()
+                .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtAddRoom)
+                    .addComponent(jBtnReload1))
+                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        jPnlRooms.setBounds(0, 0, 440, 480);
+        jLayers.add(jPnlRooms, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jMenuBar1.setName("jMenuBar1"); // NOI18N
 
@@ -1210,8 +1297,10 @@ public class MainJFrame extends javax.swing.JFrame {
             c = jPnlSchedule;
         } else if( layer.compareTo("Nauczyciele") == 0 ) {
             c = jPnlTeachers;
-        }else if( layer.compareTo("Klasy") == 0 ) {
+        } else if( layer.compareTo("Klasy") == 0 ) {
             c = jPnlClasses;
+        } else if( layer.compareTo("Sale") == 0 ) {
+            c = jPnlRooms;
         }
         
         for( Component k: jLayers.getComponents() ) {
@@ -1680,6 +1769,43 @@ private void jBtnDeletePersonActionPerformed(java.awt.event.ActionEvent evt) {//
     }
 }//GEN-LAST:event_jBtnDeletePersonActionPerformed
 
+private void jbtAddRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAddRoomActionPerformed
+    JNewClassroomDialog nc = new JNewClassroomDialog();
+    nc.setVisible(true);
+}//GEN-LAST:event_jbtAddRoomActionPerformed
+
+private void jBtnReload1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnReload1ActionPerformed
+    reloadClassrooms();
+}//GEN-LAST:event_jBtnReload1ActionPerformed
+
+private void jtblRoomsmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblRoomsmouseClicked
+    if( jtblRooms.getSelectedRowCount() != 1 ) return;
+    int row = jtblRooms.getSelectedRow();
+    Object o = jtblRooms.getValueAt(row, 0);
+    if(o == null) return;
+    SmClassroom classroom = (SmClassroom)jtblRooms.getValueAt(row, 0);
+    JEditClassroomDialog ec = new JEditClassroomDialog(classroom, jtblRooms, row);
+    ec.setVisible(true);
+}//GEN-LAST:event_jtblRoomsmouseClicked
+
+private void jPnlRoomsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlRoomsComponentShown
+    // zaladuj sale
+    reloadClassrooms();
+}//GEN-LAST:event_jPnlRoomsComponentShown
+
+public void reloadClassrooms()
+{
+    DefaultTableModel tm = (DefaultTableModel)jtblRooms.getModel();
+    
+    while( tm.getRowCount() > 0 ) tm.removeRow(0);
+    List<SmClassroom> list = DBAccess.GetInstance().getAllClasrooms();
+    
+    for( SmClassroom cl : list )
+    {
+        tm.addRow(new Object[] { cl, cl.getClrDescr() });
+    }
+}
+
 String dateToTimeString( Date date )
 {
     return String.format("%tH:%tM",date,date);
@@ -1706,6 +1832,7 @@ String dateToTimeString( Date date )
     private javax.swing.JButton jBtnNewMail3;
     private javax.swing.JButton jBtnPassCHange;
     private javax.swing.JButton jBtnReload;
+    private javax.swing.JButton jBtnReload1;
     private javax.swing.JButton jBtnSave;
     private javax.swing.JButton jBtnSearch;
     private javax.swing.JButton jBtnSearch2;
@@ -1731,6 +1858,7 @@ String dateToTimeString( Date date )
     private javax.swing.JPanel jPnlPeople;
     private javax.swing.JPanel jPnlProfile;
     private javax.swing.JPanel jPnlRings;
+    private javax.swing.JPanel jPnlRooms;
     private javax.swing.JPanel jPnlSchedule;
     private javax.swing.JPanel jPnlTeachers;
     private javax.swing.JRadioButton jRbClass;
@@ -1739,6 +1867,7 @@ String dateToTimeString( Date date )
     private javax.swing.JRadioButton jRbSurname;
     private javax.swing.JRadioButton jRbSurname1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane10;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -1762,6 +1891,7 @@ String dateToTimeString( Date date )
     private javax.swing.JTable jTblTeachers;
     private javax.swing.JTree jTree;
     private javax.swing.JButton jbtAddClass;
+    private javax.swing.JButton jbtAddRoom;
     private javax.swing.JButton jbtReceive;
     private javax.swing.JComboBox jcbPickClassForNotes;
     private javax.swing.JComboBox jcbPickSubjectForNotes;
@@ -1772,6 +1902,7 @@ String dateToTimeString( Date date )
     private javax.swing.JPanel jpanelProporties;
     private javax.swing.JTable jtblClasses;
     private javax.swing.JTable jtblPupilNotes;
+    private javax.swing.JTable jtblRooms;
     private javax.swing.JTable jtblScheldue;
     private schoolmanagement.controls.PersonDetailsControl personDetailsControl1;
     // End of variables declaration//GEN-END:variables
