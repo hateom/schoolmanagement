@@ -500,7 +500,7 @@ public class DataAccess {
     {
         try
         {
-            SmPerson2class p2c = (SmPerson2class) m_oEm.createQuery("SELECT").setParameter(1, a_oClass).setParameter(2, a_oPerson).setHint("refresh", new Boolean(true)).getSingleResult();
+            SmPerson2class p2c = (SmPerson2class) m_oEm.createQuery("SELECT p2c FROM SmPerson2class p2c WHERE p2c.p2cPerId = ?2 AND p2c.p2cClsId = ?1").setParameter(1, a_oClass).setParameter(2, a_oPerson).setHint("refresh", new Boolean(true)).getSingleResult();
             if(delete(p2c))
             {
                 a_oPerson.getSmPerson2classCollection().remove(p2c);
@@ -508,7 +508,9 @@ public class DataAccess {
             }
         }
         catch(Exception e)
-        {}
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
         return false;
     }
     
