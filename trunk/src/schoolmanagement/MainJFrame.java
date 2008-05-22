@@ -1274,8 +1274,7 @@ public class MainJFrame extends javax.swing.JFrame {
         }
         
         for(SmPerson person : list){
-            model.addRow(new Object[]{person,
-                                      person.getSmUserCollection().iterator().next().getUsrRolId().getRolName()});
+            model.addRow(new Object[]{person, DBAccess.GetInstance().getUserRole(person)});
             //int row = list.indexOf(person);
             //jTable4.setValueAt(person.getPerSurname(), row, 0);
             //jTable4.setValueAt(person.getPerName(), row, 1);
