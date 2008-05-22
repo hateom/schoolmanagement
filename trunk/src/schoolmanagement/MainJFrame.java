@@ -1613,8 +1613,8 @@ private void jtblClassesmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST
       if(o == null)
           return;
       SmClass cls = (SmClass)o;
-      JEditClassDialog dlg = new JEditClassDialog(cls, target, row);
-      dlg.setVisible(true);
+     // JEditClassDialog dlg = new JEditClassDialog(cls, target, row);
+      //dlg.setVisible(true);
    }
 }//GEN-LAST:event_jtblClassesmouseClicked
 
