@@ -587,9 +587,9 @@ public class DataAccess {
         switch(a_eRole)
         {
           case ROLE_TEACHER: { return getRoleByName("Nauczyciel");}
-          case ROLE_ADMIN: { return getRoleByName("Nauczyciel");}
-          case ROLE_PRINCIPAL: { return getRoleByName("Nauczyciel");}
-          case ROLE_STUDENT: { return getRoleByName("Nauczyciel");}
+          case ROLE_ADMIN: { return getRoleByName("Admin");}
+          case ROLE_PRINCIPAL: { return getRoleByName("Dyrektor");}
+          case ROLE_STUDENT: { return getRoleByName("Uczeń");}
             default: return null;
         }
     }
