@@ -795,12 +795,12 @@ public class DataAccess {
         return false;
     }
     
-    public SmClassroom getClassroomByName( String a_oStrName )
+    public List<SmClassroom> getClassroomByName( String a_oStrName )
     {
         try
         {
             Query query = m_oEm.createQuery("SELECT c FROM SmClassroom c WHERE c.clrDescr LIKE ?1").setParameter(1, a_oStrName).setHint("refresh", new Boolean(true));
-            return (SmClassroom) query.getSingleResult();
+            return query.getResultList();
         }
         catch(Exception e)
         {
