@@ -8,6 +8,7 @@ package schoolmanagement.dialogs;
 
 import java.util.List;
 import schoolmanagement.controller.DBAccess;
+import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmClassroom;
 import schoolmanagement.entity.SmDay;
 import schoolmanagement.entity.SmPerson;
@@ -29,9 +30,10 @@ public class JAddLessonDialog extends javax.swing.JDialog {
     private SmSchedule m_lesson;
     private SmPerson m_person;
     private SmSubject m_subject;
+    private SmClass m_class;
     
     /** Creates new form JAddLessonDialog */
-    public JAddLessonDialog(java.awt.Frame parent, boolean modal, SmDay day, SmRing ring, SmSchedule lesson ) {
+    public JAddLessonDialog(java.awt.Frame parent, boolean modal, SmClass cls, SmDay day, SmRing ring, SmSchedule lesson ) {
         super(parent, modal);
         initComponents();
         
@@ -40,12 +42,18 @@ public class JAddLessonDialog extends javax.swing.JDialog {
         m_ring = ring;
         m_day = day;
         m_lesson = lesson;
+        m_class = cls;
         
         if( m_lesson != null) {
             setPerson( m_lesson.getSchTchId().getTchPerId() );
             setSubject( m_lesson.getSchTchId().getTchSubId() );
             setClassroom( m_lesson.getSchClrId() );
         }
+    }
+    
+    public SmSchedule getResult()
+    {
+        return m_lesson;
     }
     
     public SmClassroom getClassroom()
@@ -103,6 +111,11 @@ public class JAddLessonDialog extends javax.swing.JDialog {
         });
 
         jcbRooms.setName("jcbRooms"); // NOI18N
+        jcbRooms.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbRoomsActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Przedmiot:"); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
@@ -193,6 +206,7 @@ public class JAddLessonDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbtnCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnCancelActionPerformed
+        m_lesson = null;
         setVisible(false);        // TODO add your handling code here:
     }//GEN-LAST:event_jbtnCancelActionPerformed
 
@@ -201,11 +215,11 @@ public class JAddLessonDialog extends javax.swing.JDialog {
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
         if( m_lesson != null )
         {
-            //m_lesson = DBAccess.GetInstance().addSchedule(m_day, m_class, m_ring, m_teacher, m_classroom );
+            m_lesson = DBAccess.GetInstance().addSchedule( m_day, m_class, m_ring, m_teacher, m_classroom );
         }
         else
         {
-            // create new lesson
+            m_lesson = DBAccess.GetInstance().addSchedule(m_day, m_class, m_ring, m_teacher, m_classroom );
         }
         setVisible(false);
     }//GEN-LAST:event_jbtnSaveActionPerformed
@@ -231,6 +245,8 @@ public class JAddLessonDialog extends javax.swing.JDialog {
         {
             jcbTeachers.addItem(t);
         }
+        
+        m_subject = (SmSubject) jcbSubjects.getSelectedItem();
     }//GEN-LAST:event_jcbSubjectsActionPerformed
 
     private void jcbTeachersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTeachersActionPerformed
@@ -242,7 +258,13 @@ public class JAddLessonDialog extends javax.swing.JDialog {
         {
             jcbRooms.addItem(cl);
         }
+        
+        m_teacher = (SmTeacher) jcbTeachers.getSelectedItem();
     }//GEN-LAST:event_jcbTeachersActionPerformed
+
+    private void jcbRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbRoomsActionPerformed
+        m_classroom = (SmClassroom) jcbRooms.getSelectedItem();
+    }//GEN-LAST:event_jcbRoomsActionPerformed
     
     /**
      * @param args the command line arguments
@@ -250,7 +272,7 @@ public class JAddLessonDialog extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JAddLessonDialog dialog = new JAddLessonDialog(new javax.swing.JFrame(), true, null, null, null );
+                JAddLessonDialog dialog = new JAddLessonDialog(new javax.swing.JFrame(), true, null, null, null, null );
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
