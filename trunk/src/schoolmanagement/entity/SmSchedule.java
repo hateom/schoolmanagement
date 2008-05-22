@@ -123,7 +123,7 @@ public class SmSchedule implements Serializable {
 
     @Override
     public String toString() {
-        return "schoolmanagement.entity.SmSchedule[schId=" + schId + "]";
+        return schTchId.getTchSubId().getSubName()+" / "+schTchId.getTchPerId().getPerSurname();
     }
 
 }

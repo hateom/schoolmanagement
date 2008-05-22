@@ -316,6 +316,19 @@ public class DataAccess {
         return false;
     }
     
+    public SmTeacher getTeacher( SmSubject a_oSubject, SmPerson a_oPerson)
+    {
+        try{
+            Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchSubId = ?1 AND t.tchPerId = ?2").setParameter(1, a_oSubject).setParameter(1, a_oPerson).setHint("refresh", new Boolean(true));
+            return (SmTeacher) query.getSingleResult();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return null;
+    }
+    
     public List<SmTeacher> getTeacherForSubject(SmSubject a_oSubject)
     {
         try{
