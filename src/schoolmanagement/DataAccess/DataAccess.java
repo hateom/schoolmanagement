@@ -17,6 +17,7 @@ import schoolmanagement.controller.ErrorLogger;
 import schoolmanagement.controller.RoleType;
 import schoolmanagement.controller.TeacherCollection;
 import schoolmanagement.entity.SmClass;
+import schoolmanagement.entity.SmClassroom;
 import schoolmanagement.entity.SmMessage;
 import schoolmanagement.entity.SmNote;
 import schoolmanagement.entity.SmPerson;
@@ -82,6 +83,8 @@ public class DataAccess {
         return false;
     }
     
+    
+    
  // USER METHODS -----------------------------------------------   
     /**
      * Logowanie uzytkownika
@@ -98,6 +101,20 @@ public class DataAccess {
         catch(Exception ex)
         {
             
+        }
+        return null;
+    }
+    
+    public SmRole getUserRole(SmPerson a_oPerson)
+    {
+        try
+        {
+            Query query = m_oEm.createQuery("SELECT u.usrRolId FROM SmUser u WHERE u.usrPerId = ?1").setParameter(1, a_oPerson).setHint("refresh", new Boolean(true));
+            return (SmRole)query.getSingleResult();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -190,7 +207,7 @@ public class DataAccess {
         usr.setUsrPasswd(a_strPasswd);
         if(save(usr))
         {
-            a_oPerID.getSmUserCollection().add(usr);
+            //a_oPerID.getSmUserCollection().add(usr);
             return usr;
         }
         return null;
@@ -325,8 +342,8 @@ public class DataAccess {
         {
             teacher = (SmTeacher)query.getSingleResult();
             m_oEm.getTransaction().begin();
-            a_oPerson.getSmTeacherCollection().remove(teacher);
-            a_oSubject.getSmTeacherCollection().remove(teacher);
+            //a_oPerson.getSmTeacherCollection().remove(teacher);
+            //a_oSubject.getSmTeacherCollection().remove(teacher);
             m_oEm.remove(teacher);
             m_oEm.getTransaction().commit();
             return true;
@@ -336,8 +353,8 @@ public class DataAccess {
             m_oEm.getTransaction().rollback();
             if( teacher != null )
             {
-                a_oPerson.getSmTeacherCollection().add(teacher);
-                a_oSubject.getSmTeacherCollection().add(teacher);
+                //a_oPerson.getSmTeacherCollection().add(teacher);
+                //a_oSubject.getSmTeacherCollection().add(teacher);
             }
             ErrorLogger.error(e.getLocalizedMessage());
         }
@@ -408,7 +425,7 @@ public class DataAccess {
         if(save(teacher))
         {
             //a_oSubject.getSmTeacherCollection().add(teacher);
-            a_oPerson.getSmTeacherCollection().add(teacher);
+           // a_oPerson.getSmTeacherCollection().add(teacher);
             return teacher;
         }
         return null;
@@ -510,8 +527,8 @@ public class DataAccess {
             SmPerson2class p2c = (SmPerson2class) m_oEm.createQuery("SELECT p2c FROM SmPerson2class p2c WHERE p2c.p2cPerId = ?2 AND p2c.p2cClsId = ?1").setParameter(1, a_oClass).setParameter(2, a_oPerson).setHint("refresh", new Boolean(true)).getSingleResult();
             if(delete(p2c))
             {
-                a_oPerson.getSmPerson2classCollection().remove(p2c);
-                a_oClass.getSmPerson2classCollection().remove(p2c);
+               // a_oPerson.getSmPerson2classCollection().remove(p2c);
+              //  a_oClass.getSmPerson2classCollection().remove(p2c);
             }
         }
         catch(Exception e)
@@ -528,8 +545,8 @@ public class DataAccess {
         p2c.setP2cClsId(a_oClass);
         if( save(p2c) )
         {
-            a_oPerson.getSmPerson2classCollection().add(p2c);
-            a_oClass.getSmPerson2classCollection().add(p2c);
+            //a_oPerson.getSmPerson2classCollection().add(p2c);
+           // a_oClass.getSmPerson2classCollection().add(p2c);
             return true;
         }
         return false;
@@ -718,4 +735,78 @@ public class DataAccess {
         return delete(a_oMessage);
     }
 //------------------------------------
+    
+    
+    
+    ////--------------------------------CLASSROM METHODS----------------
+    public List<SmClassroom> getAllClasrooms()
+    {
+        try
+        {
+            Query query = m_oEm.createQuery("SELECT c FROM SmClassroom c").setHint("refresh", new Boolean(true));
+            return query.getResultList();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return null;
+    }
+    public SmClassroom addClassRom( int a_nClassroomNum, SmPerson a_oOwnerPer, String a_strDescription )
+    {
+        try
+        {
+            SmClassroom clsr = new SmClassroom();
+            clsr.setClrId(a_nClassroomNum);
+            clsr.setClrOwnerPerId(a_oOwnerPer);
+            clsr.setClrDescr(a_strDescription);
+            if(save(clsr))
+                return clsr;
+            return null;
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return null;
+    }
+    public boolean updateClassroom(SmClassroom a_oClsRoom)
+    {
+        try
+        {
+            return save(a_oClsRoom);
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return false;
+    }
+    public boolean removeClassroom(SmClassroom a_oClsr)
+    {
+        try
+        {
+            return delete(a_oClsr);
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return false;
+    }
+    
+    public SmClassroom getClassroomByName( String a_oStrName )
+    {
+        try
+        {
+            Query query = m_oEm.createQuery("SELECT c FROM SmClassroom c WHERE c.clrDescr LIKE ?1").setParameter(1, a_oStrName).setHint("refresh", new Boolean(true));
+            return (SmClassroom) query.getSingleResult();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return null;
+    }
+    ////--------------------------------END OF CLASSROM ----------------
 }
