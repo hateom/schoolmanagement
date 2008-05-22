@@ -7,6 +7,7 @@ package schoolmanagement.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -31,10 +32,10 @@ public class SmClassroom implements Serializable {
     private Integer clrId;
     @Column(name = "CLR_DESCR")
     private String clrDescr;
-    @OneToMany(mappedBy = "schClrId")
+    @OneToMany(mappedBy = "schClrId", cascade = CascadeType.ALL)
     private Collection<SmSchedule> smScheduleCollection;
     @JoinColumn(name = "CLR_OWNER_PER_ID", referencedColumnName = "PER_ID")
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private SmPerson clrOwnerPerId;
 
     public SmClassroom() {
@@ -98,7 +99,7 @@ public class SmClassroom implements Serializable {
 
     @Override
     public String toString() {
-        return "schoolmanagement.entity.SmClassroom[clrId=" + clrId + "]";
+        return "" + clrId;
     }
 
 }
