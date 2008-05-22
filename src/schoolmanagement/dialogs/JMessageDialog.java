@@ -99,9 +99,19 @@ public class JMessageDialog extends javax.swing.JFrame {
 
         jbtnReply.setText("Odpowiedz"); // NOI18N
         jbtnReply.setName("jbtnReply"); // NOI18N
+        jbtnReply.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnReplyActionPerformed(evt);
+            }
+        });
 
         jbtnForward.setText("Przeslij dalej"); // NOI18N
         jbtnForward.setName("jbtnForward"); // NOI18N
+        jbtnForward.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnForwardActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -177,6 +187,27 @@ public class JMessageDialog extends javax.swing.JFrame {
     private void jPanel1ComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPanel1ComponentShown
         setSender( m_message.getMsgSenderUsrId() );
     }//GEN-LAST:event_jPanel1ComponentShown
+
+    private void jbtnReplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReplyActionPerformed
+        JNewMessageDialog nm = new JNewMessageDialog();
+        nm.setVisible(true);
+        nm.addReceiver(getSender().getUsrPerId());
+        nm.setSubject( "Re: " + getSubject());
+        String reply = getBody();
+        reply = reply.replaceAll( "\n", "\n> " );
+        nm.setBody( "> " + reply + "\n\n" );
+        nm.updateReceiversText();
+    }//GEN-LAST:event_jbtnReplyActionPerformed
+
+    private void jbtnForwardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnForwardActionPerformed
+        JNewMessageDialog nm = new JNewMessageDialog();
+        nm.setVisible(true);
+        nm.setSubject( "Fwd: " + getSubject());
+        String reply = getBody();
+        reply = reply.replaceAll( "\n", "\n> " );
+        nm.setBody( "> " + reply + "\n\n" );
+        nm.updateReceiversText();
+    }//GEN-LAST:event_jbtnForwardActionPerformed
     
     public void setSender( SmUser sender )
     {
