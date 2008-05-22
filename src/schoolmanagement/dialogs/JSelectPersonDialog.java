@@ -80,8 +80,18 @@ public class JSelectPersonDialog extends javax.swing.JDialog {
 
         jTbRole.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Dyrekcja", "Nauczyciele", "Uczniowie" }));
         jTbRole.setName("jTbRole"); // NOI18N
+        jTbRole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTbRoleActionPerformed(evt);
+            }
+        });
 
         jTbClass.setName("jTbClass"); // NOI18N
+        jTbClass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTbClassActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -123,6 +133,11 @@ public class JSelectPersonDialog extends javax.swing.JDialog {
         jRbSurname.setName("jRbSurname"); // NOI18N
 
         jTbName.setName("jTbName"); // NOI18N
+        jTbName.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                jTbNameFocusGained(evt);
+            }
+        });
 
         jBtnSearch.setText("Szukaj"); // NOI18N
         jBtnSearch.setName("jBtnSearch"); // NOI18N
@@ -237,6 +252,8 @@ public class JSelectPersonDialog extends javax.swing.JDialog {
     private void jBtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearchActionPerformed
         // TODO add your handling code here:
         
+        jRbSurname.setSelected(true);
+        
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
         },
@@ -335,6 +352,18 @@ public class JSelectPersonDialog extends javax.swing.JDialog {
             jTbClass.addItem(smclass);
         }
     }//GEN-LAST:event_formComponentShown
+
+    private void jTbRoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbRoleActionPerformed
+        jRbRole.setSelected(true);
+    }//GEN-LAST:event_jTbRoleActionPerformed
+
+    private void jTbClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTbClassActionPerformed
+        jRbClass.setSelected(true);
+    }//GEN-LAST:event_jTbClassActionPerformed
+
+    private void jTbNameFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbNameFocusGained
+        jRbSurname.setSelected(true);
+    }//GEN-LAST:event_jTbNameFocusGained
     
     /**
      * @param args the command line arguments
@@ -344,6 +373,7 @@ public class JSelectPersonDialog extends javax.swing.JDialog {
             public void run() {
                 JSelectPersonDialog dialog = new JSelectPersonDialog(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
                     }
