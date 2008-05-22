@@ -67,23 +67,23 @@ public class JMessageDialog extends javax.swing.JFrame {
         jLabel1.setName("jLabel1"); // NOI18N
 
         jtbSender.setBackground(new java.awt.Color(204, 255, 204));
+        jtbSender.setEditable(false);
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JMessageDialog.class);
         jtbSender.setText(resourceMap.getString("jtbSender.text")); // NOI18N
-        jtbSender.setEnabled(false);
         jtbSender.setName("jtbSender"); // NOI18N
 
         jLabel2.setText("Temat:"); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
 
+        jtbSubject.setEditable(false);
         jtbSubject.setText(resourceMap.getString("jtbSubject.text")); // NOI18N
-        jtbSubject.setEnabled(false);
         jtbSubject.setName("jtbSubject"); // NOI18N
 
         jLabel3.setText("Wyslano:"); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
 
+        jtbDate.setEditable(false);
         jtbDate.setText(resourceMap.getString("jtbDate.text")); // NOI18N
-        jtbDate.setEnabled(false);
         jtbDate.setName("jtbDate"); // NOI18N
 
         jSeparator1.setName("jSeparator1"); // NOI18N
@@ -91,9 +91,9 @@ public class JMessageDialog extends javax.swing.JFrame {
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         jtBody.setColumns(20);
+        jtBody.setEditable(false);
         jtBody.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jtBody.setRows(5);
-        jtBody.setEnabled(false);
         jtBody.setName("jtBody"); // NOI18N
         jScrollPane1.setViewportView(jtBody);
 
