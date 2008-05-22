@@ -34,6 +34,7 @@ public class JNewMessageDialog extends javax.swing.JFrame {
     {
         String recv = "";
             
+        if( m_receivers == null ) return;
         for( SmPerson p : m_receivers )
         {
             if( recv.compareTo("") != 0 ) {
