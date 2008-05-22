@@ -345,11 +345,12 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
         loadRings();
         DefaultTableModel tm = (DefaultTableModel) jTblSchedule.getModel();
         
+        List<SmSchedule> list = DBAccess.GetInstance().getSchedule(day, m_class);
+        if( list == null ) return;
+        
         for( int i=0; i<tm.getRowCount(); ++i )
         {
             SmRing ring = (SmRing) tm.getValueAt(i, 0);
-            List<SmSchedule> list = DBAccess.GetInstance().getSchedule(day, m_class);
-            if( list == null ) continue;
             for( SmSchedule lesson : list )
             {
                 if( lesson.getSchRngId() == ring )
