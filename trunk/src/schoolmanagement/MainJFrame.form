@@ -611,13 +611,13 @@
                 <Component class="javax.swing.JTable" name="jtblScheldue">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                      <Table columnCount="6" rowCount="10">
-                        <Column editable="true" title="Godzina" type="java.lang.String"/>
-                        <Column editable="true" title="Poniedzia&#x142;ek" type="java.lang.String"/>
-                        <Column editable="true" title="Wtorek" type="java.lang.String"/>
-                        <Column editable="true" title="&#x15a;roda" type="java.lang.String"/>
-                        <Column editable="true" title="Czwartek" type="java.lang.String"/>
-                        <Column editable="true" title="Pi&#x105;tek" type="java.lang.String"/>
+                      <Table columnCount="6" rowCount="0">
+                        <Column editable="false" title="Godzina" type="java.lang.String"/>
+                        <Column editable="false" title="Poniedzia&#x142;ek" type="java.lang.String"/>
+                        <Column editable="false" title="Wtorek" type="java.lang.String"/>
+                        <Column editable="false" title="&#x15a;roda" type="java.lang.String"/>
+                        <Column editable="false" title="Czwartek" type="java.lang.String"/>
+                        <Column editable="false" title="Pi&#x105;tek" type="java.lang.String"/>
                       </Table>
                     </Property>
                     <Property name="name" type="java.lang.String" value="jtblScheldue" noResource="true"/>
