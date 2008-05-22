@@ -287,7 +287,7 @@ public class JSelectPersonDialog extends javax.swing.JDialog {
         
         for(SmPerson person : list){
             model.addRow(new Object[]{person,
-            person.getSmUserCollection().iterator().next().getUsrRolId().getRolName()});
+            DBAccess.GetInstance().getUserRole(person).getRolName()});
             //int row = list.indexOf(person);
             //jTable4.setValueAt(person.getPerSurname(), row, 0);
             //jTable4.setValueAt(person.getPerName(), row, 1);
