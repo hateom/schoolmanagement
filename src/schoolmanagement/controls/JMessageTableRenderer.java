@@ -7,6 +7,7 @@ package schoolmanagement.controls;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 import schoolmanagement.entity.SmMessage;
@@ -21,23 +22,30 @@ public class JMessageTableRenderer extends DefaultTableCellRenderer {
        (JTable table, Object value, boolean isSelected,
        boolean hasFocus, int row, int column) 
     {
+        
         Component cell = super.getTableCellRendererComponent
            (table, value, isSelected, hasFocus, row, column);
-        if( value instanceof SmMessage )
+        
+        SmMessage msg = (SmMessage)table.getModel().getValueAt(row, 1);
+        if( msg instanceof SmMessage )
         {
-            SmMessage msg = (SmMessage) value;
             if( msg.getMsgReaded() == false )
             {
-                cell.setBackground( Color.red );
-                // You can also customize the Font and Foreground this way
-                // cell.setForeground();
-                // cell.setFont();
+                Font newFont = cell.getFont().deriveFont( Font.BOLD );
+                cell.setFont( newFont );
             }
             else
             {
-                cell.setBackground( Color.white );
+                Font newFont = cell.getFont().deriveFont( Font.PLAIN );
+                cell.setFont( newFont );
             }
+            
+            if( isSelected ) 
+                cell.setBackground( Color.LIGHT_GRAY );
+            else
+                cell.setBackground( Color.white );
         }
+
         return cell;
     }
 }

@@ -9,6 +9,8 @@ import java.awt.Component;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.event.TableModelEvent;
@@ -19,6 +21,7 @@ import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import schoolmanagement.controller.*;
+import schoolmanagement.controls.JMessageTableRenderer;
 import schoolmanagement.dialogs.*;
 import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmPerson;
@@ -1454,15 +1457,21 @@ private void jPnlInboxComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
 public void refreshInbox()
 {
     SmUser me = DBAccess.GetInstance().getUserByPerson(User.GetUserPerson());
-    List<SmMessage> list = DBAccess.GetInstance().getRecievedMessages( me, null, true );
-    
-    DefaultTableModel dm = (DefaultTableModel)jlReceived.getModel();
-    
-    while(dm.getRowCount() > 0) dm.removeRow(0);
-    
-    for( SmMessage msg : list )
-    {
-        dm.addRow(new Object[] { msg.getMsgSenderUsrId().getUsrPerId(), msg, msg.getMsgSendDate().toString() } );
+    List<SmMessage> list = DBAccess.GetInstance().getRecievedMessages(me, null, true);
+
+    DefaultTableModel dm = (DefaultTableModel) jlReceived.getModel();
+
+    try {
+        jlReceived.setDefaultRenderer(Class.forName("java.lang.Object"), new JMessageTableRenderer());
+    } catch (ClassNotFoundException ex) {
+        ErrorLogger.error("Renderer failed...");
+    }
+
+    while (dm.getRowCount() > 0) {
+        dm.removeRow(0);
+    }
+    for (SmMessage msg : list) {
+        dm.addRow(new Object[]{msg.getMsgSenderUsrId().getUsrPerId(), msg, msg.getMsgSendDate().toString()});
     }
 }
 
