@@ -9,8 +9,10 @@ package schoolmanagement.dialogs;
 import javax.swing.table.DefaultTableModel;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.controller.ErrorLogger;
+import schoolmanagement.controller.RoleType;
 import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmPerson;
+import schoolmanagement.entity.SmRole;
 
 /**
  *
@@ -91,6 +93,11 @@ public class JNewClassDialog extends javax.swing.JFrame {
 
         jBtnAdd.setText("Dodaj osobe do klasy"); // NOI18N
         jBtnAdd.setName("jBtnAdd"); // NOI18N
+        jBtnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAddActionPerformed(evt);
+            }
+        });
 
         jBtnDelete.setText(resourceMap.getString("jBtnDelete.text")); // NOI18N
         jBtnDelete.setName("jBtnDelete"); // NOI18N
@@ -196,6 +203,17 @@ public class JNewClassDialog extends javax.swing.JFrame {
         }
         setVisible(false);
     }//GEN-LAST:event_jbtnSaveActionPerformed
+
+    private void jBtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddActionPerformed
+        SmRole role = DBAccess.GetInstance().getRoleByType( RoleType.ROLE_STUDENT );
+        JSelectPersonByRoleDialog sp = new JSelectPersonByRoleDialog( this, true, role );
+        sp.setVisible(true);
+        SmPerson pers;
+        if( ( pers = sp.getResult() ) == null ) return;
+        
+        DefaultTableModel tm = (DefaultTableModel)jTblStudents.getModel();
+        tm.addRow( new Object[] { pers } );
+    }//GEN-LAST:event_jBtnAddActionPerformed
     
     /**
      * @param args the command line arguments

@@ -197,6 +197,9 @@
             <Property name="text" type="java.lang.String" value="Dodaj osobe do klasy" noResource="true"/>
             <Property name="name" type="java.lang.String" value="jBtnAdd" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBtnAddActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jBtnDelete">
           <Properties>
