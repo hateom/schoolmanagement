@@ -1779,6 +1779,7 @@ private void jBtnReload1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_jBtnReload1ActionPerformed
 
 private void jtblRoomsmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblRoomsmouseClicked
+    if( evt.getClickCount() != 2 ) return;
     if( jtblRooms.getSelectedRowCount() != 1 ) return;
     int row = jtblRooms.getSelectedRow();
     Object o = jtblRooms.getValueAt(row, 0);

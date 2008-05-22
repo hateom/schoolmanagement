@@ -31,6 +31,7 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
         
         m_table = target;
         m_row = row;
+        m_class = cr;
         
         setNo(cr.getClrId());
         setDesc(cr.getClrDescr());
@@ -50,7 +51,10 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
     public void setHost( SmPerson host )
     {
         m_host = host;
-        jtbHost.setText( m_host.toString() );
+        if( m_host != null )
+            jtbHost.setText( m_host.toString() );
+        else
+            jtbHost.setText( "" );
     }
     
     public int getNo()
@@ -234,6 +238,8 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
         
         tm.setValueAt(m_class, m_row, 0);
         tm.setValueAt(m_class.getClrDescr(), m_row, 1);
+        
+        m_class.setClrOwnerPerId(getHost());
         
         DBAccess.GetInstance().updateClassroom( m_class );
         
