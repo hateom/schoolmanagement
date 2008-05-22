@@ -136,10 +136,7 @@ public class JSelectPersonDialog extends javax.swing.JDialog {
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nazwisko i Imię", "Grupa"
