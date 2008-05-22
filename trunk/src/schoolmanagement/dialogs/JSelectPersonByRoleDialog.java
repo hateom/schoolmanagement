@@ -50,7 +50,7 @@ public class JSelectPersonByRoleDialog extends javax.swing.JDialog {
 
         setName("Form"); // NOI18N
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Wybierz osobe")); // NOI18N
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Wybierz osobe"));
         jPanel3.setName("jPanel3"); // NOI18N
 
         jTbName2.setName("jTbName2"); // NOI18N
@@ -169,26 +169,6 @@ public class JSelectPersonByRoleDialog extends javax.swing.JDialog {
 
     private void jBtnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearch2ActionPerformed
         // TODO add your handling code here:
-        
-        
-        
-        jTblRoleUsers.setModel(new javax.swing.table.DefaultTableModel(
-                new Object [][] {
-        },
-                new String [] {
-            "Nazwisko i Imię", "Grupa"
-        }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-            
-            @Override
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        
         DefaultTableModel model = (DefaultTableModel) jTblRoleUsers.getModel();
         
         List<SmPerson> list = new ArrayList<SmPerson>();
@@ -259,21 +239,9 @@ public class JSelectPersonByRoleDialog extends javax.swing.JDialog {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnSearch;
-    private javax.swing.JButton jBtnSearch1;
     private javax.swing.JButton jBtnSearch2;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRbSurname;
-    private javax.swing.JRadioButton jRbSurname1;
-    private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTextField jTbName;
-    private javax.swing.JTextField jTbName1;
     private javax.swing.JTextField jTbName2;
     private javax.swing.JTable jTblRoleUsers;
     private javax.swing.JButton jbtCancel;
