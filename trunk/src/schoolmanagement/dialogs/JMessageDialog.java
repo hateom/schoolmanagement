@@ -56,7 +56,7 @@ public class JMessageDialog extends javax.swing.JFrame {
         setName("Form"); // NOI18N
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Wiadomosc")); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Wiadomosc"));
         jPanel1.setName("jPanel1"); // NOI18N
         jPanel1.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -67,8 +67,8 @@ public class JMessageDialog extends javax.swing.JFrame {
         jLabel1.setText("Nadawca:"); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
+        jtbSender.setBackground(new java.awt.Color(204, 255, 204));
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JMessageDialog.class);
-        jtbSender.setBackground(resourceMap.getColor("jtbSender.background")); // NOI18N
         jtbSender.setText(resourceMap.getString("jtbSender.text")); // NOI18N
         jtbSender.setEnabled(false);
         jtbSender.setName("jtbSender"); // NOI18N
@@ -76,7 +76,6 @@ public class JMessageDialog extends javax.swing.JFrame {
         jLabel2.setText("Temat:"); // NOI18N
         jLabel2.setName("jLabel2"); // NOI18N
 
-        jtbSubject.setBackground(resourceMap.getColor("jtbSubject.background")); // NOI18N
         jtbSubject.setText(resourceMap.getString("jtbSubject.text")); // NOI18N
         jtbSubject.setEnabled(false);
         jtbSubject.setName("jtbSubject"); // NOI18N
@@ -84,7 +83,6 @@ public class JMessageDialog extends javax.swing.JFrame {
         jLabel3.setText("Wyslano:"); // NOI18N
         jLabel3.setName("jLabel3"); // NOI18N
 
-        jtbDate.setBackground(resourceMap.getColor("jtbDate.background")); // NOI18N
         jtbDate.setText(resourceMap.getString("jtbDate.text")); // NOI18N
         jtbDate.setEnabled(false);
         jtbDate.setName("jtbDate"); // NOI18N
@@ -95,6 +93,7 @@ public class JMessageDialog extends javax.swing.JFrame {
 
         jtBody.setColumns(20);
         jtBody.setRows(5);
+        jtBody.setEnabled(false);
         jtBody.setName("jtBody"); // NOI18N
         jScrollPane1.setViewportView(jtBody);
 

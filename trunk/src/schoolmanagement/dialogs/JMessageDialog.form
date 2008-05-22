@@ -126,7 +126,9 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtbSender">
           <Properties>
-            <Property name="background" type="java.awt.Color" resourceKey="jtbSender.background"/>
+            <Property name="background" type="java.awt.Color" noResource="true" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="cc" green="ff" red="cc" type="rgb"/>
+            </Property>
             <Property name="text" type="java.lang.String" resourceKey="jtbSender.text"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="jtbSender" noResource="true"/>
@@ -140,7 +142,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtbSubject">
           <Properties>
-            <Property name="background" type="java.awt.Color" resourceKey="jtbSubject.background"/>
             <Property name="text" type="java.lang.String" resourceKey="jtbSubject.text"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="jtbSubject" noResource="true"/>
@@ -154,7 +155,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtbDate">
           <Properties>
-            <Property name="background" type="java.awt.Color" resourceKey="jtbDate.background"/>
             <Property name="text" type="java.lang.String" resourceKey="jtbDate.text"/>
             <Property name="enabled" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="jtbDate" noResource="true"/>
@@ -179,6 +179,7 @@
               <Properties>
                 <Property name="columns" type="int" value="20"/>
                 <Property name="rows" type="int" value="5"/>
+                <Property name="enabled" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="jtBody" noResource="true"/>
               </Properties>
             </Component>
