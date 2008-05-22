@@ -252,8 +252,8 @@ public class DataAccess {
     
     public SmRole getRoleByName(String a_StrRole)
     {
-        Query query = m_oEm.createQuery("SELECT r FROM SmRole r WHERE r.rolName = :rolName").setParameter("rolName", a_StrRole);
         try{
+            Query query = m_oEm.createQuery("SELECT r FROM SmRole r WHERE r.rolName = :rolName").setParameter("rolName", a_StrRole);
         return (SmRole)query.getSingleResult();
         }
         catch(Exception e)
@@ -263,18 +263,13 @@ public class DataAccess {
     
     public List<SmSubject> getSubjectsForPerson( SmPerson a_oPerson )
     {
-        Collection<SmTeacher> col = a_oPerson.getSmTeacherCollection();
-        if( col != null ){
-            List<SmSubject> subList = new ArrayList<SmSubject>();
-            Iterator it = col.iterator();
-            if(it != null)
-            {
-                while( it.hasNext() )
-                {
-                    subList.add( ((SmTeacher)it.next()).getTchSubId() );
-                }
-                return subList;
-            }
+        try{
+            Query query = m_oEm.createQuery("SELECT t.tchSubId FROM SmTeacher t WHERE t.tchPerId = ?1").setParameter(1, a_oPerson).setHint("refresh", new Boolean(true));
+            return query.getResultList();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -295,45 +290,6 @@ public class DataAccess {
         return false;
     }
 //------------    TEACHER STUFF -------------
-    public List<TeacherCollection> getTeacherList()
-    {
-        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t").setHint("refresh", new Boolean(true));
-        List<TeacherCollection> teachColList = new ArrayList<TeacherCollection>();
-        try{
-            List<SmTeacher> lst = query.getResultList();
-            for( SmTeacher teacher : lst )
-            {
-                boolean found = false;
-                int idx = 0;
-                for( TeacherCollection tch : teachColList )
-                {
-                    if(tch.containsTeacher(teacher))
-                    {
-                        found = true;
-                        break;
-                    }
-                    idx++;
-                }
-                if(!found)
-                {
-                    TeacherCollection col = new TeacherCollection();
-                    col.getTeacherList().add(teacher);
-                    teachColList.add(col);
-                }
-                else
-                {
-                  teachColList.get(idx).getTeacherList().add(teacher);
-                }
-            }
-            return teachColList;
-        }
-        catch(Exception e)
-        {
-            e.printStackTrace();
-        }
-        return null;
-    }
-    
     public boolean removeTeachersSubject(SmPerson a_oPerson, SmSubject a_oSubject)
     {
         Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchPerId = ?1 AND t.tchSubId = ?2").setParameter(1, a_oPerson).setParameter(2, a_oSubject).setHint("refresh", new Boolean(true));
@@ -363,23 +319,20 @@ public class DataAccess {
     
     public List<SmTeacher> getTeacherForSubject(SmSubject a_oSubject)
     {
-        Collection<SmTeacher> teachCol = a_oSubject.getSmTeacherCollection();
-        List<SmTeacher> teacherList = new ArrayList<SmTeacher>();
-        if( teachCol != null )
+        try{
+            Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchSubId = ?1").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
+            return query.getResultList();
+        }
+        catch(Exception e)
         {
-            Iterator it = teachCol.iterator();
-            while( it.hasNext() )
-            {
-                teacherList.add( (SmTeacher)it.next() );
-            }
-            return teacherList;
+            ErrorLogger.error(e.getLocalizedMessage());
         }
         return null;
     }
     
     public List<Object[]> getScheduleForTeacher( SmPerson a_oPerson )
     {
-        Query query = m_oEm.createQuery("SELECT DISTINCT s.schClsId, s.schTchId FROM SmSchedule s WHERE s.schTchId.tchPerId = ?1").setParameter(1, a_oPerson);
+        Query query = m_oEm.createQuery("SELECT DISTINCT s.schClsId, s.schTchId FROM SmSchedule s WHERE s.schTchId.tchPerId = ?1").setParameter(1, a_oPerson).setHint("refresh", new Boolean(true));
         try{
             return query.getResultList();
         }
@@ -390,33 +343,6 @@ public class DataAccess {
         return null;
     }
     
-    public List<SmClass> getClassesForTeacher( TeacherCollection a_oTeacherCol )
-    {
-        List<SmClass> lstClass = new ArrayList<SmClass>();
-        String lstID = "";
-        for(SmTeacher teach : a_oTeacherCol.getTeacherList())
-        {
-            lstID += (teach.getTchId().toString()) + ",";
-        }
-        lstID = lstID.substring(0, lstID.length()-1);
-        Query query = m_oEm.createQuery("SELECT s FROM SmSchedule s WHERE s.schTchId.tchId IN ("+ lstID +")");
-        try{
-            List<SmSchedule> lst = query.getResultList();
-            Iterator iter = lst.iterator();
-            while(iter.hasNext())
-            {
-                SmClass cls = (SmClass)((SmSchedule)iter.next()).getSchClsId();
-                if(!lstClass.contains(cls))
-                {
-                    lstClass.add(cls);
-                }
-            }
-            return lstClass;
-        }
-        catch(Exception e)
-        {}
-        return null;
-    }
     public SmTeacher addTeachersSubject( SmPerson a_oPerson, SmSubject a_oSubject)
     {
         SmTeacher teacher = new SmTeacher();
@@ -620,16 +546,17 @@ public class DataAccess {
         }
     }
     
-    public List<SmPerson> GetPersonsForClass(SmClass a_oClsId)
+    public List<SmPerson> GetPersonsForClass(SmClass a_oClass)
     {
-        List lstPerson = new ArrayList<SmPerson>();
-        Iterator it = a_oClsId.getSmPerson2classCollection().iterator();
-       while(it.hasNext())
-       {
-           SmPerson2class osmPerson2Class = (SmPerson2class)it.next();
-           lstPerson.add(osmPerson2Class.getP2cPerId());
-       }
-        return lstPerson;
+        try
+        {
+            Query query = m_oEm.createQuery("SELECT p2c.p2cPerId FROM SmPerson2class p2c WHERE p2c.p2cClsId = ?1 ORDER BY p2c.p2cPerId.perSurname").setParameter(1, a_oClass).setHint("refresh", new Boolean(true));
+            return query.getResultList();
+        }
+        catch(Exception e)
+        {
+        }
+        return null;
     }
     
     public List<SmRing> getRings()
