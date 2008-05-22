@@ -234,7 +234,14 @@ public class JAddLessonDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jcbSubjectsActionPerformed
 
     private void jcbTeachersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTeachersActionPerformed
-        // getAvailableRoom
+        List<SmClassroom> list = DBAccess.GetInstance().getAvailableClassrooms(m_day, m_ring);
+        
+        jcbRooms.removeAllItems();
+        
+        for(SmClassroom cl : list )
+        {
+            jcbRooms.addItem(cl);
+        }
     }//GEN-LAST:event_jcbTeachersActionPerformed
     
     /**
