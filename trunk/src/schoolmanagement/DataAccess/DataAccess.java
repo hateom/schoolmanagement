@@ -165,18 +165,22 @@ public class DataAccess {
      */
     public List<SmPerson> GetUserByName(String a_strUserName)
     {
-        Query query = null;
-        if( a_strUserName.equals("") || a_strUserName== null)
+        try
         {
-            query = m_oEm.createQuery("SELECT p FROM SmPerson p").setHint("refresh", new Boolean(true));
-        }
-        else
-            query = m_oEm.createQuery("SELECT p FROM SmPerson p WHERE p.perSurname LIKE ?1 OR p.perName LIKE ?1").setParameter(1, a_strUserName).setHint("refresh", new Boolean(true));
-        try{
-        return query.getResultList();
+            Query query = null;
+            if( a_strUserName.equals("") || a_strUserName== null)
+            {
+                query = m_oEm.createQuery("SELECT p FROM SmPerson p").setHint("refresh", new Boolean(true));
+            }
+            else
+                query = m_oEm.createQuery("SELECT p FROM SmPerson p WHERE p.perSurname LIKE ?1 OR p.perName LIKE ?1").setParameter(1, a_strUserName).setHint("refresh", new Boolean(true));
+
+            return query.getResultList();
         }
         catch(Exception e)
-        {}
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+        }
         return null;
     }
     
