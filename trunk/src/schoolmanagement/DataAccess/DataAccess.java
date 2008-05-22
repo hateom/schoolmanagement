@@ -91,16 +91,16 @@ public class DataAccess {
      */
     public SmUser loginUser(String a_strLogin, String a_strPassword)
     {
-        Query sq = m_oEm.createQuery("SELECT u FROM SmUser u INNER JOIN FETCH u.usrRolId WHERE u.usrLogin = ?1 AND u.usrPasswd = ?2").setParameter(1, a_strLogin).setParameter(2, a_strPassword);
         //Query sq = m_oEm.createQuery("SELECT u FROM SmUser u WHERE u.usrLogin = ?1 AND u.usrPasswd = ?2").setParameter(1, a_strLogin).setParameter(2, a_strPassword);
         try{
+            Query sq = m_oEm.createQuery("SELECT u FROM SmUser u WHERE u.usrLogin = ?1 AND u.usrPasswd = ?2").setParameter(1, a_strLogin).setParameter(2, a_strPassword);
             Object o = sq.getSingleResult();
             SmUser smUser = (SmUser)o;
             return smUser;
         }
         catch(Exception ex)
         {
-            
+           ex.printStackTrace();
         }
         return null;
     }
@@ -207,7 +207,7 @@ public class DataAccess {
         usr.setUsrPasswd(a_strPasswd);
         if(save(usr))
         {
-            //a_oPerID.getSmUserCollection().add(usr);
+            a_oPerID.getSmUserCollection().add(usr);
             return usr;
         }
         return null;
@@ -342,8 +342,8 @@ public class DataAccess {
         {
             teacher = (SmTeacher)query.getSingleResult();
             m_oEm.getTransaction().begin();
-            //a_oPerson.getSmTeacherCollection().remove(teacher);
-            //a_oSubject.getSmTeacherCollection().remove(teacher);
+            a_oPerson.getSmTeacherCollection().remove(teacher);
+            a_oSubject.getSmTeacherCollection().remove(teacher);
             m_oEm.remove(teacher);
             m_oEm.getTransaction().commit();
             return true;
@@ -353,8 +353,8 @@ public class DataAccess {
             m_oEm.getTransaction().rollback();
             if( teacher != null )
             {
-                //a_oPerson.getSmTeacherCollection().add(teacher);
-                //a_oSubject.getSmTeacherCollection().add(teacher);
+                a_oPerson.getSmTeacherCollection().add(teacher);
+                a_oSubject.getSmTeacherCollection().add(teacher);
             }
             ErrorLogger.error(e.getLocalizedMessage());
         }
@@ -424,8 +424,8 @@ public class DataAccess {
         teacher.setTchSubId(a_oSubject);
         if(save(teacher))
         {
-            //a_oSubject.getSmTeacherCollection().add(teacher);
-           // a_oPerson.getSmTeacherCollection().add(teacher);
+           a_oSubject.getSmTeacherCollection().add(teacher);
+            a_oPerson.getSmTeacherCollection().add(teacher);
             return teacher;
         }
         return null;
@@ -527,8 +527,8 @@ public class DataAccess {
             SmPerson2class p2c = (SmPerson2class) m_oEm.createQuery("SELECT p2c FROM SmPerson2class p2c WHERE p2c.p2cPerId = ?2 AND p2c.p2cClsId = ?1").setParameter(1, a_oClass).setParameter(2, a_oPerson).setHint("refresh", new Boolean(true)).getSingleResult();
             if(delete(p2c))
             {
-               // a_oPerson.getSmPerson2classCollection().remove(p2c);
-              //  a_oClass.getSmPerson2classCollection().remove(p2c);
+                a_oPerson.getSmPerson2classCollection().remove(p2c);
+                a_oClass.getSmPerson2classCollection().remove(p2c);
             }
         }
         catch(Exception e)
@@ -545,8 +545,8 @@ public class DataAccess {
         p2c.setP2cClsId(a_oClass);
         if( save(p2c) )
         {
-            //a_oPerson.getSmPerson2classCollection().add(p2c);
-           // a_oClass.getSmPerson2classCollection().add(p2c);
+            a_oPerson.getSmPerson2classCollection().add(p2c);
+            a_oClass.getSmPerson2classCollection().add(p2c);
             return true;
         }
         return false;
