@@ -8,6 +8,7 @@ package schoolmanagement.dialogs;
 
 import java.util.List;
 import schoolmanagement.controller.DBAccess;
+import schoolmanagement.controller.ErrorLogger;
 import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmClassroom;
 import schoolmanagement.entity.SmDay;
@@ -213,9 +214,14 @@ public class JAddLessonDialog extends javax.swing.JDialog {
     
     
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
+        if( jcbSubjects.getSelectedItem() == null || jcbTeachers.getSelectedItem() == null || jcbRooms.getSelectedItem() == null )
+        {
+            ErrorLogger.error("All fields must be filled out!");
+            return;
+        }
         if( m_lesson != null )
         {
-            m_lesson = DBAccess.GetInstance().addSchedule( m_day, m_class, m_ring, m_teacher, m_classroom );
+            DBAccess.GetInstance().updateSchedule( m_lesson );
         }
         else
         {
@@ -232,6 +238,11 @@ public class JAddLessonDialog extends javax.swing.JDialog {
         {
             jcbSubjects.addItem(sb);
         }
+        
+        if( m_lesson != null )
+        {
+            jcbSubjects.setSelectedItem(m_lesson.getSchTchId().getTchSubId());
+        }
     }//GEN-LAST:event_formComponentShown
 
     private void jcbSubjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSubjectsActionPerformed
@@ -246,6 +257,12 @@ public class JAddLessonDialog extends javax.swing.JDialog {
             jcbTeachers.addItem(t);
         }
         
+        if( m_lesson != null && jcbSubjects.getSelectedItem() == m_lesson.getSchTchId().getTchSubId() )
+        {
+            jcbTeachers.addItem(m_lesson.getSchTchId());
+            jcbTeachers.setSelectedItem(m_lesson.getSchTchId());
+        }
+        
         m_subject = (SmSubject) jcbSubjects.getSelectedItem();
     }//GEN-LAST:event_jcbSubjectsActionPerformed
 
@@ -257,6 +274,12 @@ public class JAddLessonDialog extends javax.swing.JDialog {
         for(SmClassroom cl : list )
         {
             jcbRooms.addItem(cl);
+        }
+        
+        if( m_lesson != null && jcbTeachers.getSelectedItem() == m_lesson.getSchTchId() && jcbSubjects.getSelectedItem() == m_lesson.getSchTchId().getTchSubId() )
+        {
+            jcbRooms.addItem(m_lesson.getSchClrId());
+            jcbRooms.setSelectedItem(m_lesson.getSchClrId());
         }
         
         m_teacher = (SmTeacher) jcbTeachers.getSelectedItem();
