@@ -1420,6 +1420,8 @@ public class MainJFrame extends javax.swing.JFrame {
 
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         
+        while( model.getRowCount() > 0 ) model.removeRow(0);
+        
         List<SmPerson> list = new ArrayList<SmPerson>();
         if(jRbSurname.isSelected()){
             list = DBAccess.GetInstance().GetUserByName(jTbName.getText().trim());
