@@ -48,6 +48,7 @@ public class ErrorLogger extends Observable{
     }
     public void error( String strError )
     {
+        super.setChanged();
         super.notifyObservers(strError);
         errorList.add(strError);
         errorDlg.reloadErrors();
