@@ -50,7 +50,7 @@ public class SmPerson implements Serializable {
     private String perEmail;
     @OneToMany(mappedBy = "pnPerId")
     private Collection<SmPersonNotes> smPersonNotesCollection;
-    @OneToMany(mappedBy = "usrPerId")
+    @OneToMany(mappedBy = "usrPerId",cascade = CascadeType.ALL)
     private Collection<SmUser> smUserCollection;
     @OneToMany(mappedBy = "clsPerId")
     private Collection<SmClass> smClassCollection;
