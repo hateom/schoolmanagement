@@ -55,7 +55,7 @@ public class DataAccess {
         } catch (Exception e) {
             e.printStackTrace();
             m_oEm.getTransaction().rollback();
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return false;
     }
@@ -77,7 +77,7 @@ public class DataAccess {
         } catch (Exception e) {
             e.printStackTrace();
             m_oEm.getTransaction().rollback();
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return false;
     }
@@ -113,7 +113,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -268,7 +268,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -311,7 +311,7 @@ public class DataAccess {
                 a_oPerson.getSmTeacherCollection().add(teacher);
                 a_oSubject.getSmTeacherCollection().add(teacher);
             }
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return false;
     }
@@ -324,7 +324,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -337,7 +337,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -350,7 +350,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -406,7 +406,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -498,7 +498,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return false;
     }
@@ -635,7 +635,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -670,7 +670,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -714,7 +714,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -729,7 +729,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return true;
     }
@@ -758,7 +758,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -777,7 +777,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -789,7 +789,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return false;
     }
@@ -801,7 +801,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return false;
     }
@@ -815,7 +815,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -834,7 +834,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -848,7 +848,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }
@@ -868,7 +868,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage());
         }
         return null;
     }

@@ -15,37 +15,48 @@ import java.util.Observable;
  */
 public class ErrorLogger extends Observable{
     static private List<String> errorList = new ArrayList<String>();;
-    static public int getCount()
+    
+    static ErrorLogger instance = null;
+    
+    private ErrorLogger()
+    {
+    }
+    
+    static public ErrorLogger getInstance()
+    {
+        if(instance == null)
+            instance = new ErrorLogger();
+        return instance;
+    }
+    
+    public int getCount()
     {
         return errorList.size();
     }
-    static public String getError(int no)
+    public String getError(int no)
     {
         if( no < 0 || no >= getCount()) return "";
         return errorList.get(no);
     }
-    static public void error( String strError )
+    public void error( String strError )
     {
+        super.setChanged();
+        super.notifyObservers(strError);
         errorList.add(strError);
         
     }
-    static public boolean errorReported()
+    public boolean errorReported()
     {
         return getCount() > 0;
     }
-    static public void removeAll()
+    public void removeAll()
     {
         errorList.removeAll(errorList);
     }
-    static public String getLast()
+    public String getLast()
     {
         return errorList.get(getCount()-1);
     }
     
     // observable methods
-    @Override
-    public void setChanged()
-    {
-        super.setChanged();
-    }
 }

@@ -197,7 +197,7 @@ public class JNewClassDialog extends javax.swing.JFrame {
         m_class = DBAccess.GetInstance().createNewClass( getClassNum(), getSubClass(), getClassDesc(), getTutor() );
         if( m_class == null )
         {
-            ErrorLogger.error( "Could not create class" );
+            ErrorLogger.getInstance().error( "Could not create class" );
             return;
         }
         
@@ -212,7 +212,7 @@ public class JNewClassDialog extends javax.swing.JFrame {
         
         if( !DBAccess.GetInstance().saveChanges(m_class) )
         {
-            ErrorLogger.error( "Error saving class data to DB!" );
+            ErrorLogger.getInstance().error( "Error saving class data to DB!" );
         }
         setVisible(false);
     }//GEN-LAST:event_jbtnSaveActionPerformed

@@ -86,7 +86,7 @@
                       <Component id="jbtnDelete" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <Component id="jScrollPane1" alignment="0" pref="266" max="32767" attributes="1"/>
+              <Component id="jScrollPane1" alignment="0" pref="269" max="32767" attributes="1"/>
           </Group>
         </DimensionLayout>
       </Layout>
