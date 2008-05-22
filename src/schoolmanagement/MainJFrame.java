@@ -180,6 +180,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jBtnNewMail3 = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jlReceived = new javax.swing.JTable();
+        jbtReceive = new javax.swing.JButton();
         jPnlOutbox = new javax.swing.JPanel();
         jSeparator4 = new javax.swing.JSeparator();
         jBtnNewMail2 = new javax.swing.JButton();
@@ -619,6 +620,14 @@ public class MainJFrame extends javax.swing.JFrame {
         jlReceived.setName("jlReceived"); // NOI18N
         jScrollPane4.setViewportView(jlReceived);
 
+        jbtReceive.setText("Odbierz"); // NOI18N
+        jbtReceive.setName("jbtReceive"); // NOI18N
+        jbtReceive.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtReceiveActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPnlInboxLayout = new javax.swing.GroupLayout(jPnlInbox);
         jPnlInbox.setLayout(jPnlInboxLayout);
         jPnlInboxLayout.setHorizontalGroup(
@@ -627,14 +636,19 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPnlInboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator5, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
-                    .addComponent(jBtnNewMail3)
+                    .addGroup(jPnlInboxLayout.createSequentialGroup()
+                        .addComponent(jBtnNewMail3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
+                        .addComponent(jbtReceive, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPnlInboxLayout.setVerticalGroup(
             jPnlInboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPnlInboxLayout.createSequentialGroup()
-                .addComponent(jBtnNewMail3)
+                .addGroup(jPnlInboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnNewMail3)
+                    .addComponent(jbtReceive))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1409,6 +1423,11 @@ private void jBtnNewMail2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_jBtnNewMail2ActionPerformed
 
 private void jPnlInboxComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlInboxComponentShown
+    refreshInbox();
+}//GEN-LAST:event_jPnlInboxComponentShown
+
+public void refreshInbox()
+{
     SmUser me = DBAccess.GetInstance().getUserByPerson(User.GetUserPerson());
     List<SmMessage> list = DBAccess.GetInstance().getRecievedMessages( me, null, true );
     
@@ -1420,7 +1439,7 @@ private void jPnlInboxComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
     {
         dm.addRow(new Object[] { msg.getMsgTopic(), msg, msg.getMsgSendDate().toString() } );
     }
-}//GEN-LAST:event_jPnlInboxComponentShown
+}
 
 private void jPnlOutboxComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlOutboxComponentShown
     SmUser me = DBAccess.GetInstance().getUserByPerson(User.GetUserPerson());
@@ -1435,6 +1454,10 @@ private void jPnlOutboxComponentShown(java.awt.event.ComponentEvent evt) {//GEN-
         dm.addRow(new Object[] { msg.getMsgTopic(), msg, msg.getMsgSendDate().toString() } );
     }
 }//GEN-LAST:event_jPnlOutboxComponentShown
+
+private void jbtReceiveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtReceiveActionPerformed
+    refreshInbox();        // TODO add your handling code here:
+}//GEN-LAST:event_jbtReceiveActionPerformed
 
 String dateToTimeString( Date date )
 {
@@ -1513,6 +1536,7 @@ String dateToTimeString( Date date )
     private javax.swing.JTable jTblRings;
     private javax.swing.JTable jTblTeachers;
     private javax.swing.JTree jTree;
+    private javax.swing.JButton jbtReceive;
     private javax.swing.JComboBox jcbPickClassForNotes;
     private javax.swing.JComboBox jcbPickSubjectForNotes;
     private javax.swing.JComboBox jcbSelectClass;
