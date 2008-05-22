@@ -6,6 +6,7 @@
 
 package schoolmanagement.dialogs;
 
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.controller.ErrorLogger;
@@ -24,6 +25,18 @@ public class JNewClassDialog extends javax.swing.JFrame {
     /** Creates new form JNewClassDialog */
     public JNewClassDialog() {
         initComponents();
+        realodDB();
+    }
+    
+    public void realodDB()
+    {
+        List<SmPerson> list = DBAccess.GetInstance().GetUserByRole(RoleType.ROLE_TEACHER);
+        
+        jCbTutor.removeAllItems();
+        for( SmPerson tch : list )
+        {
+            jCbTutor.addItem( tch );
+        }
     }
     
     /** This method is called from within the constructor to
