@@ -1349,25 +1349,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnPassCHangeActionPerformed
 
     private void jBtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearchActionPerformed
-                // TODO add your handling code here:
-        
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-            },
-            new String [] {
-                "Nazwisko i Imię", "Grupa"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
 
-            @Override
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        
         DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
         
         List<SmPerson> list = new ArrayList<SmPerson>();
@@ -1387,10 +1369,6 @@ public class MainJFrame extends javax.swing.JFrame {
         
         for(SmPerson person : list){
             model.addRow(new Object[]{person, DBAccess.GetInstance().getUserRole(person)});
-            //int row = list.indexOf(person);
-            //jTable4.setValueAt(person.getPerSurname(), row, 0);
-            //jTable4.setValueAt(person.getPerName(), row, 1);
-            //jTable4.setValueAt(person.getSmUserCollection().iterator().next().getUsrRolId().getRolName(), row, 2);
         }
     }//GEN-LAST:event_jBtnSearchActionPerformed
 
@@ -1434,19 +1412,7 @@ public class MainJFrame extends javax.swing.JFrame {
         {
             jcbPickSubjectForNotes.addItem( sbj );
         }
-        
-        /*
-        
-        List<SmNote> notes = null;//DBAccess.GetInstance().getNotes(teacher, smclass, null);
-        
-        DefaultTableModel model = new DefaultTableModel();
-        jtblPupilNotes.setModel(model);
-        model.addColumn("Nazwisko");
-        model.addColumn("Oceny");
-        for(SmNote note : notes){
-            model.addRow(new Object[]{note.getNotP2cId().getP2cPerId(), note.getNotNote()});
-        }
-         */
+
     }//GEN-LAST:event_jcbPickClassForNotesActionPerformed
 
     private void jPnlProfileComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlProfileComponentShown
@@ -1818,8 +1784,8 @@ private void jcbSelectClassActionPerformed(java.awt.event.ActionEvent evt) {//GE
 }//GEN-LAST:event_jcbSelectClassActionPerformed
 
 private void jbtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditActionPerformed
-//    JEditScheduleDialog sd = new JEditScheduleDialog(this, true );
-  //  sd.setVisible(true);
+      JEditScheduleDialog sd = new JEditScheduleDialog(this, true, (SmClass)jcbSelectClass.getSelectedItem() );
+      sd.setVisible(true);
 }//GEN-LAST:event_jbtnEditActionPerformed
 
 public void reloadClassrooms()
