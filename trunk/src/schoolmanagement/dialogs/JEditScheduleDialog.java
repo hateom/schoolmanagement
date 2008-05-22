@@ -56,6 +56,8 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
                 ErrorLogger.error("Could not update schedule!");
             }
         }
+        
+        reloadSchedule();
     }
     
     /** This method is called from within the constructor to
