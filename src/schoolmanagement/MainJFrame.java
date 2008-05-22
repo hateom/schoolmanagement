@@ -386,24 +386,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jtblPupilNotes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nazwisko ucznia", "Oceny"
@@ -619,10 +602,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jlReceived.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Od", "Temat", "Data"
@@ -687,10 +667,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jlSent.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Od", "Temat", "Data"
@@ -740,10 +717,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jTable4.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nazwisko i Imię", "Grupa"
@@ -881,22 +855,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jTblRings.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, "", "", ""},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Numer", "Początek lekcji", "Koniec lekcji", "Przerwa"
@@ -944,10 +903,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jTblTeachers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+
             },
             new String [] {
                 "Nazwisko i Imię", "Przedmiot"
