@@ -1549,7 +1549,7 @@ private void jBtnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         
         for( SmPerson pers : list )
         {
-            if( pers.getSmUserCollection().iterator().next().getUsrRolId().getRolName().compareTo( "Nauczyciel" ) != 0 ) continue;
+            if( DBAccess.GetInstance().getUserRole(pers).getRolName().compareTo( "Nauczyciel" ) != 0 ) continue;
 
             List<SmSubject> subs = DBAccess.GetInstance().getSubjectsForPerson( pers );
 
