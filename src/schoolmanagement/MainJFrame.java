@@ -18,7 +18,7 @@ import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
-import observers.ErrorObserver;
+import schoolmanagement.observers.ErrorObserver;
 import schoolmanagement.controller.*;
 import schoolmanagement.controls.JMessageTableRenderer;
 import schoolmanagement.dialogs.*;
