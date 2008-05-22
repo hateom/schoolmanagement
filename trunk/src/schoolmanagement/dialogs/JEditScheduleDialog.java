@@ -30,6 +30,22 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
         m_class = cls;
         loadRings();
     }
+
+    private void editSelectedLesson() {
+        SmDay day;
+        SmRing ring;
+        SmSchedule lesson;
+        
+        if( jTblDays.getSelectedRowCount() != 1 ) return;
+        if( jTblSchedule.getSelectedRowCount() != 1 ) return;
+        
+        day = (SmDay) jTblDays.getModel().getValueAt(jTblDays.getSelectedRow(), 0 );
+        ring = (SmRing) jTblSchedule.getModel().getValueAt( jTblSchedule.getSelectedRow(), 0 );
+        lesson = (SmSchedule) jTblSchedule.getModel().getValueAt( jTblSchedule.getSelectedRow(), 1 );
+        
+        JAddLessonDialog nl = new JAddLessonDialog(null, true, day, ring, lesson );
+        nl.setVisible(true);
+    }
     
     /** This method is called from within the constructor to
      * initialize the form.
@@ -120,8 +136,21 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
             new String [] {
                 "Lekcja", "Przedmiot", "Nauczyciel", "Sala"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTblSchedule.setName("jTblSchedule"); // NOI18N
+        jTblSchedule.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTblScheduleMouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTblSchedule);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JEditScheduleDialog.class);
@@ -208,19 +237,7 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnCancelActionPerformed
 
     private void jbtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddActionPerformed
-        SmDay day;
-        SmRing ring;
-        SmSchedule lesson;
-        
-        if( jTblDays.getSelectedRowCount() != 1 ) return;
-        if( jTblSchedule.getSelectedRowCount() != 1 ) return;
-        
-        day = (SmDay) jTblDays.getModel().getValueAt(jTblDays.getSelectedRow(), 0 );
-        ring = (SmRing) jTblSchedule.getModel().getValueAt( jTblSchedule.getSelectedRow(), 0 );
-        lesson = (SmSchedule) jTblSchedule.getModel().getValueAt( jTblSchedule.getSelectedRow(), 1 );
-        
-        JAddLessonDialog nl = new JAddLessonDialog(null, true, day, ring, lesson );
-        nl.setVisible(true);
+        editSelectedLesson();
     }//GEN-LAST:event_jbtnAddActionPerformed
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
@@ -264,6 +281,11 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
     private void jTblDaysKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTblDaysKeyReleased
         reloadSchedule();
     }//GEN-LAST:event_jTblDaysKeyReleased
+
+    private void jTblScheduleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblScheduleMouseClicked
+        if( evt.getClickCount() != 2 ) return;
+        editSelectedLesson();
+    }//GEN-LAST:event_jTblScheduleMouseClicked
     
     /**
      * @param args the command line arguments
