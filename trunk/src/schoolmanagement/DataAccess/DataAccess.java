@@ -498,11 +498,31 @@ public class DataAccess {
     
     public boolean removePersonFromClass( SmClass a_oClass, SmPerson a_oPerson )
     {
+        try
+        {
+            SmPerson2class p2c = (SmPerson2class) m_oEm.createQuery("SELECT").setParameter(1, a_oClass).setParameter(2, a_oPerson).setHint("refresh", new Boolean(true)).getSingleResult();
+            if(delete(p2c))
+            {
+                a_oPerson.getSmPerson2classCollection().remove(p2c);
+                a_oClass.getSmPerson2classCollection().remove(p2c);
+            }
+        }
+        catch(Exception e)
+        {}
         return false;
     }
     
     public boolean addPersonToClass(SmClass a_oClass, SmPerson a_oPerson)
     {
+        SmPerson2class p2c = new SmPerson2class();
+        p2c.setP2cPerId(a_oPerson);
+        p2c.setP2cClsId(a_oClass);
+        if( save(p2c) )
+        {
+            a_oPerson.getSmPerson2classCollection().add(p2c);
+            a_oClass.getSmPerson2classCollection().add(p2c);
+            return true;
+        }
         return false;
     }
     
