@@ -28,11 +28,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="jbtnSave" min="-2" pref="134" max="-2" attributes="0"/>
-                      <EmptySpace pref="373" max="32767" attributes="0"/>
-                      <Component id="jbtnCancel" min="-2" pref="132" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="jbtnCancel" alignment="1" min="-2" pref="132" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -44,10 +40,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jbtnCancel" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jbtnSave" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="jbtnCancel" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -178,15 +171,9 @@
         </Component>
       </SubComponents>
     </Container>
-    <Component class="javax.swing.JButton" name="jbtnSave">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Zapisz" noResource="true"/>
-        <Property name="name" type="java.lang.String" value="jbtnSave" noResource="true"/>
-      </Properties>
-    </Component>
     <Component class="javax.swing.JButton" name="jbtnCancel">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Anuluj" noResource="true"/>
+        <Property name="text" type="java.lang.String" value="Zamknij" noResource="true"/>
         <Property name="name" type="java.lang.String" value="jbtnCancel" noResource="true"/>
       </Properties>
       <Events>

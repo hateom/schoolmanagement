@@ -75,7 +75,6 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
         jTblSchedule = new javax.swing.JTable();
         jbtnAdd = new javax.swing.JButton();
         jbtnDelete = new javax.swing.JButton();
-        jbtnSave = new javax.swing.JButton();
         jbtnCancel = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
@@ -205,10 +204,7 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 266, Short.MAX_VALUE)
         );
 
-        jbtnSave.setText("Zapisz"); // NOI18N
-        jbtnSave.setName("jbtnSave"); // NOI18N
-
-        jbtnCancel.setText("Anuluj"); // NOI18N
+        jbtnCancel.setText("Zamknij"); // NOI18N
         jbtnCancel.setName("jbtnCancel"); // NOI18N
         jbtnCancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,10 +220,7 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 373, Short.MAX_VALUE)
-                        .addComponent(jbtnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jbtnCancel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -236,9 +229,7 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnCancel)
-                    .addComponent(jbtnSave))
+                .addComponent(jbtnCancel)
                 .addContainerGap())
         );
 
@@ -327,7 +318,6 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
     private javax.swing.JButton jbtnAdd;
     private javax.swing.JButton jbtnCancel;
     private javax.swing.JButton jbtnDelete;
-    private javax.swing.JButton jbtnSave;
     // End of variables declaration//GEN-END:variables
 
     private void loadRings() {
