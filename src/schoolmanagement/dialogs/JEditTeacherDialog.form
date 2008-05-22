@@ -2,7 +2,9 @@
 
 <Form version="1.5" maxVersion="1.5" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
+    <Property name="locationByPlatform" type="boolean" value="true"/>
     <Property name="name" type="java.lang.String" value="Form" noResource="true"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -72,7 +74,6 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jSeparator1" alignment="0" pref="456" max="32767" attributes="0"/>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
@@ -80,7 +81,7 @@
                               </Group>
                               <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                               <Component id="jbtnMove" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="55" max="32767" attributes="0"/>
+                              <EmptySpace pref="61" max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jScrollPane2" alignment="1" min="-2" pref="148" max="-2" attributes="0"/>
@@ -88,9 +89,10 @@
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
                               <Component id="jbtnSave" min="-2" pref="150" max="-2" attributes="0"/>
-                              <EmptySpace pref="158" max="32767" attributes="0"/>
+                              <EmptySpace pref="160" max="32767" attributes="0"/>
                               <Component id="jbtnRemoveSelected" min="-2" pref="148" max="-2" attributes="0"/>
                           </Group>
+                          <Component id="jSeparator1" alignment="0" pref="458" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -108,8 +110,8 @@
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jScrollPane1" pref="198" max="32767" attributes="1"/>
-                                  <Component id="jScrollPane2" alignment="0" pref="198" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane1" pref="209" max="32767" attributes="1"/>
+                                  <Component id="jScrollPane2" alignment="0" pref="209" max="32767" attributes="1"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -119,9 +121,9 @@
                               <EmptySpace min="-2" pref="152" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jbtnRemoveSelected" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jbtnSave" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -253,7 +255,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jScrollPane3" pref="281" max="32767" attributes="0"/>
+                      <Component id="jScrollPane3" pref="280" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>

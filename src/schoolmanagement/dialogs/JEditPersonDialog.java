@@ -24,15 +24,13 @@ public class JEditPersonDialog extends javax.swing.JFrame {
     /** Creates new form JEditPersonDialog */
     public JEditPersonDialog( SmPerson person, JTable target, int row ) {
         initComponents();
-        
-        if( person != null ) persDetails.fillFields(person);
-
         persDetails.LoginRO( true );
         m_person = person;
         m_table = target;
         m_row = row;
         
         persDetails.readDBFields();
+        if( person != null ) persDetails.fillFields(person);
     }
 
     
