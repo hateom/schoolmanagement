@@ -122,6 +122,10 @@ public class MainJFrame extends javax.swing.JFrame {
             tree.collapsePath(parent);
         }
     }
+
+    private void loadScheduleFor(SmClass selectedItem) {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
     
     private DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
         DefaultMutableTreeNode node =
@@ -179,6 +183,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jLabel24 = new javax.swing.JLabel();
         jScrollPane8 = new javax.swing.JScrollPane();
         jtblScheldue = new javax.swing.JTable();
+        jbtnEdit = new javax.swing.JButton();
         jPnlInbox = new javax.swing.JPanel();
         jSeparator5 = new javax.swing.JSeparator();
         jBtnNewMail3 = new javax.swing.JButton();
@@ -510,11 +515,21 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPnlSchedule.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPnlSchedule.border.title"))); // NOI18N
         jPnlSchedule.setName("jPnlSchedule"); // NOI18N
+        jPnlSchedule.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPnlScheduleComponentShown(evt);
+            }
+        });
 
         jpanelClassSelect.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jpanelClassSelect.setName("jpanelClassSelect"); // NOI18N
 
         jcbSelectClass.setName("jcbSelectClass"); // NOI18N
+        jcbSelectClass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbSelectClassActionPerformed(evt);
+            }
+        });
 
         jLabel24.setText("Klasa:"); // NOI18N
         jLabel24.setName("jLabel24"); // NOI18N
@@ -527,8 +542,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel24)
                 .addGap(18, 18, 18)
-                .addComponent(jcbSelectClass, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(194, Short.MAX_VALUE))
+                .addComponent(jcbSelectClass, 0, 333, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jpanelClassSelectLayout.setVerticalGroup(
             jpanelClassSelectLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -573,6 +588,14 @@ public class MainJFrame extends javax.swing.JFrame {
         jtblScheldue.getTableHeader().setReorderingAllowed(false);
         jScrollPane8.setViewportView(jtblScheldue);
 
+        jbtnEdit.setText("Edytuj"); // NOI18N
+        jbtnEdit.setName("jbtnEdit"); // NOI18N
+        jbtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEditActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPnlScheduleLayout = new javax.swing.GroupLayout(jPnlSchedule);
         jPnlSchedule.setLayout(jPnlScheduleLayout);
         jPnlScheduleLayout.setHorizontalGroup(
@@ -581,7 +604,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPnlScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
-                    .addComponent(jpanelClassSelect, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpanelClassSelect, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jbtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         jPnlScheduleLayout.setVerticalGroup(
@@ -589,8 +613,9 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlScheduleLayout.createSequentialGroup()
                 .addComponent(jpanelClassSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 387, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbtnEdit))
         );
 
         jPnlSchedule.setBounds(0, 0, 440, 480);
@@ -1517,26 +1542,9 @@ private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
 
 private void jBtnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearch2ActionPerformed
   
-    jTblTeachers.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-            },
-            new String [] {
-                "Nazwisko i Imię", "Przedmiot"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false
-            };
-
-            @Override
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-    
     DefaultTableModel model = (DefaultTableModel)jTblTeachers.getModel();
     if(jRbSurname1.isSelected()){
-        List<SmPerson> list = new ArrayList<SmPerson>();
+        List<SmPerson> list;
         list = DBAccess.GetInstance().GetUserByName(jTbName.getText().trim());
         
         for( SmPerson pers : list )
@@ -1792,6 +1800,25 @@ private void jPnlRoomsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
     reloadClassrooms();
 }//GEN-LAST:event_jPnlRoomsComponentShown
 
+private void jPnlScheduleComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlScheduleComponentShown
+    List<SmClass> list = DBAccess.GetInstance().GetAllClasses();
+    
+    jcbSelectClass.removeAllItems();
+    for( SmClass cl : list )
+    {
+        jcbSelectClass.addItem( cl );
+    }
+}//GEN-LAST:event_jPnlScheduleComponentShown
+
+private void jcbSelectClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSelectClassActionPerformed
+    loadScheduleFor( (SmClass)jcbSelectClass.getSelectedItem() );
+}//GEN-LAST:event_jcbSelectClassActionPerformed
+
+private void jbtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditActionPerformed
+    JEditScheduleDialog sd = new JEditScheduleDialog(this, true );
+    sd.setVisible(true);
+}//GEN-LAST:event_jbtnEditActionPerformed
+
 public void reloadClassrooms()
 {
     DefaultTableModel tm = (DefaultTableModel)jtblRooms.getModel();
@@ -1892,6 +1919,7 @@ String dateToTimeString( Date date )
     private javax.swing.JButton jbtAddClass;
     private javax.swing.JButton jbtAddRoom;
     private javax.swing.JButton jbtReceive;
+    private javax.swing.JButton jbtnEdit;
     private javax.swing.JComboBox jcbPickClassForNotes;
     private javax.swing.JComboBox jcbPickSubjectForNotes;
     private javax.swing.JComboBox jcbSelectClass;
