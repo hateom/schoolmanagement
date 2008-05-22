@@ -60,6 +60,13 @@ public class DataAccess {
         return false;
     }
     
+    public boolean isConnected()
+    {
+        if(m_oEm != null)
+            return m_oEm.isOpen();
+        return false;
+    }
+    
     public boolean delete(Object object)
     {
         m_oEm.getTransaction().begin();
