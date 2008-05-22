@@ -843,7 +843,7 @@ public class DataAccess {
     {
         try
         {
-            Query query = m_oEm.createQuery("SELECT s FROM SmSchedule s WHERE s.schDayId = ?1 AND s.schClsId=?2 ORDER BY s.schRngId.rngTime ASC").setParameter(1, a_oDay).setParameter(1, a_oClass).setHint("refresh", new Boolean(true));
+            Query query = m_oEm.createQuery("SELECT s FROM SmSchedule s WHERE s.schDayId = ?1 AND s.schClsId=?2 ORDER BY s.schRngId.rngTime ASC").setParameter(1, a_oDay).setParameter(2, a_oClass).setHint("refresh", new Boolean(true));
             return query.getResultList();
         }
         catch(Exception e)

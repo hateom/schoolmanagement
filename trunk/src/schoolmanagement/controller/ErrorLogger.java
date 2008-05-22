@@ -7,12 +7,13 @@ package schoolmanagement.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
 /**
  *
  * @author deely
  */
-public class ErrorLogger {
+public class ErrorLogger extends Observable{
     static private List<String> errorList = new ArrayList<String>();;
     static public int getCount()
     {
@@ -26,6 +27,7 @@ public class ErrorLogger {
     static public void error( String strError )
     {
         errorList.add(strError);
+        
     }
     static public boolean errorReported()
     {
@@ -38,5 +40,12 @@ public class ErrorLogger {
     static public String getLast()
     {
         return errorList.get(getCount()-1);
+    }
+    
+    // observable methods
+    @Override
+    public void setChanged()
+    {
+        super.setChanged();
     }
 }
