@@ -68,7 +68,10 @@ public class DBAccess {
     }
 
     static public boolean IsConnected() {
-        return da != null;
+        //return da != null;
+        if( da!= null )
+            return da.isConnected();
+        return false;
     }
 
     static public void Dispose() {
