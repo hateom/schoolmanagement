@@ -6,6 +6,10 @@
 
 package schoolmanagement.dialogs;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import schoolmanagement.controller.User;
 import schoolmanagement.controller.DBAccess;
@@ -19,6 +23,27 @@ import schoolmanagement.entity.SmUser;
 public class JNewMessageDialog extends javax.swing.JFrame {
     
     List<SmPerson> m_receivers;
+    
+    public void addReceiver( SmPerson rec )
+    {
+        if( m_receivers == null ) m_receivers = new ArrayList<SmPerson>();
+        m_receivers.add(rec);
+    }
+    
+    public void updateReceiversText()
+    {
+        String recv = "";
+            
+        for( SmPerson p : m_receivers )
+        {
+            if( recv.compareTo("") != 0 ) {
+                recv += ", ";
+            }
+            recv += p.toString();
+        }
+
+        jtbReceiver.setText(recv);
+    }
     
     /** Creates new form JNewMessageDialog */
     public JNewMessageDialog() {
@@ -54,8 +79,9 @@ public class JNewMessageDialog extends javax.swing.JFrame {
         jLabel1.setText("Do:"); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
-        jtbReceiver.setBackground(new java.awt.Color(238, 239, 241));
-        jtbReceiver.setEnabled(false);
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JNewMessageDialog.class);
+        jtbReceiver.setBackground(resourceMap.getColor("jtbReceiver.background")); // NOI18N
+        jtbReceiver.setEditable(false);
         jtbReceiver.setName("jtbReceiver"); // NOI18N
 
         jLabel2.setText("Temat:"); // NOI18N
@@ -179,17 +205,7 @@ public class JNewMessageDialog extends javax.swing.JFrame {
         if( ( list = spd.getResult() ) != null ) {
             m_receivers = list;
             
-            String recv = "";
-            
-            for( SmPerson p : list )
-            {
-                if( recv.compareTo("") != 0 ) {
-                    recv += ", ";
-                }
-                recv += p.toString();
-            }
-            
-            jtbReceiver.setText(recv);
+            updateReceiversText();
         }
     }//GEN-LAST:event_jbtSearchActionPerformed
 
@@ -214,6 +230,28 @@ public class JNewMessageDialog extends javax.swing.JFrame {
         
         setVisible(false);
     }//GEN-LAST:event_jbtSendActionPerformed
+    
+   
+    public void setSubject( String subject )
+    {
+        jtbSubject.setText(subject);
+    }
+    
+    public void setBody( String body )
+    {
+        jTextArea1.setText(body);
+    }
+    
+  
+    public String getSubject()
+    {
+        return jtbSubject.getText();
+    }
+    
+    public String getBody()
+    {
+        return jTextArea1.getText();
+    }
     
     /**
      * @param args the command line arguments

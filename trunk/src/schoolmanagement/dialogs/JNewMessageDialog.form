@@ -126,10 +126,8 @@
         </Component>
         <Component class="javax.swing.JTextField" name="jtbReceiver">
           <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="f1" green="ef" red="ee" type="rgb"/>
-            </Property>
-            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="background" type="java.awt.Color" resourceKey="jtbReceiver.background"/>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="name" type="java.lang.String" value="jtbReceiver" noResource="true"/>
           </Properties>
         </Component>
