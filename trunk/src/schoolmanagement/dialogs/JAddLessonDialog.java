@@ -221,6 +221,7 @@ public class JAddLessonDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formComponentShown
 
     private void jcbSubjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSubjectsActionPerformed
+        m_subject = (SmSubject) jcbSubjects.getSelectedItem();
         List<SmTeacher> list = DBAccess.GetInstance().getAvailableTeachers(m_subject, m_day, m_ring);
         jcbTeachers.removeAllItems();
         
