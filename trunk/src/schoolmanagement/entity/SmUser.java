@@ -41,7 +41,7 @@ public class SmUser implements Serializable {
     @Column(name = "USR_ISLOGGED", nullable = false)
     private boolean usrIslogged;
     @JoinColumn(name = "USR_PER_ID", referencedColumnName = "PER_ID")
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private SmPerson usrPerId;
     @JoinColumn(name = "USR_ROL_ID", referencedColumnName = "ROL_ID")
     @ManyToOne
