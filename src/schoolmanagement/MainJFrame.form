@@ -507,6 +507,9 @@
             </Property>
             <Property name="name" type="java.lang.String" value="jPnlSchedule" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="componentShown" listener="java.awt.event.ComponentListener" parameters="java.awt.event.ComponentEvent" handler="jPnlScheduleComponentShown"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JLayeredPaneSupportLayout$JLayeredPaneConstraintsDescription">
               <JLayeredPaneConstraints x="0" y="0" width="440" height="480" layer="0" position="-1"/>
@@ -521,6 +524,7 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jScrollPane8" alignment="0" pref="404" max="32767" attributes="0"/>
                           <Component id="jpanelClassSelect" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jbtnEdit" alignment="1" min="-2" pref="145" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -531,8 +535,9 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jpanelClassSelect" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jScrollPane8" pref="387" max="32767" attributes="0"/>
+                      <Component id="jScrollPane8" pref="369" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                      <Component id="jbtnEdit" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -555,8 +560,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel24" min="-2" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jcbSelectClass" min="-2" pref="149" max="-2" attributes="0"/>
-                          <EmptySpace pref="194" max="32767" attributes="0"/>
+                          <Component id="jcbSelectClass" pref="333" max="32767" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -581,6 +586,9 @@
                     </Property>
                     <Property name="name" type="java.lang.String" value="jcbSelectClass" noResource="true"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jcbSelectClassActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel24">
                   <Properties>
@@ -622,6 +630,15 @@
                 </Component>
               </SubComponents>
             </Container>
+            <Component class="javax.swing.JButton" name="jbtnEdit">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Edytuj" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="jbtnEdit" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnEditActionPerformed"/>
+              </Events>
+            </Component>
           </SubComponents>
         </Container>
         <Container class="javax.swing.JPanel" name="jPnlInbox">
