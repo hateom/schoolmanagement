@@ -279,6 +279,7 @@ public class JEditClassDialog extends javax.swing.JFrame {
     private void jBtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddActionPerformed
         SmRole role = DBAccess.GetInstance().getRoleByType( RoleType.ROLE_STUDENT );
         JSelectPersonByRoleDialog sp = new JSelectPersonByRoleDialog( this, true, role );
+        sp.setVisible(true);
         SmPerson pers;
         if( ( pers = sp.getResult() ) == null ) return;
         
