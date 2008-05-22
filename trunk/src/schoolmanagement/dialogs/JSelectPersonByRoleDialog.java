@@ -44,7 +44,7 @@ public class JSelectPersonByRoleDialog extends javax.swing.JDialog {
         jTbName2 = new javax.swing.JTextField();
         jBtnSearch2 = new javax.swing.JButton();
         jScrollPane7 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        jTblRoleUsers = new javax.swing.JTable();
         jbtSelect = new javax.swing.JButton();
         jbtCancel = new javax.swing.JButton();
 
@@ -70,7 +70,7 @@ public class JSelectPersonByRoleDialog extends javax.swing.JDialog {
 
         jScrollPane7.setName("jScrollPane7"); // NOI18N
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        jTblRoleUsers.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -86,13 +86,13 @@ public class JSelectPersonByRoleDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jTable6.setName("jTable6"); // NOI18N
-        jTable6.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTblRoleUsers.setName("jTblRoleUsers"); // NOI18N
+        jTblRoleUsers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable6mouseClicked(evt);
+                jTblRoleUsersmouseClicked(evt);
             }
         });
-        jScrollPane7.setViewportView(jTable6);
+        jScrollPane7.setViewportView(jTblRoleUsers);
 
         jbtSelect.setText("Wybierz"); // NOI18N
         jbtSelect.setName("jbtSelect"); // NOI18N
@@ -164,15 +164,15 @@ public class JSelectPersonByRoleDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTbName2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTbName2FocusGained
-        jRbSurname.setSelected(true);
+        
     }//GEN-LAST:event_jTbName2FocusGained
 
     private void jBtnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearch2ActionPerformed
         // TODO add your handling code here:
         
-        jRbSurname.setSelected(true);
         
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        
+        jTblRoleUsers.setModel(new javax.swing.table.DefaultTableModel(
                 new Object [][] {
         },
                 new String [] {
@@ -189,10 +189,10 @@ public class JSelectPersonByRoleDialog extends javax.swing.JDialog {
             }
         });
         
-        DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
+        DefaultTableModel model = (DefaultTableModel) jTblRoleUsers.getModel();
         
         List<SmPerson> list = new ArrayList<SmPerson>();
-        list = DBAccess.GetInstance().GetUserByName(jTbName.getText().trim());
+        list = DBAccess.GetInstance().GetUserByName(jTbName2.getText().trim());
         
         for(SmPerson person : list){
             if( DBAccess.GetInstance().getUserByPerson(person).getUsrRolId() != m_role ) continue;
@@ -205,7 +205,7 @@ public class JSelectPersonByRoleDialog extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jBtnSearch2ActionPerformed
 
-    private void jTable6mouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable6mouseClicked
+    private void jTblRoleUsersmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTblRoleUsersmouseClicked
         // TODO add your handling code here:
         if (evt.getClickCount() == 2) {
             JTable target = (JTable)evt.getSource();
@@ -217,7 +217,7 @@ public class JSelectPersonByRoleDialog extends javax.swing.JDialog {
             m_result = person;
             setVisible(false);
         }
-    }//GEN-LAST:event_jTable6mouseClicked
+}//GEN-LAST:event_jTblRoleUsersmouseClicked
 
     public SmPerson getResult()
     {
@@ -226,11 +226,11 @@ public class JSelectPersonByRoleDialog extends javax.swing.JDialog {
     
     private void jbtSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSelectActionPerformed
         
-        if( jTable4.getSelectedRowCount() != 1 ) return;
-        int row = jTable4.getSelectedRow();
-        Object o = jTable4.getValueAt(row, 0);
+        if( jTblRoleUsers.getSelectedRowCount() != 1 ) return;
+        int row = jTblRoleUsers.getSelectedRow();
+        Object o = jTblRoleUsers.getValueAt(row, 0);
         if(o == null) return;
-        SmPerson person = (SmPerson)jTable4.getValueAt(row, 0);
+        SmPerson person = (SmPerson)jTblRoleUsers.getValueAt(row, 0);
         m_result = person;
         setVisible(false);
     }//GEN-LAST:event_jbtSelectActionPerformed
@@ -272,10 +272,10 @@ public class JSelectPersonByRoleDialog extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JTable jTable4;
     private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
     private javax.swing.JTextField jTbName;
     private javax.swing.JTextField jTbName1;
     private javax.swing.JTextField jTbName2;
+    private javax.swing.JTable jTblRoleUsers;
     private javax.swing.JButton jbtCancel;
     private javax.swing.JButton jbtSelect;
     // End of variables declaration//GEN-END:variables
