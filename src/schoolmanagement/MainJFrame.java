@@ -32,6 +32,7 @@ import schoolmanagement.entity.SmClassroom;
 import schoolmanagement.entity.SmDay;
 import schoolmanagement.entity.SmDay;
 import schoolmanagement.entity.SmMessage;
+import schoolmanagement.entity.SmSchedule;
 
 /**
  *
@@ -126,10 +127,45 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     private void loadScheduleFor(SmClass selectedItem) {
+        DefaultTableModel tm = (DefaultTableModel) jtblScheldue.getModel();
+        
+        while( tm.getRowCount() > 0 ) tm.removeRow(0);
+        
+        List<SmRing> rings = DBAccess.GetInstance().getRings();
         List<SmDay> days = DBAccess.GetInstance().getAllDays();
+        
+        int column = 1;
+        int row = 0;
+        for( SmRing ring : rings )
+        {
+            tm.addRow(new Object[] {ring, null, null, null, null, null });
+        }
+        
         for(SmDay day : days )
         {
-            DBAccess.GetInstance().getSchedule( day, selectedItem );
+            List<SmSchedule> list = DBAccess.GetInstance().getSchedule( day, selectedItem );
+            if( list == null ) {
+                column++;
+                continue;
+            }
+            row = 0;
+            for( SmRing ring : rings )
+            {
+                for( SmSchedule lesson : list )
+                {
+                    if( lesson.getSchRngId() == ring )
+                    {
+                        tm.setValueAt(lesson.getSchTchId().getTchSubId().getSubName(), row, column);
+                    }
+                    else
+                    {
+                        //
+                    }
+                }
+                row++;
+            }
+            column++;
+            if( column > 5 ) break;
         }
     }
     
