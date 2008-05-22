@@ -300,7 +300,7 @@ public class JEditClassDialog extends javax.swing.JFrame {
             {
                 if( !DBAccess.GetInstance().removePersonFromClass(m_class, pers) )
                 {
-                    ErrorLogger.error( "Could not rmove person from class!" );
+                    ErrorLogger.getInstance().error( "Could not rmove person from class!" );
                 }
             }
             tm.removeRow( rows[i] );

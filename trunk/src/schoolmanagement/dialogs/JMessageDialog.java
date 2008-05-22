@@ -238,7 +238,7 @@ public class JMessageDialog extends javax.swing.JFrame {
             Date date = dfm.parse(jtbDate.getText());
             return date;
         } catch (ParseException ex) {
-            ErrorLogger.error("Date conversion error!");
+            ErrorLogger.getInstance().error("Date conversion error!");
         }
         
         return null;

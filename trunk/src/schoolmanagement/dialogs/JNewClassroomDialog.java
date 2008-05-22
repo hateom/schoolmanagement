@@ -185,7 +185,7 @@ public class JNewClassroomDialog extends javax.swing.JFrame {
         SmClassroom cr = DBAccess.GetInstance().addClassRom( getNo(), getHost(), getDesc() );
         if( cr == null )
         {
-            ErrorLogger.error("Could not add classroom!");
+            ErrorLogger.getInstance().error("Could not add classroom!");
         }
         else
         {

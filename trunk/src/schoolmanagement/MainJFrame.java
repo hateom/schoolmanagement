@@ -18,6 +18,7 @@ import javax.swing.table.TableModel;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
+import observers.ErrorObserver;
 import schoolmanagement.controller.*;
 import schoolmanagement.controls.JMessageTableRenderer;
 import schoolmanagement.dialogs.*;
@@ -52,6 +53,7 @@ public class MainJFrame extends javax.swing.JFrame {
     /** Creates new form MainJFrame */
     public MainJFrame() {
         initComponents();
+        ErrorLogger.getInstance().addObserver(new ErrorObserver());
         PrepareTree();
         jTbRole.removeAllItems();
         jTbClass.removeAllItems();
@@ -1676,7 +1678,7 @@ public void refreshInbox()
     try {
         jlReceived.setDefaultRenderer(Class.forName("java.lang.Object"), new JMessageTableRenderer());
     } catch (ClassNotFoundException ex) {
-        ErrorLogger.error("Renderer failed...");
+        ErrorLogger.getInstance().error("Renderer failed...");
     }
 
     while (dm.getRowCount() > 0) {

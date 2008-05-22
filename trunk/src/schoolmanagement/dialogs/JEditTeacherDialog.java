@@ -288,7 +288,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
             SmSubject sb = (SmSubject)((DefaultListModel)jlTought.getModel()).getElementAt(k);
             boolean removeTeachersSubject = DBAccess.GetInstance().removeTeachersSubject(m_person, sb);
             if(!removeTeachersSubject) 
-                ErrorLogger.error("Could not add teachers subject!");
+                ErrorLogger.getInstance().error("Could not add teachers subject!");
         }
         updateLists();
     }//GEN-LAST:event_jbtnRemoveSelectedActionPerformed

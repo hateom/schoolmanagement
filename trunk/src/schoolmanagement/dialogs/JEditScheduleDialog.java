@@ -53,7 +53,7 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
         {
             if( !DBAccess.GetInstance().updateSchedule(res) )
             {
-                ErrorLogger.error("Could not update schedule!");
+                ErrorLogger.getInstance().error("Could not update schedule!");
             }
         }
         
