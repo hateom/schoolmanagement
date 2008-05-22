@@ -8,6 +8,7 @@ package schoolmanagement.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Observable;
+import schoolmanagement.dialogs.JErrorLoggerDialog;
 
 /**
  *
@@ -15,11 +16,13 @@ import java.util.Observable;
  */
 public class ErrorLogger extends Observable{
     static private List<String> errorList = new ArrayList<String>();;
+    private JErrorLoggerDialog errorDlg;
     
     static ErrorLogger instance = null;
     
     private ErrorLogger()
     {
+        errorDlg = new JErrorLoggerDialog();
     }
     
     static public ErrorLogger getInstance()
@@ -27,6 +30,11 @@ public class ErrorLogger extends Observable{
         if(instance == null)
             instance = new ErrorLogger();
         return instance;
+    }
+    
+    public void showWindow( boolean flag )
+    {
+        errorDlg.setVisible(flag);
     }
     
     public int getCount()
@@ -42,6 +50,7 @@ public class ErrorLogger extends Observable{
     {
         super.notifyObservers(strError);
         errorList.add(strError);
+        errorDlg.reloadErrors();
     }
     public boolean errorReported()
     {
