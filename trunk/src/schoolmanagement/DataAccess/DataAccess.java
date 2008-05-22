@@ -382,7 +382,18 @@ public class DataAccess {
         return false;
     }
     
-    
+    public List<SmTeacher> getAvailableTeachers(SmSubject a_oSubject, SmDay a_oDay , SmRing a_oRing)
+    {
+        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchPerId = ?1 AND t.tchSubId = ?2").setParameter(1, a_oSubject).setParameter(2, a_oRing).setParameter(3, a_oDay).setHint("refresh", new Boolean(true));
+        try{
+        Long count = (Long)query.getSingleResult();
+        if(count != null && count >0)
+            return null;
+        }
+        catch(Exception e)
+        {}
+        return null;
+    }
  //------------------------------- END OF TEACHER STUFF
     public List<SmNote> getNotes( SmSubject a_oSubject, SmClass a_oClass )
     {
@@ -753,7 +764,7 @@ public class DataAccess {
     
     ////-------------------------------SCHEDULE--------------------------
     
-    List<SmDay> getAllDays()
+    public List<SmDay> getAllDays()
     {
         try
         {
