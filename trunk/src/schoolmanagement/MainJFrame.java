@@ -213,6 +213,9 @@ public class MainJFrame extends javax.swing.JFrame {
         jTbSubs = new javax.swing.JComboBox();
         jBtnSearch2 = new javax.swing.JButton();
         jPnlClasses = new javax.swing.JPanel();
+        jScrollPane9 = new javax.swing.JScrollPane();
+        jtblClasses = new javax.swing.JTable();
+        jbtAddClass = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -1049,16 +1052,59 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jPnlClasses.setBorder(javax.swing.BorderFactory.createTitledBorder("Klasy")); // NOI18N
         jPnlClasses.setName("jPnlClasses"); // NOI18N
+        jPnlClasses.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPnlClassesComponentShown(evt);
+            }
+        });
+
+        jScrollPane9.setName("jScrollPane9"); // NOI18N
+
+        jtblClasses.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Klasa", "Opis"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jtblClasses.setName("jtblClasses"); // NOI18N
+        jtblClasses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblClassesmouseClicked(evt);
+            }
+        });
+        jScrollPane9.setViewportView(jtblClasses);
+
+        jbtAddClass.setText("Dodaj klase"); // NOI18N
+        jbtAddClass.setName("jbtAddClass"); // NOI18N
 
         javax.swing.GroupLayout jPnlClassesLayout = new javax.swing.GroupLayout(jPnlClasses);
         jPnlClasses.setLayout(jPnlClassesLayout);
         jPnlClassesLayout.setHorizontalGroup(
             jPnlClassesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlClassesLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPnlClassesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jbtAddClass, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane9, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPnlClassesLayout.setVerticalGroup(
             jPnlClassesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGroup(jPnlClassesLayout.createSequentialGroup()
+                .addComponent(jScrollPane9, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jbtAddClass)
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         jPnlClasses.setBounds(0, 0, 440, 480);
@@ -1553,6 +1599,22 @@ private void jTbClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     jRbClass.setSelected(true);
 }//GEN-LAST:event_jTbClassActionPerformed
 
+private void jtblClassesmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblClassesmouseClicked
+    // TODO add your handling code here:
+}//GEN-LAST:event_jtblClassesmouseClicked
+
+private void jPnlClassesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlClassesComponentShown
+    List<SmClass> classes = DBAccess.GetInstance().GetAllClasses();
+    DefaultTableModel dtm = (DefaultTableModel)jtblClasses.getModel();
+    
+    while( dtm.getRowCount() > 0 ) dtm.removeRow(0);
+    
+    for( SmClass cl : classes )
+    {
+        dtm.addRow( new Object[] { cl, cl.getClsDescription() } );
+    }
+}//GEN-LAST:event_jPnlClassesComponentShown
+
 String dateToTimeString( Date date )
 {
     return String.format("%tH:%tM",date,date);
@@ -1617,6 +1679,7 @@ String dateToTimeString( Date date )
     private javax.swing.JScrollPane jScrollPane6;
     private javax.swing.JScrollPane jScrollPane7;
     private javax.swing.JScrollPane jScrollPane8;
+    private javax.swing.JScrollPane jScrollPane9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator4;
@@ -1631,6 +1694,7 @@ String dateToTimeString( Date date )
     private javax.swing.JTable jTblRings;
     private javax.swing.JTable jTblTeachers;
     private javax.swing.JTree jTree;
+    private javax.swing.JButton jbtAddClass;
     private javax.swing.JButton jbtReceive;
     private javax.swing.JComboBox jcbPickClassForNotes;
     private javax.swing.JComboBox jcbPickSubjectForNotes;
@@ -1639,6 +1703,7 @@ String dateToTimeString( Date date )
     private javax.swing.JTable jlSent;
     private javax.swing.JPanel jpanelClassSelect;
     private javax.swing.JPanel jpanelProporties;
+    private javax.swing.JTable jtblClasses;
     private javax.swing.JTable jtblPupilNotes;
     private javax.swing.JTable jtblScheldue;
     private schoolmanagement.controls.PersonDetailsControl personDetailsControl1;
