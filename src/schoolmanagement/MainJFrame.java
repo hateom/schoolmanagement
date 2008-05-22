@@ -29,6 +29,8 @@ import schoolmanagement.entity.SmTeacher;
 import schoolmanagement.entity.SmUser;
 import schoolmanagement.dialogs.JNewMessageDialog;
 import schoolmanagement.entity.SmClassroom;
+import schoolmanagement.entity.SmDay;
+import schoolmanagement.entity.SmDay;
 import schoolmanagement.entity.SmMessage;
 
 /**
@@ -124,7 +126,11 @@ public class MainJFrame extends javax.swing.JFrame {
     }
 
     private void loadScheduleFor(SmClass selectedItem) {
-        throw new UnsupportedOperationException("Not yet implemented");
+        List<SmDay> days = DBAccess.GetInstance().getAllDays();
+        for(SmDay day : days )
+        {
+            DBAccess.GetInstance().getSchedule( day, selectedItem );
+        }
     }
     
     private DefaultMutableTreeNode processHierarchy(Object[] hierarchy) {
@@ -184,6 +190,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jScrollPane8 = new javax.swing.JScrollPane();
         jtblScheldue = new javax.swing.JTable();
         jbtnEdit = new javax.swing.JButton();
+        jbtnReload = new javax.swing.JButton();
         jPnlInbox = new javax.swing.JPanel();
         jSeparator5 = new javax.swing.JSeparator();
         jBtnNewMail3 = new javax.swing.JButton();
@@ -260,7 +267,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jLblLogText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLblLoggedAs)
-                .addContainerGap(556, Short.MAX_VALUE))
+                .addContainerGap(571, Short.MAX_VALUE))
         );
         jStatusLayout.setVerticalGroup(
             jStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -559,16 +566,7 @@ public class MainJFrame extends javax.swing.JFrame {
 
         jtblScheldue.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Godzina", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek"
@@ -577,9 +575,16 @@ public class MainJFrame extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jtblScheldue.setName("jtblScheldue"); // NOI18N
@@ -596,6 +601,14 @@ public class MainJFrame extends javax.swing.JFrame {
             }
         });
 
+        jbtnReload.setText("Odswiez"); // NOI18N
+        jbtnReload.setName("jbtnReload"); // NOI18N
+        jbtnReload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnReloadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPnlScheduleLayout = new javax.swing.GroupLayout(jPnlSchedule);
         jPnlSchedule.setLayout(jPnlScheduleLayout);
         jPnlScheduleLayout.setHorizontalGroup(
@@ -605,7 +618,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPnlScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jScrollPane8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                     .addComponent(jpanelClassSelect, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jbtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPnlScheduleLayout.createSequentialGroup()
+                        .addComponent(jbtnReload, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
+                        .addComponent(jbtnEdit, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPnlScheduleLayout.setVerticalGroup(
@@ -615,7 +631,9 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jbtnEdit))
+                .addGroup(jPnlScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnEdit)
+                    .addComponent(jbtnReload)))
         );
 
         jPnlSchedule.setBounds(0, 0, 440, 480);
@@ -1281,7 +1299,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 498, Short.MAX_VALUE)
+                .addComponent(jLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1788,6 +1806,10 @@ private void jbtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
       sd.setVisible(true);
 }//GEN-LAST:event_jbtnEditActionPerformed
 
+private void jbtnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnReloadActionPerformed
+    loadScheduleFor( (SmClass)jcbSelectClass.getSelectedItem() );
+}//GEN-LAST:event_jbtnReloadActionPerformed
+
 public void reloadClassrooms()
 {
     DefaultTableModel tm = (DefaultTableModel)jtblRooms.getModel();
@@ -1889,6 +1911,7 @@ String dateToTimeString( Date date )
     private javax.swing.JButton jbtAddRoom;
     private javax.swing.JButton jbtReceive;
     private javax.swing.JButton jbtnEdit;
+    private javax.swing.JButton jbtnReload;
     private javax.swing.JComboBox jcbPickClassForNotes;
     private javax.swing.JComboBox jcbPickSubjectForNotes;
     private javax.swing.JComboBox jcbSelectClass;

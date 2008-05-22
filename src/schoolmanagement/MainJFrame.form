@@ -524,7 +524,11 @@
                       <Group type="103" groupAlignment="1" attributes="0">
                           <Component id="jScrollPane8" alignment="0" pref="404" max="32767" attributes="0"/>
                           <Component id="jpanelClassSelect" alignment="0" max="32767" attributes="0"/>
-                          <Component id="jbtnEdit" alignment="1" min="-2" pref="145" max="-2" attributes="0"/>
+                          <Group type="102" alignment="1" attributes="0">
+                              <Component id="jbtnReload" min="-2" pref="139" max="-2" attributes="0"/>
+                              <EmptySpace pref="120" max="32767" attributes="0"/>
+                              <Component id="jbtnEdit" min="-2" pref="145" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -537,7 +541,10 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jScrollPane8" pref="369" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jbtnEdit" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jbtnEdit" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jbtnReload" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -637,6 +644,15 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnEditActionPerformed"/>
+              </Events>
+            </Component>
+            <Component class="javax.swing.JButton" name="jbtnReload">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Odswiez" noResource="true"/>
+                <Property name="name" type="java.lang.String" value="jbtnReload" noResource="true"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtnReloadActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
