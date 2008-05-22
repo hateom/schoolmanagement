@@ -9,6 +9,7 @@ package schoolmanagement.dialogs;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import schoolmanagement.controller.DBAccess;
+import schoolmanagement.controller.ErrorLogger;
 import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmDay;
 import schoolmanagement.entity.SmRing;
@@ -43,8 +44,18 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
         ring = (SmRing) jTblSchedule.getModel().getValueAt( jTblSchedule.getSelectedRow(), 0 );
         lesson = (SmSchedule) jTblSchedule.getModel().getValueAt( jTblSchedule.getSelectedRow(), 1 );
         
-        JAddLessonDialog nl = new JAddLessonDialog(null, true, day, ring, lesson );
+        JAddLessonDialog nl = new JAddLessonDialog(null, true, m_class, day, ring, lesson );
         nl.setVisible(true);
+        
+        SmSchedule res = nl.getResult();
+        
+        if( res != null )
+        {
+            if( !DBAccess.GetInstance().updateSchedule(res) )
+            {
+                ErrorLogger.error("Could not update schedule!");
+            }
+        }
     }
     
     /** This method is called from within the constructor to
@@ -338,6 +349,7 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
         {
             SmRing ring = (SmRing) tm.getValueAt(i, 0);
             List<SmSchedule> list = DBAccess.GetInstance().getSchedule(day, m_class);
+            if( list == null ) continue;
             for( SmSchedule lesson : list )
             {
                 if( lesson.getSchRngId() == ring )
