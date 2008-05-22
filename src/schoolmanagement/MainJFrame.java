@@ -161,7 +161,7 @@ public class MainJFrame extends javax.swing.JFrame {
                     }
                     else
                     {
-                        //
+                        // zostawiamy puste pole jak nie ma lekcji
                     }
                 }
                 row++;
