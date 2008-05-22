@@ -130,7 +130,7 @@ public class JMessageDialog extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jtbDate)
                             .addComponent(jtbSubject)
-                            .addComponent(jtbSender, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)))
+                            .addComponent(jtbSender, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)))
                     .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap(389, Short.MAX_VALUE)
