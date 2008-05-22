@@ -384,7 +384,15 @@ public class DataAccess {
     
     public List<SmTeacher> getAvailableTeachers(SmSubject a_oSubject, SmDay a_oDay , SmRing a_oRing)
     {
-        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchPerId = ?1 AND t.tchSubId = ?2").setParameter(1, a_oSubject).setParameter(2, a_oRing).setParameter(3, a_oDay).setHint("refresh", new Boolean(true));
+        List<SmTeacher> lst = m_oEm.createQuery("SELECT s.schTchId FROM SmSchedule s WHERE s.schDayId = ?1 AND s.schRngId = ?2").setParameter(1, a_oDay).setParameter(2, a_oRing).setHint("refresh", new Boolean(true)).getResultList();
+        String str ="";
+        for(SmTeacher tch : lst)
+        {
+            str+= tch.getTchId()+",";
+        }
+        if(str.length()>0)
+            str = str.substring(0, str.length()-1);
+        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t LEFT JOIN SmSchedule s WHERE t.tchSubId = ?1 AND t.tchId NOT IN("+str+")").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
         try{
         Long count = (Long)query.getSingleResult();
         if(count != null && count >0)
