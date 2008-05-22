@@ -1543,6 +1543,7 @@ private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
 private void jBtnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearch2ActionPerformed
   
     DefaultTableModel model = (DefaultTableModel)jTblTeachers.getModel();
+    while( model.getRowCount() > 0 ) model.removeRow(0);
     if(jRbSurname1.isSelected()){
         List<SmPerson> list;
         list = DBAccess.GetInstance().GetUserByName(jTbName.getText().trim());
@@ -1552,11 +1553,13 @@ private void jBtnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             if( DBAccess.GetInstance().getUserRole(pers).getRolName().compareTo( "Nauczyciel" ) != 0 ) continue;
 
             List<SmSubject> subs = DBAccess.GetInstance().getSubjectsForPerson( pers );
-
+            String strSubs = "";
             for( SmSubject sb : subs )
             {
-                model.addRow(new Object[] { pers, sb } );
+                strSubs += sb.getSubName()+",";
             }
+            model.addRow(new Object[] { pers, strSubs } );
+            
         }
     }
     else if(jRbSubject.isSelected()){
@@ -1815,8 +1818,8 @@ private void jcbSelectClassActionPerformed(java.awt.event.ActionEvent evt) {//GE
 }//GEN-LAST:event_jcbSelectClassActionPerformed
 
 private void jbtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditActionPerformed
-    JEditScheduleDialog sd = new JEditScheduleDialog(this, true );
-    sd.setVisible(true);
+//    JEditScheduleDialog sd = new JEditScheduleDialog(this, true );
+  //  sd.setVisible(true);
 }//GEN-LAST:event_jbtnEditActionPerformed
 
 public void reloadClassrooms()
