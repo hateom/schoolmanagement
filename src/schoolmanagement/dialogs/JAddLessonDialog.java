@@ -216,7 +216,7 @@ public class JAddLessonDialog extends javax.swing.JDialog {
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
         if( jcbSubjects.getSelectedItem() == null || jcbTeachers.getSelectedItem() == null || jcbRooms.getSelectedItem() == null )
         {
-            ErrorLogger.error("All fields must be filled out!");
+            ErrorLogger.getInstance().error("All fields must be filled out!");
             return;
         }
         if( m_lesson != null )
