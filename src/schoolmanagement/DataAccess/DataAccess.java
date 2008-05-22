@@ -16,6 +16,7 @@ import schoolmanagement.controller.RoleType;
 import schoolmanagement.controller.TeacherCollection;
 import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmClassroom;
+import schoolmanagement.entity.SmDay;
 import schoolmanagement.entity.SmMessage;
 import schoolmanagement.entity.SmNote;
 import schoolmanagement.entity.SmPerson;
@@ -734,4 +735,67 @@ public class DataAccess {
         return null;
     }
     ////--------------------------------END OF CLASSROM ----------------
+    
+    
+    
+    ////-------------------------------SCHEDULE--------------------------
+    
+    List<SmDay> getAllDays()
+    {
+        try
+        {
+            Query query = m_oEm.createQuery("SELECT d FROM SmDay d");
+            return query.getResultList();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return null;
+    }
+    
+    public List<SmSchedule> getSchedule( SmDay a_oDay, SmClass a_oClass)
+    {
+        try
+        {
+            Query query = m_oEm.createQuery("SELECT s FROM SmSchedule s WHERE s.schDayId = ?1 AND s.schClsId=?2 ORDER BY s.schRngId.rngTime ASC").setParameter(1, a_oDay).setParameter(1, a_oClass).setHint("refresh", new Boolean(true));
+            return query.getResultList();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return null;
+    }
+    
+    public SmSchedule addSchedule( SmDay a_smDay, SmClass a_smClass, SmRing a_smRing, SmTeacher a_smTeacher, SmClassroom a_oClassroom)
+    {
+        try
+        {
+            SmSchedule sch = new SmSchedule();
+            sch.setSchClrId(a_oClassroom);
+            sch.setSchClsId(a_smClass);
+            sch.setSchDayId(a_smDay);
+            sch.setSchRngId(a_smRing);
+            sch.setSchTchId(a_smTeacher);
+            if(save(sch))
+                return sch;
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return null;
+    }
+    public boolean removeSchedule( SmSchedule a_oSchedule )
+    {
+        return delete(a_oSchedule);
+    }
+    
+    public boolean updateSchedule( SmSchedule a_oSchedule )
+    {
+        return save(a_oSchedule);
+    }
+    
+    ////-------------------------------END OF SCHEDULE ------------------
 }

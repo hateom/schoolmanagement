@@ -85,7 +85,7 @@ public class SmDay implements Serializable {
 
     @Override
     public String toString() {
-        return "schoolmanagement.entity.SmDay[dayId=" + dayId + "]";
+        return dayName;
     }
 
 }
