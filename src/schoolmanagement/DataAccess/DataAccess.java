@@ -400,7 +400,7 @@ public class DataAccess {
             }
             else
             {
-                query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchSubId = ?1 AND t.tchId").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
+                query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchSubId = ?1").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
             }
             return query.getResultList();
         }
