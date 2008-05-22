@@ -554,6 +554,21 @@ public class DataAccess {
         {}
         return null;
     }
+    
+    public boolean classContains( SmClass a_oClass, SmPerson a_oPerson)
+    {
+        try
+        {
+            Long count = (Long)m_oEm.createQuery("SELECT COUNT(p2c) FROM SmPerson2class p2c WHERE p2c.p2cPerId = ?1 AND p2c.p2cClsId = ?2").setParameter(1, a_oPerson).setParameter(2, a_oClass).setHint("refresh", new Boolean(true)).getSingleResult();
+           if (count != null) return count != 0L;
+           return false;
+        }
+        catch(Exception e)
+        {
+        }
+        return false;
+    }
+    
 //----------------------------------END OF CLASS STUFF
     public List<SmRole> GetRoles()
     {
@@ -564,6 +579,19 @@ public class DataAccess {
         catch(Exception e)
         {}
         return null;
+    }
+    
+    public SmRole getRoleByType(RoleType a_eRole)
+    {
+        List<SmRole> roles = GetRoles();
+        switch(a_eRole)
+        {
+          case ROLE_TEACHER: { return getRoleByName("Nauczyciel");}
+          case ROLE_ADMIN: { return getRoleByName("Nauczyciel");}
+          case ROLE_PRINCIPAL: { return getRoleByName("Nauczyciel");}
+          case ROLE_STUDENT: { return getRoleByName("Nauczyciel");}
+            default: return null;
+        }
     }
     
     public List<SmPerson> GetPersonsForClass(SmClass a_oClsId)
