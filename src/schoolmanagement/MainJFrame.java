@@ -201,6 +201,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jStatus = new javax.swing.JPanel();
         jLblLogText = new javax.swing.JLabel();
         jLblLoggedAs = new javax.swing.JLabel();
+        jbtnShowConsole = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree = new javax.swing.JTree();
         jLayers = new javax.swing.JLayeredPane();
@@ -296,6 +297,14 @@ public class MainJFrame extends javax.swing.JFrame {
         jLblLoggedAs.setText(resourceMap.getString("jLblLoggedAs.text")); // NOI18N
         jLblLoggedAs.setName("jLblLoggedAs"); // NOI18N
 
+        jbtnShowConsole.setText("Pokaz okno bledow"); // NOI18N
+        jbtnShowConsole.setName("jbtnShowConsole"); // NOI18N
+        jbtnShowConsole.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnShowConsoleActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jStatusLayout = new javax.swing.GroupLayout(jStatus);
         jStatus.setLayout(jStatusLayout);
         jStatusLayout.setHorizontalGroup(
@@ -305,7 +314,9 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jLblLogText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLblLoggedAs)
-                .addContainerGap(571, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 452, Short.MAX_VALUE)
+                .addComponent(jbtnShowConsole, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jStatusLayout.setVerticalGroup(
             jStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -313,7 +324,8 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jStatusLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLblLogText)
-                    .addComponent(jLblLoggedAs))
+                    .addComponent(jLblLoggedAs)
+                    .addComponent(jbtnShowConsole, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -1337,7 +1349,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
+                .addComponent(jLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -1345,8 +1357,8 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 478, Short.MAX_VALUE))
+                    .addComponent(jLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1848,6 +1860,10 @@ private void jbtnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     loadScheduleFor( (SmClass)jcbSelectClass.getSelectedItem() );
 }//GEN-LAST:event_jbtnReloadActionPerformed
 
+private void jbtnShowConsoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnShowConsoleActionPerformed
+    ErrorLogger.getInstance().showWindow(true);
+}//GEN-LAST:event_jbtnShowConsoleActionPerformed
+
 public void reloadClassrooms()
 {
     DefaultTableModel tm = (DefaultTableModel)jtblRooms.getModel();
@@ -1950,6 +1966,7 @@ String dateToTimeString( Date date )
     private javax.swing.JButton jbtReceive;
     private javax.swing.JButton jbtnEdit;
     private javax.swing.JButton jbtnReload;
+    private javax.swing.JButton jbtnShowConsole;
     private javax.swing.JComboBox jcbPickClassForNotes;
     private javax.swing.JComboBox jcbPickSubjectForNotes;
     private javax.swing.JComboBox jcbSelectClass;
