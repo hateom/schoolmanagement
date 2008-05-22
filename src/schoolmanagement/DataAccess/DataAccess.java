@@ -719,6 +719,21 @@ public class DataAccess {
         return null;
     }
     
+    public boolean isClassroomAvailable(SmClassroom a_oClr, SmDay a_oDay, SmRing a_oRing)
+    {
+        try
+        {
+            Query query = m_oEm.createQuery("SELECT s.schClrId FROM SmSchedule s WHERE s.schDayId = ?1 AND s.schRngId = ?2").setParameter(1, a_oDay).setParameter(2, a_oRing).setHint("refresh", new Boolean(true));
+            SmClassroom clr = (SmClassroom) query.getSingleResult();
+            return clr.getClrId() != a_oClr.getClrId();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.error(e.getLocalizedMessage());
+        }
+        return true;
+    }
+    
     public List<SmClassroom> getAvailableClassrooms(SmDay a_oDay , SmRing a_oRing)
     {
         try
