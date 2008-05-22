@@ -436,12 +436,12 @@ public class MainJFrame extends javax.swing.JFrame {
         jPnlNotes.setLayout(jPnlNotesLayout);
         jPnlNotesLayout.setHorizontalGroup(
             jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPnlNotesLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlNotesLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, 0, 0, Short.MAX_VALUE)
+                .addGroup(jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                     .addComponent(jpanelProporties, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(335, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPnlNotesLayout.setVerticalGroup(
             jPnlNotesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1147,7 +1147,7 @@ public class MainJFrame extends javax.swing.JFrame {
         jPnlClasses.setBounds(0, 0, 440, 480);
         jLayers.add(jPnlClasses, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
-        jPnlRooms.setBorder(javax.swing.BorderFactory.createTitledBorder("Sale")); // NOI18N
+        jPnlRooms.setBorder(javax.swing.BorderFactory.createTitledBorder("Sale"));
         jPnlRooms.setName("jPnlRooms"); // NOI18N
         jPnlRooms.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
@@ -1201,7 +1201,6 @@ public class MainJFrame extends javax.swing.JFrame {
         jPnlRooms.setLayout(jPnlRoomsLayout);
         jPnlRoomsLayout.setHorizontalGroup(
             jPnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 424, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPnlRoomsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -1214,7 +1213,6 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         jPnlRoomsLayout.setVerticalGroup(
             jPnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
             .addGroup(jPnlRoomsLayout.createSequentialGroup()
                 .addComponent(jScrollPane10, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
