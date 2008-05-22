@@ -1566,7 +1566,8 @@ public void refreshInbox()
         dm.removeRow(0);
     }
     for (SmMessage msg : list) {
-        dm.addRow(new Object[]{msg.getMsgSenderUsrId().getUsrPerId(), msg, msg.getMsgSendDate().toString()});
+        Object perId = (msg.getMsgRecpUsrId() != null) ? msg.getMsgRecpUsrId().getUsrPerId() : "(Użytkownik usunięty)";
+        dm.addRow(new Object[]{perId, msg, msg.getMsgSendDate().toString()});
     }
 }
 
@@ -1580,7 +1581,8 @@ private void jPnlOutboxComponentShown(java.awt.event.ComponentEvent evt) {//GEN-
     
     for( SmMessage msg : list )
     {
-        dm.addRow(new Object[] { msg.getMsgRecpUsrId().getUsrPerId(), msg, msg.getMsgSendDate().toString() } );
+        Object perId = (msg.getMsgRecpUsrId() != null) ? msg.getMsgRecpUsrId().getUsrPerId() : "(Użytkownik usunięty)";
+        dm.addRow(new Object[] { perId, msg, msg.getMsgSendDate().toString() } );
     }
 }//GEN-LAST:event_jPnlOutboxComponentShown
 
