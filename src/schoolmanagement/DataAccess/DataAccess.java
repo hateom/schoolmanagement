@@ -384,26 +384,25 @@ public class DataAccess {
     
     public List<SmTeacher> getAvailableTeachers(SmSubject a_oSubject, SmDay a_oDay , SmRing a_oRing)
     {
-        List<SmTeacher> lst = m_oEm.createQuery("SELECT s.schTchId FROM SmSchedule s WHERE s.schDayId = ?1 AND s.schRngId = ?2").setParameter(1, a_oDay).setParameter(2, a_oRing).setHint("refresh", new Boolean(true)).getResultList();
-        String str ="";
-        Query query = null;
-        for(SmTeacher tch : lst)
+        try
         {
-            str+= tch.getTchId()+",";
-        }
-        if(str.length()>0)
-        {
-            str = str.substring(0, str.length()-1);
-             query = m_oEm.createQuery("SELECT t FROM SmTeacher t LEFT JOIN SmSchedule s WHERE t.tchSubId = ?1 AND t.tchId NOT IN("+str+")").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
-        }
-        else
-        {
-            query = m_oEm.createQuery("SELECT t FROM SmTeacher t LEFT JOIN SmSchedule s WHERE t.tchSubId = ?1 AND t.tchId").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
-        }
-        try{
-        Long count = (Long)query.getSingleResult();
-        if(count != null && count >0)
-            return null;
+            List<SmTeacher> lst = m_oEm.createQuery("SELECT s.schTchId FROM SmSchedule s WHERE s.schDayId = ?1 AND s.schRngId = ?2").setParameter(1, a_oDay).setParameter(2, a_oRing).setHint("refresh", new Boolean(true)).getResultList();
+            String str ="";
+            Query query = null;
+            for(SmTeacher tch : lst)
+            {
+                str+= tch.getTchId()+",";
+            }
+            if(str.length()>0)
+            {
+                str = str.substring(0, str.length()-1);
+                 query = m_oEm.createQuery("SELECT t FROM SmTeacher t LEFT JOIN SmSchedule s WHERE t.tchSubId = ?1 AND t.tchId NOT IN("+str+")").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
+            }
+            else
+            {
+                query = m_oEm.createQuery("SELECT t FROM SmTeacher t LEFT JOIN SmSchedule s WHERE t.tchSubId = ?1 AND t.tchId").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
+            }
+            return query.getResultList();
         }
         catch(Exception e)
         {}
