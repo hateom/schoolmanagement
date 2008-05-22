@@ -6,8 +6,13 @@
 
 package schoolmanagement.dialogs;
 
-import javax.swing.JFrame;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import schoolmanagement.controller.DBAccess;
 import schoolmanagement.entity.SmClass;
+import schoolmanagement.entity.SmDay;
+import schoolmanagement.entity.SmRing;
+import schoolmanagement.entity.SmSchedule;
 
 /**
  *
@@ -23,6 +28,7 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
         initComponents();
         
         m_class = cls;
+        loadRings();
     }
     
     /** This method is called from within the constructor to
@@ -35,22 +41,27 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTblDays = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        jTblSchedule = new javax.swing.JTable();
         jbtnAdd = new javax.swing.JButton();
         jbtnDelete = new javax.swing.JButton();
         jbtnSave = new javax.swing.JButton();
         jbtnCancel = new javax.swing.JButton();
 
         setName("Form"); // NOI18N
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Edycja planu")); // NOI18N
         jPanel1.setName("jPanel1"); // NOI18N
 
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTblDays.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {"Poniedzialek"},
                 {"Wtorek"},
@@ -70,12 +81,19 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setName("jTable1"); // NOI18N
-        jScrollPane1.setViewportView(jTable1);
+        jTblDays.setName("jTblDays"); // NOI18N
+        jTblDays.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+                jTblDaysCaretPositionChanged(evt);
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+            }
+        });
+        jScrollPane1.setViewportView(jTblDays);
 
         jScrollPane2.setName("jScrollPane2"); // NOI18N
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        jTblSchedule.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -83,8 +101,8 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
                 "Lekcja", "Przedmiot", "Nauczyciel", "Sala"
             }
         ));
-        jTable2.setName("jTable2"); // NOI18N
-        jScrollPane2.setViewportView(jTable2);
+        jTblSchedule.setName("jTblSchedule"); // NOI18N
+        jScrollPane2.setViewportView(jTblSchedule);
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JEditScheduleDialog.class);
         jbtnAdd.setText(resourceMap.getString("jbtnAdd.text")); // NOI18N
@@ -170,9 +188,41 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnCancelActionPerformed
 
     private void jbtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnAddActionPerformed
-        JAddLessonDialog nl = new JAddLessonDialog(null, true);
+        SmDay day;
+        SmRing ring;
+        SmSchedule lesson;
+        
+        if( jTblDays.getSelectedRowCount() != 1 ) return;
+        if( jTblSchedule.getSelectedRowCount() != 1 ) return;
+        
+        day = (SmDay) jTblDays.getModel().getValueAt(jTblDays.getSelectedRow(), 0 );
+        ring = (SmRing) jTblSchedule.getModel().getValueAt( jTblSchedule.getSelectedRow(), 0 );
+        lesson = (SmSchedule) jTblSchedule.getModel().getValueAt( jTblSchedule.getSelectedRow(), 0 );
+        
+        JAddLessonDialog nl = new JAddLessonDialog(null, true, day, ring, lesson );
         nl.setVisible(true);
     }//GEN-LAST:event_jbtnAddActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        List<SmDay> list = DBAccess.GetInstance().getAllDays();
+        DefaultTableModel tm = (DefaultTableModel) jTblDays.getModel();
+        while( tm.getRowCount() > 0 ) tm.removeRow(0);
+        
+        for( SmDay day : list )
+        {
+            tm.addRow(new Object[] { day } );
+        }
+    }//GEN-LAST:event_formComponentShown
+
+    private void jTblDaysCaretPositionChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTblDaysCaretPositionChanged
+        if( jTblDays.getSelectedRowCount() != 1 ) return;
+        int row = jTblDays.getSelectedRow();
+        SmDay day = (SmDay) jTblDays.getValueAt( row, 0 );
+        if( day != null )
+        {
+            reloadScheduleFor( day );
+        }
+    }//GEN-LAST:event_jTblDaysCaretPositionChanged
     
     /**
      * @param args the command line arguments
@@ -196,12 +246,45 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable jTblDays;
+    private javax.swing.JTable jTblSchedule;
     private javax.swing.JButton jbtnAdd;
     private javax.swing.JButton jbtnCancel;
     private javax.swing.JButton jbtnDelete;
     private javax.swing.JButton jbtnSave;
     // End of variables declaration//GEN-END:variables
+
+    private void loadRings() {
+        List<SmRing> list = DBAccess.GetInstance().getRings();
+
+        DefaultTableModel tm = (DefaultTableModel) jTblSchedule.getModel();
+        while( tm.getRowCount() > 0 ) tm.removeRow( 0 );
+        
+        for( SmRing ring : list )
+        {
+            tm.addRow( new Object[] { ring, null, null, null } );
+        }
+    }
+
+    private void reloadScheduleFor(SmDay day) {
+        
+        loadRings();
+        DefaultTableModel tm = (DefaultTableModel) jTblSchedule.getModel();
+        
+        for( int i=0; i<tm.getRowCount(); ++i )
+        {
+            SmRing ring = (SmRing) tm.getValueAt(i, 0);
+            List<SmSchedule> list = DBAccess.GetInstance().getSchedule(day, m_class);
+            for( SmSchedule lesson : list )
+            {
+                if( lesson.getSchRngId() == ring )
+                {
+                    tm.setValueAt(lesson, i, 1);
+                    tm.setValueAt(lesson.getSchTchId().getTchPerId(), i, 2);
+                    tm.setValueAt(lesson.getSchClrId(), i, 3);
+                }
+            }
+        }
+    }
     
 }
