@@ -96,6 +96,11 @@ public class JAddLessonDialog extends javax.swing.JDialog {
         });
 
         jcbTeachers.setName("jcbTeachers"); // NOI18N
+        jcbTeachers.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTeachersActionPerformed(evt);
+            }
+        });
 
         jcbRooms.setName("jcbRooms"); // NOI18N
 
@@ -216,8 +221,20 @@ public class JAddLessonDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_formComponentShown
 
     private void jcbSubjectsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbSubjectsActionPerformed
-        //DBAccess.GetInstance().getAv
+        List<SmTeacher> list = DBAccess.GetInstance().getAvailableTeachers(m_subject, m_day, m_ring);
+        jcbTeachers.removeAllItems();
+        
+        if( list == null ) return;
+        
+        for( SmTeacher t : list )
+        {
+            jcbTeachers.addItem(t);
+        }
     }//GEN-LAST:event_jcbSubjectsActionPerformed
+
+    private void jcbTeachersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTeachersActionPerformed
+        // getAvailableRoom
+    }//GEN-LAST:event_jcbTeachersActionPerformed
     
     /**
      * @param args the command line arguments
