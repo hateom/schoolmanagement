@@ -412,6 +412,9 @@ public class DataAccess {
             }
             return query.getResultList();
         }
+        catch(NoResultException e)
+        {
+        }
         catch(Exception e)
         {
             ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
@@ -422,12 +425,17 @@ public class DataAccess {
     public List<SmNote> getNotes( SmSubject a_oSubject, SmClass a_oClass )
     {
         Query query = null;
-        query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notTchId.tchSubId = ?1 AND n.notP2cId.p2cClsId = ?2").setParameter(1, a_oSubject).setParameter(2, a_oClass).setHint("refresh", new Boolean(true));
+        query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notSubId = ?1 AND n.notP2cId.p2cClsId = ?2").setParameter(1, a_oSubject).setParameter(2, a_oClass).setHint("refresh", new Boolean(true));
         try{
         return query.getResultList();
         }
+        catch(NoResultException e)
+        {
+        }
         catch(Exception e)
-        {}
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+        }
         return null;
     }
     
@@ -440,8 +448,18 @@ public class DataAccess {
         if(teacherPerson != null){
             if( a_oPupilID == null )
             {
-                query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notTchId.tchPerId = ?1 AND n.notP2cId.p2cClsId = ?2").setParameter(1, teacherPerson).setParameter(2, a_oClass).setHint("refresh", new Boolean(true));
-                return query.getResultList();
+                try
+                {
+                    query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notTchId.tchPerId = ?1 AND n.notP2cId.p2cClsId = ?2").setParameter(1, teacherPerson).setParameter(2, a_oClass).setHint("refresh", new Boolean(true));
+                    return query.getResultList();
+                }
+                catch(NoResultException e)
+                {
+                }
+                catch(Exception e)
+                {
+                    ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+                }
             }
             else
             {
@@ -462,12 +480,17 @@ public class DataAccess {
      */
     public List<SmClass> GetAllClasses()
     {
-        Query query = m_oEm.createQuery("SELECT c FROM SmClass c").setHint("refresh", new Boolean(true));
         try{
-        return query.getResultList();
+            Query query = m_oEm.createQuery("SELECT c FROM SmClass c").setHint("refresh", new Boolean(true));
+            return query.getResultList();
+        }
+        catch(NoResultException e)
+        {
         }
         catch(Exception e)
-        {}
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+        }
         return null;
     }
     
@@ -504,6 +527,9 @@ public class DataAccess {
                 a_oClass.getSmPerson2classCollection().remove(p2c);
             }
         }
+        catch(NoResultException e)
+        {
+        }
         catch(Exception e)
         {
             ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
@@ -527,20 +553,25 @@ public class DataAccess {
     
     public List<SmSubject> getSubjectsList()
     {
-        Query query = m_oEm.createQuery("SELECT s FROM SmSubject s").setHint("refresh", new Boolean(true));
         try{
-        return query.getResultList();
+            Query query = m_oEm.createQuery("SELECT s FROM SmSubject s").setHint("refresh", new Boolean(true));
+            return query.getResultList();
+        }
+        catch(NoResultException e)
+        {
         }
         catch(Exception e)
-        {}
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+        }
         return null;
     }
     
     public List<SmSubject> getSubjectsForClass( SmClass a_oClass )
     {
-        Query query = m_oEm.createQuery("SELECT s FROM SmSchedule s WHERE s.schClsId = :class").setParameter("class", a_oClass);
         List<SmSubject> subjectList = new ArrayList<SmSubject>();
         try{ 
+            Query query = m_oEm.createQuery("SELECT s FROM SmSchedule s WHERE s.schClsId = :class").setParameter("class", a_oClass);
             List<SmSchedule> lst = query.getResultList();
             for(SmSchedule sh : lst)
             {
@@ -549,8 +580,13 @@ public class DataAccess {
             }
             return subjectList;
         }
+        catch(NoResultException e)
+        {
+        }
         catch(Exception e)
-        {}
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+        }
         return null;
     }
     
@@ -562,8 +598,12 @@ public class DataAccess {
            if (count != null) return count != 0L;
            return false;
         }
+        catch(NoResultException e)
+        {
+        }
         catch(Exception e)
         {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return false;
     }
@@ -571,12 +611,17 @@ public class DataAccess {
 //----------------------------------END OF CLASS STUFF
     public List<SmRole> GetRoles()
     {
-        Query query = m_oEm.createQuery("SELECT r FROM SmRole r");
         try{
-        return query.getResultList();
+            Query query = m_oEm.createQuery("SELECT r FROM SmRole r");
+            return query.getResultList();
+        }
+        catch(NoResultException e)
+        {
         }
         catch(Exception e)
-        {}
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+        }
         return null;
     }
     
@@ -600,23 +645,29 @@ public class DataAccess {
             Query query = m_oEm.createQuery("SELECT p2c.p2cPerId FROM SmPerson2class p2c WHERE p2c.p2cClsId = ?1 ORDER BY p2c.p2cPerId.perSurname").setParameter(1, a_oClass).setHint("refresh", new Boolean(true));
             return query.getResultList();
         }
+        catch(NoResultException e)
+        {
+        }
         catch(Exception e)
         {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
     
     public List<SmRing> getRings()
     {
-        return m_oEm.createQuery("SELECT r FROM SmRing r").getResultList();
-    }
-    
-    /**
-     * 
-     * @return
-     */
-    public List getData() {
-        return m_oEm.createQuery("SELECT p FROM SmPersons p").getResultList();
+        try{
+            return m_oEm.createQuery("SELECT r FROM SmRing r").getResultList();
+        }
+        catch(NoResultException e)
+        {
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+        }
+        return null;
     }
     
     /**
