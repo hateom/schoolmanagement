@@ -35,12 +35,13 @@ import schoolmanagement.entity.SmDay;
 import schoolmanagement.entity.SmMessage;
 import schoolmanagement.entity.SmNote;
 import schoolmanagement.entity.SmSchedule;
+import schoolmanagement.controller.Commander;
 
 /**
  *
  * @author  deely
  */
-public class MainJFrame extends javax.swing.JFrame {
+public class MainJFrame extends javax.swing.JFrame implements Commander {
 
     static private MainJFrame instance;
     static public MainJFrame getInstance() {
@@ -1478,22 +1479,7 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jPnlNotesComponentShown
 
     private void jcbPickSubjectForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickSubjectForNotesActionPerformed
-        SmSubject subject = (SmSubject) jcbPickSubjectForNotes.getSelectedItem();
-        SmClass cls = (SmClass) jcbPickClassForNotes.getSelectedItem();
-        
-        if( cls == null || subject == null) return;
-        
-        DefaultTableModel tm = (DefaultTableModel) jtblPupilNotes.getModel();
-        while( tm.getRowCount() > 0 ) tm.removeRow(0);
-        
-        List<SmPerson> list = DBAccess.GetInstance().GetPersonsForClass(cls);
-        
-        String notes;
-        for( SmPerson pupil : list )
-        {
-            notes = compileNotes( pupil, cls, subject );
-            tm.addRow(new Object[] { pupil, notes } );
-        }
+        reloadNotes();
     }//GEN-LAST:event_jcbPickSubjectForNotesActionPerformed
 
     private void jcbPickClassForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickClassForNotesActionPerformed
@@ -1906,7 +1892,7 @@ private void jtblPupilNotesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     
     if( subject == null || cls == null ) return;
     
-    JEditNotesDialog en = new JEditNotesDialog(pupil, cls, subject, jtblPupilNotes, row );
+    JEditNotesDialog en = new JEditNotesDialog(pupil, cls, subject, this );
     en.setVisible(true);
     
 }//GEN-LAST:event_jtblPupilNotesMouseClicked
@@ -2027,4 +2013,27 @@ String dateToTimeString( Date date )
     private javax.swing.JTable jtblScheldue;
     private schoolmanagement.controls.PersonDetailsControl personDetailsControl1;
     // End of variables declaration//GEN-END:variables
+
+    public void execute() {
+        reloadNotes();
+    }
+
+    private void reloadNotes() {
+        SmSubject subject = (SmSubject) jcbPickSubjectForNotes.getSelectedItem();
+        SmClass cls = (SmClass) jcbPickClassForNotes.getSelectedItem();
+        
+        if( cls == null || subject == null) return;
+        
+        DefaultTableModel tm = (DefaultTableModel) jtblPupilNotes.getModel();
+        while( tm.getRowCount() > 0 ) tm.removeRow(0);
+        
+        List<SmPerson> list = DBAccess.GetInstance().GetPersonsForClass(cls);
+        
+        String notes;
+        for( SmPerson pupil : list )
+        {
+            notes = compileNotes( pupil, cls, subject );
+            tm.addRow(new Object[] { pupil, notes } );
+        }
+    }
 }
