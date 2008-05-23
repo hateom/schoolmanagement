@@ -14,7 +14,6 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
 import schoolmanagement.controller.ErrorLogger;
 import schoolmanagement.controller.RoleType;
-import schoolmanagement.controller.TeacherCollection;
 import schoolmanagement.entity.SmClass;
 import schoolmanagement.entity.SmClassroom;
 import schoolmanagement.entity.SmDay;
@@ -422,6 +421,13 @@ public class DataAccess {
         return null;
     }
  //------------------------------- END OF TEACHER STUFF
+    
+    /**
+     * Lista wszystkich ocen z danego przedmiotu w danej klasie
+     * @param a_oSubject Przedmiot
+     * @param a_oClass Klasa
+     * @return Lista Ocen
+     */
     public List<SmNote> getNotes( SmSubject a_oSubject, SmClass a_oClass )
     {
         Query query = null;
@@ -438,37 +444,102 @@ public class DataAccess {
         }
         return null;
     }
+    /**
+     * Funkcja zwraca oceny dla wybranej osoby, z wybranego przemdiotu dla wybranej klasy
+     * @param a_oPerson Osoba
+     * @param a_oClass Klasa
+     * @param a_oSubject Przedmiot
+     * @return Lista ocen
+     */
+    public List<SmNote> getNotes(SmPerson a_oPerson, SmClass a_oClass, SmSubject a_oSubject)
+    {
+        try
+        {
+            Query query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notP2cId.p2cPerId = ?1 AND n.notP2cId.p2cClsId = ?2 AND n.notSubId = ?3").setParameter(1, a_oPerson).setParameter(2, a_oClass).setParameter(3, a_oSubject).setHint("refresh", new Boolean(true));
+            query.getResultList();
+        }
+        catch(NoResultException e)
+        {
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+        }
+        return new ArrayList<SmNote>();
+    }
     
-    
-    
-    public List<SmNote> getNotes( TeacherCollection a_oTeacher, SmClass a_oClass, SmPerson a_oPupilID)
+    /**
+     * Zwraca liste ocen w zaleznosci jak sie chce (albo nauczyciel dla swoich klas albo uczniowie swoje)
+     * @param a_oTeacher Nauczyciel
+     * @param a_oClass Klasa
+     * @param a_oPupilID Uczeń
+     * @param a_oSubject Przedmiot
+     * @return Lista Ocen
+     */
+    public List<SmNote> getNotes( SmPerson a_oTeacher, SmClass a_oClass, SmPerson a_oPupilID, SmSubject a_oSubject )
     {
         Query query = null;
-        SmPerson teacherPerson = a_oTeacher.getPerson();
-        if(teacherPerson != null){
-            if( a_oPupilID == null )
+        try{
+            if(a_oTeacher != null)
             {
-                try
+                if( a_oPupilID == null )
                 {
-                    query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notTchId.tchPerId = ?1 AND n.notP2cId.p2cClsId = ?2").setParameter(1, teacherPerson).setParameter(2, a_oClass).setHint("refresh", new Boolean(true));
-                    return query.getResultList();
+                        query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notTchPerId = ?1 AND n.notP2cId.p2cClsId = ?2 AND n.notSubId = ?3").setParameter(1, a_oTeacher).setParameter(2, a_oClass).setParameter(3, a_oSubject).setHint("refresh", new Boolean(true));
                 }
-                catch(NoResultException e)
+                else
                 {
-                }
-                catch(Exception e)
-                {
-                    ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+                        query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notTchPerId = ?1 AND n.notP2cId.p2cClsId = ?2 AND n.notP2cId.p2cPerId = ?3 AND n.notSubId = ?3").setParameter(1, a_oTeacher).setParameter(2, a_oClass).setParameter(3, a_oPupilID).setParameter(4, a_oSubject).setHint("refresh", new Boolean(true));
                 }
             }
             else
             {
-
+                query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notSubId = ?1 AND n.notP2cId.p2cClsId = ?2 AND n.notP2cId.p2cPerId = ?3").setParameter(1, a_oSubject).setParameter(2, a_oClass).setParameter(3, a_oPupilID).setHint("refresh", new Boolean(true));   
             }
+            return query.getResultList();
+        }
+        catch(NoResultException e)
+        {
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
     
+    public SmNote addNote(SmPerson a_oTeacher, SmSubject a_oSubject, SmPerson a_oPupil, SmClass a_oClass, String a_strNote, String a_strComment)
+    {
+        try
+        {
+            SmNote note = new SmNote();
+            note.setNotComment(a_strComment);
+            note.setNotTchPerId(a_oTeacher);
+            note.setNotSubId(a_oSubject);
+            note.setNotNote(a_strNote);
+            SmPerson2class p2c = getP2CByPersonClass(a_oPupil, a_oClass);
+            note.setNotP2cId(p2c);
+            Date d = new Date();
+            d.setTime(System.currentTimeMillis());
+            note.setNotDate(d);
+            if(save(note))
+                return note;
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+        }
+        return null;
+    }
+    
+    public boolean saveNote(SmNote a_oNote)
+    {
+        return save(a_oNote);
+    }
+    
+    public boolean deleteNote(SmNote a_oNote)
+    {
+        return delete(a_oNote);
+    }
 //---------------------------- END OF NOTEZ STUFF
     
     
@@ -535,6 +606,22 @@ public class DataAccess {
             ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return false;
+    }
+    
+    public SmPerson2class getP2CByPersonClass( SmPerson a_oPerson, SmClass a_oClass )
+    {
+        try
+        {
+            return (SmPerson2class) m_oEm.createQuery("SELECT p2c FROM SmPerson2class p2c WHERE p2c.p2cPerId = ?2 AND p2c.p2cClsId = ?1").setParameter(1, a_oClass).setParameter(2, a_oPerson).setHint("refresh", new Boolean(true)).getSingleResult();
+        }
+        catch(NoResultException e)
+        {
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+        }
+        return null;
     }
     
     public boolean addPersonToClass(SmClass a_oClass, SmPerson a_oPerson)
