@@ -6,6 +6,7 @@
 
 package schoolmanagement.dialogs;
 
+import schoolmanagement.controller.DBAccess;
 import schoolmanagement.entity.SmMessage;
 
 /**
@@ -122,6 +123,7 @@ public class JNewMailMessageDialog extends javax.swing.JDialog {
         JMessageDialog md = new JMessageDialog(m_msg);
         md.setVisible(true);
         m_msg.setMsgReaded(true);
+        DBAccess.GetInstance().markAsRead(m_msg, true);
     }//GEN-LAST:event_jbtnOpenActionPerformed
     
     /**

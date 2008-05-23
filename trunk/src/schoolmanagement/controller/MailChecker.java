@@ -17,8 +17,12 @@ import schoolmanagement.entity.SmUser;
  */
 public class MailChecker extends TimerTask {
 
+    static private boolean m_lock = false;
+    
     @Override
     public void run() {
+        if( m_lock == true ) return;
+        m_lock = true;
         SmUser user = DBAccess.GetInstance().getUserByPerson(User.GetUserPerson());
         if( user == null || User.IsLogged() == false ) return;
         List<SmMessage> list = DBAccess.GetInstance().getRecievedMessages( user, null, false );
@@ -30,6 +34,7 @@ public class MailChecker extends TimerTask {
                 JNewMailMessageDialog nm = new JNewMailMessageDialog(null, true, msg);
                 nm.setLocationRelativeTo(null);
                 nm.setVisible(true);
+                m_lock = false;
             }
         }
     }

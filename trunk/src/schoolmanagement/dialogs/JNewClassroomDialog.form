@@ -82,9 +82,9 @@
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jtbDesc" alignment="0" pref="242" max="32767" attributes="0"/>
+                      <Component id="jtbDesc" alignment="0" pref="249" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jtbHost" pref="142" max="32767" attributes="0"/>
+                          <Component id="jtbHost" pref="160" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jBtnSelect" min="-2" max="-2" attributes="0"/>
                       </Group>
