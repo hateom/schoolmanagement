@@ -456,7 +456,7 @@ public class DataAccess {
         try
         {
             Query query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notP2cId.p2cPerId = ?1 AND n.notP2cId.p2cClsId = ?2 AND n.notSubId = ?3").setParameter(1, a_oPerson).setParameter(2, a_oClass).setParameter(3, a_oSubject).setHint("refresh", new Boolean(true));
-            query.getResultList();
+            return query.getResultList();
         }
         catch(NoResultException e)
         {
