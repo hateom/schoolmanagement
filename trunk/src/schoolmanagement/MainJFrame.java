@@ -71,6 +71,9 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
             jTbClass.addItem(smclass);
         }
         jLblLoggedAs.setText(User.GetUserPerson().getPerName() + " " + User.GetUserPerson().getPerSurname());
+        
+        Timer timer = new Timer();
+        timer.schedule( new MailChecker(), 3000, 60000 );
     }
 
     public void PrepareTree() {
