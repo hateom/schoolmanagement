@@ -53,6 +53,7 @@ public class MainJFrame extends javax.swing.JFrame {
     /** Creates new form MainJFrame */
     public MainJFrame() {
         initComponents();
+        Thread.setDefaultUncaughtExceptionHandler( ErrorLogger.getInstance() );
         ErrorLogger.getInstance().addObserver(new ErrorObserver());
         PrepareTree();
         jTbRole.removeAllItems();
@@ -155,7 +156,7 @@ public class MainJFrame extends javax.swing.JFrame {
             {
                 for( SmSchedule lesson : list )
                 {
-                    if( lesson.getSchRngId() == ring )
+                    if( lesson.getSchRngId() == ring && lesson.getSchTchId()!=null)
                     {
                         tm.setValueAt(lesson.getSchTchId().getTchSubId().getSubName(), row, column);
                     }

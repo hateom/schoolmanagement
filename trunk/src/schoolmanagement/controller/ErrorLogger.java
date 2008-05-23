@@ -14,8 +14,8 @@ import schoolmanagement.dialogs.JErrorLoggerDialog;
  *
  * @author deely
  */
-public class ErrorLogger extends Observable{
-    static private List<String> errorList = new ArrayList<String>();;
+public class ErrorLogger extends Observable implements Thread.UncaughtExceptionHandler{
+    static private List<String> errorList = new ArrayList<String>();
     private JErrorLoggerDialog errorDlg;
     
     static ErrorLogger instance = null;
@@ -64,6 +64,10 @@ public class ErrorLogger extends Observable{
     public String getLast()
     {
         return errorList.get(getCount()-1);
+    }
+
+    public void uncaughtException(Thread t, Throwable e) {
+        ErrorLogger.getInstance().error(e.toString()+" at:"+"\n"+e.getStackTrace()[0].toString());
     }
     
     // observable methods
