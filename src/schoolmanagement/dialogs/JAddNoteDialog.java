@@ -95,6 +95,7 @@ public class JAddNoteDialog extends javax.swing.JDialog {
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         jtbDesc.setColumns(20);
+        jtbDesc.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jtbDesc.setRows(5);
         jtbDesc.setName("jtbDesc"); // NOI18N
         jScrollPane1.setViewportView(jtbDesc);
@@ -192,18 +193,15 @@ public class JAddNoteDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jbtnCancelActionPerformed
 
     private void jBtnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnOKActionPerformed
+        m_not = jtbNote.getText();
+        m_desc = jtbDesc.getText();
+        
         if( m_note != null )
         {
-            if( !DBAccess.GetInstance().saveNote( m_note ) )
-            {
-                ErrorLogger.getInstance().error( "Could not save note!" );
-            }
+            m_note.setNotComment(getDesc());
+            m_note.setNotNote(getNote());
         }
-        else
-        {
-            m_not = jtbNote.getText();
-            m_desc = jtbDesc.getText();
-        }
+
         m_saved = true;
         setVisible( false );
     }//GEN-LAST:event_jBtnOKActionPerformed
