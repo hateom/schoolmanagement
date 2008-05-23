@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import schoolmanagement.controller.Commander;
 import schoolmanagement.controller.User;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.controller.ErrorLogger;
@@ -29,19 +30,17 @@ public class JEditNotesDialog extends javax.swing.JFrame {
     private SmClass   m_class;
     private SmSubject m_subject;
     
-    private JTable m_table;
-    private int m_row;
+    private Commander m_cmd;
     
     /** Creates new form JEditNotesDialog */
-    public JEditNotesDialog( SmPerson person, SmClass cls, SmSubject subject, JTable target, int row ) {
+    public JEditNotesDialog( SmPerson person, SmClass cls, SmSubject subject, Commander cmd ) {
         initComponents();
         
         m_person = person;
         m_class = cls;
         m_subject = subject;
         
-        m_table = target;
-        m_row = row;
+        m_cmd = cmd;
         
         jLblStudentName.setText(m_person.toString());
         jLblSubjectName.setText(m_subject.getSubName());
@@ -263,7 +262,7 @@ public class JEditNotesDialog extends javax.swing.JFrame {
     }//GEN-LAST:event_jtblNotesMouseClicked
 
     private void jBtnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCloseActionPerformed
-        
+        m_cmd.execute();
         setVisible(false);
     }//GEN-LAST:event_jBtnCloseActionPerformed
     
@@ -273,7 +272,7 @@ public class JEditNotesDialog extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JEditNotesDialog( null, null, null, null, 0 ).setVisible(true);
+                new JEditNotesDialog( null, null, null, null ).setVisible(true);
             }
         });
     }
