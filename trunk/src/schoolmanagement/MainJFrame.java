@@ -1826,7 +1826,7 @@ private void jBtnDeletePersonActionPerformed(java.awt.event.ActionEvent evt) {//
     for(int nRowIndex : jTable4.getSelectedRows())
     {
         SmPerson person = (SmPerson)jTable4.getValueAt(nRowIndex,0);
-        DBAccess.GetInstance().delete(person);
+        DBAccess.GetInstance().deletePerson(person);
     }
 }//GEN-LAST:event_jBtnDeletePersonActionPerformed
 
