@@ -201,7 +201,7 @@
         </Component>
         <Component class="javax.swing.JCheckBox" name="jcbPriority">
           <Properties>
-            <Property name="text" type="java.lang.String" resourceKey="jcbPriority.text"/>
+            <Property name="text" type="java.lang.String" value="Oznacz te wiadomosc jako wazna (odbiorca dostanie powiadomienie)" noResource="true"/>
             <Property name="name" type="java.lang.String" value="jcbPriority" noResource="true"/>
           </Properties>
         </Component>
