@@ -6,16 +6,20 @@
 package schoolmanagement.entity;
 
 import java.io.Serializable;
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -32,6 +36,12 @@ public class SmNote implements Serializable {
     private Integer notId;
     @Column(name = "NOT_NOTE")
     private String notNote;
+    @Lob
+    @Column(name = "NOT_COMMENT")
+    private String notComment;
+    @Column(name = "NOT_DATE")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date notDate;
     @JoinColumn(name = "NOT_P2C_ID", referencedColumnName = "P2C_ID")
     @ManyToOne
     private SmPerson2class notP2cId;
@@ -64,7 +74,22 @@ public class SmNote implements Serializable {
     public void setNotNote(String notNote) {
         this.notNote = notNote;
     }
+    public String getNotComment() {
+        return notComment;
+    }
 
+    public void setNotComment(String notComment) {
+        this.notComment = notComment;
+    }
+
+    public Date getNotDate() {
+        return notDate;
+    }
+
+    public void setNotDate(Date notDate) {
+        this.notDate = notDate;
+    }
+    
     public SmPerson2class getNotP2cId() {
         return notP2cId;
     }
