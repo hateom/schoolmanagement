@@ -6,6 +6,8 @@
 
 package schoolmanagement.dialogs;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -297,7 +299,8 @@ public class JEditNotesDialog extends javax.swing.JFrame {
         
         for( SmNote note : list )
         {
-            tm.addRow(new Object[] {note.getNotDate(), note, note.getNotComment() });
+            DateFormat dfm = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            tm.addRow(new Object[] { dfm.format(note.getNotDate()), note, note.getNotComment() });
         }
     }
     
