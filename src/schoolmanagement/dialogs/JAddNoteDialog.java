@@ -96,6 +96,7 @@ public class JAddNoteDialog extends javax.swing.JDialog {
 
         jtbDesc.setColumns(20);
         jtbDesc.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jtbDesc.setLineWrap(true);
         jtbDesc.setRows(5);
         jtbDesc.setName("jtbDesc"); // NOI18N
         jScrollPane1.setViewportView(jtbDesc);
