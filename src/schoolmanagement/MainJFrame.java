@@ -33,6 +33,7 @@ import schoolmanagement.entity.SmClassroom;
 import schoolmanagement.entity.SmDay;
 import schoolmanagement.entity.SmDay;
 import schoolmanagement.entity.SmMessage;
+import schoolmanagement.entity.SmNote;
 import schoolmanagement.entity.SmSchedule;
 
 /**
@@ -108,6 +109,18 @@ public class MainJFrame extends javax.swing.JFrame {
         
         ShowLayer( "Profil" );
         expandAll( jTree, new TreePath(jTree.getModel().getRoot()), true );
+    }
+
+    private String compileNotes(SmPerson pupil, SmClass cls, SmSubject subject) {
+        List<SmNote> list = DBAccess.GetInstance().getNotes(pupil, cls, subject);
+        String result = "";
+        for( SmNote note : list )
+        {
+            if( result.compareTo("") != 0 ) result += ", ";
+            result += note.getNotNote();
+        }
+        
+        return result;
     }
 
     private void expandAll(JTree tree, TreePath parent, boolean expand) {
@@ -488,6 +501,11 @@ public class MainJFrame extends javax.swing.JFrame {
         });
         jtblPupilNotes.setName("jtblPupilNotes"); // NOI18N
         jtblPupilNotes.getTableHeader().setReorderingAllowed(false);
+        jtblPupilNotes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblPupilNotesMouseClicked(evt);
+            }
+        });
         jtblPupilNotes.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
                 jtblPupilNotesPropertyChange(evt);
@@ -1460,15 +1478,22 @@ public class MainJFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jPnlNotesComponentShown
 
     private void jcbPickSubjectForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickSubjectForNotesActionPerformed
-        /*if( jcbPickTeacherForNotes.getSelectedItem() == null)
-            return;
-        TeacherCollection teacher = (TeacherCollection)jcbPickTeacherForNotes.getSelectedItem();
-        jcbPickClassForNotes.removeAllItems();
-        List<SmClass> lstSmClass = DBAccess.GetInstance().getClassesForTeacher(teacher);
-        for( SmClass smclass : lstSmClass)
+        SmSubject subject = (SmSubject) jcbPickSubjectForNotes.getSelectedItem();
+        SmClass cls = (SmClass) jcbPickClassForNotes.getSelectedItem();
+        
+        if( cls == null || subject == null) return;
+        
+        DefaultTableModel tm = (DefaultTableModel) jtblPupilNotes.getModel();
+        while( tm.getRowCount() > 0 ) tm.removeRow(0);
+        
+        List<SmPerson> list = DBAccess.GetInstance().GetPersonsForClass(cls);
+        
+        String notes;
+        for( SmPerson pupil : list )
         {
-            jcbPickClassForNotes.addItem(smclass);
-        }*/
+            notes = compileNotes( pupil, cls, subject );
+            tm.addRow(new Object[] { pupil, notes } );
+        }
     }//GEN-LAST:event_jcbPickSubjectForNotesActionPerformed
 
     private void jcbPickClassForNotesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPickClassForNotesActionPerformed
@@ -1866,6 +1891,24 @@ private void jbtnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
 private void jbtnShowConsoleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnShowConsoleActionPerformed
     ErrorLogger.getInstance().showWindow(true);
 }//GEN-LAST:event_jbtnShowConsoleActionPerformed
+
+private void jtblPupilNotesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblPupilNotesMouseClicked
+    if( evt.getClickCount() != 2 ) return;
+    DefaultTableModel tm = (DefaultTableModel) jtblPupilNotes.getModel();
+    
+    if( jtblPupilNotes.getSelectedRowCount() != 1 ) return;
+    
+    int row = jtblPupilNotes.getSelectedRow();
+    SmPerson pupil = (SmPerson) tm.getValueAt(row, 0 );
+    SmSubject subject = (SmSubject) jcbPickSubjectForNotes.getSelectedItem();
+    SmClass cls = (SmClass) jcbPickClassForNotes.getSelectedItem();
+    
+    if( subject == null || cls == null ) return;
+    
+    JEditNotesDialog en = new JEditNotesDialog(pupil, cls, subject, jtblPupilNotes, row );
+    en.setVisible(true);
+    
+}//GEN-LAST:event_jtblPupilNotesMouseClicked
 
 public void reloadClassrooms()
 {
