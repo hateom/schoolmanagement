@@ -1642,6 +1642,7 @@ private void jPnlTeachersComponentShown(java.awt.event.ComponentEvent evt) {//GE
 
 private void jBtnAddPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddPersonActionPerformed
     JNewPersonDialog jNewPesonDlg = new JNewPersonDialog();
+    jNewPesonDlg.setLocationRelativeTo(null);
     jNewPesonDlg.setVisible(true);
 }//GEN-LAST:event_jBtnAddPersonActionPerformed
 
@@ -1655,6 +1656,7 @@ private void mouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mous
           return;
       SmPerson person = (SmPerson)target.getValueAt(row, 0);
       JEditPersonDialog dlg = new JEditPersonDialog( person, target, row );
+      dlg.setLocationRelativeTo(null);
       dlg.setVisible(true);
    }
 }//GEN-LAST:event_mouseClicked
@@ -1676,22 +1678,26 @@ private void TblTeachersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST
           return;
       SmPerson person = (SmPerson)target.getValueAt(row, 0);
       JEditTeacherDialog dlg = new JEditTeacherDialog( person );
+      dlg.setLocationRelativeTo(null);
       dlg.setVisible(true);
    }
 }//GEN-LAST:event_TblTeachersMouseClicked
 
 private void jBtnNewMailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNewMailActionPerformed
     JNewMessageDialog nmd = new JNewMessageDialog();
+    nmd.setLocationRelativeTo(null);
     nmd.setVisible(true);
 }//GEN-LAST:event_jBtnNewMailActionPerformed
 
 private void jBtnNewMail3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNewMail3ActionPerformed
     JNewMessageDialog nmd = new JNewMessageDialog();
+    nmd.setLocationRelativeTo(null);
     nmd.setVisible(true);
 }//GEN-LAST:event_jBtnNewMail3ActionPerformed
 
 private void jBtnNewMail2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnNewMail2ActionPerformed
     JNewMessageDialog nmd = new JNewMessageDialog();
+    nmd.setLocationRelativeTo(null);
     nmd.setVisible(true);
 }//GEN-LAST:event_jBtnNewMail2ActionPerformed
 
@@ -1751,6 +1757,7 @@ private void inboxTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:
       SmMessage msg = (SmMessage)o;
       JMessageDialog dlg = new JMessageDialog(msg);
       DBAccess.GetInstance().markAsRead(msg, true);
+      dlg.setLocationRelativeTo(null);
       dlg.setVisible(true);
    }
 }//GEN-LAST:event_inboxTableMouseClicked
@@ -1765,6 +1772,7 @@ private void outboxTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST
           return;
       SmMessage msg = (SmMessage)o;
       JMessageDialog dlg = new JMessageDialog(msg);
+      dlg.setLocationRelativeTo(null);
       dlg.setVisible(true);
    }
 }//GEN-LAST:event_outboxTableMouseClicked
@@ -1791,6 +1799,7 @@ private void jtblClassesmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST
           return;
       SmClass cls = (SmClass)o;
       JEditClassDialog dlg = new JEditClassDialog(cls, target, row);
+      dlg.setLocationRelativeTo(null);
       dlg.setVisible(true);
    }
 }//GEN-LAST:event_jtblClassesmouseClicked
@@ -1815,6 +1824,7 @@ public void reloadData()
 private void jbtAddClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAddClassActionPerformed
     // TODO add your handling code here:
     JNewClassDialog dlg = new JNewClassDialog();
+    dlg.setLocationRelativeTo(null);
     dlg.setVisible(true);
 }//GEN-LAST:event_jbtAddClassActionPerformed
 
@@ -1833,6 +1843,7 @@ private void jBtnDeletePersonActionPerformed(java.awt.event.ActionEvent evt) {//
 
 private void jbtAddRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtAddRoomActionPerformed
     JNewClassroomDialog nc = new JNewClassroomDialog();
+    nc.setLocationRelativeTo(null);
     nc.setVisible(true);
 }//GEN-LAST:event_jbtAddRoomActionPerformed
 
@@ -1848,6 +1859,7 @@ private void jtblRoomsmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
     if(o == null) return;
     SmClassroom classroom = (SmClassroom)jtblRooms.getValueAt(row, 0);
     JEditClassroomDialog ec = new JEditClassroomDialog(classroom, jtblRooms, row);
+    ec.setLocationRelativeTo(null);
     ec.setVisible(true);
 }//GEN-LAST:event_jtblRoomsmouseClicked
 
@@ -1872,6 +1884,7 @@ private void jcbSelectClassActionPerformed(java.awt.event.ActionEvent evt) {//GE
 
 private void jbtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditActionPerformed
       JEditScheduleDialog sd = new JEditScheduleDialog(this, true, (SmClass)jcbSelectClass.getSelectedItem() );
+      sd.setLocationRelativeTo(null);
       sd.setVisible(true);
 }//GEN-LAST:event_jbtnEditActionPerformed
 
