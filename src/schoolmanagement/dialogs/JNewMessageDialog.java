@@ -71,6 +71,7 @@ public class JNewMessageDialog extends javax.swing.JFrame {
         jbtSearch = new javax.swing.JButton();
         jbtSend = new javax.swing.JButton();
         jbtCancel = new javax.swing.JButton();
+        jcbPriority = new javax.swing.JCheckBox();
 
         setName("Form"); // NOI18N
 
@@ -124,6 +125,10 @@ public class JNewMessageDialog extends javax.swing.JFrame {
             }
         });
 
+        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JNewMessageDialog.class);
+        jcbPriority.setText(resourceMap.getString("jcbPriority.text")); // NOI18N
+        jcbPriority.setName("jcbPriority"); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -142,14 +147,13 @@ public class JNewMessageDialog extends javax.swing.JFrame {
                                 .addComponent(jtbReceiver, javax.swing.GroupLayout.DEFAULT_SIZE, 296, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jbtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jtbSubject, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
+                            .addComponent(jtbSubject, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE)
+                            .addComponent(jcbPriority))
                         .addGap(83, 83, 83)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jbtSend, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jbtCancel, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 646, Short.MAX_VALUE)))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.DEFAULT_SIZE, 656, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -170,10 +174,12 @@ public class JNewMessageDialog extends javax.swing.JFrame {
                         .addComponent(jbtSend)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtCancel)))
-                .addGap(24, 24, 24)
+                .addGap(3, 3, 3)
+                .addComponent(jcbPriority)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 258, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -188,7 +194,7 @@ public class JNewMessageDialog extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
@@ -226,7 +232,9 @@ public class JNewMessageDialog extends javax.swing.JFrame {
             rec = DBAccess.GetInstance().getUserByPerson(p);
             if( rec == null ) continue;
             
-            DBAccess.GetInstance().sendMessage(rec, me, jTextArea1.getText(), jtbSubject.getText(), false, 2 );
+            int prt = 2;
+            if( jcbPriority.isSelected() ) prt = 0;
+            DBAccess.GetInstance().sendMessage(rec, me, jTextArea1.getText(), jtbSubject.getText(), false, prt );
         }
         
         setVisible(false);
@@ -275,6 +283,7 @@ public class JNewMessageDialog extends javax.swing.JFrame {
     private javax.swing.JButton jbtCancel;
     private javax.swing.JButton jbtSearch;
     private javax.swing.JButton jbtSend;
+    private javax.swing.JCheckBox jcbPriority;
     private javax.swing.JTextField jtbReceiver;
     private javax.swing.JTextField jtbSubject;
     // End of variables declaration//GEN-END:variables

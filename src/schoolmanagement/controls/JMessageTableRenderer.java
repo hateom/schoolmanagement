@@ -44,6 +44,11 @@ public class JMessageTableRenderer extends DefaultTableCellRenderer {
                 cell.setBackground( Color.LIGHT_GRAY );
             else
                 cell.setBackground( Color.white );
+            
+            if( msg.getMsgSeverity() == 0 )
+            {
+                cell.setBackground(Color.YELLOW);
+            }
         }
 
         return cell;
