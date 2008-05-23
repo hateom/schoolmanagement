@@ -198,6 +198,9 @@
             <Property name="text" type="java.lang.String" value="Plan zajec..." noResource="true"/>
             <Property name="name" type="java.lang.String" value="kbtSchedule" noResource="true"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="kbtScheduleActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jbtnSave">
           <Properties>

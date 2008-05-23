@@ -117,7 +117,7 @@ public class JEditClassDialog extends javax.swing.JFrame {
 
         setName("Form"); // NOI18N
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Edycja klasy")); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Edycja klasy"));
         jPanel1.setName("jPanel1"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JEditClassDialog.class);
@@ -156,6 +156,11 @@ public class JEditClassDialog extends javax.swing.JFrame {
 
         kbtSchedule.setText("Plan zajec..."); // NOI18N
         kbtSchedule.setName("kbtSchedule"); // NOI18N
+        kbtSchedule.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                kbtScheduleActionPerformed(evt);
+            }
+        });
 
         jbtnSave.setText("Zapisz zmiany"); // NOI18N
         jbtnSave.setName("jbtnSave"); // NOI18N
@@ -189,7 +194,7 @@ public class JEditClassDialog extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 523, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 541, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -197,20 +202,20 @@ public class JEditClassDialog extends javax.swing.JFrame {
                             .addComponent(jLabel1))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCbTutor, 0, 449, Short.MAX_VALUE)
+                            .addComponent(jCbTutor, 0, 467, Short.MAX_VALUE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jTbClass, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTbClassExt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jtbClassDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 378, Short.MAX_VALUE))))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                                .addComponent(jtbClassDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 396, Short.MAX_VALUE))))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jbtnSave, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(kbtSchedule, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 158, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 210, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 228, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(jBtnDelete, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jBtnAdd, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))))
@@ -307,6 +312,12 @@ public class JEditClassDialog extends javax.swing.JFrame {
             tm.removeRow( rows[i] );
         }
     }//GEN-LAST:event_jBtnDeleteActionPerformed
+
+    private void kbtScheduleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kbtScheduleActionPerformed
+        JEditScheduleDialog es = new JEditScheduleDialog(this, true, m_class);
+        es.setLocationRelativeTo(null);
+        es.setVisible(true);
+    }//GEN-LAST:event_kbtScheduleActionPerformed
     
     /**
      * @param args the command line arguments
