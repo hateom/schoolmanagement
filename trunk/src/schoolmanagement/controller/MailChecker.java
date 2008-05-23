@@ -28,6 +28,7 @@ public class MailChecker extends TimerTask {
             if( msg.getMsgReaded() == false && msg.getMsgSeverity() < 1 )
             {
                 JNewMailMessageDialog nm = new JNewMailMessageDialog(null, true, msg);
+                nm.setLocationRelativeTo(null);
                 nm.setVisible(true);
             }
         }
