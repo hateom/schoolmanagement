@@ -125,8 +125,7 @@ public class JNewMessageDialog extends javax.swing.JFrame {
             }
         });
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JNewMessageDialog.class);
-        jcbPriority.setText(resourceMap.getString("jcbPriority.text")); // NOI18N
+        jcbPriority.setText("Oznacz te wiadomosc jako wazna (odbiorca dostanie powiadomienie)"); // NOI18N
         jcbPriority.setName("jcbPriority"); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
