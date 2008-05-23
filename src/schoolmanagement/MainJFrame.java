@@ -1618,7 +1618,8 @@ private void jBtnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             String strSubs = "";
             for( SmSubject sb : subs )
             {
-                strSubs += sb.getSubName()+",";
+                if( strSubs.compareTo("") != 0 ) strSubs += ", ";
+                strSubs += sb.getSubName();
             }
             model.addRow(new Object[] { pers, strSubs } );
             
