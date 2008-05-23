@@ -259,6 +259,7 @@ public class JEditNotesDialog extends javax.swing.JFrame {
         {
             ErrorLogger.getInstance().error("Could not save note!");
         }
+        reloadNotes();
     }//GEN-LAST:event_jtblNotesMouseClicked
 
     private void jBtnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnCloseActionPerformed
