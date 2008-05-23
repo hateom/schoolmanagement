@@ -219,7 +219,8 @@ public class JEditNotesDialog extends javax.swing.JFrame {
         }
         else
         {
-            ((DefaultTableModel)jtblNotes.getModel()).addRow(new Object[]{ note.getNotDate(), note, note.getNotComment() });
+            DateFormat dfm = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+            ((DefaultTableModel)jtblNotes.getModel()).addRow(new Object[]{ dfm.format(note.getNotDate()), note, note.getNotComment() });
         }
     }//GEN-LAST:event_jBtnAddActionPerformed
 
