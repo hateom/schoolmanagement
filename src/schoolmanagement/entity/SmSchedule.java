@@ -30,9 +30,6 @@ public class SmSchedule implements Serializable {
     @Column(name = "SCH_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer schId;
-    @JoinColumn(name = "SCH_TCH_ID", referencedColumnName = "TCH_ID")
-    @ManyToOne
-    private SmTeacher schTchId;
     @JoinColumn(name = "SCH_DAY_ID", referencedColumnName = "DAY_ID")
     @ManyToOne
     private SmDay schDayId;
@@ -45,6 +42,12 @@ public class SmSchedule implements Serializable {
     @JoinColumn(name = "SCH_CLR_ID", referencedColumnName = "CLR_ID")
     @ManyToOne
     private SmClassroom schClrId;
+    @JoinColumn(name = "SCH_TCH_PER_ID", referencedColumnName = "PER_ID")
+    @ManyToOne
+    private SmPerson schTchPerId;
+    @JoinColumn(name = "SCH_SUB_ID", referencedColumnName = "SUB_ID")
+    @ManyToOne
+    private SmSubject schSubId;
 
     public SmSchedule() {
     }
@@ -59,14 +62,6 @@ public class SmSchedule implements Serializable {
 
     public void setSchId(Integer schId) {
         this.schId = schId;
-    }
-
-    public SmTeacher getSchTchId() {
-        return schTchId;
-    }
-
-    public void setSchTchId(SmTeacher schTchId) {
-        this.schTchId = schTchId;
     }
 
     public SmDay getSchDayId() {
@@ -101,6 +96,22 @@ public class SmSchedule implements Serializable {
         this.schClrId = schClrId;
     }
 
+    public SmPerson getSchTchPerId() {
+        return schTchPerId;
+    }
+
+    public void setSchTchPerId(SmPerson schTchPerId) {
+        this.schTchPerId = schTchPerId;
+    }
+
+    public SmSubject getSchSubId() {
+        return schSubId;
+    }
+
+    public void setSchSubId(SmSubject schSubId) {
+        this.schSubId = schSubId;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -123,7 +134,7 @@ public class SmSchedule implements Serializable {
 
     @Override
     public String toString() {
-        return schTchId.getTchSubId().getSubName()+" / "+schTchId.getTchPerId().getPerSurname();
+        return schSubId.getSubName();
     }
 
 }

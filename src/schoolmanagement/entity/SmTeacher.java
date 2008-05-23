@@ -32,10 +32,6 @@ public class SmTeacher implements Serializable {
     @Column(name = "TCH_ID", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer tchId;
-    @OneToMany(mappedBy = "schTchId")
-    private Collection<SmSchedule> smScheduleCollection;
-    @OneToMany(mappedBy = "notTchId")
-    private Collection<SmNote> smNoteCollection;
     @JoinColumn(name = "TCH_PER_ID", referencedColumnName = "PER_ID")
     @ManyToOne
     private SmPerson tchPerId;
@@ -56,22 +52,6 @@ public class SmTeacher implements Serializable {
 
     public void setTchId(Integer tchId) {
         this.tchId = tchId;
-    }
-
-    public Collection<SmSchedule> getSmScheduleCollection() {
-        return smScheduleCollection;
-    }
-
-    public void setSmScheduleCollection(Collection<SmSchedule> smScheduleCollection) {
-        this.smScheduleCollection = smScheduleCollection;
-    }
-
-    public Collection<SmNote> getSmNoteCollection() {
-        return smNoteCollection;
-    }
-
-    public void setSmNoteCollection(Collection<SmNote> smNoteCollection) {
-        this.smNoteCollection = smNoteCollection;
     }
 
     public SmPerson getTchPerId() {

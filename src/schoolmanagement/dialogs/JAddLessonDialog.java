@@ -46,8 +46,8 @@ public class JAddLessonDialog extends javax.swing.JDialog {
         m_class = cls;
         
         if( m_lesson != null) {
-            setPerson( m_lesson.getSchTchId().getTchPerId() );
-            setSubject( m_lesson.getSchTchId().getTchSubId() );
+            setPerson( m_lesson.getSchTchPerId() );
+            setSubject( m_lesson.getSchSubId() );
             setClassroom( m_lesson.getSchClrId() );
         }
     }
@@ -241,7 +241,7 @@ public class JAddLessonDialog extends javax.swing.JDialog {
         
         if( m_lesson != null )
         {
-            jcbSubjects.setSelectedItem(m_lesson.getSchTchId().getTchSubId());
+            jcbSubjects.setSelectedItem(m_lesson.getSchSubId());
         }
     }//GEN-LAST:event_formComponentShown
 
@@ -254,13 +254,13 @@ public class JAddLessonDialog extends javax.swing.JDialog {
         
         for( SmTeacher t : list )
         {
-            jcbTeachers.addItem(t);
+            jcbTeachers.addItem(t.getTchPerId());
         }
         
-        if( m_lesson != null && jcbSubjects.getSelectedItem() == m_lesson.getSchTchId().getTchSubId() )
+        if( m_lesson != null && jcbSubjects.getSelectedItem() == m_lesson.getSchSubId() )
         {
-            jcbTeachers.addItem(m_lesson.getSchTchId());
-            jcbTeachers.setSelectedItem(m_lesson.getSchTchId());
+            jcbTeachers.addItem(m_lesson.getSchTchPerId());
+            jcbTeachers.setSelectedItem(m_lesson.getSchTchPerId());
         }
         
         m_subject = (SmSubject) jcbSubjects.getSelectedItem();
@@ -276,13 +276,13 @@ public class JAddLessonDialog extends javax.swing.JDialog {
             jcbRooms.addItem(cl);
         }
         
-        if( m_lesson != null && jcbTeachers.getSelectedItem() == m_lesson.getSchTchId() && jcbSubjects.getSelectedItem() == m_lesson.getSchTchId().getTchSubId() )
+        if( m_lesson != null && jcbTeachers.getSelectedItem() == m_lesson.getSchTchPerId() && jcbSubjects.getSelectedItem() == m_lesson.getSchSubId() )
         {
             jcbRooms.addItem(m_lesson.getSchClrId());
             jcbRooms.setSelectedItem(m_lesson.getSchClrId());
         }
         
-        m_teacher = (SmTeacher) jcbTeachers.getSelectedItem();
+        m_teacher = (SmTeacher) DBAccess.GetInstance().getTeacher((SmSubject)jcbSubjects.getSelectedItem(), (SmPerson)jcbTeachers.getSelectedItem());
     }//GEN-LAST:event_jcbTeachersActionPerformed
 
     private void jcbRoomsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbRoomsActionPerformed

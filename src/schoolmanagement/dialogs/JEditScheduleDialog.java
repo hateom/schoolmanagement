@@ -344,10 +344,10 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
             SmRing ring = (SmRing) tm.getValueAt(i, 0);
             for( SmSchedule lesson : list )
             {
-                if( lesson.getSchRngId() == ring && lesson.getSchTchId() != null )
+                if( lesson.getSchRngId() == ring )
                 {
                     tm.setValueAt(lesson, i, 1);
-                    tm.setValueAt(lesson.getSchTchId().getTchPerId(), i, 2);
+                    tm.setValueAt(lesson.getSchTchPerId(), i, 2);
                     tm.setValueAt(lesson.getSchClrId(), i, 3);
                 }
             }

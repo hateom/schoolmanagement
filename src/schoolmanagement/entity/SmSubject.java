@@ -32,6 +32,10 @@ public class SmSubject implements Serializable {
     private Integer subId;
     @Column(name = "SUB_NAME", nullable = false)
     private String subName;
+    @OneToMany(mappedBy = "schSubId")
+    private Collection<SmSchedule> smScheduleCollection;
+    @OneToMany(mappedBy = "notSubId")
+    private Collection<SmNote> smNoteCollection;
     @OneToMany(mappedBy = "tchSubId")
     private Collection<SmTeacher> smTeacherCollection;
 
@@ -62,7 +66,23 @@ public class SmSubject implements Serializable {
     public void setSubName(String subName) {
         this.subName = subName;
     }
+    
+    public Collection<SmSchedule> getSmScheduleCollection() {
+        return smScheduleCollection;
+    }
 
+    public void setSmScheduleCollection(Collection<SmSchedule> smScheduleCollection) {
+        this.smScheduleCollection = smScheduleCollection;
+    }
+
+    public Collection<SmNote> getSmNoteCollection() {
+        return smNoteCollection;
+    }
+
+    public void setSmNoteCollection(Collection<SmNote> smNoteCollection) {
+        this.smNoteCollection = smNoteCollection;
+    }
+    
     public Collection<SmTeacher> getSmTeacherCollection() {
         return smTeacherCollection;
     }

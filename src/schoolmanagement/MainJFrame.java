@@ -156,9 +156,9 @@ public class MainJFrame extends javax.swing.JFrame {
             {
                 for( SmSchedule lesson : list )
                 {
-                    if( lesson.getSchRngId() == ring && lesson.getSchTchId()!=null)
+                    if( lesson.getSchRngId() == ring )
                     {
-                        tm.setValueAt(lesson.getSchTchId().getTchSubId().getSubName(), row, column);
+                        tm.setValueAt(lesson.getSchSubId(), row, column);
                     }
                     else
                     {

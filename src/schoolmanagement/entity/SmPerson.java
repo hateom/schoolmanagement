@@ -48,12 +48,16 @@ public class SmPerson implements Serializable {
     private String perAdress;
     @Column(name = "PER_EMAIL")
     private String perEmail;
+    @OneToMany(mappedBy = "schTchPerId")
+    private Collection<SmSchedule> smScheduleCollection;
     @OneToMany(mappedBy = "pnPerId")
     private Collection<SmPersonNotes> smPersonNotesCollection;
     @OneToMany(mappedBy = "usrPerId",cascade = CascadeType.ALL)
     private Collection<SmUser> smUserCollection;
     @OneToMany(mappedBy = "clsPerId")
     private Collection<SmClass> smClassCollection;
+    @OneToMany(mappedBy = "notTchPerId")
+    private Collection<SmNote> smNoteCollection;
     @OneToMany(mappedBy = "clrOwnerPerId")
     private Collection<SmClassroom> smClassroomCollection;
     @OneToMany(mappedBy = "p2cPerId")
@@ -140,6 +144,13 @@ public class SmPerson implements Serializable {
         this.perEmail = perEmail;
     }
 
+    public Collection<SmSchedule> getSmScheduleCollection() {
+        return smScheduleCollection;
+    }
+
+    public void setSmScheduleCollection(Collection<SmSchedule> smScheduleCollection) {
+        this.smScheduleCollection = smScheduleCollection;
+    }
     public Collection<SmPersonNotes> getSmPersonNotesCollection() {
         return smPersonNotesCollection;
     }
@@ -164,6 +175,14 @@ public class SmPerson implements Serializable {
         this.smClassCollection = smClassCollection;
     }
 
+    public Collection<SmNote> getSmNoteCollection() {
+        return smNoteCollection;
+    }
+
+    public void setSmNoteCollection(Collection<SmNote> smNoteCollection) {
+        this.smNoteCollection = smNoteCollection;
+    }
+    
     public Collection<SmClassroom> getSmClassroomCollection() {
         return smClassroomCollection;
     }

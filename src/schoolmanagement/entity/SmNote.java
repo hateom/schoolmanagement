@@ -32,12 +32,15 @@ public class SmNote implements Serializable {
     private Integer notId;
     @Column(name = "NOT_NOTE")
     private String notNote;
-    @JoinColumn(name = "NOT_TCH_ID", referencedColumnName = "TCH_ID")
-    @ManyToOne
-    private SmTeacher notTchId;
     @JoinColumn(name = "NOT_P2C_ID", referencedColumnName = "P2C_ID")
     @ManyToOne
     private SmPerson2class notP2cId;
+    @JoinColumn(name = "NOT_TCH_PER_ID", referencedColumnName = "PER_ID")
+    @ManyToOne
+    private SmPerson notTchPerId;
+    @JoinColumn(name = "NOT_SUB_ID", referencedColumnName = "SUB_ID")
+    @ManyToOne
+    private SmSubject notSubId;
 
     public SmNote() {
     }
@@ -62,20 +65,28 @@ public class SmNote implements Serializable {
         this.notNote = notNote;
     }
 
-    public SmTeacher getNotTchId() {
-        return notTchId;
-    }
-
-    public void setNotTchId(SmTeacher notTchId) {
-        this.notTchId = notTchId;
-    }
-
     public SmPerson2class getNotP2cId() {
         return notP2cId;
     }
 
     public void setNotP2cId(SmPerson2class notP2cId) {
         this.notP2cId = notP2cId;
+    }
+    
+        public SmPerson getNotTchPerId() {
+        return notTchPerId;
+    }
+
+    public void setNotTchPerId(SmPerson notTchPerId) {
+        this.notTchPerId = notTchPerId;
+    }
+
+    public SmSubject getNotSubId() {
+        return notSubId;
+    }
+
+    public void setNotSubId(SmSubject notSubId) {
+        this.notSubId = notSubId;
     }
 
     @Override
