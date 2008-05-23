@@ -80,8 +80,7 @@ public class JNewMessageDialog extends javax.swing.JFrame {
         jLabel1.setText("Do:"); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
 
-        org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JNewMessageDialog.class);
-        jtbReceiver.setBackground(resourceMap.getColor("jtbReceiver.background")); // NOI18N
+        jtbReceiver.setBackground(new java.awt.Color(204, 255, 204));
         jtbReceiver.setEditable(false);
         jtbReceiver.setName("jtbReceiver"); // NOI18N
 
@@ -96,6 +95,7 @@ public class JNewMessageDialog extends javax.swing.JFrame {
 
         jTextArea1.setColumns(20);
         jTextArea1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jTextArea1.setLineWrap(true);
         jTextArea1.setRows(5);
         jTextArea1.setName("jTextArea1"); // NOI18N
         jScrollPane1.setViewportView(jTextArea1);

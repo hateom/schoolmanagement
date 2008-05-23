@@ -92,7 +92,8 @@ public class JMessageDialog extends javax.swing.JFrame {
 
         jtBody.setColumns(20);
         jtBody.setEditable(false);
-        jtBody.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jtBody.setFont(new java.awt.Font("Arial", 0, 12));
+        jtBody.setLineWrap(true);
         jtBody.setRows(5);
         jtBody.setName("jtBody"); // NOI18N
         jScrollPane1.setViewportView(jtBody);
@@ -119,7 +120,7 @@ public class JMessageDialog extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -131,9 +132,9 @@ public class JMessageDialog extends javax.swing.JFrame {
                             .addComponent(jtbDate)
                             .addComponent(jtbSubject)
                             .addComponent(jtbSender, javax.swing.GroupLayout.DEFAULT_SIZE, 546, Short.MAX_VALUE)))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 627, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(389, Short.MAX_VALUE)
+                        .addContainerGap(402, Short.MAX_VALUE)
                         .addComponent(jbtnForward, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(5, 5, 5)
                         .addComponent(jbtnReply, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
