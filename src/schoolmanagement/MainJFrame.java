@@ -1436,6 +1436,7 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
 
     private void jBtnPassCHangeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnPassCHangeActionPerformed
         JPasswordChangeDialog jpDlg = new JPasswordChangeDialog( this, true );
+        jpDlg.setLocationRelativeTo(null);
         jpDlg.setVisible(true);
     }//GEN-LAST:event_jBtnPassCHangeActionPerformed
 

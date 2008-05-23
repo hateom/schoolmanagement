@@ -44,6 +44,7 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
         lesson = (SmSchedule) jTblSchedule.getModel().getValueAt( jTblSchedule.getSelectedRow(), 1 );
         
         JAddLessonDialog nl = new JAddLessonDialog(null, true, m_class, day, ring, lesson );
+        nl.setLocationRelativeTo(null);
         nl.setVisible(true);
         
         SmSchedule res = nl.getResult();

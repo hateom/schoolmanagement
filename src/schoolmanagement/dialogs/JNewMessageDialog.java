@@ -204,6 +204,7 @@ public class JNewMessageDialog extends javax.swing.JFrame {
 
     private void jbtSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtSearchActionPerformed
         JSelectPersonDialog spd = new JSelectPersonDialog( this, true );
+        spd.setLocationRelativeTo(null);
         spd.setVisible(true);
         
         List<SmPerson> list;

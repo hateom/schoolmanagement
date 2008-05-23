@@ -56,7 +56,7 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" pref="581" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" pref="583" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
@@ -66,13 +66,13 @@
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jCbTutor" alignment="0" pref="493" max="32767" attributes="0"/>
+                              <Component id="jCbTutor" alignment="0" pref="509" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jTbClass" min="-2" pref="29" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jTbClassExt" min="-2" pref="30" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jtbClassDesc" pref="420" max="32767" attributes="0"/>
+                                  <Component id="jtbClassDesc" pref="438" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -80,7 +80,7 @@
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jbtnSave" min="-2" pref="108" max="-2" attributes="0"/>
-                          <EmptySpace pref="142" max="32767" attributes="0"/>
+                          <EmptySpace pref="187" max="32767" attributes="0"/>
                           <Component id="jBtnDelete" min="-2" max="-2" attributes="1"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jBtnAdd" min="-2" max="-2" attributes="1"/>

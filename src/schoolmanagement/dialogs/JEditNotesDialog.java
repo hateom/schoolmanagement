@@ -201,6 +201,7 @@ public class JEditNotesDialog extends javax.swing.JFrame {
 
     private void jBtnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddActionPerformed
         JAddNoteDialog an = new JAddNoteDialog(this, true, null );
+        an.setLocationRelativeTo(null);
         an.setVisible(true);
         
         if( !an.isSaved() ) return;
@@ -251,6 +252,7 @@ public class JEditNotesDialog extends javax.swing.JFrame {
         if( note == null ) return;
         
         JAddNoteDialog an = new JAddNoteDialog(this, true, note);
+        an.setLocationRelativeTo(null);
         an.setVisible(true);
         
         if( an.isSaved() == false ) return;

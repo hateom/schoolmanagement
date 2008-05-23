@@ -226,6 +226,7 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
 
     private void jBtnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSelectActionPerformed
         JSelectPersonByRoleDialog sp = new JSelectPersonByRoleDialog(this, true, DBAccess.GetInstance().getRoleByType(RoleType.ROLE_TEACHER));
+        sp.setLocationRelativeTo(null);
         sp.setVisible(true);
         SmPerson result = sp.getResult();
         if( result == null ) return;
