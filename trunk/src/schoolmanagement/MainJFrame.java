@@ -315,7 +315,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jLblLogText)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLblLoggedAs)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 452, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
                 .addComponent(jbtnShowConsole, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -395,10 +395,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPnlProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtnSave)
                     .addComponent(jBtnPassCHange))
-                .addContainerGap(147, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
-        jPnlProfile.setBounds(0, 0, 440, 480);
+        jPnlProfile.setBounds(0, 0, 440, 460);
         jLayers.add(jPnlProfile, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPnlNotes.setBorder(javax.swing.BorderFactory.createTitledBorder("Oceny"));
@@ -511,11 +511,11 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlNotesLayout.createSequentialGroup()
                 .addComponent(jpanelProporties, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                .addComponent(jScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 341, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPnlNotes.setBounds(0, 0, 440, 480);
+        jPnlNotes.setBounds(0, 0, 440, 460);
         jLayers.add(jPnlNotes, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPnlMail.setBorder(javax.swing.BorderFactory.createTitledBorder("Poczta"));
@@ -548,10 +548,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addComponent(jBtnNewMail)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(411, Short.MAX_VALUE))
+                .addContainerGap(391, Short.MAX_VALUE))
         );
 
-        jPnlMail.setBounds(0, 0, 440, 480);
+        jPnlMail.setBounds(0, 0, 440, 460);
         jLayers.add(jPnlMail, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPnlOptions.setBorder(javax.swing.BorderFactory.createTitledBorder("Opcje"));
@@ -565,10 +565,10 @@ public class MainJFrame extends javax.swing.JFrame {
         );
         jPnlOptionsLayout.setVerticalGroup(
             jPnlOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 450, Short.MAX_VALUE)
+            .addGap(0, 430, Short.MAX_VALUE)
         );
 
-        jPnlOptions.setBounds(0, 0, 440, 480);
+        jPnlOptions.setBounds(0, 0, 440, 460);
         jLayers.add(jPnlOptions, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPnlSchedule.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPnlSchedule.border.title"))); // NOI18N
@@ -680,14 +680,14 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlScheduleLayout.createSequentialGroup()
                 .addComponent(jpanelClassSelect, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 369, Short.MAX_VALUE)
+                .addComponent(jScrollPane8, javax.swing.GroupLayout.DEFAULT_SIZE, 349, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPnlScheduleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtnEdit)
                     .addComponent(jbtnReload)))
         );
 
-        jPnlSchedule.setBounds(0, 0, 440, 480);
+        jPnlSchedule.setBounds(0, 0, 440, 460);
         jLayers.add(jPnlSchedule, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPnlInbox.setBorder(javax.swing.BorderFactory.createTitledBorder("Odebrane"));
@@ -749,12 +749,12 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlInboxLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPnlInboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                     .addComponent(jSeparator5, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                     .addGroup(jPnlInboxLayout.createSequentialGroup()
                         .addComponent(jBtnNewMail3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 179, Short.MAX_VALUE)
-                        .addComponent(jbtReceive, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
+                        .addComponent(jbtReceive, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         jPnlInboxLayout.setVerticalGroup(
@@ -766,11 +766,11 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 317, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(68, Short.MAX_VALUE))
         );
 
-        jPnlInbox.setBounds(0, 0, 440, 480);
+        jPnlInbox.setBounds(0, 0, 440, 460);
         jLayers.add(jPnlInbox, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPnlOutbox.setBorder(javax.swing.BorderFactory.createTitledBorder("Wyslane"));
@@ -824,9 +824,9 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlOutboxLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPnlOutboxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
                     .addComponent(jSeparator4, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
-                    .addComponent(jBtnNewMail2)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE))
+                    .addComponent(jBtnNewMail2))
                 .addContainerGap())
         );
         jPnlOutboxLayout.setVerticalGroup(
@@ -836,11 +836,11 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
-        jPnlOutbox.setBounds(0, 0, 440, 480);
+        jPnlOutbox.setBounds(0, 0, 440, 460);
         jLayers.add(jPnlOutbox, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPnlPeople.setBorder(javax.swing.BorderFactory.createTitledBorder("Osoby"));
@@ -994,11 +994,11 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlPeopleLayout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.DEFAULT_SIZE, 316, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPnlPeople.setBounds(0, 0, 440, 480);
+        jPnlPeople.setBounds(0, 0, 440, 470);
         jLayers.add(jPnlPeople, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPnlRings.setBorder(javax.swing.BorderFactory.createTitledBorder("Dzwonki"));
@@ -1043,10 +1043,10 @@ public class MainJFrame extends javax.swing.JFrame {
             jPnlRingsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPnlRingsLayout.createSequentialGroup()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
-        jPnlRings.setBounds(0, 0, 440, 480);
+        jPnlRings.setBounds(0, 0, 440, 470);
         jLayers.add(jPnlRings, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPnlTeachers.setBorder(javax.swing.BorderFactory.createTitledBorder("Nauczyciele"));
@@ -1156,11 +1156,11 @@ public class MainJFrame extends javax.swing.JFrame {
             .addGroup(jPnlTeachersLayout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 358, Short.MAX_VALUE)
+                .addComponent(jScrollPane6, javax.swing.GroupLayout.DEFAULT_SIZE, 338, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jPnlTeachers.setBounds(0, 0, 440, 480);
+        jPnlTeachers.setBounds(0, 0, 440, 460);
         jLayers.add(jPnlTeachers, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPnlClasses.setBorder(javax.swing.BorderFactory.createTitledBorder("Klasy"));
@@ -1235,10 +1235,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPnlClassesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtAddClass)
                     .addComponent(jBtnReload))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPnlClasses.setBounds(0, 0, 440, 480);
+        jPnlClasses.setBounds(0, 0, 440, 470);
         jLayers.add(jPnlClasses, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPnlRooms.setBorder(javax.swing.BorderFactory.createTitledBorder("Sale"));
@@ -1313,10 +1313,10 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addGroup(jPnlRoomsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jbtAddRoom)
                     .addComponent(jBtnReload1))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPnlRooms.setBounds(0, 0, 440, 480);
+        jPnlRooms.setBounds(0, 0, 440, 460);
         jLayers.add(jPnlRooms, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jMenuBar1.setName("jMenuBar1"); // NOI18N
@@ -1350,7 +1350,7 @@ public class MainJFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 528, Short.MAX_VALUE)
+                .addComponent(jLayers, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
