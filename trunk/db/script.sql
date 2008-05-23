@@ -156,6 +156,8 @@ CREATE TABLE `SM_NOTE` (
   `NOT_P2C_ID` int(11) default NULL,
   `NOT_SUB_ID` int(11) default NULL,
   `NOT_TCH_PER_ID` int(11) default NULL,
+  `NOT_COMMENT` text,
+  `NOT_DATE` datetime default '0000-00-00 00:00:00',
   PRIMARY KEY  (`NOT_ID`),
   KEY `SCH_P2C_IDX` (`NOT_P2C_ID`),
   KEY `NOT_TCH_PER_ID` (`NOT_TCH_PER_ID`),
