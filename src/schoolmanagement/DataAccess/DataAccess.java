@@ -46,6 +46,7 @@ public class DataAccess {
      m_oEmf = javax.persistence.Persistence.createEntityManagerFactory("schoolmanagementPU");   
      m_oEm = m_oEmf.createEntityManager();
     }
+    
     public boolean save(Object object) {
         m_oEm.getTransaction().begin();
         try {
@@ -203,15 +204,21 @@ public class DataAccess {
     
     public SmUser addUser(SmPerson a_oPerID, SmRole a_oRole, String a_strLogin, String a_strPasswd)
     {
-        SmUser usr = new SmUser();
-        usr.setUsrRolId(a_oRole);
-        usr.setUsrLogin(a_strLogin);
-        usr.setUsrPerId(a_oPerID);
-        usr.setUsrPasswd(a_strPasswd);
-        if(save(usr))
-        {
-            a_oPerID.getSmUserCollection().add(usr);
+        m_oEm.getTransaction().begin();
+        try {
+            SmUser usr = new SmUser();
+            usr.setUsrRolId(a_oRole);
+            usr.setUsrLogin(a_strLogin);
+            usr.setUsrPerId(a_oPerID);
+            usr.setUsrPasswd(a_strPasswd);
+            m_oEm.persist(a_oPerID);
+            m_oEm.persist(usr);
+            m_oEm.getTransaction().commit();
             return usr;
+        } catch (Exception e) {
+            e.printStackTrace();
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
+            m_oEm.getTransaction().rollback();
         }
         return null;
     }
@@ -224,6 +231,18 @@ public class DataAccess {
         }
         catch(Exception e)
         {}
+        return null;
+    }
+    
+    public List<SmUser> getUsersByPerson(SmPerson a_oPerson)
+    {
+        Query query = m_oEm.createQuery("SELECT u FROM SmUser u WHERE u.usrPerId = ?1").setParameter(1, a_oPerson).setHint("refresh", new Boolean(true));
+        try{
+            return query.getResultList();
+        }
+        catch(Exception e)
+        {
+        }
         return null;
     }
     
@@ -246,6 +265,31 @@ public class DataAccess {
             return null;
         }
         return person;
+    }
+    
+    public boolean deletePerson(SmPerson person) {
+        m_oEm.getTransaction().begin();
+        try
+        {
+            List<SmUser> users = getUsersByPerson(person);
+            for(SmUser u : users)
+            {
+                m_oEm.remove(u);
+            }
+            m_oEm.remove(person);
+            m_oEm.getTransaction().commit();
+        }
+        catch(NoResultException e)
+        {
+            m_oEm.getTransaction().rollback();
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
+            m_oEm.getTransaction().rollback();
+        }
+        return false;
+        
     }
     
     public void savePerson(SmPerson a_oPerson)
@@ -301,8 +345,6 @@ public class DataAccess {
         {
             teacher = (SmTeacher)query.getSingleResult();
             m_oEm.getTransaction().begin();
-            a_oPerson.getSmTeacherCollection().remove(teacher);
-            a_oSubject.getSmTeacherCollection().remove(teacher);
             m_oEm.remove(teacher);
             m_oEm.getTransaction().commit();
             return true;
@@ -310,11 +352,6 @@ public class DataAccess {
         catch(Exception e)
         {
             m_oEm.getTransaction().rollback();
-            if( teacher != null )
-            {
-                a_oPerson.getSmTeacherCollection().add(teacher);
-                a_oSubject.getSmTeacherCollection().add(teacher);
-            }
             ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return false;
@@ -369,8 +406,6 @@ public class DataAccess {
         teacher.setTchSubId(a_oSubject);
         if(save(teacher))
         {
-           a_oSubject.getSmTeacherCollection().add(teacher);
-            a_oPerson.getSmTeacherCollection().add(teacher);
             return teacher;
         }
         return null;
@@ -592,11 +627,7 @@ public class DataAccess {
         try
         {
             SmPerson2class p2c = (SmPerson2class) m_oEm.createQuery("SELECT p2c FROM SmPerson2class p2c WHERE p2c.p2cPerId = ?2 AND p2c.p2cClsId = ?1").setParameter(1, a_oClass).setParameter(2, a_oPerson).setHint("refresh", new Boolean(true)).getSingleResult();
-            if(delete(p2c))
-            {
-                a_oPerson.getSmPerson2classCollection().remove(p2c);
-                a_oClass.getSmPerson2classCollection().remove(p2c);
-            }
+            return (delete(p2c));
         }
         catch(NoResultException e)
         {
@@ -631,8 +662,6 @@ public class DataAccess {
         p2c.setP2cClsId(a_oClass);
         if( save(p2c) )
         {
-            a_oPerson.getSmPerson2classCollection().add(p2c);
-            a_oClass.getSmPerson2classCollection().add(p2c);
             return true;
         }
         return false;
