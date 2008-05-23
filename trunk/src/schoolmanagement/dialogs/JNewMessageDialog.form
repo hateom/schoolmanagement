@@ -30,7 +30,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jPanel1" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
@@ -69,6 +69,7 @@
                                   <Component id="jbtSearch" min="-2" pref="106" max="-2" attributes="0"/>
                               </Group>
                               <Component id="jtbSubject" pref="408" max="32767" attributes="1"/>
+                              <Component id="jcbPriority" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="83" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="1" max="-2" attributes="0">
@@ -76,10 +77,7 @@
                               <Component id="jbtCancel" alignment="1" pref="100" max="32767" attributes="1"/>
                           </Group>
                       </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jSeparator1" pref="646" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jSeparator1" alignment="1" pref="656" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -108,10 +106,12 @@
                           <Component id="jbtCancel" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                  <Component id="jcbPriority" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="jSeparator1" min="-2" pref="10" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jScrollPane1" pref="258" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="249" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
@@ -198,6 +198,12 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbtCancelActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="javax.swing.JCheckBox" name="jcbPriority">
+          <Properties>
+            <Property name="text" type="java.lang.String" resourceKey="jcbPriority.text"/>
+            <Property name="name" type="java.lang.String" value="jcbPriority" noResource="true"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
