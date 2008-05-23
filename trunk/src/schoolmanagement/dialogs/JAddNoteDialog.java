@@ -202,7 +202,7 @@ public class JAddNoteDialog extends javax.swing.JDialog {
         else
         {
             m_not = jtbNote.getText();
-            m_desc = jtbDesc.getName();
+            m_desc = jtbDesc.getText();
         }
         m_saved = true;
         setVisible( false );
