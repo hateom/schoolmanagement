@@ -55,7 +55,7 @@ public class DataAccess {
         } catch (Exception e) {
             e.printStackTrace();
             m_oEm.getTransaction().rollback();
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return false;
     }
@@ -77,7 +77,7 @@ public class DataAccess {
         } catch (Exception e) {
             e.printStackTrace();
             m_oEm.getTransaction().rollback();
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return false;
     }
@@ -113,7 +113,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -179,7 +179,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -272,7 +272,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -315,7 +315,7 @@ public class DataAccess {
                 a_oPerson.getSmTeacherCollection().add(teacher);
                 a_oSubject.getSmTeacherCollection().add(teacher);
             }
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return false;
     }
@@ -331,7 +331,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -344,20 +344,20 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
     
     public List<Object[]> getScheduleForTeacher( SmPerson a_oPerson )
     {
-        Query query = m_oEm.createQuery("SELECT DISTINCT s.schClsId, s.schTchId FROM SmSchedule s WHERE s.schTchId.tchPerId = ?1").setParameter(1, a_oPerson).setHint("refresh", new Boolean(true));
+        Query query = m_oEm.createQuery("SELECT DISTINCT s.schClsId, s.schSubId FROM SmSchedule s WHERE s.schTchPerId = ?1").setParameter(1, a_oPerson).setHint("refresh", new Boolean(true));
         try{
             return query.getResultList();
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -416,7 +416,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -440,7 +440,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -463,7 +463,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return new ArrayList<SmNote>();
     }
@@ -502,7 +502,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -526,7 +526,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -560,7 +560,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -603,7 +603,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return false;
     }
@@ -619,7 +619,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -649,7 +649,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -672,7 +672,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -690,7 +690,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return false;
     }
@@ -707,7 +707,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -737,7 +737,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -752,7 +752,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -781,7 +781,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -816,7 +816,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -860,7 +860,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -875,7 +875,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return true;
     }
@@ -904,7 +904,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -923,7 +923,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -935,7 +935,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return false;
     }
@@ -947,7 +947,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return false;
     }
@@ -961,7 +961,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -980,7 +980,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -994,7 +994,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }
@@ -1015,7 +1015,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return null;
     }

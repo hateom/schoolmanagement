@@ -8,6 +8,7 @@ package schoolmanagement.dialogs;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Observable;
 import javax.swing.DefaultListModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -15,17 +16,15 @@ import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmSubject;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.controller.ErrorLogger;
-import schoolmanagement.entity.SmSchedule;
-import schoolmanagement.entity.SmTeacher;
 
 /**
  *
  * @author  deely
  */
-public class JEditTeacherDialog extends javax.swing.JFrame {
+public class JEditTeacherDialog extends javax.swing.JFrame{
     
     private SmPerson m_person;
-
+    
     /** Creates new form JEditTeacherDialog */
     public JEditTeacherDialog( SmPerson person ) {
         m_person = person;
@@ -246,7 +245,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
          
          updateLists();
     }//GEN-LAST:event_formComponentShown
-
+    
     public void updateLists()
     {
         List<SmSubject> subs = DBAccess.GetInstance().getSubjectsList();
@@ -330,8 +329,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame {
         Iterator it = shedule.iterator();
         while(it.hasNext()){
             Object[] o = (Object[]) it.next();
-            SmTeacher t = (SmTeacher)o[1];
-            model.addRow(new Object[] { o[0], t.getTchSubId() }); 
+            model.addRow(new Object[] { o[0], o[1] }); 
         }
     }//GEN-LAST:event_classPanelComponentShow
 
