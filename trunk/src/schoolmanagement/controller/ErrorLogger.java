@@ -67,6 +67,7 @@ public class ErrorLogger extends Observable implements Thread.UncaughtExceptionH
     }
 
     public void uncaughtException(Thread t, Throwable e) {
+        e.printStackTrace();
         ErrorLogger.getInstance().error(e.toString()+" at:"+"\n"+e.getStackTrace()[0].toString());
     }
     

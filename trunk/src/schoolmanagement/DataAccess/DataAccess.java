@@ -11,6 +11,7 @@ import java.util.List;
 import javax.persistence.Query;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.NoResultException;
 import schoolmanagement.controller.ErrorLogger;
 import schoolmanagement.controller.RoleType;
 import schoolmanagement.controller.TeacherCollection;
@@ -55,7 +56,7 @@ public class DataAccess {
         } catch (Exception e) {
             e.printStackTrace();
             m_oEm.getTransaction().rollback();
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return false;
     }
@@ -77,7 +78,7 @@ public class DataAccess {
         } catch (Exception e) {
             e.printStackTrace();
             m_oEm.getTransaction().rollback();
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return false;
     }
@@ -113,7 +114,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -179,7 +180,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -272,7 +273,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -315,7 +316,7 @@ public class DataAccess {
                 a_oPerson.getSmTeacherCollection().add(teacher);
                 a_oSubject.getSmTeacherCollection().add(teacher);
             }
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return false;
     }
@@ -323,12 +324,15 @@ public class DataAccess {
     public SmTeacher getTeacher( SmSubject a_oSubject, SmPerson a_oPerson)
     {
         try{
-            Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchSubId = ?1 AND t.tchPerId = ?2").setParameter(1, a_oSubject).setParameter(1, a_oPerson).setHint("refresh", new Boolean(true));
+            Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchSubId = ?1 AND t.tchPerId = ?2").setParameter(1, a_oSubject).setParameter(2, a_oPerson).setHint("refresh", new Boolean(true));
             return (SmTeacher) query.getSingleResult();
+        }
+        catch(NoResultException e)
+        {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -341,7 +345,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -354,7 +358,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -390,17 +394,17 @@ public class DataAccess {
     {
         try
         {
-            List<SmTeacher> lst = m_oEm.createQuery("SELECT s.schTchId FROM SmSchedule s WHERE s.schDayId = ?1 AND s.schRngId = ?2").setParameter(1, a_oDay).setParameter(2, a_oRing).setHint("refresh", new Boolean(true)).getResultList();
+            List<SmPerson> lst = m_oEm.createQuery("SELECT s.schTchPerId FROM SmSchedule s WHERE s.schDayId = ?1 AND s.schRngId = ?2").setParameter(1, a_oDay).setParameter(2, a_oRing).setHint("refresh", new Boolean(true)).getResultList();
             String str ="";
             Query query = null;
-            for(SmTeacher tch : lst)
+            for(SmPerson p : lst)
             {
-                str+= tch.getTchId()+",";
+                str+= p.getPerId()+",";
             }
             if(str.length()>0)
             {
                 str = str.substring(0, str.length()-1);
-                 query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchSubId = ?1 AND t.tchId NOT IN("+str+")").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
+                 query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchSubId = ?1 AND t.tchPerId.perId NOT IN("+str+")").setParameter(1, a_oSubject).setHint("refresh", new Boolean(true));
             }
             else
             {
@@ -410,7 +414,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -502,7 +506,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return false;
     }
@@ -540,8 +544,8 @@ public class DataAccess {
             List<SmSchedule> lst = query.getResultList();
             for(SmSchedule sh : lst)
             {
-                if(!subjectList.contains(sh.getSchTchId().getTchSubId()))
-                    subjectList.add(sh.getSchTchId().getTchSubId());
+                if(!subjectList.contains(sh.getSchSubId()))
+                    subjectList.add(sh.getSchSubId());
             }
             return subjectList;
         }
@@ -639,7 +643,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -674,7 +678,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -718,7 +722,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -733,7 +737,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return true;
     }
@@ -762,7 +766,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -781,7 +785,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -793,7 +797,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return false;
     }
@@ -805,7 +809,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return false;
     }
@@ -819,7 +823,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -838,7 +842,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -852,7 +856,7 @@ public class DataAccess {
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
@@ -866,13 +870,14 @@ public class DataAccess {
             sch.setSchClsId(a_smClass);
             sch.setSchDayId(a_smDay);
             sch.setSchRngId(a_smRing);
-            sch.setSchTchId(a_smTeacher);
+            sch.setSchSubId(a_smTeacher.getTchSubId());
+            sch.setSchTchPerId(a_smTeacher.getTchPerId());
             if(save(sch))
                 return sch;
         }
         catch(Exception e)
         {
-            ErrorLogger.getInstance().error(e.getLocalizedMessage());
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString());
         }
         return null;
     }
