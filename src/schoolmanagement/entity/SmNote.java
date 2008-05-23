@@ -136,7 +136,7 @@ public class SmNote implements Serializable {
 
     @Override
     public String toString() {
-        return "schoolmanagement.entity.SmNote[notId=" + notId + "]";
+        return notNote;
     }
 
 }
