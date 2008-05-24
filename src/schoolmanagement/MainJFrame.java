@@ -95,8 +95,8 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
                 "Odebrane",
                 "Wysłane"
                 },
-            "Profil",
-            "Opcje"
+            "Profil"
+            //"Opcje"
         };
 
         DefaultMutableTreeNode root = processHierarchy(hierarchy);
