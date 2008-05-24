@@ -431,6 +431,7 @@ public class DataAccess {
         {   
             SmPerson person = teacher.getTchPerId();
             SmSubject subject = teacher.getTchSubId();
+            if(person != null){
             Object [] lst = person.getSmTeacherCollection().toArray();
             for(Object o : lst)
             {
@@ -440,8 +441,10 @@ public class DataAccess {
                    person.getSmTeacherCollection().remove(o);
                 }
             }
-            
-            lst = subject.getSmTeacherCollection().toArray();
+            }
+            if(subject != null)
+            {
+            Object [] lst = subject.getSmTeacherCollection().toArray();
             for(Object o : lst)
             {
                 SmTeacher t = (SmTeacher)o;
@@ -450,7 +453,8 @@ public class DataAccess {
                     subject.getSmTeacherCollection().remove(o);
                 }
             }
-            
+            }
+            teacher.setTchPerId(null);
             m_oEm.remove(teacher);
             return true;
         }
@@ -513,6 +517,8 @@ public class DataAccess {
         teacher.setTchSubId(a_oSubject);
         if(save(teacher))
         {
+            a_oPerson.getSmTeacherCollection().add(teacher);
+            a_oSubject.getSmTeacherCollection().add(teacher);
             return teacher;
         }
         return null;
@@ -535,7 +541,7 @@ public class DataAccess {
     {
         try
         {
-            List<SmPerson> lst = m_oEm.createQuery("SELECT s.schTchPerId FROM SmSchedule s WHERE s.schDayId = ?1 AND s.schRngId = ?2").setParameter(1, a_oDay).setParameter(2, a_oRing).setHint("refresh", new Boolean(true)).getResultList();
+            List<SmPerson> lst = m_oEm.createQuery("SELECT s.schTchPerId FROM SmSchedule s WHERE s.schDayId = ?1 AND s.schRngId = ?2 AND s.schTchPerId IS NOT NULL").setParameter(1, a_oDay).setParameter(2, a_oRing).setHint("refresh", new Boolean(true)).getResultList();
             String str ="";
             Query query = null;
             for(SmPerson p : lst)
@@ -1220,7 +1226,16 @@ public class DataAccess {
     {
         try
         {
-            return delete(a_oClsr);
+           if( delete(a_oClsr) )
+           {
+                Object [] lst = a_oClsr.getClrOwnerPerId().getSmClassroomCollection().toArray();
+                for(Object o : lst)
+                {
+                    SmClassroom p = (SmClassroom)o;
+                    if(p.getClrId() == a_oClsr.getClrId())
+                        a_oClsr.getClrOwnerPerId().getSmClassroomCollection().remove(o);
+                }
+           }
         }
         catch(Exception e)
         {
@@ -1288,7 +1303,15 @@ public class DataAccess {
             sch.setSchSubId(a_smTeacher.getTchSubId());
             sch.setSchTchPerId(a_smTeacher.getTchPerId());
             if(save(sch))
+            {
+                a_oClassroom.getSmScheduleCollection().add(sch);
+                a_smClass.getSmScheduleCollection().add(sch);
+                a_smDay.getSmScheduleCollection().add(sch);
+                a_smRing.getSmScheduleCollection().add(sch);
+                a_smTeacher.getTchSubId().getSmScheduleCollection().add(sch);
+                a_smTeacher.getTchSubId().getSmScheduleCollection().add(sch);
                 return sch;
+            }
         }
         catch(Exception e)
         {
@@ -1298,7 +1321,91 @@ public class DataAccess {
     }
     public boolean removeSchedule( SmSchedule a_oSchedule )
     {
-        return delete(a_oSchedule);
+        if( delete(a_oSchedule) )
+        {
+            /*
+              x  a_oClassroom.getSmScheduleCollection().add(sch);
+              x  a_smClass.getSmScheduleCollection().add(sch);
+              x  a_smDay.getSmScheduleCollection().add(sch);
+                a_smRing.getSmScheduleCollection().add(sch);
+                a_smTeacher.getTchSubId().getSmScheduleCollection().add(sch);
+                a_smTeacher.getTchSubId().getSmScheduleCollection().add(sch);
+             */
+            if(a_oSchedule.getSchClrId() != null)
+            {
+                Object [] lst = a_oSchedule.getSchClrId().getSmScheduleCollection().toArray();
+                for(Object o : lst)
+                {
+                    SmSchedule s = (SmSchedule)o;
+                    if( s.getSchId() == a_oSchedule.getSchId() )
+                    {
+                        a_oSchedule.getSchClrId().getSmScheduleCollection().remove(o);
+                    }
+                }
+            }
+            if(a_oSchedule.getSchClsId()!= null)
+            {
+               Object [] lst = a_oSchedule.getSchClsId().getSmScheduleCollection().toArray();
+                for(Object o : lst)
+                {
+                    SmSchedule s = (SmSchedule)o;
+                    if( s.getSchId() == a_oSchedule.getSchId() )
+                    {
+                        a_oSchedule.getSchClsId().getSmScheduleCollection().remove(o);
+                    }
+                }
+            }
+            if(a_oSchedule.getSchDayId() != null)
+            {
+              Object [] lst = a_oSchedule.getSchDayId().getSmScheduleCollection().toArray();
+                for(Object o : lst)
+                {
+                    SmSchedule s = (SmSchedule)o;
+                    if( s.getSchId() == a_oSchedule.getSchId() )
+                    {
+                        a_oSchedule.getSchDayId().getSmScheduleCollection().remove(o);
+                    }
+                }
+            }
+            if(a_oSchedule.getSchRngId()!= null)
+            {
+                Object [] lst = a_oSchedule.getSchRngId().getSmScheduleCollection().toArray();
+                for(Object o : lst)
+                {
+                    SmSchedule s = (SmSchedule)o;
+                    if( s.getSchId() == a_oSchedule.getSchId() )
+                    {
+                        a_oSchedule.getSchRngId().getSmScheduleCollection().remove(o);
+                    }
+                }
+            }
+            if(a_oSchedule.getSchSubId()!= null)
+            {
+                Object [] lst = a_oSchedule.getSchSubId().getSmScheduleCollection().toArray();
+                for(Object o : lst)
+                {
+                    SmSchedule s = (SmSchedule)o;
+                    if( s.getSchId() == a_oSchedule.getSchId() )
+                    {
+                        a_oSchedule.getSchSubId().getSmScheduleCollection().remove(o);
+                    }
+                }
+            }
+            if(a_oSchedule.getSchTchPerId()!= null)
+            {
+                Object [] lst = a_oSchedule.getSchTchPerId().getSmScheduleCollection().toArray();
+                for(Object o : lst)
+                {
+                    SmSchedule s = (SmSchedule)o;
+                    if( s.getSchId() == a_oSchedule.getSchId() )
+                    {
+                        a_oSchedule.getSchTchPerId().getSmScheduleCollection().remove(o);
+                    }
+                }
+            }
+            return true;
+        }
+        return false;
     }
     
     public boolean updateSchedule( SmSchedule a_oSchedule )
