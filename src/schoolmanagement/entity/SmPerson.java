@@ -50,7 +50,7 @@ public class SmPerson implements Serializable {
     private String perEmail;
     @OneToMany(mappedBy = "schTchPerId")
     private Collection<SmSchedule> smScheduleCollection;
-    @OneToMany(mappedBy = "pnPerId")
+    @OneToMany(mappedBy = "pnPerId", cascade = CascadeType.REMOVE)
     private Collection<SmPersonNotes> smPersonNotesCollection;
     @OneToMany(mappedBy = "usrPerId",cascade = CascadeType.ALL)
     private Collection<SmUser> smUserCollection;
@@ -60,9 +60,9 @@ public class SmPerson implements Serializable {
     private Collection<SmNote> smNoteCollection;
     @OneToMany(mappedBy = "clrOwnerPerId")
     private Collection<SmClassroom> smClassroomCollection;
-    @OneToMany(mappedBy = "p2cPerId")
+    @OneToMany(mappedBy = "p2cPerId", cascade = CascadeType.REMOVE)
     private Collection<SmPerson2class> smPerson2classCollection;
-    @OneToMany(mappedBy = "tchPerId")
+    @OneToMany(mappedBy = "tchPerId", cascade = CascadeType.REMOVE)
     private Collection<SmTeacher> smTeacherCollection;
 
     public SmPerson() {

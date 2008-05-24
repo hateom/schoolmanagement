@@ -240,9 +240,7 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
         tm.setValueAt(m_class, m_row, 0);
         tm.setValueAt(m_class.getClrDescr(), m_row, 1);
         
-        m_class.setClrOwnerPerId(getHost());
-        
-        DBAccess.GetInstance().updateClassroom( m_class );
+        DBAccess.GetInstance().updateClassroom( m_class, getHost() );
         
         setVisible(false);
     }//GEN-LAST:event_jbtnSaveActionPerformed
