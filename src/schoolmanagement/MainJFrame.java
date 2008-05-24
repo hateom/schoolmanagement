@@ -294,6 +294,12 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
         jBtnReload1 = new javax.swing.JButton();
         jScrollPane10 = new javax.swing.JScrollPane();
         jtblRooms = new javax.swing.JTable();
+        jPnlSubjects = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        jBtnDeleteSubject = new javax.swing.JButton();
+        jBtnAddSubject = new javax.swing.JButton();
+        jScrollPane11 = new javax.swing.JScrollPane();
+        jtblSubjects = new javax.swing.JTable();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -1344,6 +1350,90 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
         jPnlRooms.setBounds(0, 0, 440, 460);
         jLayers.add(jPnlRooms, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
+        jPnlSubjects.setName("jPnlSubjects"); // NOI18N
+        jPnlSubjects.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                jPnlSubjectsComponentShown(evt);
+            }
+        });
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Przedmioty")); // NOI18N
+        jPanel1.setName("jPanel1"); // NOI18N
+
+        jBtnDeleteSubject.setText("Usun przedmiot"); // NOI18N
+        jBtnDeleteSubject.setName("jBtnDeleteSubject"); // NOI18N
+        jBtnDeleteSubject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnDeleteSubjectActionPerformed(evt);
+            }
+        });
+
+        jBtnAddSubject.setText("Dodaj przedmiot"); // NOI18N
+        jBtnAddSubject.setName("jBtnAddSubject"); // NOI18N
+        jBtnAddSubject.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBtnAddSubjectActionPerformed(evt);
+            }
+        });
+
+        jScrollPane11.setName("jScrollPane11"); // NOI18N
+
+        jtblSubjects.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Przedmiot"
+            }
+        ));
+        jtblSubjects.setName("jtblSubjects"); // NOI18N
+        jtblSubjects.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtblSubjectsMouseClicked(evt);
+            }
+        });
+        jScrollPane11.setViewportView(jtblSubjects);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jBtnAddSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 127, Short.MAX_VALUE)
+                .addComponent(jBtnDeleteSubject, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(jScrollPane11, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(jScrollPane11, javax.swing.GroupLayout.PREFERRED_SIZE, 402, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jBtnDeleteSubject)
+                    .addComponent(jBtnAddSubject)))
+        );
+
+        javax.swing.GroupLayout jPnlSubjectsLayout = new javax.swing.GroupLayout(jPnlSubjects);
+        jPnlSubjects.setLayout(jPnlSubjectsLayout);
+        jPnlSubjectsLayout.setHorizontalGroup(
+            jPnlSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnlSubjectsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPnlSubjectsLayout.setVerticalGroup(
+            jPnlSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPnlSubjectsLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        jPnlSubjects.setBounds(0, 0, 440, 460);
+        jLayers.add(jPnlSubjects, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
         jMenuBar1.setName("jMenuBar1"); // NOI18N
 
         jMenu1.setText(resourceMap.getString("jMenu1.text")); // NOI18N
@@ -1936,6 +2026,7 @@ private void jtblPupilNotesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     if( subject == null || cls == null ) return;
     
     JEditNotesDialog en = new JEditNotesDialog(pupil, cls, subject, this );
+    en.setLocationRelativeTo(null);
     en.setVisible(true);
     
 }//GEN-LAST:event_jtblPupilNotesMouseClicked
@@ -1943,6 +2034,74 @@ private void jtblPupilNotesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
 private void jPnlProfileComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlProfileComponentResized
     // TODO add your handling code here:
 }//GEN-LAST:event_jPnlProfileComponentResized
+
+private void jBtnAddSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnAddSubjectActionPerformed
+    JAddSubjectDialog as = new JAddSubjectDialog(this, true, null );
+    as.setLocationRelativeTo(null);
+    as.setVisible(true);
+    
+    if( as.isSaved() )
+    {
+        SmSubject sb;
+        sb = DBAccess.GetInstance().addSubject( as.getResult() );
+        if( sb == null )
+        {
+            ErrorLogger.getInstance().error("Could not add subject!");
+        }
+    }
+    
+    realodSubjectsList();
+}//GEN-LAST:event_jBtnAddSubjectActionPerformed
+
+private void jPnlSubjectsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlSubjectsComponentShown
+    if( getRole() != RoleType.ROLE_ADMIN && getRole() != RoleType.ROLE_PRINCIPAL ) 
+    {
+        jBtnAddSubject.setEnabled(false);
+        jBtnDeleteSubject.setEnabled(false);
+    }
+    else
+    {
+        jBtnAddSubject.setEnabled(true);
+        jBtnDeleteSubject.setEnabled(true);
+    }
+    realodSubjectsList();
+}//GEN-LAST:event_jPnlSubjectsComponentShown
+
+private void jtblSubjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblSubjectsMouseClicked
+    if( getRole() != RoleType.ROLE_ADMIN && getRole() != RoleType.ROLE_PRINCIPAL ) return;
+    if( evt.getClickCount() != 2 ) return;
+    
+    DefaultTableModel tm = (DefaultTableModel) jtblSubjects.getModel();
+    if( jtblSubjects.getSelectedRowCount() != 1 ) return;
+    
+    int row = jtblSubjects.getSelectedRow();
+    SmSubject sb;
+    sb = (SmSubject) tm.getValueAt(row, 0);
+    JAddSubjectDialog es = new JAddSubjectDialog(this, true, sb.getSubName() );
+    es.setLocationRelativeTo(null);
+    es.setVisible( true );
+    
+    if( es.isSaved() == false ) return;
+    sb.setSubName(es.getResult() );
+    if( !DBAccess.GetInstance().saveSubject( sb ) )
+    {
+        ErrorLogger.getInstance().error( "Could not save subject!" );
+    }
+}//GEN-LAST:event_jtblSubjectsMouseClicked
+
+private void jBtnDeleteSubjectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeleteSubjectActionPerformed
+    DefaultTableModel tm = (DefaultTableModel) jtblSubjects.getModel();
+    int [] rows = jtblSubjects.getSelectedRows();
+    
+    SmSubject sb;
+    
+    for( int row : rows )
+    {
+        sb = (SmSubject) tm.getValueAt(row, 0);
+        DBAccess.GetInstance().removeSubject(sb);
+    }
+    realodSubjectsList();
+}//GEN-LAST:event_jBtnDeleteSubjectActionPerformed
 
 public void reloadClassrooms()
 {
@@ -1977,7 +2136,9 @@ String dateToTimeString( Date date )
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.ButtonGroup buttonGroup2;
     private javax.swing.JButton jBtnAddPerson;
+    private javax.swing.JButton jBtnAddSubject;
     private javax.swing.JButton jBtnDeletePerson;
+    private javax.swing.JButton jBtnDeleteSubject;
     private javax.swing.JButton jBtnNewMail;
     private javax.swing.JButton jBtnNewMail2;
     private javax.swing.JButton jBtnNewMail3;
@@ -1998,6 +2159,7 @@ String dateToTimeString( Date date )
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPnlClasses;
@@ -2011,6 +2173,7 @@ String dateToTimeString( Date date )
     private javax.swing.JPanel jPnlRings;
     private javax.swing.JPanel jPnlRooms;
     private javax.swing.JPanel jPnlSchedule;
+    private javax.swing.JPanel jPnlSubjects;
     private javax.swing.JPanel jPnlTeachers;
     private javax.swing.JRadioButton jRbClass;
     private javax.swing.JRadioButton jRbRole;
@@ -2019,6 +2182,7 @@ String dateToTimeString( Date date )
     private javax.swing.JRadioButton jRbSurname1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane10;
+    private javax.swing.JScrollPane jScrollPane11;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
@@ -2058,11 +2222,24 @@ String dateToTimeString( Date date )
     private javax.swing.JTable jtblPupilNotes;
     private javax.swing.JTable jtblRooms;
     private javax.swing.JTable jtblScheldue;
+    private javax.swing.JTable jtblSubjects;
     private schoolmanagement.controls.PersonDetailsControl personDetailsControl1;
     // End of variables declaration//GEN-END:variables
 
     public void execute() {
         reloadNotes();
+    }
+
+    private void realodSubjectsList() {
+        List<SmSubject> list = DBAccess.GetInstance().getAllSubjects();
+        DefaultTableModel tm = (DefaultTableModel)jtblSubjects.getModel();
+        
+        while( tm.getRowCount() > 0 ) tm.removeRow(0);
+        
+        for( SmSubject s : list )
+        {
+            tm.addRow(new Object[] { s } );
+        }
     }
 
     private void reloadNotes() {
