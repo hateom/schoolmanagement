@@ -98,6 +98,9 @@ public class DataAccess {
             SmUser smUser = (SmUser)o;
             return smUser;
         }
+        catch(NoResultException e)
+        {
+        }
         catch(Exception ex)
         {
            ex.printStackTrace();
@@ -275,8 +278,57 @@ public class DataAccess {
             for(SmUser u : users)
             {
                 m_oEm.remove(u);
+                Object [] lst = u.getSmMessageCollection().toArray();
+                for(Object m : lst)
+                {
+                    ((SmMessage)m).setMsgRecpUsrId(null);
+                }
+                lst = u.getSmMessageCollection1().toArray();
+                for(Object m : lst)
+                {
+                    ((SmMessage)m).setMsgSenderUsrId(null);
+                }
             }
+            Object [] lst = person.getSmClassCollection().toArray();
+            for(Object m : lst)
+            {
+                ((SmClass)m).setClsPerId(null);
+            }
+            
+            lst = person.getSmClassroomCollection().toArray();
+            for(Object m : lst)
+            {
+                ((SmClassroom)m).setClrOwnerPerId(null);
+            }
+            
+            lst = person.getSmNoteCollection().toArray();
+            for(Object m : lst)
+            {
+                ((SmNote)m).setNotTchPerId(null);
+            }
+            
+            lst = person.getSmScheduleCollection().toArray();
+            for(Object m : lst)
+            {
+                ((SmSchedule)m).setSchTchPerId(null);
+            }
+            
             m_oEm.remove(person);
+            
+            lst = person.getSmPerson2classCollection().toArray();
+            for(Object m : lst)
+            {
+                person.getSmPerson2classCollection().remove(m);
+                ((SmPerson2class)m).getP2cClsId().getSmPerson2classCollection().remove(m);
+                Object[] notes = ((SmPerson2class)m).getSmNoteCollection().toArray();
+                        for(Object oN : notes)
+                        {
+                            this.deleteNotesRefs((SmNote)oN);
+                            m_oEm.remove(oN);
+                        }
+                m_oEm.remove((SmPerson2class)m);
+            }
+            
             m_oEm.getTransaction().commit();
         }
         catch(NoResultException e)
@@ -557,7 +609,12 @@ public class DataAccess {
             d.setTime(System.currentTimeMillis());
             note.setNotDate(d);
             if(save(note))
+            {
+                a_oTeacher.getSmNoteCollection().add(note);
+                a_oSubject.getSmNoteCollection().add(note);
+                p2c.getSmNoteCollection().add(note);
                 return note;
+            }
         }
         catch(Exception e)
         {
@@ -573,7 +630,39 @@ public class DataAccess {
     
     public boolean deleteNote(SmNote a_oNote)
     {
-        return delete(a_oNote);
+        if(delete(a_oNote))
+        {
+            deleteNotesRefs(a_oNote);
+            return true;
+        }
+        return false;
+    }
+    
+    public void deleteNotesRefs(SmNote a_oNote)
+    {
+        Object [] lst = a_oNote.getNotTchPerId().getSmNoteCollection().toArray();
+            for(Object o : lst)
+            {
+                SmNote p = (SmNote)o;
+                if( p.getNotId() == a_oNote.getNotId() )
+                    a_oNote.getNotTchPerId().getSmNoteCollection().remove(o);
+            }
+            
+            lst = a_oNote.getNotSubId().getSmNoteCollection().toArray();
+            for(Object o : lst)
+            {
+                SmNote p = (SmNote)o;
+                if( p.getNotId() == a_oNote.getNotId() )
+                    a_oNote.getNotSubId().getSmNoteCollection().remove(o);
+            }
+            
+            lst = a_oNote.getNotP2cId().getSmNoteCollection().toArray();
+            for(Object o : lst)
+            {
+                SmNote p = (SmNote)o;
+                if( p.getNotId() == a_oNote.getNotId() )
+                    a_oNote.getNotP2cId().getSmNoteCollection().remove(o);
+            }
     }
 //---------------------------- END OF NOTEZ STUFF
     
@@ -602,7 +691,13 @@ public class DataAccess {
     
     public boolean deleteClass( SmClass a_oClass )
     {
-        return delete(a_oClass);
+        
+        if(delete(a_oClass))
+        {
+            a_oClass.getClsPerId().getSmClassCollection().remove(a_oClass);
+            return true;
+        }
+        return false;
     }
     
     public SmClass createNewClass(Integer a_nClsNumber, String a_strClsAlph, String a_strClsDesc, SmPerson a_oTutor)
@@ -613,21 +708,76 @@ public class DataAccess {
         cls.setClsDescription(a_strClsDesc);
         cls.setClsNumberAlph(a_strClsAlph);
         if(save(cls))
+        {
+            a_oTutor.getSmClassCollection().add(cls);
             return cls;
+        }
         return null;
     }
     
-    public boolean saveChanges( SmClass a_oClass )
+    public boolean saveChanges( SmClass a_oClass, SmPerson a_oTutor )
     {
+        if((a_oClass.getClsPerId() == null && a_oTutor != null) || ( a_oClass.getClsPerId() != null && a_oTutor != null &&a_oTutor.getPerId() != a_oClass.getClsPerId().getPerId()))
+        {
+            SmPerson old = a_oClass.getClsPerId();
+            a_oClass.setClsPerId(a_oTutor);
+            if(save(a_oClass))
+            {
+                if( old!= null )
+                    old.getSmClassCollection().remove(a_oClass);
+                a_oTutor.getSmClassCollection().add(a_oClass);
+                return true;
+            }
+            else
+            {
+                a_oClass.setClsPerId(old);
+                return false;
+            }
+        }
         return save(a_oClass);
     }
+   
     
     public boolean removePersonFromClass( SmClass a_oClass, SmPerson a_oPerson )
     {
         try
         {
             SmPerson2class p2c = (SmPerson2class) m_oEm.createQuery("SELECT p2c FROM SmPerson2class p2c WHERE p2c.p2cPerId = ?2 AND p2c.p2cClsId = ?1").setParameter(1, a_oClass).setParameter(2, a_oPerson).setHint("refresh", new Boolean(true)).getSingleResult();
-            return (delete(p2c));
+            if(delete(p2c))
+            {
+                Object [] lst = a_oPerson.getSmPerson2classCollection().toArray();
+                for(Object o : lst)
+                {
+                    SmPerson2class p = (SmPerson2class)o;
+                    if(p.getP2cId() == p2c.getP2cId())
+                    {
+                     Object[] notes = p.getSmNoteCollection().toArray();
+                        for(Object oN : notes)
+                        {
+                            this.deleteNotesRefs((SmNote)oN);
+                            m_oEm.remove(oN);
+                        }
+                        a_oPerson.getSmPerson2classCollection().remove(o);
+                    }
+                }
+                lst = a_oClass.getSmPerson2classCollection().toArray();
+                for(Object o : lst)
+                {
+                    SmPerson2class p = (SmPerson2class)o;
+                    if(p.getP2cId() == p2c.getP2cId())
+                    {
+                        Object[] notes = p.getSmNoteCollection().toArray();
+                        for(Object oN : notes)
+                        {
+                            this.deleteNotesRefs((SmNote)oN);
+                        }
+                        a_oClass.getSmPerson2classCollection().remove(o);
+                    }
+                }
+                
+                return true;
+            }
+            return false;
         }
         catch(NoResultException e)
         {
@@ -662,6 +812,8 @@ public class DataAccess {
         p2c.setP2cClsId(a_oClass);
         if( save(p2c) )
         {
+            a_oPerson.getSmPerson2classCollection().add(p2c);
+            a_oClass.getSmPerson2classCollection().add(p2c);
             return true;
         }
         return false;
@@ -862,7 +1014,13 @@ public class DataAccess {
         message.setMsgSendDate(d);
         message.setMsgSeverity(a_nSeverity);
         message.setMsgTopic(a_strTopic);
-        return save(message);
+        if(save(message))
+        {
+            a_oRecpUser.getSmMessageCollection().add(message);
+            a_oSenderUser.getSmMessageCollection1().add(message);
+            return true;
+        }
+        return false;
     }
     
     public boolean markAsRead(SmMessage a_oMessage, boolean a_bIsReaded)
@@ -873,7 +1031,12 @@ public class DataAccess {
     
     public boolean deleteMessage(SmMessage a_oMessage)
     {
-        return delete(a_oMessage);
+        if(delete(a_oMessage))
+        {
+            a_oMessage.getMsgSenderUsrId().getSmMessageCollection1().remove(a_oMessage);
+            a_oMessage.getMsgRecpUsrId().getSmMessageCollection().remove(a_oMessage);
+        }
+        return false;
     }
 //------------------------------------
     
@@ -947,7 +1110,10 @@ public class DataAccess {
             clsr.setClrOwnerPerId(a_oOwnerPer);
             clsr.setClrDescr(a_strDescription);
             if(save(clsr))
+            {
+                a_oOwnerPer.getSmClassroomCollection().add(clsr);
                 return clsr;
+            }
             return null;
         }
         catch(Exception e)
@@ -956,11 +1122,37 @@ public class DataAccess {
         }
         return null;
     }
-    public boolean updateClassroom(SmClassroom a_oClsRoom)
+    public boolean updateClassroom(SmClassroom a_oClsRoom, SmPerson a_oPerson)
     {
         try
         {
-            return save(a_oClsRoom);
+            if((a_oClsRoom.getClrOwnerPerId() == null && a_oPerson != null) || ( a_oClsRoom.getClrOwnerPerId() != null && a_oPerson != null && a_oPerson.getPerId() != a_oClsRoom.getClrOwnerPerId().getPerId()))
+            {
+                SmPerson old = a_oClsRoom.getClrOwnerPerId();
+                a_oClsRoom.setClrOwnerPerId(a_oPerson);
+                if(save(a_oClsRoom))
+                {
+                    if( old!= null )
+                    {
+                        Object [] lst = old.getSmClassroomCollection().toArray();
+                        for(Object o : lst)
+                        {
+                            SmClassroom p = (SmClassroom)o;
+                            if(p.getClrId() == a_oClsRoom.getClrId())
+                                a_oPerson.getSmClassroomCollection().remove(o);
+                        }
+                    }
+                    a_oPerson.getSmClassroomCollection().add(a_oClsRoom);
+                    return true;
+                }
+                else
+                {
+                    a_oClsRoom.setClrOwnerPerId(old);
+                    return false;
+                }
+            }
+            else
+                return save(a_oClsRoom);
         }
         catch(Exception e)
         {
@@ -968,6 +1160,7 @@ public class DataAccess {
         }
         return false;
     }
+    
     public boolean removeClassroom(SmClassroom a_oClsr)
     {
         try

@@ -210,7 +210,7 @@ public class JNewClassDialog extends javax.swing.JFrame {
             DBAccess.GetInstance().addPersonToClass(m_class, pers);
         }
         
-        if( !DBAccess.GetInstance().saveChanges(m_class) )
+        if( !DBAccess.GetInstance().saveChanges( m_class, getTutor() ) )
         {
             ErrorLogger.getInstance().error( "Error saving class data to DB!" );
         }

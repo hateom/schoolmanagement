@@ -271,12 +271,11 @@ public class JEditClassDialog extends javax.swing.JFrame {
         m_class.setClsNumber( getClassNum() );
         m_class.setClsNumberAlph( getSubClass() );
         m_class.setClsDescription(getClassDesc());
-        m_class.setClsPerId( getTutor() );
       
         ((DefaultTableModel)m_table.getModel()).setValueAt( m_class, m_row, 0);
         ((DefaultTableModel)m_table.getModel()).setValueAt( m_class.getClsDescription(), m_row, 1);
         
-        DBAccess.GetInstance().saveChanges(m_class);
+        DBAccess.GetInstance().saveChanges(m_class, getTutor() );
         setVisible(false);
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
