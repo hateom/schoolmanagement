@@ -310,6 +310,11 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setName("Form"); // NOI18N
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
 
         jStatus.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jStatus.setName("jStatus"); // NOI18N
@@ -1437,7 +1442,7 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
             .addGroup(jPnlSubjectsLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         jPnlSubjects.setBounds(0, 0, 440, 460);
@@ -2113,6 +2118,10 @@ private void jBtnDeleteSubjectActionPerformed(java.awt.event.ActionEvent evt) {/
     }
     realodSubjectsList();
 }//GEN-LAST:event_jBtnDeleteSubjectActionPerformed
+
+private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+    if(getRole() != RoleType.ROLE_ADMIN) jbtnShowConsole.setVisible(false); else jbtnShowConsole.setVisible(true);
+}//GEN-LAST:event_formComponentShown
 
 public void reloadClassrooms()
 {
