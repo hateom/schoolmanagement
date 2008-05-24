@@ -87,7 +87,8 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
                 "Plan Zajęc",
                 "Klasy",
                 "Sale",
-                "Dzwonki"
+                "Dzwonki",
+                "Przedmioty"
             },
             new Object[] {
                 "Poczta",
@@ -1508,6 +1509,8 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
             c = jPnlClasses;
         } else if( layer.compareTo("Sale") == 0 ) {
             c = jPnlRooms;
+        } else if( layer.compareTo("Przedmioty") == 0 ) {
+            c = jPnlSubjects;
         }
         
         for( Component k: jLayers.getComponents() ) {
