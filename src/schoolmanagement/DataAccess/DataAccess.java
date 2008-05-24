@@ -313,6 +313,13 @@ public class DataAccess {
                 ((SmSchedule)m).setSchTchPerId(null);
             }
             
+            lst = person.getSmTeacherCollection().toArray();
+            for(Object m : lst)
+            {
+                this.removeTeachersSubjectWithRefs((SmTeacher)m);
+                person.getSmTeacherCollection().remove(m);
+            }
+            
             m_oEm.remove(person);
             
             lst = person.getSmPerson2classCollection().toArray();
@@ -391,24 +398,72 @@ public class DataAccess {
 //------------    TEACHER STUFF -------------
     public boolean removeTeachersSubject(SmPerson a_oPerson, SmSubject a_oSubject)
     {
-        Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchPerId = ?1 AND t.tchSubId = ?2").setParameter(1, a_oPerson).setParameter(2, a_oSubject).setHint("refresh", new Boolean(true));
-        SmTeacher teacher = null;
+        m_oEm.getTransaction().begin();
         try
         {
-            teacher = (SmTeacher)query.getSingleResult();
-            m_oEm.getTransaction().begin();
-            m_oEm.remove(teacher);
-            m_oEm.getTransaction().commit();
-            return true;
+            Query query = m_oEm.createQuery("SELECT t FROM SmTeacher t WHERE t.tchPerId = ?1 AND t.tchSubId = ?2").setParameter(1, a_oPerson).setParameter(2, a_oSubject).setHint("refresh", new Boolean(true));
+            SmTeacher  teacher = (SmTeacher)query.getSingleResult();
+            if(removeTeachersSubjectWithRefs(teacher))
+            {
+                if(m_oEm.getTransaction().isActive())
+                m_oEm.getTransaction().commit();
+                return true;
+            }
+            m_oEm.getTransaction().rollback();
+        }
+        catch(NoResultException e)
+        {
+            if(m_oEm.getTransaction().isActive())
+            m_oEm.getTransaction().rollback();
         }
         catch(Exception e)
         {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
+            if(m_oEm.getTransaction().isActive())
             m_oEm.getTransaction().rollback();
+        }
+        return false;
+    }
+      
+    public boolean removeTeachersSubjectWithRefs(SmTeacher teacher)
+    {
+        try
+        {   
+            SmPerson person = teacher.getTchPerId();
+            SmSubject subject = teacher.getTchSubId();
+            Object [] lst = person.getSmTeacherCollection().toArray();
+            for(Object o : lst)
+            {
+                SmTeacher t = (SmTeacher)o;
+                if(t.getTchId() == teacher.getTchId())
+                {
+                   person.getSmTeacherCollection().remove(o);
+                }
+            }
+            
+            lst = subject.getSmTeacherCollection().toArray();
+            for(Object o : lst)
+            {
+                SmTeacher t = (SmTeacher)o;
+                if(t.getTchId() == teacher.getTchId())
+                {
+                    subject.getSmTeacherCollection().remove(o);
+                }
+            }
+            
+            m_oEm.remove(teacher);
+            return true;
+        }
+        catch(NoResultException e)
+        {
+        }
+        catch(Exception e)
+        {
+            
             ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return false;
     }
-    
     public SmTeacher getTeacher( SmSubject a_oSubject, SmPerson a_oPerson)
     {
         try{
@@ -1293,10 +1348,18 @@ public class DataAccess {
     
     public boolean removeSubject(SmSubject a_oSubject)
     {
-        if(delete(a_oSubject))
+        try
         {
+            m_oEm.getTransaction().begin();
+            m_oEm.remove(a_oSubject);
             removeSubjectRefs(a_oSubject);
+            m_oEm.getTransaction().commit();
             return true;
+        }
+        catch(Exception e)
+        {
+            m_oEm.getTransaction().rollback();
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
         }
         return false;
     }
@@ -1318,7 +1381,7 @@ public class DataAccess {
         lst = a_oSubject.getSmTeacherCollection().toArray();
         for(Object o : lst)
         {
-            //TODO:
+            this.removeTeachersSubjectWithRefs((SmTeacher)o);
         }
     }
     
