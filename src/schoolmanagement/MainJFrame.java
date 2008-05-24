@@ -362,6 +362,9 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
         jPnlProfile.setBorder(javax.swing.BorderFactory.createTitledBorder(resourceMap.getString("jPnlProfile.border.title"))); // NOI18N
         jPnlProfile.setName("jPnlProfile"); // NOI18N
         jPnlProfile.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                jPnlProfileComponentResized(evt);
+            }
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jPnlProfileComponentShown(evt);
             }
@@ -1501,9 +1504,16 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
 
     }//GEN-LAST:event_jcbPickClassForNotesActionPerformed
 
+    RoleType getRole()
+    {
+        return User.GetRole().GetRoleType();
+    }
+    
     private void jPnlProfileComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlProfileComponentShown
         personDetailsControl1.readDBFields();
         personDetailsControl1.fillFields( User.GetUserPerson() );
+        
+        if( getRole() != RoleType.ROLE_ADMIN ) jBtnSave.setEnabled(false); else jBtnSave.setEnabled(true);
     }//GEN-LAST:event_jPnlProfileComponentShown
 
     private void jtblPupilNotesPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jtblPupilNotesPropertyChange
@@ -1648,7 +1658,10 @@ private void jBtnAddPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN
 
 private void mouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mouseClicked
     // TODO add your handling code here:
-   if (evt.getClickCount() == 2) {
+
+    if( getRole() != RoleType.ROLE_ADMIN && getRole() != RoleType.ROLE_PRINCIPAL ) return;
+    
+    if (evt.getClickCount() == 2) {
       JTable target = (JTable)evt.getSource();
       int row = target.getSelectedRow();
       Object o = target.getValueAt(row, 0);
@@ -1669,6 +1682,8 @@ private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jBtnSaveActionPerformed
 
 private void TblTeachersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TblTeachersMouseClicked
+    if( getRole() != RoleType.ROLE_ADMIN && getRole() != RoleType.ROLE_PRINCIPAL ) return;
+    
     // TODO add your handling code here:
     if (evt.getClickCount() == 2) {
       JTable target = (JTable)evt.getSource();
@@ -1790,6 +1805,8 @@ private void jTbClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
 }//GEN-LAST:event_jTbClassActionPerformed
 
 private void jtblClassesmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblClassesmouseClicked
+    if( getRole() != RoleType.ROLE_ADMIN && getRole() != RoleType.ROLE_PRINCIPAL ) return;
+    
     // TODO add your handling code here:
     if (evt.getClickCount() == 2) {
       JTable target = (JTable)evt.getSource();
@@ -1805,6 +1822,8 @@ private void jtblClassesmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST
 }//GEN-LAST:event_jtblClassesmouseClicked
 
 private void jPnlClassesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlClassesComponentShown
+    if( getRole() != RoleType.ROLE_ADMIN && getRole() != RoleType.ROLE_PRINCIPAL ) jbtAddClass.setEnabled( false ); else jbtAddClass.setEnabled( true );
+    
     reloadData();
 }//GEN-LAST:event_jPnlClassesComponentShown
 
@@ -1852,6 +1871,8 @@ private void jBtnReload1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_jBtnReload1ActionPerformed
 
 private void jtblRoomsmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblRoomsmouseClicked
+    if( getRole() != RoleType.ROLE_ADMIN && getRole() != RoleType.ROLE_PRINCIPAL ) return;
+    
     if( evt.getClickCount() != 2 ) return;
     if( jtblRooms.getSelectedRowCount() != 1 ) return;
     int row = jtblRooms.getSelectedRow();
@@ -1864,11 +1885,15 @@ private void jtblRoomsmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
 }//GEN-LAST:event_jtblRoomsmouseClicked
 
 private void jPnlRoomsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlRoomsComponentShown
+    if( getRole() != RoleType.ROLE_ADMIN && getRole() != RoleType.ROLE_PRINCIPAL ) jbtAddRoom.setEnabled( false ); else jbtAddRoom.setEnabled( true );
+    
     // zaladuj sale
     reloadClassrooms();
 }//GEN-LAST:event_jPnlRoomsComponentShown
 
 private void jPnlScheduleComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlScheduleComponentShown
+    
+    if( getRole() != RoleType.ROLE_ADMIN && getRole() != RoleType.ROLE_PRINCIPAL ) jbtnEdit.setEnabled( false ); else jbtnEdit.setEnabled( true );
     List<SmClass> list = DBAccess.GetInstance().GetAllClasses();
     
     jcbSelectClass.removeAllItems();
@@ -1898,6 +1923,7 @@ private void jbtnShowConsoleActionPerformed(java.awt.event.ActionEvent evt) {//G
 
 private void jtblPupilNotesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblPupilNotesMouseClicked
     if( evt.getClickCount() != 2 ) return;
+    if( getRole() == RoleType.ROLE_STUDENT ) return;
     DefaultTableModel tm = (DefaultTableModel) jtblPupilNotes.getModel();
     
     if( jtblPupilNotes.getSelectedRowCount() != 1 ) return;
@@ -1913,6 +1939,10 @@ private void jtblPupilNotesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     en.setVisible(true);
     
 }//GEN-LAST:event_jtblPupilNotesMouseClicked
+
+private void jPnlProfileComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlProfileComponentResized
+    // TODO add your handling code here:
+}//GEN-LAST:event_jPnlProfileComponentResized
 
 public void reloadClassrooms()
 {
