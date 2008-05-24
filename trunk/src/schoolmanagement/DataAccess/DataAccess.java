@@ -1252,4 +1252,97 @@ public class DataAccess {
     }
     
     ////-------------------------------END OF SCHEDULE ------------------
+    
+    ////------------------------------SUBJECTS
+    
+    public SmSubject addSubject( String a_strName )
+    {
+        try
+        {
+            if( getSubjectByName(a_strName) == null )
+            {
+                SmSubject sub = new SmSubject();
+                sub.setSubName(a_strName);
+                if(save(sub))
+                    return sub;
+            }
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
+        }
+        return null;
+    }
+    
+    public SmSubject getSubjectByName( String a_strName )
+    {
+        try
+        {
+            Query query = m_oEm.createQuery("SELECT s FROM SmSubject s WHERE s.subName = ?1").setParameter(1, a_strName).setHint("refresh", new Boolean(true));
+            return (SmSubject)query.getSingleResult();
+        }
+        catch(NoResultException e)
+        {
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
+        }
+        return null;
+    }
+    
+    public boolean removeSubject(SmSubject a_oSubject)
+    {
+        if(delete(a_oSubject))
+        {
+            removeSubjectRefs(a_oSubject);
+            return true;
+        }
+        return false;
+    }
+    
+    private void removeSubjectRefs(SmSubject a_oSubject)
+    {
+        Object [] lst = a_oSubject.getSmNoteCollection().toArray();
+        for(Object o : lst)
+        {
+            ((SmNote)o).setNotSubId(null);
+        }
+        
+        lst = a_oSubject.getSmScheduleCollection().toArray();
+        for(Object o : lst)
+        {
+            ((SmSchedule)o).setSchSubId(null);
+        }
+        
+        lst = a_oSubject.getSmTeacherCollection().toArray();
+        for(Object o : lst)
+        {
+            //TODO:
+        }
+    }
+    
+    public List<SmSubject> getAllSubjects()
+    {
+        try
+        {
+            Query query = m_oEm.createQuery("SELECT s FROM SmSubject s").setHint("refresh", new Boolean(true));
+            return query.getResultList();
+        }
+        catch(NoResultException e)
+        {
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
+        }
+        return null;
+    }
+    
+    public boolean saveSubject( SmSubject a_oSubject )
+    {
+        return save(a_oSubject);
+    }
+    
+    ////------------------------------END OF SUBJECTS
 }
