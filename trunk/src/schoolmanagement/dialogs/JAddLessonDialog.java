@@ -29,7 +29,6 @@ public class JAddLessonDialog extends javax.swing.JDialog {
     private SmDay m_day;
     private SmRing m_ring;
     private SmSchedule m_lesson;
-    private SmPerson m_person;
     private SmSubject m_subject;
     private SmClass m_class;
     
@@ -221,7 +220,7 @@ public class JAddLessonDialog extends javax.swing.JDialog {
         }
         if( m_lesson != null )
         {
-            DBAccess.GetInstance().updateSchedule( m_lesson );
+            DBAccess.GetInstance().updateSchedule( m_lesson, m_teacher, m_classroom, (SmSubject)jcbSubjects.getSelectedItem() );
         }
         else
         {
@@ -326,7 +325,7 @@ public class JAddLessonDialog extends javax.swing.JDialog {
     // End of variables declaration
 
     private void setPerson(SmPerson tchPerId) {
-        m_person = tchPerId;
+        //m_person = tchPerId;
         jcbTeachers.setSelectedItem( tchPerId );
     }
 

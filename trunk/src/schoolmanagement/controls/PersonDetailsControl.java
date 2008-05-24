@@ -38,9 +38,11 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         setAddress( person.getPerAdress() );
         setFirstName( person.getPerName() );
         setSurname( person.getPerSurname() );
-        setNip(Integer.toString(person.getPerNip()));
+        if(person.getPerNip() != null)
+            setNip(Integer.toString(person.getPerNip()));
         setPesel(Integer.toString(person.getPerPesel()));
-        setPhoneNumber(Integer.toString(person.getPerPhone()));
+        if(person.getPerPhone() != null )
+            setPhoneNumber(Integer.toString(person.getPerPhone()));
         setEmail(person.getPerEmail());
         setLogin( DBAccess.GetInstance().getUserByPerson(person).getUsrLogin());
         setGroupRole( DBAccess.GetInstance().getUserByPerson(person).getUsrRolId() );
@@ -51,9 +53,15 @@ public class PersonDetailsControl extends javax.swing.JPanel {
         person.setPerAdress(getAddress());
         person.setPerName(getFirstName());
         person.setPerSurname(getSurname());
-        person.setPerNip(Integer.parseInt(getNip()));
+        if( !getNip().trim().equals("") ) 
+            person.setPerNip(Integer.parseInt(getNip()));
+        else
+            person.setPerNip(null);
         person.setPerPesel(Integer.parseInt(getPesel()));
-        person.setPerPhone(Integer.parseInt(getPhoneNumber()));
+        if(!getPhoneNumber().trim().equals(""))
+            person.setPerPhone(Integer.parseInt(getPhoneNumber()));
+        else
+            person.setPerPhone(null);
         person.setPerEmail(getEmail());
         DBAccess.GetInstance().getUserByPerson(person).setUsrRolId(getGroupRole());
     }
@@ -100,7 +108,7 @@ public class PersonDetailsControl extends javax.swing.JPanel {
     
     public String getNip()
     {
-        return jtbPeselForDetail.getText();
+        return jtbNipForDetail.getText();
     }
     
     public String getAddress()

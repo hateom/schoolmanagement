@@ -50,11 +50,12 @@ public class JEditScheduleDialog extends javax.swing.JDialog {
         SmSchedule res = nl.getResult();
         
         if( res != null )
-        {
-            if( !DBAccess.GetInstance().updateSchedule(res) )
+        {/*
+            ( m_lesson, m_teacher, m_classroom, (SmSubject)jcbSubjects.getSelectedItem() );
+            if( !DBAccess.GetInstance().updateSchedule(res, ) )
             {
                 ErrorLogger.getInstance().error("Could not update schedule!");
-            }
+            }*/
         }
         
         reloadSchedule();

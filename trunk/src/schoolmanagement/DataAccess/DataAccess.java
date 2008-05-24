@@ -1408,9 +1408,74 @@ public class DataAccess {
         return false;
     }
     
-    public boolean updateSchedule( SmSchedule a_oSchedule )
+    public boolean updateSchedule( SmSchedule a_oSchedule, SmTeacher a_oTeacher, SmClassroom a_oClassroom, SmSubject a_oSubject )
     {
-        return save(a_oSchedule);
+        m_oEm.getTransaction().begin();
+        SmClassroom oldClassroom = a_oSchedule.getSchClrId();
+        SmPerson oldPerson = a_oSchedule.getSchTchPerId();
+        SmSubject oldSubject = a_oSchedule.getSchSubId();
+        try
+        {   
+            a_oSchedule.setSchClrId(a_oClassroom);
+            a_oSchedule.setSchSubId(a_oSubject);
+            if( a_oTeacher != null && a_oTeacher.getTchPerId() != null )
+            a_oSchedule.setSchTchPerId( a_oTeacher.getTchPerId() );
+            m_oEm.persist(a_oSchedule);            
+            m_oEm.getTransaction().commit();
+            
+            if(oldSubject != null)
+            {
+                Object [] lst = oldSubject.getSmScheduleCollection().toArray();
+                for(Object o : lst)
+                {
+                    SmSchedule s = (SmSchedule)o;
+                    if( s.getSchId() == a_oSchedule.getSchId() )
+                    {
+                        oldSubject.getSmScheduleCollection().remove(o);
+                    }
+                }
+            }
+            if(oldPerson!= null)
+            {
+                Object [] lst = oldPerson.getSmScheduleCollection().toArray();
+                for(Object o : lst)
+                {
+                    SmSchedule s = (SmSchedule)o;
+                    if( s.getSchId() == a_oSchedule.getSchId() )
+                    {
+                        oldPerson.getSmScheduleCollection().remove(o);
+                    }
+                }
+            }
+            if(oldClassroom!= null)
+            {
+                Object [] lst = oldClassroom.getSmScheduleCollection().toArray();
+                for(Object o : lst)
+                {
+                    SmSchedule s = (SmSchedule)o;
+                    if( s.getSchId() == a_oSchedule.getSchId() )
+                    {
+                        oldClassroom.getSmScheduleCollection().remove(o);
+                    }
+                }
+            }
+            
+            if(a_oTeacher != null && a_oTeacher.getTchPerId() != null)
+                a_oTeacher.getTchPerId().getSmScheduleCollection().add(a_oSchedule);
+            a_oSubject.getSmScheduleCollection().add(a_oSchedule);
+            a_oClassroom.getSmScheduleCollection().add(a_oSchedule);
+            
+            return true;
+        }
+        catch(Exception e)
+        {
+            m_oEm.getTransaction().rollback();
+            a_oSchedule.setSchClrId(oldClassroom);
+            a_oSchedule.setSchSubId(oldSubject);
+            a_oSchedule.setSchTchPerId(oldPerson);
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
+        }
+        return false;
     }
     
     ////-------------------------------END OF SCHEDULE ------------------

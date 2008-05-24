@@ -72,7 +72,7 @@
                       <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
                       <Component id="jLabel16" min="-2" pref="69" max="-2" attributes="1"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jcbPickGroupForDetails" pref="188" max="32767" attributes="1"/>
+                      <Component id="jcbPickGroupForDetails" pref="190" max="32767" attributes="1"/>
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
