@@ -128,6 +128,31 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
         return result;
     }
 
+    private void doSearchPeople() {
+        DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
+        
+        while( model.getRowCount() > 0 ) model.removeRow(0);
+        
+        List<SmPerson> list = new ArrayList<SmPerson>();
+        if(jRbSurname.isSelected()){
+            list = DBAccess.GetInstance().GetUserByName(jTbName.getText().trim());
+        }
+        else if(jRbRole.isSelected()){
+            list = DBAccess.GetInstance().GetUserByRole(((Role)jTbRole.getSelectedItem()).GetRoleType());
+
+        }
+        else if(jRbClass.isSelected()){
+            list = DBAccess.GetInstance().GetPersonsForClass((SmClass)jTbClass.getSelectedItem());
+        }
+        else{
+            throw new RuntimeException();
+        }
+        
+        for(SmPerson person : list){
+            model.addRow(new Object[]{person, DBAccess.GetInstance().getUserRole(person)});
+        }
+    }
+
     private void expandAll(JTree tree, TreePath parent, boolean expand) {
         // Traverse children
         TreeNode node = (TreeNode)parent.getLastPathComponent();
@@ -1550,29 +1575,7 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
     }//GEN-LAST:event_jBtnPassCHangeActionPerformed
 
     private void jBtnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearchActionPerformed
-
-        DefaultTableModel model = (DefaultTableModel) jTable4.getModel();
-        
-        while( model.getRowCount() > 0 ) model.removeRow(0);
-        
-        List<SmPerson> list = new ArrayList<SmPerson>();
-        if(jRbSurname.isSelected()){
-            list = DBAccess.GetInstance().GetUserByName(jTbName.getText().trim());
-        }
-        else if(jRbRole.isSelected()){
-            list = DBAccess.GetInstance().GetUserByRole(((Role)jTbRole.getSelectedItem()).GetRoleType());
-
-        }
-        else if(jRbClass.isSelected()){
-            list = DBAccess.GetInstance().GetPersonsForClass((SmClass)jTbClass.getSelectedItem());
-        }
-        else{
-            throw new RuntimeException();
-        }
-        
-        for(SmPerson person : list){
-            model.addRow(new Object[]{person, DBAccess.GetInstance().getUserRole(person)});
-        }
+        doSearchPeople();
     }//GEN-LAST:event_jBtnSearchActionPerformed
 
     private void jPnlNotesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlNotesComponentShown
@@ -1709,41 +1712,7 @@ private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
 }//GEN-LAST:event_jPnlRingsComponentShown
 
 private void jBtnSearch2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSearch2ActionPerformed
-  
-    DefaultTableModel model = (DefaultTableModel)jTblTeachers.getModel();
-    while( model.getRowCount() > 0 ) model.removeRow(0);
-    if(jRbSurname1.isSelected()){
-        List<SmPerson> list;
-        list = DBAccess.GetInstance().GetUserByName(jTbName.getText().trim());
-        
-        for( SmPerson pers : list )
-        {
-            if( DBAccess.GetInstance().getUserRole(pers).getRolName().compareTo( "Nauczyciel" ) != 0 ) continue;
-
-            List<SmSubject> subs = DBAccess.GetInstance().getSubjectsForPerson( pers );
-            String strSubs = "";
-            for( SmSubject sb : subs )
-            {
-                if( strSubs.compareTo("") != 0 ) strSubs += ", ";
-                strSubs += sb.getSubName();
-            }
-            model.addRow(new Object[] { pers, strSubs } );
-            
-        }
-    }
-    else if(jRbSubject.isSelected()){
-        List<SmTeacher> list = DBAccess.GetInstance().getTeacherForSubject( (SmSubject)jTbSubs.getSelectedObjects()[0] );
-        
-        for( SmTeacher tr : list )
-        {
-            model.addRow(new Object[] { 
-                tr.getTchPerId(),
-                tr.getTchSubId()
-            });
-        }
-    }
-    
-    
+    reloadTeachers();
 }//GEN-LAST:event_jBtnSearch2ActionPerformed
 
 private void jPnlTeachersComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlTeachersComponentShown
@@ -1774,7 +1743,11 @@ private void mouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mous
       if(o == null)
           return;
       SmPerson person = (SmPerson)target.getValueAt(row, 0);
-      JEditPersonDialog dlg = new JEditPersonDialog( person, target, row );
+      JEditPersonDialog dlg = new JEditPersonDialog( person, new Commander() {
+                public void execute() {
+                    doSearchPeople();
+                }
+            } );
       dlg.setLocationRelativeTo(null);
       dlg.setVisible(true);
    }
@@ -1798,7 +1771,11 @@ private void TblTeachersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST
       if(o == null)
           return;
       SmPerson person = (SmPerson)target.getValueAt(row, 0);
-      JEditTeacherDialog dlg = new JEditTeacherDialog( person );
+      JEditTeacherDialog dlg = new JEditTeacherDialog( person, new Commander() {
+                public void execute() {
+                    reloadTeachers();
+                }
+      } );
       dlg.setLocationRelativeTo(null);
       dlg.setVisible(true);
    }
@@ -1921,7 +1898,11 @@ private void jtblClassesmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST
       if(o == null)
           return;
       SmClass cls = (SmClass)o;
-      JEditClassDialog dlg = new JEditClassDialog(cls, target, row);
+      JEditClassDialog dlg = new JEditClassDialog(cls, new Commander() {
+                public void execute() {
+                    reloadClassData();
+                }
+            });
       dlg.setLocationRelativeTo(null);
       dlg.setVisible(true);
    }
@@ -1930,10 +1911,10 @@ private void jtblClassesmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST
 private void jPnlClassesComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jPnlClassesComponentShown
     if( getRole() != RoleType.ROLE_ADMIN && getRole() != RoleType.ROLE_PRINCIPAL ) jbtAddClass.setEnabled( false ); else jbtAddClass.setEnabled( true );
     
-    reloadData();
+    reloadClassData();
 }//GEN-LAST:event_jPnlClassesComponentShown
 
-public void reloadData()
+public void reloadClassData()
 {
     List<SmClass> classes = DBAccess.GetInstance().GetAllClasses();
     DefaultTableModel dtm = (DefaultTableModel)jtblClasses.getModel();
@@ -1954,7 +1935,7 @@ private void jbtAddClassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
 }//GEN-LAST:event_jbtAddClassActionPerformed
 
 private void jBtnReloadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnReloadActionPerformed
-    reloadData();    // TODO add your handling code here:
+    reloadClassData();    // TODO add your handling code here:
 }//GEN-LAST:event_jBtnReloadActionPerformed
 
 private void jBtnDeletePersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnDeletePersonActionPerformed
@@ -1985,7 +1966,11 @@ private void jtblRoomsmouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:e
     Object o = jtblRooms.getValueAt(row, 0);
     if(o == null) return;
     SmClassroom classroom = (SmClassroom)jtblRooms.getValueAt(row, 0);
-    JEditClassroomDialog ec = new JEditClassroomDialog(classroom, jtblRooms, row);
+    JEditClassroomDialog ec = new JEditClassroomDialog(classroom, new Commander() {
+            public void execute() {
+                reloadClassrooms();
+            }
+        });
     ec.setLocationRelativeTo(null);
     ec.setVisible(true);
 }//GEN-LAST:event_jtblRoomsmouseClicked
@@ -2278,6 +2263,41 @@ String dateToTimeString( Date date )
         {
             notes = compileNotes( pupil, cls, subject );
             tm.addRow(new Object[] { pupil, notes } );
+        }
+    }
+
+    private void reloadTeachers() {
+        DefaultTableModel model = (DefaultTableModel)jTblTeachers.getModel();
+        while( model.getRowCount() > 0 ) model.removeRow(0);
+        if(jRbSurname1.isSelected()){
+            List<SmPerson> list;
+            list = DBAccess.GetInstance().GetUserByName(jTbName.getText().trim());
+
+            for( SmPerson pers : list )
+            {
+                if( DBAccess.GetInstance().getUserRole(pers).getRolName().compareTo( "Nauczyciel" ) != 0 ) continue;
+
+                List<SmSubject> subs = DBAccess.GetInstance().getSubjectsForPerson( pers );
+                String strSubs = "";
+                for( SmSubject sb : subs )
+                {
+                    if( strSubs.compareTo("") != 0 ) strSubs += ", ";
+                    strSubs += sb.getSubName();
+                }
+                model.addRow(new Object[] { pers, strSubs } );
+
+            }
+        }
+        else if(jRbSubject.isSelected()){
+            List<SmTeacher> list = DBAccess.GetInstance().getTeacherForSubject( (SmSubject)jTbSubs.getSelectedObjects()[0] );
+
+            for( SmTeacher tr : list )
+            {
+                model.addRow(new Object[] { 
+                    tr.getTchPerId(),
+                    tr.getTchSubId()
+                });
+            }
         }
     }
 }

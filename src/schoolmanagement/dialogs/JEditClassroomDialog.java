@@ -8,6 +8,7 @@ package schoolmanagement.dialogs;
 
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import schoolmanagement.controller.Commander;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.controller.RoleType;
 import schoolmanagement.entity.SmClassroom;
@@ -22,15 +23,13 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
     private SmClassroom m_class;
     private SmPerson m_host;
     
-    private JTable m_table;
-    private int m_row;
+    private Commander m_cmd;
     
     /** Creates new form JEditClassroomDialog */
-    public JEditClassroomDialog( SmClassroom cr, JTable target, int row ) {
+    public JEditClassroomDialog( SmClassroom cr, Commander onClose ) {
         initComponents();
         
-        m_table = target;
-        m_row = row;
+        m_cmd = onClose;
         m_class = cr;
         
         setNo(cr.getClrId());
@@ -235,10 +234,7 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSelectActionPerformed
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
-        DefaultTableModel tm = (DefaultTableModel)m_table.getModel();
-        
-        tm.setValueAt(m_class, m_row, 0);
-        tm.setValueAt(m_class.getClrDescr(), m_row, 1);
+        if( m_cmd != null ) m_cmd.execute();
         
         DBAccess.GetInstance().updateClassroom( m_class, getHost() );
         
@@ -251,7 +247,7 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JEditClassroomDialog(null, null, 0).setVisible(true);
+                new JEditClassroomDialog(null, null).setVisible(true);
             }
         });
     }
