@@ -6,6 +6,7 @@
 
 package schoolmanagement.dialogs;
 
+import schoolmanagement.controller.Commander;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.entity.SmMessage;
 
@@ -16,11 +17,14 @@ import schoolmanagement.entity.SmMessage;
 public class JNewMailMessageDialog extends javax.swing.JDialog {
     private SmMessage m_msg;
     
+    private Commander m_cmd;
+    
     /** Creates new form JNewMailMessageDialog */
-    public JNewMailMessageDialog(java.awt.Frame parent, boolean modal, SmMessage msg ) {
+    public JNewMailMessageDialog(java.awt.Frame parent, boolean modal, SmMessage msg, Commander onClose ) {
         super(parent, modal);
         initComponents();
         m_msg = msg;
+        m_cmd = onClose;
     }
     
     /** This method is called from within the constructor to
@@ -40,12 +44,17 @@ public class JNewMailMessageDialog extends javax.swing.JDialog {
         setLocationByPlatform(true);
         setName("Form"); // NOI18N
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(255, 153, 153));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setName("jPanel1"); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 12));
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JNewMailMessageDialog.class);
         jLabel1.setText(resourceMap.getString("jLabel1.text")); // NOI18N
         jLabel1.setName("jLabel1"); // NOI18N
@@ -125,6 +134,10 @@ public class JNewMailMessageDialog extends javax.swing.JDialog {
         m_msg.setMsgReaded(true);
         DBAccess.GetInstance().markAsRead(m_msg, true);
     }//GEN-LAST:event_jbtnOpenActionPerformed
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        if( m_cmd != null ) m_cmd.execute();
+    }//GEN-LAST:event_formComponentHidden
     
     /**
      * @param args the command line arguments
@@ -132,7 +145,7 @@ public class JNewMailMessageDialog extends javax.swing.JDialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                JNewMailMessageDialog dialog = new JNewMailMessageDialog(new javax.swing.JFrame(), true, null);
+                JNewMailMessageDialog dialog = new JNewMailMessageDialog(new javax.swing.JFrame(), true, null, null );
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
