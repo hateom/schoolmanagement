@@ -83,11 +83,11 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jtbNo = new javax.swing.JTextField();
         jtbDesc = new javax.swing.JTextField();
         jtbHost = new javax.swing.JTextField();
         jBtnSelect = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        jtbNo = new javax.swing.JFormattedTextField();
         jbtnSave = new javax.swing.JButton();
         jbtnCancel = new javax.swing.JButton();
 
@@ -95,7 +95,7 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
         setName("Form"); // NOI18N
         setResizable(false);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Edycja sali")); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Edycja sali"));
         jPanel1.setName("jPanel1"); // NOI18N
 
         jLabel1.setText("Numer:"); // NOI18N
@@ -108,9 +108,6 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
         jLabel3.setName("jLabel3"); // NOI18N
 
         org.jdesktop.application.ResourceMap resourceMap = org.jdesktop.application.Application.getInstance(schoolmanagement.SchoolmanagementApp.class).getContext().getResourceMap(JEditClassroomDialog.class);
-        jtbNo.setText(resourceMap.getString("jtbNo.text")); // NOI18N
-        jtbNo.setName("jtbNo"); // NOI18N
-
         jtbDesc.setText(resourceMap.getString("jtbDesc.text")); // NOI18N
         jtbDesc.setName("jtbDesc"); // NOI18N
 
@@ -131,6 +128,10 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
         jLabel4.setText(resourceMap.getString("jLabel4.text")); // NOI18N
         jLabel4.setName("jLabel4"); // NOI18N
 
+        jtbNo.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        jtbNo.setText(resourceMap.getString("jtbNo.text")); // NOI18N
+        jtbNo.setName("jtbNo"); // NOI18N
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -144,14 +145,13 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtbNo, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtbNo, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jLabel4)
                         .addContainerGap())
-                    .addComponent(jtbDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
+                    .addComponent(jtbDesc, javax.swing.GroupLayout.DEFAULT_SIZE, 245, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jtbHost, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                        .addComponent(jtbHost, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jBtnSelect))))
         );
@@ -160,9 +160,9 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtbNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel4))
+                    .addComponent(jLabel4)
+                    .addComponent(jtbNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtbDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -200,7 +200,7 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 100, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                         .addComponent(jbtnCancel, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -234,10 +234,10 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSelectActionPerformed
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
-        if( m_cmd != null ) m_cmd.execute();
-        
+        m_class.setClrId(getNo());
+        m_class.setClrDescr(getDesc());
         DBAccess.GetInstance().updateClassroom( m_class, getHost() );
-        
+        if( m_cmd != null ) m_cmd.execute();
         setVisible(false);
     }//GEN-LAST:event_jbtnSaveActionPerformed
     
@@ -263,7 +263,7 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
     private javax.swing.JButton jbtnSave;
     private javax.swing.JTextField jtbDesc;
     private javax.swing.JTextField jtbHost;
-    private javax.swing.JTextField jtbNo;
+    private javax.swing.JFormattedTextField jtbNo;
     // End of variables declaration//GEN-END:variables
     
 }
