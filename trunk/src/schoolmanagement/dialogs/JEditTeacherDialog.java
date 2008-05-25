@@ -12,6 +12,7 @@ import java.util.Observable;
 import javax.swing.DefaultListModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import schoolmanagement.controller.Commander;
 import schoolmanagement.entity.SmPerson;
 import schoolmanagement.entity.SmSubject;
 import schoolmanagement.controller.DBAccess;
@@ -24,11 +25,23 @@ import schoolmanagement.controller.ErrorLogger;
 public class JEditTeacherDialog extends javax.swing.JFrame{
     
     private SmPerson m_person;
+    private Commander m_cmd;
     
     /** Creates new form JEditTeacherDialog */
-    public JEditTeacherDialog( SmPerson person ) {
+    public JEditTeacherDialog( SmPerson person, Commander onClose ) {
         m_person = person;
         initComponents();
+        m_cmd = onClose;
+    }
+
+    private void addToList() {
+        int [] list = jlAll.getSelectedIndices();
+        for( int k: list ) {
+            SmSubject sb = (SmSubject)jlAll.getModel().getElementAt(k);
+            if( !DBAccess.GetInstance().teacherHasSubject(m_person, sb)) {
+                ((DefaultListModel)jlTought.getModel()).addElement( sb );
+            }
+        }
     }
     
     /** This method is called from within the constructor to
@@ -59,6 +72,9 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
         setName("Form"); // NOI18N
         setResizable(false);
         addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                formComponentHidden(evt);
+            }
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 formComponentShown(evt);
             }
@@ -72,6 +88,11 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
         jScrollPane1.setName("jScrollPane1"); // NOI18N
 
         jlAll.setName("jlAll"); // NOI18N
+        jlAll.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jlAllMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jlAll);
 
         jLabel1.setText("Przedmioty:"); // NOI18N
@@ -124,7 +145,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(48, 48, 48)
                         .addComponent(jbtnMove)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                         .addGroup(jpnSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jpnSubjectsLayout.createSequentialGroup()
                                 .addComponent(jLabel2)
@@ -132,9 +153,9 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnSubjectsLayout.createSequentialGroup()
                         .addComponent(jbtnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 184, Short.MAX_VALUE)
                         .addComponent(jbtnRemoveSelected, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE))
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 482, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpnSubjectsLayout.setVerticalGroup(
@@ -148,12 +169,12 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpnSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)))
                     .addGroup(jpnSubjectsLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(jbtnMove)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -208,7 +229,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
         jpnClassesLayout.setHorizontalGroup(
             jpnClassesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpnClassesLayout.createSequentialGroup()
-                .addContainerGap(16, Short.MAX_VALUE)
+                .addContainerGap(40, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -272,19 +293,17 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
     }
     
     private void jbtnMoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnMoveActionPerformed
-        int [] list = jlAll.getSelectedIndices();
-        for( int k: list ) {
-            SmSubject sb = (SmSubject)jlAll.getModel().getElementAt(k);
-            if( !DBAccess.GetInstance().teacherHasSubject(m_person, sb)) {
-                ((DefaultListModel)jlTought.getModel()).addElement( sb );
-            }
-        }
+        addToList();
     }//GEN-LAST:event_jbtnMoveActionPerformed
 
     private void jbtnRemoveSelectedActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnRemoveSelectedActionPerformed
         int [] list = jlTought.getSelectedIndices();
         for( int k: list ) {
             SmSubject sb = (SmSubject)((DefaultListModel)jlTought.getModel()).getElementAt(k);
+            if( DBAccess.GetInstance().teacherHasSubject(m_person, sb) == false )
+            {
+                continue;
+            }
             boolean removeTeachersSubject = DBAccess.GetInstance().removeTeachersSubject(m_person, sb);
             if(!removeTeachersSubject) 
                 ErrorLogger.getInstance().error("Could not add teachers subject!");
@@ -299,6 +318,8 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
                 DBAccess.GetInstance().addTeachersSubject(m_person, sb);
             }
         }
+        
+        setVisible(false);
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
     private void classesTableComponentShow(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_classesTableComponentShow
@@ -346,6 +367,16 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
       //dlg.setVisible(true);
         }
     }//GEN-LAST:event_classTableMouseClicked
+
+    private void jlAllMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jlAllMouseClicked
+        if( evt.getClickCount() != 2 ) return;
+        
+        addToList();
+    }//GEN-LAST:event_jlAllMouseClicked
+
+    private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
+        if( m_cmd != null ) m_cmd.execute();
+    }//GEN-LAST:event_formComponentHidden
     
     /**
      * @param args the command line arguments
@@ -353,7 +384,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JEditTeacherDialog( null ).setVisible(true);
+                new JEditTeacherDialog( null, null ).setVisible(true);
             }
         });
     }

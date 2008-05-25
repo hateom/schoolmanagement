@@ -7,6 +7,7 @@
 package schoolmanagement.dialogs;
 
 import javax.swing.JTable;
+import schoolmanagement.controller.Commander;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.controls.PersonDetailsControl;
 import schoolmanagement.entity.SmPerson;
@@ -19,15 +20,13 @@ import schoolmanagement.entity.SmUser;
 public class JEditPersonDialog extends javax.swing.JFrame {
     
     private SmPerson m_person;
-    private JTable m_table;
-    private int m_row;
+    private Commander m_cmd;
     /** Creates new form JEditPersonDialog */
-    public JEditPersonDialog( SmPerson person, JTable target, int row ) {
+    public JEditPersonDialog( SmPerson person, Commander onClose ) {
         initComponents();
         persDetails.LoginRO( true );
         m_person = person;
-        m_table = target;
-        m_row = row;
+        m_cmd = onClose;
         
         persDetails.readDBFields();
         if( person != null ) persDetails.fillFields(person);
@@ -126,8 +125,7 @@ public class JEditPersonDialog extends javax.swing.JFrame {
         persDetails.readFields(m_person);
         DBAccess.GetInstance().modifyUserAndPerson( user, m_person );
         
-        m_table.getModel().setValueAt( m_person, m_row, 0 );
-        m_table.getModel().setValueAt( DBAccess.GetInstance().getUserByPerson(m_person).getUsrRolId().getRolName(), m_row, 1 );
+        m_cmd.execute();
         m_person = null;
         
         setVisible(false);
@@ -139,7 +137,7 @@ public class JEditPersonDialog extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JEditPersonDialog( null, null, 0 ).setVisible(true);
+                new JEditPersonDialog( null, null ).setVisible(true);
             }
         });
     }

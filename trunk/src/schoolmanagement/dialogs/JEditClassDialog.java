@@ -10,6 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import schoolmanagement.controller.Commander;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.controller.ErrorLogger;
 import schoolmanagement.controller.RoleType;
@@ -23,16 +24,16 @@ import schoolmanagement.entity.SmRole;
  */
 public class JEditClassDialog extends javax.swing.JFrame {
     private SmClass m_class;
-    private JTable m_table;
-    private int m_row;
+    
+    private Commander m_cmd;
+    
     /** Creates new form JEditClassDialog */
-    public JEditClassDialog( SmClass iclass, JTable target, int row ) {
+    public JEditClassDialog( SmClass iclass, Commander onClose ) {
         initComponents();
         m_class = iclass;
         realodDB();
         
-        m_table = target;
-        m_row = row;
+        m_cmd = onClose;
         
         setClassName( m_class.getClsNumber(), m_class.getClsNumberAlph(), m_class.getClsDescription() );
         setTutor( m_class.getClsPerId() );
@@ -272,8 +273,7 @@ public class JEditClassDialog extends javax.swing.JFrame {
         m_class.setClsNumberAlph( getSubClass() );
         m_class.setClsDescription(getClassDesc());
       
-        ((DefaultTableModel)m_table.getModel()).setValueAt( m_class, m_row, 0);
-        ((DefaultTableModel)m_table.getModel()).setValueAt( m_class.getClsDescription(), m_row, 1);
+        if( m_cmd != null ) m_cmd.execute();
         
         DBAccess.GetInstance().saveChanges(m_class, getTutor() );
         setVisible(false);
@@ -324,7 +324,7 @@ public class JEditClassDialog extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JEditClassDialog( null, null, 0 ).setVisible(true);
+                new JEditClassDialog( null, null ).setVisible(true);
             }
         });
     }
