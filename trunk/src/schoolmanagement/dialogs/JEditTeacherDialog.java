@@ -67,6 +67,9 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
         jpnClasses = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jLabel3 = new javax.swing.JLabel();
+        jLblTeachersName = new javax.swing.JLabel();
+        jbtnEditPerson = new javax.swing.JButton();
 
         setLocationByPlatform(true);
         setName("Form"); // NOI18N
@@ -169,12 +172,12 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
                             .addComponent(jLabel2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jpnSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE)))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)))
                     .addGroup(jpnSubjectsLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
                         .addComponent(jbtnMove)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpnSubjectsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -236,26 +239,53 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
         jpnClassesLayout.setVerticalGroup(
             jpnClassesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnClassesLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 280, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         jTabbedPane1.addTab(resourceMap.getString("jpnClasses.TabConstraints.tabTitle"), jpnClasses); // NOI18N
 
+        jLabel3.setText("Nauczyciel: "); // NOI18N
+        jLabel3.setName("jLabel3"); // NOI18N
+
+        jLblTeachersName.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLblTeachersName.setText(resourceMap.getString("jLblTeachersName.text")); // NOI18N
+        jLblTeachersName.setName("jLblTeachersName"); // NOI18N
+
+        jbtnEditPerson.setText(resourceMap.getString("jbtnEditPerson.text")); // NOI18N
+        jbtnEditPerson.setName("jbtnEditPerson"); // NOI18N
+        jbtnEditPerson.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnEditPersonActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jTabbedPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLblTeachersName)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
+                        .addComponent(jbtnEditPerson)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLblTeachersName)
+                    .addComponent(jbtnEditPerson))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -263,7 +293,7 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
     }// </editor-fold>//GEN-END:initComponents
 
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
-         
+         jLblTeachersName.setText(m_person.toString());
          updateLists();
     }//GEN-LAST:event_formComponentShown
     
@@ -377,6 +407,16 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
     private void formComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentHidden
         if( m_cmd != null ) m_cmd.execute();
     }//GEN-LAST:event_formComponentHidden
+
+    private void jbtnEditPersonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnEditPersonActionPerformed
+        JEditPersonDialog ep = new JEditPersonDialog( m_person, new Commander(){
+            public void execute() {
+                jLblTeachersName.setText(m_person.toString());
+            }
+        } );
+        ep.setLocationRelativeTo(null);
+        ep.setVisible(true);
+    }//GEN-LAST:event_jbtnEditPersonActionPerformed
     
     /**
      * @param args the command line arguments
@@ -392,12 +432,15 @@ public class JEditTeacherDialog extends javax.swing.JFrame{
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLblTeachersName;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JButton jbtnEditPerson;
     private javax.swing.JButton jbtnMove;
     private javax.swing.JButton jbtnRemoveSelected;
     private javax.swing.JButton jbtnSave;
