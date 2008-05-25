@@ -29,7 +29,7 @@
                   <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="jbtnSave" min="-2" pref="101" max="-2" attributes="0"/>
-                      <EmptySpace pref="126" max="32767" attributes="0"/>
+                      <EmptySpace pref="154" max="32767" attributes="0"/>
                       <Component id="jbtnCancel" min="-2" pref="91" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -81,9 +81,9 @@
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
-                      <Component id="jtbDesc" pref="245" max="32767" attributes="0"/>
+                      <Component id="jtbDesc" pref="266" max="32767" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
-                          <Component id="jtbHost" pref="156" max="32767" attributes="0"/>
+                          <Component id="jtbHost" pref="166" max="32767" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jBtnSelect" min="-2" max="-2" attributes="0"/>
                       </Group>

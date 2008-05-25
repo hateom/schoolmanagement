@@ -7,7 +7,6 @@ package schoolmanagement.entity;
 
 import java.io.Serializable;
 import java.util.Collection;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -32,6 +31,8 @@ public class SmClassroom implements Serializable {
     private Integer clrId;
     @Column(name = "CLR_DESCR")
     private String clrDescr;
+    @Column(name = "CLR_NUMER")
+    private int clrNumer;
     @OneToMany(mappedBy = "schClrId")
     private Collection<SmSchedule> smScheduleCollection;
     @JoinColumn(name = "CLR_OWNER_PER_ID", referencedColumnName = "PER_ID")
@@ -76,7 +77,14 @@ public class SmClassroom implements Serializable {
     public void setClrOwnerPerId(SmPerson clrOwnerPerId) {
         this.clrOwnerPerId = clrOwnerPerId;
     }
+    public int getClrNumer() {
+        return clrNumer;
+    }
 
+    public void setClrNumer(int clrNumer) {
+        this.clrNumer = clrNumer;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -99,7 +107,6 @@ public class SmClassroom implements Serializable {
 
     @Override
     public String toString() {
-        return "" + clrId;
+        return "" + clrNumer;
     }
-
 }
