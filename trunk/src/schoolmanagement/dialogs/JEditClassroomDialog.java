@@ -32,7 +32,7 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
         m_cmd = onClose;
         m_class = cr;
         
-        setNo(cr.getClrId());
+        setNo(cr.getClrNumer());
         setDesc(cr.getClrDescr());
         setHost(cr.getClrOwnerPerId());
     }
@@ -234,7 +234,7 @@ public class JEditClassroomDialog extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnSelectActionPerformed
 
     private void jbtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSaveActionPerformed
-        m_class.setClrId(getNo());
+        m_class.setClrNumer(getNo());
         m_class.setClrDescr(getDesc());
         DBAccess.GetInstance().updateClassroom( m_class, getHost() );
         if( m_cmd != null ) m_cmd.execute();
