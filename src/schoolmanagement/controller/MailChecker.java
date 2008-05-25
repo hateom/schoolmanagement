@@ -22,7 +22,7 @@ public class MailChecker extends TimerTask {
     @Override
     public void run() {
         if( m_lock == true ) return;
-        m_lock = true;
+        
         SmUser user = DBAccess.GetInstance().getUserByPerson(User.GetUserPerson());
         if( user == null || User.IsLogged() == false ) return;
         List<SmMessage> list = DBAccess.GetInstance().getRecievedMessages( user, null, false );
@@ -31,10 +31,14 @@ public class MailChecker extends TimerTask {
         {
             if( msg.getMsgReaded() == false && msg.getMsgSeverity() < 1 )
             {
-                JNewMailMessageDialog nm = new JNewMailMessageDialog(null, true, msg);
+                m_lock = true;
+                JNewMailMessageDialog nm = new JNewMailMessageDialog(null, true, msg, new Commander(){
+                    public void execute() {
+                        m_lock = false;
+                    }
+                });
                 nm.setLocationRelativeTo(null);
                 nm.setVisible(true);
-                m_lock = false;
             }
         }
     }
