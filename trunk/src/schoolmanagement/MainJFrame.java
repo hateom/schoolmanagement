@@ -1676,32 +1676,39 @@ private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
     Date lStart = new Date();
     Date lEnd = new Date();
     Date lNext = new Date();
-    long lesson = 0;
     long ringDuration = 0;
+    int hours = 0;
     
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-    try {
-        lesson = sdf.parse("00:45:00").getTime();
-
+    Calendar cal = new GregorianCalendar();
+    Calendar cal2;
+    
+    
         for( i=0; i<rings.size()-1; ++i )
         {
+            hours = 0;
             lStart = rings.get(i).getRngTime();
-            lEnd.setTime( lStart.getTime() + lesson );
+            cal.setTime(lStart);
+            cal.add(Calendar.MINUTE, 45);
+            lEnd = cal.getTime();
             lNext = rings.get(i+1).getRngTime();
-            ringDuration = lNext.getTime() - lEnd.getTime();
+            ringDuration = (lNext.getTime() - lEnd.getTime())/(1000*60);
+            while(ringDuration >= 60){
+                hours++;
+                ringDuration -= 60;
+            }
             
-            Date dupa = (Date)lStart.clone();
-            dupa.setTime(ringDuration);
+            
+            cal2 = new GregorianCalendar(0, 0, 0, hours, (int)ringDuration);
+            
             model.addRow( new Object[] { 
                 rings.get(i), //
                 dateToTimeString( lStart ),
                 dateToTimeString( lEnd ),
-                dateToTimeString( dupa )
+                dateToTimeString( cal2.getTime() )
             } );
         }
     
-    } catch (ParseException ex) {
-    }
+
     
     /*i = rings.size()-1;
     model.addRow( new Object[] { 
