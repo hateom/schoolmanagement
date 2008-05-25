@@ -1167,7 +1167,7 @@ public class DataAccess {
         try
         {
             SmClassroom clsr = new SmClassroom();
-            clsr.setClrId(a_nClassroomNum);
+            clsr.setClrNumer(a_nClassroomNum);
             clsr.setClrOwnerPerId(a_oOwnerPer);
             clsr.setClrDescr(a_strDescription);
             if(save(clsr))
