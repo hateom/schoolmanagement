@@ -1697,15 +1697,25 @@ private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
                 ringDuration -= 60;
             }
             
+            Date ringDate = new GregorianCalendar(0, 0, 0, hours, (int)ringDuration).getTime();
             
-            cal2 = new GregorianCalendar(0, 0, 0, hours, (int)ringDuration);
+            if(ringDuration<0){
+                ringDate = new GregorianCalendar(0,0,0).getTime();
+            }  
+            
+            cal.setTime(lStart);
+            if(cal.get(Calendar.MINUTE) ==0 && cal.get(Calendar.HOUR) ==0){
+                lEnd = new GregorianCalendar(0,0,0).getTime();
+            }
+
             
             model.addRow( new Object[] { 
-                rings.get(i), //
-                dateToTimeString( lStart ),
-                dateToTimeString( lEnd ),
-                dateToTimeString( cal2.getTime() )
+               rings.get(i), //
+               dateToTimeString( lStart ),
+               dateToTimeString( lEnd ),
+               dateToTimeString( ringDate )
             } );
+
         }
     
 
