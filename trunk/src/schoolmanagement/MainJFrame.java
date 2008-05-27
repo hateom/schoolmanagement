@@ -2362,6 +2362,7 @@ String dateToTimeString( Date date )
         String notes;
         for( SmPerson pupil : list )
         {
+            if( getRole() == RoleType.ROLE_STUDENT && User.GetUserPerson() != pupil ) continue;
             notes = compileNotes( pupil, cls, subject );
             tm.addRow(new Object[] { pupil, notes } );
         }
