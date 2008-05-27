@@ -1211,8 +1211,8 @@
                       <Table columnCount="4" rowCount="0">
                         <Column editable="false" title="Numer" type="java.lang.Object"/>
                         <Column editable="true" title="Pocz&#x105;tek lekcji" type="java.lang.Object"/>
-                        <Column editable="true" title="Koniec lekcji" type="java.lang.Object"/>
-                        <Column editable="true" title="Przerwa" type="java.lang.Object"/>
+                        <Column editable="false" title="Koniec lekcji" type="java.lang.Object"/>
+                        <Column editable="false" title="Przerwa" type="java.lang.Object"/>
                       </Table>
                     </Property>
                     <Property name="name" type="java.lang.String" value="jTblRings" noResource="true"/>
