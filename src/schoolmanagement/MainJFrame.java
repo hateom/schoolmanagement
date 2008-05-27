@@ -6,6 +6,7 @@
 package schoolmanagement;
 
 import java.awt.Component;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -1090,6 +1091,11 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
             }
         });
         jTblRings.setName("jTblRings"); // NOI18N
+        jTblRings.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                jTblRingsPropertyChange(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTblRings);
 
         javax.swing.GroupLayout jPnlRingsLayout = new javax.swing.GroupLayout(jPnlRings);
@@ -1652,6 +1658,7 @@ private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
     
     DefaultTableModel model = new NonEditableTableModel();
     jTblRings.setModel(model);
+    
     model.addTableModelListener(new TableModelListener() {
         public void tableChanged(TableModelEvent e) {
             int row = e.getFirstRow();
@@ -1660,8 +1667,13 @@ private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
             String columnName = model.getColumnName(column);
             if(row == -1 || column == -1 || model.getValueAt(row, column) == null)
                 return;
+            
+            
             String data = model.getValueAt(row, column).toString();
             SmRing ring = (SmRing)model.getValueAt(row, 0);
+            
+            //SmRing ringEnd = (SmRing)model.getValueAt(row, 2);
+            //SmRing ringPrevBreak = (SmRing)model.getValueAt(row-1, 3);
             
             SimpleDateFormat ssdf = new SimpleDateFormat("HH:mm");
             long time = 0;
@@ -1670,6 +1682,61 @@ private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
                 time = ssdf.parse(data).getTime();
                 outDate.setTime(time);
                 DBAccess.GetInstance().changeRingTime(ring, outDate );
+            
+                //-----------------
+                    
+                    DefaultTableModel model2 = (DefaultTableModel)jTblRings.getModel();
+                    while(model2.getRowCount()>0) model2.removeRow(0);
+                            
+                    List<SmRing> rings = DBAccess.GetInstance().getRings();
+                    int i;
+                    Date lStart = new Date();
+                    Date lEnd = new Date();
+                    Date lNext = new Date();
+                    long ringDuration = 0;
+                    int hours = 0;
+
+                    Calendar cal = new GregorianCalendar();
+
+
+                        for( i=0; i<rings.size()-1; ++i )
+                        {
+                            hours = 0;
+                            lStart = rings.get(i).getRngTime();
+                            cal.setTime(lStart);
+                            cal.add(Calendar.MINUTE, 45);
+                            lEnd = cal.getTime();
+                            lNext = rings.get(i+1).getRngTime();
+                            ringDuration = (lNext.getTime() - lEnd.getTime())/(1000*60);
+                            while(ringDuration >= 60){
+                                hours++;
+                                ringDuration -= 60;
+                            }
+
+                            Date ringDate = new GregorianCalendar(0, 0, 0, hours, (int)ringDuration).getTime();
+
+                            if(ringDuration<0){
+                                ringDate = new GregorianCalendar(0,0,0).getTime();
+                            }  
+
+                            cal.setTime(lStart);
+                            if(cal.get(Calendar.MINUTE) ==0 && cal.get(Calendar.HOUR) ==0){
+                                lEnd = new GregorianCalendar(0,0,0).getTime();
+                            }
+
+
+                            model2.addRow( new Object[] { 
+                               rings.get(i), //
+                               dateToTimeString( lStart ),
+                               dateToTimeString( lEnd ),
+                               dateToTimeString( ringDate )
+                            } );
+
+
+
+                        }
+                
+                //--------------
             } catch( ParseException ex )
             {
             }
@@ -2135,6 +2202,12 @@ private void jBtnDeleteSubjectActionPerformed(java.awt.event.ActionEvent evt) {/
 private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
     if(getRole() != RoleType.ROLE_ADMIN) jbtnShowConsole.setVisible(false); else jbtnShowConsole.setVisible(true);
 }//GEN-LAST:event_formComponentShown
+
+private void jTblRingsPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_jTblRingsPropertyChange
+    // TODO add your handling code here:
+}//GEN-LAST:event_jTblRingsPropertyChange
+
+
 
 public void reloadClassrooms()
 {
