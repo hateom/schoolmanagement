@@ -1096,6 +1096,7 @@ public class DataAccess {
         {
             a_oMessage.getMsgSenderUsrId().getSmMessageCollection1().remove(a_oMessage);
             a_oMessage.getMsgRecpUsrId().getSmMessageCollection().remove(a_oMessage);
+            return true;
         }
         return false;
     }
