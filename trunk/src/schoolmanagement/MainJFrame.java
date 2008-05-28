@@ -1424,6 +1424,11 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
         jLayers.add(jPnlRooms, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         jPnlSubjects.setName("jPnlSubjects"); // NOI18N
+        jPnlSubjects.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPnlSubjectsMouseClicked(evt);
+            }
+        });
         jPnlSubjects.addComponentListener(new java.awt.event.ComponentAdapter() {
             public void componentShown(java.awt.event.ComponentEvent evt) {
                 jPnlSubjectsComponentShown(evt);
@@ -2217,7 +2222,14 @@ private void jtblSubjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
     int row = jtblSubjects.getSelectedRow();
     SmSubject sb;
     sb = (SmSubject) tm.getValueAt(row, 0);
-    JAddSubjectDialog es = new JAddSubjectDialog(this, true, sb.getSubName() );
+    List<SmTeacher> tList = DBAccess.GetInstance().getTeacherForSubject(sb);
+    ArrayList<String> al = new ArrayList<String>();
+    for(SmTeacher t: tList){
+        al.add(t.getTchPerId().getPerSurname() + " " + t.getTchPerId().getPerName()); 
+    }
+    
+    
+    JEditSubjectDialog es = new JEditSubjectDialog(this, true, sb.getSubName(), al.toArray() );
     es.setLocationRelativeTo(null);
     es.setVisible( true );
     
@@ -2295,6 +2307,8 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     if( getRole() != RoleType.ROLE_ADMIN && getRole() != RoleType.ROLE_PRINCIPAL ) return;
 
       int row = jTblTeachers.getSelectedRow();
+      if(row==-1) return;
+      
       Object o = jTblTeachers.getValueAt(row, 0);
       if(o == null)
           return;
@@ -2308,6 +2322,10 @@ private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
       dlg.setVisible(true);
    
 }//GEN-LAST:event_jButton1ActionPerformed
+
+private void jPnlSubjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPnlSubjectsMouseClicked
+    // TODO add your handling code here:
+}//GEN-LAST:event_jPnlSubjectsMouseClicked
 
 
 
