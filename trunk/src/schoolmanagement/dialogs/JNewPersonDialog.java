@@ -129,6 +129,7 @@ public class JNewPersonDialog extends javax.swing.JFrame {
         
         SmRole role = DBAccess.GetInstance().getRoleByName( personDetailsControl1.getGroup() );
         DBAccess.GetInstance().addUser( pers, role, personDetailsControl1.getLogin(), "" );
+        setVisible(false);
     }//GEN-LAST:event_jBtnSaveActionPerformed
     
     /**
