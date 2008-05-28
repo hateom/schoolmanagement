@@ -8,6 +8,7 @@ package schoolmanagement.dialogs;
 
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
+import schoolmanagement.controller.Commander;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.controller.ErrorLogger;
 import schoolmanagement.controller.RoleType;
@@ -22,10 +23,14 @@ import schoolmanagement.entity.SmRole;
 public class JNewClassDialog extends javax.swing.JFrame {
     private SmClass m_class;
     
+    private Commander mCmd;
+    
     /** Creates new form JNewClassDialog */
-    public JNewClassDialog() {
+    public JNewClassDialog( Commander onClose ) {
         initComponents();
         realodDB();
+        
+        mCmd = onClose;
     }
     
     public void realodDB()
@@ -214,6 +219,7 @@ public class JNewClassDialog extends javax.swing.JFrame {
         {
             ErrorLogger.getInstance().error( "Error saving class data to DB!" );
         }
+        if(mCmd != null) mCmd.execute();
         setVisible(false);
     }//GEN-LAST:event_jbtnSaveActionPerformed
 
@@ -235,7 +241,7 @@ public class JNewClassDialog extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JNewClassDialog().setVisible(true);
+                new JNewClassDialog(null).setVisible(true);
             }
         });
     }
