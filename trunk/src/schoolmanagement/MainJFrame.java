@@ -207,7 +207,8 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
                 {
                     if( lesson.getSchRngId() == ring )
                     {
-                        tm.setValueAt(lesson.getSchSubId(), row, column);
+                        //tm.setValueAt(lesson.getSchSubId(), row, column);
+                        tm.setValueAt(lesson, row, column);
                     }
                     else
                     {
@@ -2402,7 +2403,7 @@ private void jbtnSNSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-
 }//GEN-LAST:event_jbtnSNSearchActionPerformed
 
 private void jtblScheldueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblScheldueMousePressed
-    String subject, room = "", teacher = "";
+    String subject = "", room = "", teacher = "";
     
     DefaultTableModel tm = (DefaultTableModel) jtblScheldue.getModel();
     int col = jtblScheldue.getSelectedColumn();
@@ -2410,11 +2411,21 @@ private void jtblScheldueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRS
     
     if( col == 0 || col > 5 ) return;
     
-    SmSubject sb = (SmSubject) tm.getValueAt(row, col);
+    SmSchedule sb = (SmSchedule) tm.getValueAt(row, col);
 
     if( sb == null ) return;
     
-    subject = sb.getSubName();
+    if( sb.getSchSubId() != null ) {
+        subject = sb.getSchSubId().getSubName();
+    }
+    
+    if( sb.getSchClrId() != null ) {
+        room = sb.getSchClrId().toString();
+    }
+    
+    if( sb.getSchTchPerId() != null ) {
+        teacher = sb.getSchTchPerId().toString();
+    }
     
     m_sprv = new JSchedulePreviewDialog( subject, room, teacher );
     Point pt = MouseInfo.getPointerInfo().getLocation();
