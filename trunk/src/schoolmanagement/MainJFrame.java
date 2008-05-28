@@ -1722,7 +1722,7 @@ private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
 
                     Calendar cal = new GregorianCalendar();
 
-
+                    
                         for( i=0; i<rings.size()-1; ++i )
                         {
                             hours = 0;
@@ -1739,15 +1739,18 @@ private void jPnlRingsComponentShown(java.awt.event.ComponentEvent evt) {//GEN-F
 
                             Date ringDate = new GregorianCalendar(0, 0, 0, hours, (int)ringDuration).getTime();
 
-                            if(ringDuration<0){
-                                ringDate = new GregorianCalendar(0,0,0).getTime();
-                            }  
-
                             cal.setTime(lStart);
                             if(cal.get(Calendar.MINUTE) ==0 && cal.get(Calendar.HOUR) ==0){
                                 lEnd = new GregorianCalendar(0,0,0).getTime();
                             }
-
+                            
+                            if(ringDuration<0){
+                                ringDate = new GregorianCalendar(0,0,0).getTime();
+                                if(lNext.getTime()>100){
+                                    JRingsOverlapping msg = new JRingsOverlapping(null, true);
+                                    msg.setVisible(true);
+                                }
+                            }
 
                             model2.addRow( new Object[] { 
                                rings.get(i), //
