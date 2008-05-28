@@ -6,6 +6,8 @@
 package schoolmanagement;
 
 import java.awt.Component;
+import java.awt.MouseInfo;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,6 +46,8 @@ import schoolmanagement.controller.Commander;
  */
 public class MainJFrame extends javax.swing.JFrame implements Commander {
 
+    private JSchedulePreviewDialog m_sprv;
+    
     static private MainJFrame instance;
     static public MainJFrame getInstance() {
         return instance;
@@ -75,6 +79,7 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
         
         Timer timer = new Timer();
         timer.schedule( new MailChecker(), 3000, 60000 );
+        m_sprv = null;
     }
 
     public void PrepareTree() {
@@ -756,6 +761,14 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
         jtblScheldue.setRowHeight(22);
         jtblScheldue.setRowSelectionAllowed(false);
         jtblScheldue.getTableHeader().setReorderingAllowed(false);
+        jtblScheldue.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jtblScheldueMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                jtblScheldueMouseReleased(evt);
+            }
+        });
         jScrollPane8.setViewportView(jtblScheldue);
 
         jbtnEdit.setText("Edytuj"); // NOI18N
@@ -2387,6 +2400,35 @@ private void jPnlSubjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
 private void jbtnSNSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSNSearchActionPerformed
     // find notes for person:  jtbStudentsName.text()
 }//GEN-LAST:event_jbtnSNSearchActionPerformed
+
+private void jtblScheldueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblScheldueMousePressed
+    String subject, room = "", teacher = "";
+    
+    DefaultTableModel tm = (DefaultTableModel) jtblScheldue.getModel();
+    int col = jtblScheldue.getSelectedColumn();
+    int row = jtblScheldue.getSelectedRow();
+    
+    if( col == 0 || col > 5 ) return;
+    
+    SmSubject sb = (SmSubject) tm.getValueAt(row, col);
+
+    if( sb == null ) return;
+    
+    subject = sb.getSubName();
+    
+    m_sprv = new JSchedulePreviewDialog( subject, room, teacher );
+    Point pt = MouseInfo.getPointerInfo().getLocation();
+    m_sprv.setLocation(pt);
+    m_sprv.setVisible(true);
+}//GEN-LAST:event_jtblScheldueMousePressed
+
+private void jtblScheldueMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblScheldueMouseReleased
+    if( m_sprv != null )
+    {
+        m_sprv.setVisible(false);
+        m_sprv = null;
+    }
+}//GEN-LAST:event_jtblScheldueMouseReleased
 
 
 
