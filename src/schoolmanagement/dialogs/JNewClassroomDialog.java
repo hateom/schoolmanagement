@@ -6,6 +6,7 @@
 
 package schoolmanagement.dialogs;
 
+import schoolmanagement.controller.Commander;
 import schoolmanagement.controller.DBAccess;
 import schoolmanagement.controller.ErrorLogger;
 import schoolmanagement.controller.RoleType;
@@ -20,9 +21,12 @@ public class JNewClassroomDialog extends javax.swing.JFrame {
     
     private SmPerson m_host;
     
+    private Commander mCmd;
+    
     /** Creates new form JNewClassroomDialog */
-    public JNewClassroomDialog() {
+    public JNewClassroomDialog(Commander onClose) {
         initComponents();
+        mCmd = onClose;
     }
     
     /** This method is called from within the constructor to
@@ -190,6 +194,7 @@ public class JNewClassroomDialog extends javax.swing.JFrame {
         }
         else
         {
+            if( mCmd != null ) mCmd.execute();
             setVisible(false);
         }
     }//GEN-LAST:event_jbtnSaveActionPerformed
@@ -235,7 +240,7 @@ public class JNewClassroomDialog extends javax.swing.JFrame {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new JNewClassroomDialog().setVisible(true);
+                new JNewClassroomDialog(null).setVisible(true);
             }
         });
     }
