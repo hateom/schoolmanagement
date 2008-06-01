@@ -664,7 +664,7 @@ public class DataAccess {
                 Query query = null;
         try{
 
-                query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notP2cId.p2cPerId.perSurname = ?1 OR n.notP2cId.p2cPerId.perName = ?1").setParameter(1, a_strStudentName).setHint("refresh", new Boolean(true));   
+                query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notP2cId.p2cPerId.perSurname LIKE ?1 OR n.notP2cId.p2cPerId.perName LIKE ?1").setParameter(1, a_strStudentName).setHint("refresh", new Boolean(true));   
          
             return query.getResultList();
         }
