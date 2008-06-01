@@ -252,16 +252,16 @@ public class DataAccess {
 //---------------END OF USER METHODS------------
     
 //----------PERSON METHODS---------------
-    public SmPerson addPerson( String a_strName, String a_strSurname, int a_nPesel, Integer a_nNip, Integer a_nPhone, String a_strAddress, String a_strEmail, boolean a_bSaveToDB)
+    public SmPerson addPerson( String a_strName, String a_strSurname, String a_strPesel, String a_strNip, String a_strPhone, String a_strAddress, String a_strEmail, boolean a_bSaveToDB)
     {
         SmPerson person = new SmPerson();
         person.setPerAdress(a_strAddress);
         person.setPerEmail(a_strEmail);
         person.setPerName(a_strName);
         person.setPerSurname(a_strSurname);
-        person.setPerPhone(a_nPhone);
-        person.setPerNip(a_nNip);
-        person.setPerPesel(a_nPesel);
+        person.setPerPhone(a_strPhone);
+        person.setPerNip(a_strNip);
+        person.setPerPesel(a_strPesel);
         if(a_bSaveToDB){
             if(save(person))
                 return person;
@@ -654,7 +654,40 @@ public class DataAccess {
         }
         return null;
     }
+    /**
+     * 
+     * @param a_strStudentName
+     * @return
+     */
+    public List<SmNote> getNotesByName( String a_strStudentName )
+    {
+                Query query = null;
+        try{
+
+                query = m_oEm.createQuery("SELECT n FROM SmNote n WHERE n.notP2cId.p2cPerId.perSurname = ?1 OR n.notP2cId.p2cPerId.perName = ?1").setParameter(1, a_strStudentName).setHint("refresh", new Boolean(true));   
+         
+            return query.getResultList();
+        }
+        catch(NoResultException e)
+        {
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
+        }
+        return null;
+    }
     
+    /**
+     * 
+     * @param a_oTeacher
+     * @param a_oSubject
+     * @param a_oPupil
+     * @param a_oClass
+     * @param a_strNote
+     * @param a_strComment
+     * @return
+     */
     public SmNote addNote(SmPerson a_oTeacher, SmSubject a_oSubject, SmPerson a_oPupil, SmClass a_oClass, String a_strNote, String a_strComment)
     {
         try

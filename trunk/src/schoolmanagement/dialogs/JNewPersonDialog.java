@@ -108,20 +108,16 @@ public class JNewPersonDialog extends javax.swing.JFrame {
     }//GEN-LAST:event_jBtnCancelActionPerformed
 
     private void jBtnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnSaveActionPerformed
-        int nPesel = Integer.parseInt(personDetailsControl1.getPesel());
         Integer nNip = null;
         if( !personDetailsControl1.getNip().trim().equals("") )
             nNip = Integer.parseInt( personDetailsControl1.getNip() );
-        Integer nPhone = null;
-        if( !personDetailsControl1.getPhoneNumber().trim().equals("") )
-            nNip = Integer.parseInt( personDetailsControl1.getPhoneNumber() );
         
         SmPerson pers = DBAccess.GetInstance().addPerson(
             personDetailsControl1.getFirstName(), 
             personDetailsControl1.getSurname(), 
-            nPesel, 
-            nNip, 
-            nPhone, 
+            personDetailsControl1.getPesel(), 
+            personDetailsControl1.getNip(), 
+            personDetailsControl1.getPhoneNumber(), 
             personDetailsControl1.getAddress(), 
             personDetailsControl1.getEmail(),
             false

@@ -10,7 +10,6 @@ import java.util.Collection;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -38,11 +37,11 @@ public class SmPerson implements Serializable {
     @Column(name = "PER_SURNAME", nullable = false)
     private String perSurname;
     @Column(name = "PER_PESEL", nullable = false)
-    private int perPesel;
+    private String perPesel;
     @Column(name = "PER_NIP")
-    private Integer perNip;
+    private String perNip;
     @Column(name = "PER_PHONE")
-    private Integer perPhone;
+    private String perPhone;
     @Lob
     @Column(name = "PER_ADRESS", nullable = false)
     private String perAdress;
@@ -72,7 +71,7 @@ public class SmPerson implements Serializable {
         this.perId = perId;
     }
 
-    public SmPerson(Integer perId, String perName, String perSurname, int perPesel, String perAdress) {
+    public SmPerson(Integer perId, String perName, String perSurname, String perPesel, String perAdress) {
         this.perId = perId;
         this.perName = perName;
         this.perSurname = perSurname;
@@ -104,27 +103,27 @@ public class SmPerson implements Serializable {
         this.perSurname = perSurname;
     }
 
-    public int getPerPesel() {
+    public String getPerPesel() {
         return perPesel;
     }
 
-    public void setPerPesel(int perPesel) {
+    public void setPerPesel(String perPesel) {
         this.perPesel = perPesel;
     }
 
-    public Integer getPerNip() {
+    public String getPerNip() {
         return perNip;
     }
 
-    public void setPerNip(Integer perNip) {
+    public void setPerNip(String perNip) {
         this.perNip = perNip;
     }
 
-    public Integer getPerPhone() {
+    public String getPerPhone() {
         return perPhone;
     }
 
-    public void setPerPhone(Integer perPhone) {
+    public void setPerPhone(String perPhone) {
         this.perPhone = perPhone;
     }
 
