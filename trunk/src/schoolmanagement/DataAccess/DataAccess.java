@@ -678,6 +678,25 @@ public class DataAccess {
         return null;
     }
     
+    public List<SmPerson> getPupilByName( String a_strStudentName )
+    {
+                Query query = null;
+        try{
+
+                query = m_oEm.createQuery("SELECT n FROM SmPerson n WHERE n.perSurname LIKE ?1 OR n.perName LIKE ?1").setParameter(1, a_strStudentName).setHint("refresh", new Boolean(true));   
+         
+            return query.getResultList();
+        }
+        catch(NoResultException e)
+        {
+        }
+        catch(Exception e)
+        {
+            ErrorLogger.getInstance().error(e.getLocalizedMessage()+" at:\n"+e.getStackTrace()[0].toString()+" at:\n"+e.getStackTrace()[1].toString());
+        }
+        return null;
+    }
+    
     /**
      * 
      * @param a_oTeacher

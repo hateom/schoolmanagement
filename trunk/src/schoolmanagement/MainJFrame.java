@@ -12,6 +12,7 @@ import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.ArrayList;
 import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.event.TableModelEvent;
@@ -2239,6 +2240,10 @@ private void jtblPupilNotesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FI
     SmSubject subject = (SmSubject) jcbPickSubjectForNotes.getSelectedItem();
     SmClass cls = (SmClass) jcbPickClassForNotes.getSelectedItem();
     
+    if( tm.getColumnCount() == 3 ) {
+        subject = (SmSubject) tm.getValueAt(row, 2 );
+    }
+    
     if( subject == null || cls == null ) return;
     
     JEditNotesDialog en = new JEditNotesDialog(pupil, cls, subject, this );
@@ -2400,6 +2405,58 @@ private void jPnlSubjectsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRS
 
 private void jbtnSNSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSNSearchActionPerformed
     // find notes for person:  jtbStudentsName.text()
+
+    if( getRole() == RoleType.ROLE_STUDENT ) return;
+    
+    DefaultTableModel tm = new DefaultTableModel(new Object[] { "Uczen", "Oceny", "Przedmiot" }, 0){
+        @Override
+        public boolean isCellEditable( int col, int row ) {
+            return false;
+        }
+    };
+    jtblPupilNotes.setModel(tm);
+    
+    while( tm.getRowCount() > 0 ) tm.removeRow(0);
+    
+    List<SmPerson> pers = DBAccess.GetInstance().getPupilByName(jtbStudentsName.getText());
+    
+    for( SmPerson p : pers )
+    {
+        SmUser user = DBAccess.GetInstance().getUserByPerson(p);
+        if( user.getUsrRolId() != DBAccess.GetInstance().getRoleByType( RoleType.ROLE_STUDENT ) )
+        {
+            pers.remove(p);
+        }
+    }
+    
+    if( pers.size() != 1 ) {
+        return;
+    }
+    
+    SmPerson pupil = pers.get(0);
+    
+    List<SmNote> list = DBAccess.GetInstance().getNotesByName(jtbStudentsName.getText());
+    List<SmSubject> subs = new ArrayList<SmSubject>();
+    for( SmNote note : list )
+    {
+        if( subs.contains( note.getNotSubId() ) == true ) continue;
+        subs.add( note.getNotSubId() );
+    }
+    
+    String notList = "";
+    
+    for( SmSubject sb: subs )
+    {
+        notList = "";
+        for( SmNote note : list )
+        {
+            if( note.getNotSubId() == sb ) {
+                if( notList.equals("") != true ) notList += ", ";
+                notList += note.getNotNote();
+            }
+        }
+        tm.addRow( new Object[] { pupil, notList, sb } );
+    }
 }//GEN-LAST:event_jbtnSNSearchActionPerformed
 
 private void jtblScheldueMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtblScheldueMousePressed
@@ -2590,13 +2647,22 @@ String dateToTimeString( Date date )
     }
 
     private void reloadNotes() {
+        
+        DefaultTableModel tm = new DefaultTableModel(new Object[] { "Uczen", "Oceny" }, 0){
+            @Override
+            public boolean isCellEditable( int col, int row ) {
+                return false;
+            }
+        };
+        jtblPupilNotes.setModel(tm);
+        
         SmSubject subject = (SmSubject) jcbPickSubjectForNotes.getSelectedItem();
         SmClass cls = (SmClass) jcbPickClassForNotes.getSelectedItem();
         
         if( cls == null || subject == null) return;
         
-        DefaultTableModel tm = (DefaultTableModel) jtblPupilNotes.getModel();
-        while( tm.getRowCount() > 0 ) tm.removeRow(0);
+        //DefaultTableModel tm = (DefaultTableModel) jtblPupilNotes.getModel();
+        //while( tm.getRowCount() > 0 ) tm.removeRow(0);
         
         List<SmPerson> list = DBAccess.GetInstance().GetPersonsForClass(cls);
         
@@ -2643,4 +2709,5 @@ String dateToTimeString( Date date )
             }
         }
     }
+
 }
