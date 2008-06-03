@@ -1740,9 +1740,14 @@ public class MainJFrame extends javax.swing.JFrame implements Commander {
     }//GEN-LAST:event_jtblPupilNotesPropertyChange
 
  class NonEditableTableModel extends DefaultTableModel {
-
+    
     @Override
     public boolean isCellEditable(int rowIndex, int columnIndex) {
+    if(User.GetRole().GetRoleName().equalsIgnoreCase("Uczen") ||
+       User.GetRole().GetRoleName().equalsIgnoreCase("Nauczyciel")){
+        return false;
+    }
+        
     if(columnIndex==1) return true;
     else
         return false;
