@@ -1014,7 +1014,7 @@ public class DataAccess {
           case ROLE_TEACHER: { return getRoleByName("Nauczyciel");}
           case ROLE_ADMIN: { return getRoleByName("Admin");}
           case ROLE_PRINCIPAL: { return getRoleByName("Dyrektor");}
-          case ROLE_STUDENT: { return getRoleByName("Uczeń");}
+          case ROLE_STUDENT: { return getRoleByName("Uczen");}
             default: return null;
         }
     }
